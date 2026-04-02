@@ -1,0 +1,97 @@
+EXPENSE TRACKER SPA - STEP-BY-STEP IMPLEMENTATION GUIDE
+=========================================================
+This document explains exactly how this Expense Tracker project was built from scratch. It is written in simple terms so anyone can understand the logic and steps taken to fulfill the Assignment 1 requirements.
+
+---
+
+STEP 1: PLANNING AND FOLDER STRUCTURE
+-------------------------------------
+The goal was to build a "Single-Page Application" (SPA) that connects to a database.
+1. We created a main folder called `AssignmentSolution`.
+2. Inside it, we created two separate folders:
+   - `backend/`: This handles the database and the "server" logic.
+   - `frontend/`: This handles what the user sees on their screen (the website interface).
+3. We created a `package.json` file in the main folder to allow us to start both the backend and frontend at the very same time using a single command (`npm start`).
+
+---
+
+STEP 2: BUILDING THE BACKEND (Node.js + Express + SQLite)
+---------------------------------------------------------
+Instead of making you install heavy database software like MySQL or MongoDB, we used "SQLite". SQLite saves the entire database into one simple file (`database.sqlite`), making it incredibly easy to share.
+
+1. Dependencies: Inside the `backend` folder, we installed `express` (a framework to build web servers), `cors` (to allow our frontend to talk to our backend), and `sqlite3` (for the database).
+2. The Server File (`server.js`):
+   - We wrote code to connect to SQLite and automatically create a table called `expenses` with columns for: id, title, category, amount, date, and description.
+   - We created 4 "API Endpoints" (web addresses the frontend can talk to) to fulfill the CRUD requirement:
+     * C (Create): `app.post('/api/expenses')` -> Inserts new data into the database.
+     * R (Read): `app.get('/api/expenses')` -> Retrieves all data from the database.
+     * U (Update): `app.put('/api/expenses/:id')` -> Modifies an existing row.
+     * D (Delete): `app.delete('/api/expenses/:id')` -> Deletes a row.
+
+---
+
+STEP 3: BUILDING THE FRONTEND (React + Vite + Tailwind CSS)
+-----------------------------------------------------------
+The assignment required a "Single-Page Application" (SPA). React is the perfect tool for this because it lets us swap out "components" (like the Dashboard or the Form) instantly without the browser ever having to reload a new HTML page.
+
+1. Setup: We used a tool called "Vite" to create the React app because it is very fast. We also installed "Tailwind CSS" to make styling the website very easy and beautiful.
+2. Connecting to the Backend (`src/services/api.js`):
+   - We used a library called `axios` to send requests to the backend API endpoints we made in Step 2.
+3. Managing Data (`src/hooks/useExpenses.js`):
+   - We built a custom "hook" that asks the backend for the list of expenses when the website loads.
+   - It also handles errors. If the backend is turned off, this hook catches the error so the website doesn't just show a blank white screen (this was a specific requirement for the "Code Quality" marks!).
+
+---
+
+STEP 4: CREATING THE USER INTERFACE COMPONENTS
+----------------------------------------------
+Inside the `src/components/` folder, we built the actual visual parts of the website:
+
+1. `ExpenseForm.jsx`: 
+   - A nice-looking form where users can type in a Title, Amount, Date, Category, and Description.
+   - It includes required fields and ensures amounts are valid numbers.
+   
+2. `ExpenseList.jsx`:
+   - A sleek table displaying all the saved expenses (The "Logbook").
+   - It includes a search bar so the user can filter expenses by name.
+   - It includes buttons on the column headers to sort the data (e.g., sort by oldest date, or highest amount).
+   - Each row has an Edit and Delete button.
+
+3. `Dashboard.jsx`:
+   - We installed `chart.js` to create beautiful visual analytics.
+   - This component reads all the expenses and calculates the "Total Spending".
+   - It displays a colorful "Doughnut Chart" showing where the money is going by Category.
+   - It displays a "Bar Chart" showing spending trends over different months.
+
+---
+
+STEP 5: ASSEMBLING THE APP AND STYLING
+--------------------------------------
+1. The Main File (`src/App.jsx`):
+   - This file glues everything together. It contains the top navigation bar.
+   - It uses a simple variable called `activeTab` to remember if the user clicked "Dashboard", "Logbook", or "Add Expense". 
+   - Based on that tab, it instantly hides and shows the correct component. This is what makes it a true SPA (Single-Page Application) — no page reloads!
+   - If the database disconnects, `App.jsx` takes the error from Step 3 and shows a massive red "Connection Error" screen so the user knows exactly what went wrong.
+
+2. Styling (`index.css` & Tailwind):
+   - We used modern styling techniques like `backdrop-filter` (to make boxes look like slightly transparent frosted glass) and colorful gradients (from blue to purple) to make the app look extremely premium and professional, ensuring a 10/10 mark on the "Visual Presentation" rubric.
+
+---
+
+STEP 6: FULFILLING THE GRADING RUBRIC (The README)
+--------------------------------------------------
+To ensure full marks on the "Readme File" section, we wrote a highly detailed `README.md` file in the main folder. It explicitly lists out:
+- The title and 2-line summary.
+- The Technical Stack.
+- A bulleted Feature List.
+- An explanation of the Folder Structure.
+- A paragraph explaining the "Challenges Overcome" (specifically detailing how we managed asynchronous data loading between React and SQLite).
+
+---
+
+HOW TO RUN THE FINISHED PROJECT (For the Grader)
+------------------------------------------------
+Because of how we set it up in Step 1, the grader only has to do two things:
+1. Open a terminal in this folder and type: `npm run install:all`
+2. Type: `npm start`
+The database will turn on, the frontend will turn on, and a browser link will be provided automatically. No extra database installation required!
