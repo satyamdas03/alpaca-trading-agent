@@ -1,0 +1,38 @@
+{
+  "actorSpecification": 1,
+  "name": "jlcpcb-parts-finder",
+  "title": "JLCPCB Parts Finder — In-Stock Component Search",
+  "description": "Search JLCPCB's in-stock electronics components (resistors, capacitors, inductors, MOSFETs, ICs, LEDs) by electrical specifications. Returns matching parts with stock counts and unit prices. Perfect for automating BOM generation and design validation.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "environmentVariables": [],
+  "input": {
+    "title": "JLCPCB Parts Search Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "component_type": {
+        "title": "Component Type",
+        "type": "string",
+        "description": "Type of electronic component to search.",
+        "enum": ["resistor", "capacitor", "inductor", "led", "mosfet", "ic"],
+        "default": "resistor"
+      },
+      "filters": {
+        "title": "Specification Filters",
+        "type": "object",
+        "description": "Key/value filters. For resistors: resistance (e.g. '1k'), package (e.g. '0402'), tolerance (e.g. '1%'). For capacitors: capacitance (e.g. '100n'), voltage (e.g. '10V'), package.",
+        "default": {}
+      },
+      "max_results": {
+        "title": "Maximum Results",
+        "type": "integer",
+        "description": "Maximum number of parts to return.",
+        "default": 50,
+        "minimum": 1,
+        "maximum": 500
+      }
+    },
+    "required": ["component_type"]
+  }
+}
