@@ -1,0 +1,43 @@
+{
+  "actorSpecification": 1,
+  "name": "neuralquant-stock-analyzer",
+  "title": "NeuralQuant Stock Analyzer — AI Scores for US & India Stocks",
+  "description": "Institutional-grade quantitative analysis for US (NYSE/NASDAQ) and India (NSE) stocks. Returns a 5-factor AI score (1–10), factor breakdown, and optional 7-agent AI debate verdict. The only actor on Apify Store covering NSE India stocks with AI-powered analysis.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "environmentVariables": {},
+  "dockerfile": "./Dockerfile",
+  "input": {
+    "title": "Stock Analyzer Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "tickers": {
+        "title": "Tickers",
+        "type": "array",
+        "description": "Stock ticker symbols. Add .NS suffix for NSE India (e.g. RELIANCE.NS, TCS.NS). US tickers need no suffix (e.g. NVDA, AAPL).",
+        "editor": "stringList",
+        "items": {
+          "type": "string"
+        },
+        "default": ["NVDA", "TCS.NS"]
+      },
+      "mode": {
+        "title": "Analysis Mode",
+        "type": "string",
+        "enum": ["quant", "full_ai"],
+        "default": "quant",
+        "description": "quant = 5-factor signal engine only (fast, no AI costs). full_ai = quant + 7-agent AI debate (requires ANTHROPIC_API_KEY secret).",
+        "editor": "select"
+      },
+      "max_spend_usd": {
+        "title": "Max Claude Spend (USD)",
+        "type": "number",
+        "default": 2.0,
+        "description": "Safety cap on Claude API spend per run. Only relevant for full_ai mode.",
+        "editor": "number"
+      }
+    },
+    "required": ["tickers"]
+  }
+}

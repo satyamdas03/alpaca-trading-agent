@@ -100,6 +100,8 @@ async def main() -> None:
             log.info("No matching parts found for component_type=%s filters=%s.", component_type, filters)
         else:
             await Actor.push_data(parts)
+            # PPE billing: charge per result returned
+            await Actor.charge(event_name="result_returned", count=len(parts))
             log.info("Pushed %d parts to dataset.", len(parts))
 
 
