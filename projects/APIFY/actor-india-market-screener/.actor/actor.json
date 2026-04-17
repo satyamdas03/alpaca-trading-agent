@@ -1,0 +1,51 @@
+{
+  "actorSpecification": 1,
+  "name": "india-market-screener",
+  "title": "India Market Screener — NSE & US Stocks Ranked by AI Score",
+  "description": "Screen India NSE and US stocks by 5-factor quantitative AI score. Returns ranked watchlist filtered by minimum score, factor type, and market. Built on NeuralQuant's institutional-grade signal engine. No AI API costs — pure quantitative screening.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "environmentVariables": {},
+  "dockerfile": "./Dockerfile",
+  "input": {
+    "title": "Screener Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "market": {
+        "title": "Market",
+        "type": "string",
+        "enum": ["India", "US", "both"],
+        "default": "India",
+        "description": "Which stock universe to screen: India (NSE), US (NYSE/NASDAQ), or both.",
+        "editor": "select"
+      },
+      "min_score": {
+        "title": "Minimum AI Score",
+        "type": "number",
+        "default": 6,
+        "minimum": 1,
+        "maximum": 10,
+        "description": "Minimum score (1–10) to include in results.",
+        "editor": "number"
+      },
+      "sort_by": {
+        "title": "Sort By",
+        "type": "string",
+        "enum": ["score", "momentum", "quality", "value"],
+        "default": "score",
+        "description": "Factor to sort results by.",
+        "editor": "select"
+      },
+      "top_n": {
+        "title": "Top N Results",
+        "type": "integer",
+        "default": 20,
+        "minimum": 1,
+        "maximum": 100,
+        "description": "Maximum number of results to return.",
+        "editor": "number"
+      }
+    }
+  }
+}
