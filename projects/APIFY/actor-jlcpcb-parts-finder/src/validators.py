@@ -14,8 +14,14 @@ ALLOWED_FILTER_KEYS: dict[str, frozenset] = {
     "ic":        frozenset(["package", "manufacturer", "category"]),
 }
 
+# All possible flat filter field names from input schema
+_ALL_FILTER_FIELDS = frozenset(
+    ["resistance", "capacitance", "inductance", "package", "tolerance", "voltage",
+     "power", "current", "color", "channel_type", "manufacturer", "category"]
+)
+
 # Filter values: alphanumeric + a handful of safe unit chars only
-_FILTER_VALUE_RE = re.compile(r"^[\w\s%.µΩ/\-]{1,40}$")
+_FILTER_VALUE_RE = re.compile(r"^[A-Za-z0-9\s%.µΩ/\-]{1,40}$")
 _MAX_FILTER_VALUE_LEN = 40
 
 
@@ -35,17 +41,20 @@ def validate_input(raw: dict) -> dict:
             f"component_type must be one of {sorted(VALID_COMPONENT_TYPES)}, got: {ct!r}"
         )
 
-    # --- filters ---
-    raw_filters = raw.get("filters", {})
-    if not isinstance(raw_filters, dict):
-        raise ValidationError("filters must be a JSON object.")
+    # --- filters (flat fields from input schema) ---
     allowed_keys = ALLOWED_FILTER_KEYS[ct]
     clean_filters: dict[str, str] = {}
-    for key, value in raw_filters.items():
-        if key not in allowed_keys:
-            continue  # silently strip unknown keys
+    for key in _ALL_FILTER_FIELDS:
+        value = raw.get(key, "")
+        if not value:
+            continue
         if not isinstance(value, str):
             value = str(value)
+        value = value.strip()
+        if not value:
+            continue
+        if key not in allowed_keys:
+            continue  # silently ignore fields not relevant to this component type
         if len(value) > _MAX_FILTER_VALUE_LEN:
             raise ValidationError(
                 f"Filter value for '{key}' too long (max {_MAX_FILTER_VALUE_LEN} chars)."
@@ -58,6 +67,8 @@ def validate_input(raw: dict) -> dict:
 
     # --- max_results ---
     max_results = raw.get("max_results", 50)
+    if isinstance(max_results, bool):
+        raise ValidationError("max_results must be an integer.")
     if not isinstance(max_results, int):
         try:
             max_results = int(max_results)

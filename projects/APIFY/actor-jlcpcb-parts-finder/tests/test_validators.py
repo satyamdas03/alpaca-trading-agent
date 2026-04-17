@@ -26,37 +26,52 @@ class TestComponentType:
 
 class TestFilters:
     def test_empty_filters_allowed(self):
-        result = validate_input({"component_type": "resistor", "filters": {}})
+        result = validate_input({"component_type": "resistor"})
         assert result["filters"] == {}
 
-    def test_valid_resistor_filters(self):
+    def test_valid_resistor_filters_flat(self):
         result = validate_input({
             "component_type": "resistor",
-            "filters": {"resistance": "1k", "package": "0402", "tolerance": "1%"}
+            "resistance": "1k",
+            "package": "0402",
+            "tolerance": "1%"
         })
         assert result["filters"]["resistance"] == "1k"
+        assert result["filters"]["package"] == "0402"
 
-    def test_unknown_filter_key_stripped(self):
+    def test_unknown_filter_field_stripped(self):
         result = validate_input({
             "component_type": "resistor",
-            "filters": {"resistance": "1k", "__proto__": "bad", "constructor": "evil"}
+            "resistance": "1k",
+            "capacitance": "100n"  # not valid for resistors
         })
-        assert "__proto__" not in result["filters"]
-        assert "constructor" not in result["filters"]
+        assert "capacitance" not in result["filters"]
+        assert "resistance" in result["filters"]
+
+    def test_empty_string_fields_ignored(self):
+        result = validate_input({
+            "component_type": "resistor",
+            "resistance": "1k",
+            "package": ""  # empty = no filter
+        })
+        assert "package" not in result["filters"]
 
     def test_filter_value_too_long_raises(self):
         with pytest.raises(ValidationError):
-            validate_input({
-                "component_type": "resistor",
-                "filters": {"resistance": "A" * 100}
-            })
+            validate_input({"component_type": "resistor", "resistance": "A" * 100})
 
     def test_filter_value_with_special_chars_raises(self):
         with pytest.raises(ValidationError):
-            validate_input({
-                "component_type": "resistor",
-                "filters": {"resistance": "1k&foo=bar"}
-            })
+            validate_input({"component_type": "resistor", "resistance": "1k&foo=bar"})
+
+    def test_capacitor_filters(self):
+        result = validate_input({
+            "component_type": "capacitor",
+            "capacitance": "100n",
+            "voltage": "50V"
+        })
+        assert result["filters"]["capacitance"] == "100n"
+        assert result["filters"]["voltage"] == "50V"
 
 
 class TestMaxResults:

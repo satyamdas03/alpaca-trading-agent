@@ -5,7 +5,7 @@
   "description": "Search JLCPCB's in-stock electronics components (resistors, capacitors, inductors, MOSFETs, ICs, LEDs) by electrical specifications. Returns matching parts with stock counts and unit prices. Perfect for automating BOM generation and design validation.",
   "version": "0.1",
   "buildTag": "latest",
-  "environmentVariables": [],
+  "environmentVariables": {},
   "input": {
     "title": "JLCPCB Parts Search Input",
     "type": "object",
@@ -14,15 +14,52 @@
       "component_type": {
         "title": "Component Type",
         "type": "string",
+        "editor": "select",
         "description": "Type of electronic component to search.",
         "enum": ["resistor", "capacitor", "inductor", "led", "mosfet", "ic"],
         "default": "resistor"
       },
-      "filters": {
-        "title": "Specification Filters",
-        "type": "object",
-        "description": "Key/value filters. For resistors: resistance (e.g. '1k'), package (e.g. '0402'), tolerance (e.g. '1%'). For capacitors: capacitance (e.g. '100n'), voltage (e.g. '10V'), package.",
-        "default": {}
+      "resistance": {
+        "title": "Resistance",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Resistance value (e.g. '1k', '4.7k', '10k'). For resistors only.",
+        "default": ""
+      },
+      "capacitance": {
+        "title": "Capacitance",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Capacitance value (e.g. '100n', '10u', '22p'). For capacitors only.",
+        "default": ""
+      },
+      "inductance": {
+        "title": "Inductance",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Inductance value (e.g. '10uH', '4.7uH'). For inductors only.",
+        "default": ""
+      },
+      "package": {
+        "title": "Package",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Component package size (e.g. '0402', '0603', '0805').",
+        "default": ""
+      },
+      "tolerance": {
+        "title": "Tolerance",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Tolerance (e.g. '1%', '5%', '10%').",
+        "default": ""
+      },
+      "voltage": {
+        "title": "Voltage",
+        "type": "string",
+        "editor": "textfield",
+        "description": "Voltage rating (e.g. '10V', '50V', '100V').",
+        "default": ""
       },
       "max_results": {
         "title": "Maximum Results",

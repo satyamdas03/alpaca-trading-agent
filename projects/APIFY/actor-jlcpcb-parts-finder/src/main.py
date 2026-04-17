@@ -52,20 +52,24 @@ async def fetch_parts(component_type: str, filters: dict, max_results: int) -> l
     """Fetch parts from jlcsearch with retry + timeout."""
     url = build_url(component_type, filters)
     last_exc: Exception | None = None
-    for attempt in range(1, _MAX_RETRIES + 1):
-        try:
-            async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
+    client = httpx.AsyncClient(timeout=_TIMEOUT)
+    try:
+        for attempt in range(1, _MAX_RETRIES + 1):
+            try:
                 resp = await client.get(url, headers={"Accept": "application/json"})
                 resp.raise_for_status()
-                return parse_response(resp.json(), component_type, max_results)
-        except httpx.TimeoutException as exc:
-            last_exc = exc
-            log.warning("Attempt %d/%d timed out: %s", attempt, _MAX_RETRIES, exc)
-        except httpx.HTTPStatusError as exc:
-            last_exc = exc
-            log.warning("Attempt %d/%d HTTP %s", attempt, _MAX_RETRIES, exc.response.status_code)
-        if attempt < _MAX_RETRIES:
-            await asyncio.sleep(2 ** attempt)
+                try:
+                    data = resp.json()
+                except ValueError as exc:
+                    raise RuntimeError(f"Invalid JSON response from jlcsearch: {exc}") from exc
+                return parse_response(data, component_type, max_results)
+            except httpx.HTTPError as exc:
+                last_exc = exc
+                log.warning("Attempt %d/%d failed: %s", attempt, _MAX_RETRIES, exc)
+            if attempt < _MAX_RETRIES:
+                await asyncio.sleep(2 ** attempt)
+    finally:
+        await client.aclose()
     raise RuntimeError(f"jlcsearch API unavailable after {_MAX_RETRIES} attempts: {last_exc}")
 
 
@@ -91,7 +95,9 @@ async def main() -> None:
             return
 
         if not parts:
-            log.info("No matching parts found.")
+            # Zero results is a valid outcome (e.g. no parts match the filters).
+            # We succeed with an empty dataset rather than failing the run.
+            log.info("No matching parts found for component_type=%s filters=%s.", component_type, filters)
         else:
             await Actor.push_data(parts)
             log.info("Pushed %d parts to dataset.", len(parts))
