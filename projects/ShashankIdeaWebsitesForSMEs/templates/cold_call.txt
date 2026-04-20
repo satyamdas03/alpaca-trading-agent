@@ -1,0 +1,19 @@
+COLD CALL SCRIPT — [CATEGORY] — [CITY]
+
+Hi, is this [BUSINESS_NAME]?
+
+I'm [YOUR_NAME] from ShashankIdea. I noticed you don't have a website
+for your [CATEGORY] business — a lot of customers search online before
+visiting, and without a site you're invisible to them.
+
+We build simple, fast websites for local businesses like yours.
+No complicated setup, you get a professional site with your menu,
+hours, contact info, and a Google Maps link — all in 3-5 days.
+
+It starts at [PRICE]. Can I send you a few examples of what
+we've built for other [CATEGORY] businesses in [CITY]?
+
+[If yes]: Great, what's the best email to send that to?
+[If no]: No problem! Here's my number — [YOUR_PHONE].
+         Feel free to call if you change your mind.
+         Have a great day!
