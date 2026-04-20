@@ -19,12 +19,27 @@ logger = logging.getLogger(__name__)
 
 # Domains that indicate social/directory listings, not real business websites
 SOCIAL_DOMAINS = {
+    # Social media
     "facebook.com", "instagram.com", "twitter.com", "x.com",
-    "linkedin.com", "yelp.com", "justdial.com", "zomato.com",
-    "swiggy.com", "uber.com", "google.com", "maps.google.com",
+    "linkedin.com", "youtube.com", "tiktok.com",
+    # Review/directory listings (not real websites)
+    "yelp.com", "justdial.com", "zomato.com", "swiggy.com",
     "tripadvisor.com", "foursquare.com", "bookmyshow.com",
     "indiamart.com", "sulekha.com", "gumtree.com",
-    "truelocal.com.au", "yellowpages.com.au",
+    "truelocal.com.au", "yellowpages.com.au", "whitepages.com.au",
+    # Food delivery / ride-share
+    "uber.com", "ubereats.com", "doordash.com", "grubhub.com",
+    "foodpanda.com",
+    # Google maps (not a business website)
+    "google.com", "maps.google.com", "goo.gl", "google.co.in",
+    "google.com.au",
+    # Booking/reservation widgets (not standalone websites)
+    "reservego.co", "resy.com", "opentable.com", "bookatable.com",
+    "favouritetable.com", "zenchef.com", "thefork.com",
+    # Directory/marketplace (not standalone websites)
+    "wix.com", "wordpress.com", "blogger.com", "tumblr.com",
+    "squarespace.com", "weebly.com", "godaddy.com",
+    "google.site", "sites.google.com",
 }
 
 
@@ -159,21 +174,21 @@ def _map_apify_item_to_lead(item, city, category, country):
     Returns:
         dict: Lead with our schema fields.
     """
-    location = item.get("location", {}) or {}
+    location = item.get("location") or {}
     return {
-        "business_name": item.get("title", ""),
+        "business_name": item.get("storeName", "") or item.get("title", ""),
         "phone": item.get("phone", ""),
         "website": item.get("website", "") or None,
         "address": item.get("address", ""),
         "category": category,
         "city": city,
         "country": country,
-        "maps_url": item.get("url", ""),
+        "maps_url": item.get("googleUrl", "") or item.get("url", ""),
         "place_id": item.get("placeId", ""),
-        "rating": item.get("totalScore"),
-        "review_count": item.get("reviewsCount"),
-        "latitude": location.get("lat"),
-        "longitude": location.get("lng"),
+        "rating": item.get("stars") or item.get("totalScore"),
+        "review_count": item.get("numberOfReviews") or item.get("reviewsCount"),
+        "latitude": location.get("lat") if location else item.get("lat"),
+        "longitude": location.get("lng") if location else item.get("lng"),
     }
 
 
@@ -214,14 +229,16 @@ def scrape_city_category(query_info, max_results=None):
 
     logger.info("Scraping via Apify: %s", query_text)
 
+    # Actor: akash9078/google-maps-scraper
+    # Input: searchQuery (string), maxResults (int), headless (bool)
     run_input = {
-        "searchStringsArray": [query_text],
-        "locationQuery": location,
-        "maxCrawledPlacesPerSearch": max_results,
-        "language": "en",
+        "searchQuery": query_text,
+        "maxResults": max_results,
+        "headless": True,
+        "proxyConfiguration": {
+            "useApifyProxy": True,
+        },
     }
-    if country_code:
-        run_input["countryCode"] = country_code
 
     try:
         client = ApifyClient(APIFY_TOKEN)

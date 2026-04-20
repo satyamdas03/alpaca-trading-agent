@@ -27,7 +27,7 @@ SEARCH_TEMPLATES = {
     "restaurant": "{category} in {city}",
 }
 
-MAX_RESULTS_PER_QUERY = 120
+MAX_RESULTS_PER_QUERY = 100
 
 # Country codes for Apify Google Maps Scraper
 COUNTRY_CODES = {
@@ -37,7 +37,7 @@ COUNTRY_CODES = {
 
 # Apify configuration
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "")
-APIFY_ACTOR_ID = "apify/google-maps-scraper"
+APIFY_ACTOR_ID = "akash9078/google-maps-scraper"
 
 APOLLO_API_KEY = ""  # Set via env var APOLLO_API_KEY
 

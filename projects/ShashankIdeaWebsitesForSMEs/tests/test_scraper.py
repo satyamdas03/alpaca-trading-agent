@@ -111,17 +111,18 @@ def test_build_location_string_australia():
 
 
 def test_map_apify_item_to_lead_full_fields():
-    """Map a full Apify result item to our lead schema."""
+    """Map a full Apify result item to our lead schema (akash9078 actor fields)."""
     item = {
-        "title": "Test Cafe",
+        "storeName": "Test Cafe",
         "phone": "+91-9876543210",
         "website": "https://testcafe.com",
         "address": "123 Main St, Mumbai",
-        "url": "https://maps.google.com/test_place_1",
+        "googleUrl": "https://maps.google.com/test_place_1",
         "placeId": "ChIJ_test_place_1",
-        "totalScore": 4.3,
-        "reviewsCount": 150,
-        "location": {"lat": 19.07, "lng": 72.87},
+        "stars": 4.3,
+        "numberOfReviews": 150,
+        "lat": 19.07,
+        "lng": 72.87,
     }
     lead = _map_apify_item_to_lead(item, "Mumbai", "cafe", "india")
     assert lead["business_name"] == "Test Cafe"
@@ -142,7 +143,7 @@ def test_map_apify_item_to_lead_full_fields():
 def test_map_apify_item_to_lead_minimal_fields():
     """Map an Apify result with minimal/missing fields."""
     item = {
-        "title": "Unknown Place",
+        "storeName": "Unknown Place",
     }
     lead = _map_apify_item_to_lead(item, "Sydney", "gym", "australia")
     assert lead["business_name"] == "Unknown Place"
@@ -172,15 +173,16 @@ def test_scrape_city_category_with_apify():
     """scrape_city_category calls Apify actor and returns mapped leads."""
     mock_items = [
         {
-            "title": "Test Cafe",
+            "storeName": "Test Cafe",
             "phone": "+91-9876543210",
             "website": None,
             "address": "Bandstand, Mumbai",
-            "url": "https://maps.google.com/test1",
+            "googleUrl": "https://maps.google.com/test1",
             "placeId": "test_place_1",
-            "totalScore": 4.3,
-            "reviewsCount": 150,
-            "location": {"lat": 19.07, "lng": 72.87},
+            "stars": 4.3,
+            "numberOfReviews": 150,
+            "lat": 19.07,
+            "lng": 72.87,
         },
     ]
 
@@ -222,10 +224,8 @@ def test_scrape_city_category_with_apify():
     mock_actor.call.assert_called_once()
     call_args = mock_actor.call.call_args
     run_input = call_args[1]["run_input"]
-    assert run_input["searchStringsArray"] == ["cafe in Mumbai"]
-    assert run_input["locationQuery"] == "Mumbai, India"
-    assert run_input["countryCode"] == "IN"
-    assert run_input["maxCrawledPlacesPerSearch"] == 120
+    assert run_input["searchQuery"] == "cafe in Mumbai"
+    assert run_input["maxResults"] == 100
 
 
 def test_scrape_city_category_handles_apify_error():
@@ -252,9 +252,9 @@ def test_scrape_city_category_respects_max_results():
     """scrape_city_category truncates results to max_results."""
     # Create 5 mock items
     mock_items = [
-        {"title": f"Cafe {i}", "phone": "", "website": None, "address": "",
-         "url": "", "placeId": f"p{i}", "totalScore": 4.0,
-         "reviewsCount": 10, "location": {"lat": 0, "lng": 0}}
+        {"storeName": f"Cafe {i}", "phone": "", "website": None, "address": "",
+         "googleUrl": "", "placeId": f"p{i}", "stars": 4.0,
+         "numberOfReviews": 10, "lat": 0, "lng": 0}
         for i in range(5)
     ]
 
