@@ -1,17 +1,19 @@
 """
 Scraper — Discovery Layer
 
-Scrapes Google Maps for businesses across 11 cities x 8 categories (88 queries),
-then filters to find SMEs without real websites (hot leads).
+Uses Apify's Google Maps Scraper actor to find businesses across
+11 cities x 8 categories (88 queries), then filters to find SMEs
+without real websites (hot leads).
 """
 
-import asyncio
 import json
 import logging
 from pathlib import Path
-from urllib.parse import quote_plus
 
-from config import CITIES, CATEGORIES, SEARCH_TEMPLATES, MAX_RESULTS_PER_QUERY, RAW_DIR
+from config import (
+    CITIES, CATEGORIES, SEARCH_TEMPLATES, MAX_RESULTS_PER_QUERY,
+    RAW_DIR, APIFY_TOKEN, APIFY_ACTOR_ID, COUNTRY_CODES,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -128,53 +130,58 @@ def deduplicate_leads(leads):
     return result
 
 
-def _build_maps_search_url(query_text):
-    """Build a Google Maps search URL from a query string.
+def _build_location_string(city, country):
+    """Build a location string for Apify's locationQuery parameter.
 
     Args:
-        query_text: e.g. "cafe in Mumbai"
+        city: City name (e.g. "Mumbai").
+        country: Country key from config (e.g. "india").
 
     Returns:
-        str: Google Maps search URL.
+        str: Location string like "Mumbai, India".
     """
-    encoded = quote_plus(query_text)
-    return f"https://www.google.com/maps/search/?api=1&query={encoded}"
+    country_name = {
+        "india": "India",
+        "australia": "Australia",
+    }.get(country, country.capitalize())
+    return f"{city}, {country_name}"
 
 
-def _map_place_to_lead(place, city, category, country):
-    """Map a gmaps_scraper PlaceDetails object to our lead schema.
+def _map_apify_item_to_lead(item, city, category, country):
+    """Map an Apify Google Maps Scraper result item to our lead schema.
 
     Args:
-        place: PlaceDetails from gmaps_scraper.
+        item: Dict from Apify dataset (one place result).
         city: City name.
         category: Business category.
-        country: Country name.
+        country: Country key.
 
     Returns:
         dict: Lead with our schema fields.
     """
+    location = item.get("location", {}) or {}
     return {
-        "business_name": place.name,
-        "phone": place.phone,
-        "website": place.website,
-        "address": place.address,
+        "business_name": item.get("title", ""),
+        "phone": item.get("phone", ""),
+        "website": item.get("website", "") or None,
+        "address": item.get("address", ""),
         "category": category,
         "city": city,
         "country": country,
-        "maps_url": place.google_maps_url,
-        "place_id": place.place_id,
-        "rating": place.rating,
-        "review_count": place.review_count,
-        "latitude": place.latitude,
-        "longitude": place.longitude,
+        "maps_url": item.get("url", ""),
+        "place_id": item.get("placeId", ""),
+        "rating": item.get("totalScore"),
+        "review_count": item.get("reviewsCount"),
+        "latitude": location.get("lat"),
+        "longitude": location.get("lng"),
     }
 
 
-async def scrape_city_category(query_info, max_results=None):
-    """Async function that scrapes Google Maps for a city-category combination.
+def scrape_city_category(query_info, max_results=None):
+    """Scrape Google Maps for a city-category combination using Apify.
 
-    Uses gmaps_scraper library to navigate to a Google Maps search URL
-    and extract place details from the top result.
+    Calls the Apify Google Maps Scraper actor, retrieves results from
+    the dataset, and maps them to our lead schema.
 
     Args:
         query_info: dict with keys 'query', 'city', 'category', 'country'.
@@ -182,43 +189,62 @@ async def scrape_city_category(query_info, max_results=None):
 
     Returns:
         list[dict]: List of lead dicts matching our schema.
+                  Returns empty list if APIFY_TOKEN is not set.
     """
-    from gmaps_scraper import GoogleMapsScraper, ScrapeConfig
-
     if max_results is None:
         max_results = MAX_RESULTS_PER_QUERY
+
+    if not APIFY_TOKEN:
+        logger.warning(
+            "APIFY_TOKEN not set — skipping scrape for '%s'. "
+            "Set the APIFY_TOKEN environment variable to enable scraping.",
+            query_info["query"],
+        )
+        return []
+
+    from apify_client import ApifyClient
 
     query_text = query_info["query"]
     city = query_info["city"]
     category = query_info["category"]
     country = query_info["country"]
 
-    search_url = _build_maps_search_url(query_text)
-    logger.info("Scraping: %s", query_text)
+    location = _build_location_string(city, country)
+    country_code = COUNTRY_CODES.get(country, "")
 
-    config = ScrapeConfig(headless=True, max_retries=2)
-    leads = []
+    logger.info("Scraping via Apify: %s", query_text)
+
+    run_input = {
+        "searchStringsArray": [query_text],
+        "locationQuery": location,
+        "maxCrawledPlacesPerSearch": max_results,
+        "language": "en",
+    }
+    if country_code:
+        run_input["countryCode"] = country_code
 
     try:
-        async with GoogleMapsScraper(config) as scraper:
-            result = await scraper.scrape(search_url)
+        client = ApifyClient(APIFY_TOKEN)
+        run = client.actor(APIFY_ACTOR_ID).call(run_input=run_input)
 
-            if result.success and result.place and result.place.name:
-                lead = _map_place_to_lead(result.place, city, category, country)
-                leads.append(lead)
-                logger.info("  Found: %s", result.place.name)
-            else:
-                error_msg = result.error or "No place found"
-                logger.warning("  No result for '%s': %s", query_text, error_msg)
+        dataset_id = run["defaultDatasetId"]
+        items = list(client.dataset(dataset_id).iterate_items())
+
+        leads = []
+        for item in items:
+            lead = _map_apify_item_to_lead(item, city, category, country)
+            leads.append(lead)
+
+        logger.info("  Found %d results for '%s'", len(leads), query_text)
+        return leads[:max_results]
 
     except Exception as e:
-        logger.error("  Scraper error for '%s': %s", query_text, e)
+        logger.error("  Apify error for '%s': %s", query_text, e)
+        return []
 
-    return leads[:max_results]
 
-
-async def run_all_scrapes(delay_seconds=3):
-    """Run scraper for all 88 queries with delays between queries.
+def run_all_scrapes(delay_seconds=3):
+    """Run scraper for all 88 queries via Apify.
 
     Saves per-query JSON files and a combined all_leads_raw.json.
 
@@ -228,6 +254,8 @@ async def run_all_scrapes(delay_seconds=3):
     Returns:
         list[dict]: All leads collected across all queries.
     """
+    import time
+
     queries = build_queries()
     all_leads = []
 
@@ -236,13 +264,14 @@ async def run_all_scrapes(delay_seconds=3):
     raw_dir.mkdir(parents=True, exist_ok=True)
 
     total = len(queries)
-    logger.info("Starting scrape of %d queries...", total)
+    logger.info("Starting scrape of %d queries via Apify...", total)
 
     for i, query_info in enumerate(queries):
         logger.info("[%d/%d] %s — %s in %s",
-                    i + 1, total, query_info["category"], query_info["query"], query_info["city"])
+                    i + 1, total, query_info["category"],
+                    query_info["query"], query_info["city"])
 
-        leads = await scrape_city_category(query_info)
+        leads = scrape_city_category(query_info)
         all_leads.extend(leads)
 
         # Save per-query JSON
@@ -251,9 +280,9 @@ async def run_all_scrapes(delay_seconds=3):
         with open(query_file, "w", encoding="utf-8") as f:
             json.dump(leads, f, indent=2, ensure_ascii=False)
 
-        # Delay between queries to avoid rate limiting
+        # Delay between queries to respect rate limits
         if i < total - 1:
-            await asyncio.sleep(delay_seconds)
+            time.sleep(delay_seconds)
 
     # Save combined results
     combined_file = raw_dir / "all_leads_raw.json"
@@ -266,4 +295,4 @@ async def run_all_scrapes(delay_seconds=3):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    asyncio.run(run_all_scrapes())
+    run_all_scrapes()

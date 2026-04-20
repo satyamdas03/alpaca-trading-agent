@@ -1,13 +1,13 @@
 """Integration tests for the full SME lead-gen pipeline.
 
-Tests the pipeline with mocked external dependencies (Google Maps scraper,
+Tests the pipeline with mocked external dependencies (Apify Google Maps Scraper,
 DNS resolver, Apollo API) to verify end-to-end data flow across modules.
 """
 
 import os
 
 import pytest
-from unittest.mock import patch, AsyncMock, MagicMock
+from unittest.mock import patch, MagicMock
 
 from scraper import scrape_city_category, filter_no_website, deduplicate_leads
 from enricher import enrich_leads
@@ -16,77 +16,61 @@ from exporter import export_all_cities, sort_leads_for_outreach
 
 # ── Fixtures ──────────────────────────────────────────────────────────────
 
-def _make_mock_place(
-    name, phone, website, address, place_id, rating, review_count,
-    latitude, longitude
-):
-    """Create a mock PlaceDetails object matching gmaps_scraper schema."""
-    place = MagicMock()
-    place.name = name
-    place.phone = phone
-    place.website = website
-    place.address = address
-    place.google_maps_url = f"https://maps.google.com/{place_id}"
-    place.place_id = place_id
-    place.rating = rating
-    place.review_count = review_count
-    place.latitude = latitude
-    place.longitude = longitude
-    return place
+# Sample Apify result items (matching the Apify Google Maps Scraper schema)
+APIFY_ITEM_MUMBAI_CAFE_1 = {
+    "title": "Test Cafe Mumbai",
+    "phone": "+91-9876543210",
+    "website": None,
+    "address": "Bandstand, Mumbai",
+    "url": "https://maps.google.com/test_place_1",
+    "placeId": "test_place_1",
+    "totalScore": 4.3,
+    "reviewsCount": 150,
+    "location": {"lat": 19.07, "lng": 72.87},
+}
+
+APIFY_ITEM_MUMBAI_CAFE_2 = {
+    "title": "Cafe With Website",
+    "phone": "+91-9876543211",
+    "website": "https://cafewithwebsite.com",
+    "address": "Andheri, Mumbai",
+    "url": "https://maps.google.com/test_place_2",
+    "placeId": "test_place_2",
+    "totalScore": 4.0,
+    "reviewsCount": 50,
+    "location": {"lat": 19.12, "lng": 72.84},
+}
 
 
-def _make_mock_result(place=None, success=True, error=None):
-    """Create a mock scrape result object."""
-    result = MagicMock()
-    result.success = success
-    result.place = place
-    result.error = error
-    return result
+def _make_mock_apify_client(items):
+    """Create a mock ApifyClient that returns the given items from a dataset."""
+    mock_dataset = MagicMock()
+    mock_dataset.iterate_items = MagicMock(return_value=iter(items))
 
+    mock_run = {"defaultDatasetId": "dataset_123"}
 
-MOCK_MUMBAI_CAFE_1 = _make_mock_place(
-    name="Test Cafe Mumbai",
-    phone="+91-9876543210",
-    website=None,
-    address="Bandstand, Mumbai",
-    place_id="test_place_1",
-    rating=4.3,
-    review_count=150,
-    latitude=19.07,
-    longitude=72.87,
-)
+    mock_actor = MagicMock()
+    mock_actor.call = MagicMock(return_value=mock_run)
 
-MOCK_MUMBAI_CAFE_2 = _make_mock_place(
-    name="Cafe With Website",
-    phone="+91-9876543211",
-    website="https://cafewithwebsite.com",
-    address="Andheri, Mumbai",
-    place_id="test_place_2",
-    rating=4.0,
-    review_count=50,
-    latitude=19.12,
-    longitude=72.84,
-)
+    mock_client = MagicMock()
+    mock_client.actor = MagicMock(return_value=mock_actor)
+    mock_client.dataset = MagicMock(return_value=mock_dataset)
+
+    return mock_client
 
 
 # ── Single-city pipeline: scraper → filter ────────────────────────────────
 
 class TestSingleCityPipeline:
-    """Test pipeline with mocked scraper for Mumbai cafes."""
+    """Test pipeline with mocked Apify scraper for Mumbai cafes."""
 
-    @pytest.mark.asyncio
-    async def test_scrape_city_category_returns_leads(self):
+    def test_scrape_city_category_returns_leads(self):
         """scrape_city_category should return leads with correct schema."""
-        mock_result = _make_mock_result(place=MOCK_MUMBAI_CAFE_1, success=True)
+        mock_client = _make_mock_apify_client([APIFY_ITEM_MUMBAI_CAFE_1])
 
-        mock_scraper_instance = AsyncMock()
-        mock_scraper_instance.scrape = AsyncMock(return_value=mock_result)
-        mock_scraper_instance.__aenter__ = AsyncMock(return_value=mock_scraper_instance)
-        mock_scraper_instance.__aexit__ = AsyncMock(return_value=False)
-
-        with patch("gmaps_scraper.GoogleMapsScraper", return_value=mock_scraper_instance), \
-             patch("gmaps_scraper.ScrapeConfig"):
-            leads = await scrape_city_category({
+        with patch("scraper.APIFY_TOKEN", "test_token"), \
+             patch("apify_client.ApifyClient", return_value=mock_client):
+            leads = scrape_city_category({
                 "query": "cafe in Mumbai",
                 "city": "Mumbai",
                 "country": "india",
@@ -106,19 +90,13 @@ class TestSingleCityPipeline:
         assert lead["rating"] == 4.3
         assert lead["review_count"] == 150
 
-    @pytest.mark.asyncio
-    async def test_scrape_city_category_handles_no_result(self):
-        """scrape_city_category should return empty list when scraper finds nothing."""
-        mock_result = _make_mock_result(place=None, success=False, error="No results")
+    def test_scrape_city_category_handles_no_result(self):
+        """scrape_city_category should return empty list when Apify returns no items."""
+        mock_client = _make_mock_apify_client([])
 
-        mock_scraper_instance = AsyncMock()
-        mock_scraper_instance.scrape = AsyncMock(return_value=mock_result)
-        mock_scraper_instance.__aenter__ = AsyncMock(return_value=mock_scraper_instance)
-        mock_scraper_instance.__aexit__ = AsyncMock(return_value=False)
-
-        with patch("gmaps_scraper.GoogleMapsScraper", return_value=mock_scraper_instance), \
-             patch("gmaps_scraper.ScrapeConfig"):
-            leads = await scrape_city_category({
+        with patch("scraper.APIFY_TOKEN", "test_token"), \
+             patch("apify_client.ApifyClient", return_value=mock_client):
+            leads = scrape_city_category({
                 "query": "cafe in Mumbai",
                 "city": "Mumbai",
                 "country": "india",
@@ -127,59 +105,44 @@ class TestSingleCityPipeline:
 
         assert leads == []
 
-    @pytest.mark.asyncio
-    async def test_filter_no_website_after_scraping(self):
+    def test_filter_no_website_after_scraping(self):
         """Filter leads to find businesses without real websites."""
-        # Simulate two scrape results: one without website, one with
-        result_1 = _make_mock_result(place=MOCK_MUMBAI_CAFE_1, success=True)
-        result_2 = _make_mock_result(place=MOCK_MUMBAI_CAFE_2, success=True)
+        mock_client = _make_mock_apify_client(
+            [APIFY_ITEM_MUMBAI_CAFE_1, APIFY_ITEM_MUMBAI_CAFE_2]
+        )
 
-        mock_scraper_instance = AsyncMock()
-        mock_scraper_instance.scrape = AsyncMock(side_effect=[result_1, result_2])
-        mock_scraper_instance.__aenter__ = AsyncMock(return_value=mock_scraper_instance)
-        mock_scraper_instance.__aexit__ = AsyncMock(return_value=False)
-
-        with patch("gmaps_scraper.GoogleMapsScraper", return_value=mock_scraper_instance), \
-             patch("gmaps_scraper.ScrapeConfig"):
-            query_info = {
+        with patch("scraper.APIFY_TOKEN", "test_token"), \
+             patch("apify_client.ApifyClient", return_value=mock_client):
+            all_leads = scrape_city_category({
                 "query": "cafe in Mumbai",
                 "city": "Mumbai",
                 "country": "india",
                 "category": "cafe",
-            }
-            leads_1 = await scrape_city_category(query_info)
-            leads_2 = await scrape_city_category(query_info)
-            all_leads = leads_1 + leads_2
+            })
 
         no_website = filter_no_website(all_leads)
         assert len(no_website) == 1
         assert no_website[0]["business_name"] == "Test Cafe Mumbai"
         assert no_website[0]["phone"] == "+91-9876543210"
 
-    @pytest.mark.asyncio
-    async def test_filter_excludes_social_only_websites(self):
+    def test_filter_excludes_social_only_websites(self):
         """Businesses with only social-media listings should be filtered out."""
-        social_cafe = _make_mock_place(
-            name="Instagram Cafe",
-            phone="+91-9876543212",
-            website="https://instagram.com/instacafe",
-            address="Juhu, Mumbai",
-            place_id="test_place_3",
-            rating=3.8,
-            review_count=30,
-            latitude=19.10,
-            longitude=72.83,
-        )
-        mock_result = _make_mock_result(place=social_cafe, success=True)
+        social_cafe_item = {
+            "title": "Instagram Cafe",
+            "phone": "+91-9876543212",
+            "website": "https://instagram.com/instacafe",
+            "address": "Juhu, Mumbai",
+            "url": "https://maps.google.com/test_place_3",
+            "placeId": "test_place_3",
+            "totalScore": 3.8,
+            "reviewsCount": 30,
+            "location": {"lat": 19.10, "lng": 72.83},
+        }
+        mock_client = _make_mock_apify_client([social_cafe_item])
 
-        mock_scraper_instance = AsyncMock()
-        mock_scraper_instance.scrape = AsyncMock(return_value=mock_result)
-        mock_scraper_instance.__aenter__ = AsyncMock(return_value=mock_scraper_instance)
-        mock_scraper_instance.__aexit__ = AsyncMock(return_value=False)
-
-        with patch("gmaps_scraper.GoogleMapsScraper", return_value=mock_scraper_instance), \
-             patch("gmaps_scraper.ScrapeConfig"):
-            leads = await scrape_city_category({
+        with patch("scraper.APIFY_TOKEN", "test_token"), \
+             patch("apify_client.ApifyClient", return_value=mock_client):
+            leads = scrape_city_category({
                 "query": "cafe in Mumbai",
                 "city": "Mumbai",
                 "country": "india",
@@ -196,29 +159,21 @@ class TestSingleCityPipeline:
 class TestMultiStepPipeline:
     """Test the full pipeline flow with all mocked external dependencies."""
 
-    @pytest.mark.asyncio
-    async def test_scraper_to_enricher_to_exporter(self, tmp_path):
+    def test_scraper_to_enricher_to_exporter(self, tmp_path):
         """End-to-end: scrape → enrich → export with mocked externals."""
-        # Step 1: Produce leads via mocked scraper
-        result_1 = _make_mock_result(place=MOCK_MUMBAI_CAFE_1, success=True)
-        result_2 = _make_mock_result(place=MOCK_MUMBAI_CAFE_2, success=True)
+        # Step 1: Produce leads via mocked Apify
+        mock_client = _make_mock_apify_client(
+            [APIFY_ITEM_MUMBAI_CAFE_1, APIFY_ITEM_MUMBAI_CAFE_2]
+        )
 
-        mock_scraper_instance = AsyncMock()
-        mock_scraper_instance.scrape = AsyncMock(side_effect=[result_1, result_2])
-        mock_scraper_instance.__aenter__ = AsyncMock(return_value=mock_scraper_instance)
-        mock_scraper_instance.__aexit__ = AsyncMock(return_value=False)
-
-        with patch("gmaps_scraper.GoogleMapsScraper", return_value=mock_scraper_instance), \
-             patch("gmaps_scraper.ScrapeConfig"):
-            query_info = {
+        with patch("scraper.APIFY_TOKEN", "test_token"), \
+             patch("apify_client.ApifyClient", return_value=mock_client):
+            all_leads = scrape_city_category({
                 "query": "cafe in Mumbai",
                 "city": "Mumbai",
                 "country": "india",
                 "category": "cafe",
-            }
-            leads_1 = await scrape_city_category(query_info)
-            leads_2 = await scrape_city_category(query_info)
-            all_leads = leads_1 + leads_2
+            })
 
         assert len(all_leads) == 2
 
@@ -322,7 +277,7 @@ class TestMultiStepPipeline:
 
     def test_filter_then_enrich_then_export(self, tmp_path):
         """Integration: filter no-website leads → enrich → export."""
-        # Simulated scraped leads (matching schema from _map_place_to_lead)
+        # Simulated scraped leads (matching schema from _map_apify_item_to_lead)
         raw_leads = [
             {
                 "business_name": "Cafe No Site",

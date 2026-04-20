@@ -4,7 +4,6 @@ Provides a Pipeline class that can run the full lead-gen flow or resume
 from intermediate checkpoints (raw data, enriched data).
 """
 
-import asyncio
 import json
 import logging
 import os
@@ -43,7 +42,7 @@ class Pipeline:
             list[dict]: Raw leads collected across all queries.
         """
         log.info("=== STEP 1: Discovery ===")
-        leads = asyncio.run(run_all_scrapes())
+        leads = run_all_scrapes()
         log.info("Discovery complete: %d leads", len(leads))
         return leads
 

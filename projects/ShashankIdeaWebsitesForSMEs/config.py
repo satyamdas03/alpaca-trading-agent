@@ -1,3 +1,5 @@
+import os
+
 CITIES = {
     "india": ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Pune"],
     "australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
@@ -26,6 +28,16 @@ SEARCH_TEMPLATES = {
 }
 
 MAX_RESULTS_PER_QUERY = 120
+
+# Country codes for Apify Google Maps Scraper
+COUNTRY_CODES = {
+    "india": "IN",
+    "australia": "AU",
+}
+
+# Apify configuration
+APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "")
+APIFY_ACTOR_ID = "apify/google-maps-scraper"
 
 APOLLO_API_KEY = ""  # Set via env var APOLLO_API_KEY
 
