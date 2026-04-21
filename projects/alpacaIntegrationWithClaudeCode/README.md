@@ -100,10 +100,11 @@ Inspired by [NeuralQuant](https://github.com/satyamdas03/NeuralQuant)'s transpar
 
 3. **Add Alpaca MCP server:**
    ```bash
-   claude mcp add alpaca --scope user --transport stdio uvx alpaca-mcp-server \
+   claude mcp add alpaca \
      -e ALPACA_API_KEY=your_key \
      -e ALPACA_SECRET_KEY=your_secret \
-     -e ALPACA_PAPER_TRADE=true
+     -e ALPACA_PAPER_TRADE=true \
+     -- uvx alpaca-mcp-server
    ```
 
 4. **Open in Claude Code and start trading:**
@@ -113,13 +114,22 @@ Inspired by [NeuralQuant](https://github.com/satyamdas03/NeuralQuant)'s transpar
 
 ### Setting Up Scheduled Routines
 
-Each routine prompt lives in `routines/`. To create a scheduled trigger in Claude Code:
+Each routine prompt lives in `routines/`. Scheduled routines can be set up two ways:
 
-```bash
-claude trigger create --name "pre-market" --cron "0 6 * * 1-5" --prompt-file routines/pre_market.md
+**Option A: Claude Code session (temporary, 7-day limit)**
+
+Inside a Claude Code session, use CronCreate to schedule routines. Note: recurring jobs auto-expire after 7 days.
+
+**Option B: Windows Task Scheduler / cron (persistent, 24/7)**
+
+For true 24/7 operation, use your OS scheduler to run `claude` with the routine prompt at market hours:
+
+```powershell
+# Windows Task Scheduler example — runs pre-market at 6:03 AM ET weekdays
+schtasks /create /tn "Bull-PreMarket" /tr "claude -p \"Read routines/pre_market.md and execute the pre-market routine\"" /sc weekly /d MON,TUE,WED,THU,FRI /st 06:03
 ```
 
-Repeat for each routine. See `routines/` for all prompts.
+Or use Linux cron on a server for uninterrupted operation. See `routines/` for all prompt files.
 
 ## 📁 Project Structure
 
