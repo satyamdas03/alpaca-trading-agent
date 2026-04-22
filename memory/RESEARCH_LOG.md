@@ -83,6 +83,60 @@ Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
 
 ---
 
+## Session: Evening (2026-04-21, ~8:30 PM ET)
+
+**Market Status:** Closed (next open 9:30 AM 4/22)
+
+### Alpaca MCP Verified
+All tools operational: get_clock, get_account_info, get_stock_snapshot, place_stock_order confirmed working. Trade execution now possible.
+
+### Snapshot Data (4/21 Close)
+| Symbol | Close | Chg | Notes |
+|--------|-------|-----|-------|
+| SPY | $703.91 | -0.65% | Fragile, VIX-implied spread wide |
+| TSLA | $386.32 | -1.5% | Earnings tomorrow after close |
+| XLE | $55.86 | +1.4% | Oil strength |
+| XLV | $145.93 | -1.0% | Defensive pullback |
+| XLU | $44.93 | -1.7% | Rates rising, defensive underperforming |
+
+### Iran Ceasefire — CRITICAL BINARY EVENT
+- Ceasefire expires **April 22** (14 days from April 7)
+- Iran has NOT sent delegation to Islamabad for second round
+- Strait of Hormuz: only ~5% pre-war volume, Iran re-closed April 18
+- Xi called Saudi Crown Prince — last-minute Chinese intervention
+- U.S. naval blockade of Iranian ports remains — Iran says this disqualifies talks
+- Trump: "under no pressure" to make deal, threatened to bomb bridges/power plants
+- **If no extension by market open 4/22 → assume Stress regime**
+
+### Tesla Earnings Preview (4/22 After Close)
+- EPS consensus: $0.39 | Revenue: ~$22.96B
+- Deliveries already missed (358K vs 365K est)
+- Energy storage 8.8 GWh (-38% QoQ from 14.2 GWh) — big disappointment
+- Robotaxi expansion to Dallas/Houston, Cybercab production start this month
+- FSD approved in Netherlands (European expansion)
+- Model S/X discontinued, lines repurposed for Optimus
+- Zacks ESP: -19.36% → likely earnings miss
+- Key upside: robotaxi timeline, AI narrative
+
+### SpotGamma Intelligence
+- VIX ~25 vs realized vol ~12% = 13pt spread (unusual outside panic)
+- Jump risk: sharp downside could force convergence
+- SPX 6,500 critical support (JP Morgan collar trade)
+- Post-VIX expiration, structural support removed
+- Correlation risk rising — everything trades together in stress
+
+### Regime Assessment
+**Late Cycle, leaning Stress.** Iran ceasefire expiration is the hinge. If it breaks tomorrow → shift to full Stress protocol (defensive only, hedging). If extended → brief Risk-On relief.
+
+### Action Plan for 4/22 Pre-Market
+1. Check Iran ceasefire status FIRST — determines entire regime
+2. If Stress: XLV/XLU positions only, consider SPY puts for hedge
+3. If Risk-On relief: momentum plays in beaten-down tech (TSLA post-earnings?)
+4. If neutral/Late Cycle: start with 2-3 positions, 5-8% each
+5. **This is our FIRST TRADING DAY.** Time to deploy capital.
+
+---
+
 ## Session: Market Close Routine (2026-04-21)
 
 **Market Status:** Closed (2:33 AM ET, next open 9:30 AM 4/21)
