@@ -1,61 +1,68 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-22 Evening Routine (~6:30 AM ET, pre-open)
+**Last Updated:** 2026-04-22 Close (Day 0 — first trading day)
 
 ## Account Overview
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $100,000.00
-- Total Portfolio Value: $100,000.00
-- Buying Power: $180,000.00 (2x margin)
-- Equity: $100,000.00
+- Current Cash: $80,000.00
+- Total Portfolio Value: $99,991.31
+- Buying Power: $179,991.31 (2x margin)
+- Equity: $99,991.31
 - Pattern Day Trader: No
 
 ## Open Positions
-| Symbol | Side | Notional | Entry Price | Status | Regime Signal |
-|--------|------|----------|-------------|--------|----------------|
-| XLV | BUY | $7,000 | mkt order | PENDING (day order) | Defensive sector in Stress |
-| XLE | BUY | $7,000 | mkt order | PENDING (day order) | Oil beneficiary, Hormuz closed |
-| GLD | BUY | $6,000 | mkt order | PENDING (day order) | Safe haven in geopolitical Stress |
+| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % |
+|--------|------|-----|-------------|---------------|----------------|-------|
+| XLV | LONG | 47.707 | $146.73 | $146.34 | -$9.71 | -0.14% |
+| XLE | LONG | 124.076 | $56.42 | $56.53 | +$23.92 | +0.34% |
+| GLD | LONG | 13.772 | $435.66 | $434.00 | -$22.92 | -0.38% |
 
-**Total deployed: $20K (20%). Remaining: $80K cash.**
-**Orders will execute at market open 9:30 AM ET 4/22. Expires 8 PM UTC.**
+**Total position value: $19,991.31. Cash: $80,000.**
+**Net unrealized P&L: -$8.69 (-0.04%)**
+
+### Stop-Loss Levels (NOT YET SET as orders)
+- XLV stop: $136.46 (-7% from entry)
+- XLE stop: $52.47 (-7% from entry)
+- GLD stop: $405.17 (-7% from entry)
+
+### Trailing Stops (NOT YET SET)
+- XLE: 10% trail (only winner currently)
 
 ## Allocation
 - Cash: 80%
-- Equities: 20% (pending execution at open)
+- Equities: 20%
 - Options: 0%
 - Crypto: 0%
 
 ## Performance
-- Total P&L: $0.00
-- Total Return: 0.00%
-- S&P 500 Benchmark: SPY $703.91 (4/21 close)
-- Alpha: 0.00%
+- Day 0 P&L: -$8.69 (-0.009%)
+- Total Return: -0.009%
+- S&P 500 Benchmark: SPY $711.20 (4/22 close, was $703.91 on 4/21)
+- S&P 500 Day Return: +1.03%
+- Alpha vs S&P: -1.04% (underperforming Day 0)
+- **Reason:** Defensive positioning in Stress regime, but S&P rallied on ceasefire relief
 
-## Market Context (2026-04-22 Pre-Open)
-- S&P 500 close 4/22: 7,064.01 (-0.63%)
-- VIX: ~21.11 (down 18% from 25.78 — ceasefire extension cooling)
-- Regime: **LATE CYCLE / STRESS BORDERLINE** — VIX dropping but Hormuz escalation ongoing
-- SPY extended hours: ~$706.78
-- Oil: Brent ~$98-99, WTI ~$90-93
-- IRGC seized 2 commercial ships in Hormuz on 4/22 (ESCALATION)
-- Peace talks collapsed — neither side showed up in Islamabad
-- UK/France planning 30+ nation force to reopen Hormuz
-- TSLA earnings tonight 5:30 PM ET (likely miss per Zacks ESP -19.36%)
+## Market Context (2026-04-22 Close)
+- SPY: $711.20 (+1.03%), S&P 500 ~7,134
+- VIX: ~21 (down from 25+ — ceasefire cooling)
+- Regime: **LATE CYCLE / STRESS BORDERLINE**
+- Oil: Brent ~$98-99, WTI ~$93
+- TSLA after-hours: $402.91 (+4.3% — earnings likely beat)
+- IRGC ship seizures in Hormuz (escalation not reflected in VIX)
+- UK/France planning force-based Hormuz reopening
 
-## Key Risks
-1. **Hormuz escalation** — ship seizures = new escalation level, oil spike risk
-2. **TSLA earnings binary** — P/E 235, miss = big drop, beat = big pop
-3. **XLE risk** — if Hormuz force-reopening announced, energy crashes fast
-4. **VIX may not reflect true risk** — dropped on ceasefire headline but fundamentals unchanged
+## Key Risks for 4/23
+1. **Hormuz escalation** — ship seizures could spike oil/VIX overnight
+2. **TSLA earnings reaction** — after-hours +4.3%, if confirmed beat = momentum opportunity
+3. **XLE risk** — Hormuz reopening = energy crash, need exit plan
+4. **Stop-losses not yet set** — must place stop orders at open 4/23
 
 ## Alpaca MCP Status
-- VERIFIED WORKING as of 4/22 evening session
-- All tools operational: account_info, clock, snapshots, orders, positions
+- VERIFIED WORKING as of 4/22
+- All tools operational
 
 ## Backtesting Engine Status
 - Phase 1 COMPLETE: 46/46 tests passing
-- 10-year walk-forward backtest infrastructure complete
 - Ready for live validation

@@ -2,23 +2,22 @@
 
 | Timestamp | Symbol | Side | Qty | Price | Rationale | Signal | Status |
 |-----------|--------|------|-----|-------|-----------|--------|--------|
-| — | — | — | — | — | — | — | — |
-
-*No trades yet. Agent initialized 2026-04-21.*
+| 2026-04-22 09:31 ET | XLV | BUY | 47.707 | $146.73 | Defensive sector in Stress, UNH beat earnings | Low Vol ↑ in Stress regime | OPEN |
+| 2026-04-22 09:31 ET | XLE | BUY | 124.076 | $56.42 | Oil at $99, Hormuz closed, direct beneficiary | Hormuz supply disruption | OPEN |
+| 2026-04-22 09:33 ET | GLD | BUY | 13.772 | $435.66 | Safe haven in geopolitical Stress | Safe haven in Stress regime | OPEN |
 
 ---
 
-## Orders Placed: 4/22 Pre-Market (Stress Regime)
+## Orders Placed: 4/22 Pre-Market (Stress Regime) — ALL FILLED
 
-| # | Order ID | Symbol | Side | Notional | Type | Status | Time |
-|---|----------|--------|------|----------|------|--------|------|
-| 1 | 69ed3794 | XLV | BUY | $7,000 | MARKET | accepted | 2026-04-22 01:53 ET |
-| 2 | fa0dd584 | XLE | BUY | $7,000 | MARKET | accepted | 2026-04-22 01:53 ET |
-| 3 | b2bb3e3b | GLD | BUY | $6,000 | MARKET | accepted | 2026-04-22 01:53 ET |
+| # | Order ID | Symbol | Side | Notional | Type | Status | Fill Price | Fill Time |
+|---|----------|--------|------|----------|------|--------|------------|-----------|
+| 1 | 69ed3794 | XLV | BUY | $7,000 | MARKET | FILLED | $146.73 | 9:31 AM ET |
+| 2 | fa0dd584 | XLE | BUY | $7,000 | MARKET | FILLED | $56.42 | 9:31 AM ET |
+| 3 | b2bb3e3b | GLD | BUY | $6,000 | MARKET | FILLED | $435.66 | 9:33 AM ET |
 
-**Regime: STRESS** — VIX >25, Hormuz closed, oil $99
-**Total deployment: $20K (20%). Remaining: $80K cash.**
-**Day orders — will execute at market open 9:30 AM ET.**
+**Regime: STRESS → Late Cycle borderline**
+**Total deployed: $20K (20%). Cash: $80K.**
 
 ---
 
