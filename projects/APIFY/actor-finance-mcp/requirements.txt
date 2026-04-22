@@ -1,0 +1,6 @@
+apify>=1.0.0
+yfinance>=0.2.36
+pandas>=2.1.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+feedparser>=6.0.0

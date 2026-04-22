@@ -1,0 +1,132 @@
+{
+  "actorSpecification": 1,
+  "name": "finance-data-mcp",
+  "title": "Finance Data MCP Server — Real-Time Market, Stock, Crypto, Forex & Macro Data",
+  "description": "Comprehensive financial data server for AI agents and MCP clients. 10 tools covering stock quotes, financials, analysis, market overview, economic indicators, crypto, forex, SEC filings, earnings calendar, and news sentiment. Covers US (NYSE/NASDAQ) and India (NSE/BSE) markets. Designed for AI agent consumption with structured, clean output. No API keys needed for core features — free data sources with intelligent fallbacks.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "environmentVariables": {},
+  "dockerfile": "./Dockerfile",
+  "input": {
+    "title": "Finance Data Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "tool": {
+        "title": "Tool",
+        "type": "string",
+        "description": "Which financial data tool to invoke.",
+        "enum": [
+          "stock_quote",
+          "stock_financials",
+          "stock_analysis",
+          "market_overview",
+          "economic_indicators",
+          "crypto_prices",
+          "currency_rates",
+          "sec_filings",
+          "earnings_calendar",
+          "news_sentiment"
+        ],
+        "default": "stock_quote",
+        "editor": "select"
+      },
+      "tickers": {
+        "title": "Tickers",
+        "type": "array",
+        "description": "Stock/crypto/forex ticker symbols. US: NVDA, AAPL. India NSE: RELIANCE.NS, TCS.NS. Crypto: BTC-USD, ETH-USD. Forex: EURUSD=X.",
+        "editor": "stringList",
+        "items": {
+          "type": "string"
+        },
+        "default": ["NVDA"]
+      },
+      "financial_type": {
+        "title": "Financial Statement Type",
+        "type": "string",
+        "description": "Which financial statement to retrieve. stock_financials tool only.",
+        "enum": ["income_statement", "balance_sheet", "cash_flow"],
+        "default": "income_statement",
+        "editor": "select"
+      },
+      "period": {
+        "title": "Period",
+        "type": "string",
+        "description": "Data period. 'annual' or 'quarterly'. For stock_financials and stock_analysis.",
+        "enum": ["annual", "quarterly"],
+        "default": "annual",
+        "editor": "select"
+      },
+      "indicators": {
+        "title": "Economic Indicators",
+        "type": "array",
+        "description": "Which macro indicators. economic_indicators tool only.",
+        "editor": "stringList",
+        "items": {
+          "type": "string"
+        },
+        "default": ["GDP", "INFLATION", "INTEREST_RATE", "UNEMPLOYMENT"]
+      },
+      "filing_type": {
+        "title": "SEC Filing Type",
+        "type": "string",
+        "description": "Type of SEC filing to search. sec_filings tool only.",
+        "enum": ["10-K", "10-Q", "8-K", "DEF 14A", "13-F", "ALL"],
+        "default": "ALL",
+        "editor": "select"
+      },
+      "query": {
+        "title": "Search Query",
+        "type": "string",
+        "description": "Free-text search for news_sentiment and sec_filings tools.",
+        "default": ""
+      },
+      "limit": {
+        "title": "Result Limit",
+        "type": "integer",
+        "description": "Maximum results to return per request.",
+        "default": 20,
+        "minimum": 1,
+        "maximum": 100
+      }
+    },
+    "required": ["tool"]
+  },
+  "dataset": {
+    "title": "Finance Data Results",
+    "description": "Structured financial data returned by the selected tool. Each result includes metadata, source attribution, and timestamp.",
+    "properties": {
+      "tool": {
+        "title": "Tool",
+        "type": "string",
+        "description": "Which tool generated this result."
+      },
+      "ticker": {
+        "title": "Ticker",
+        "type": "string",
+        "description": "Primary ticker symbol for this result."
+      },
+      "data": {
+        "title": "Data",
+        "type": "object",
+        "description": "Tool-specific structured data payload."
+      },
+      "source": {
+        "title": "Source",
+        "type": "string",
+        "description": "Data source identifier (e.g. 'yfinance', 'fred', 'sec_edgar')."
+      },
+      "fetched_at": {
+        "title": "Fetched At",
+        "type": "string",
+        "description": "ISO 8601 UTC timestamp of data retrieval."
+      },
+      "cache_ttl": {
+        "title": "Cache TTL",
+        "type": "integer",
+        "description": "Suggested cache time-to-live in seconds for this data type."
+      }
+    },
+    "required": ["tool", "data", "source", "fetched_at"]
+  }
+}
