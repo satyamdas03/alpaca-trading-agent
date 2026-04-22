@@ -3,13 +3,12 @@ name = "bull-backtest"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-    "lib-pybroker>=1.2.12",
     "edgartools>=5.30.0",
-    "riskfolio-lib>=7.2.0",
     "alpaca-trade-api>=3.2.0",
     "tenacity>=9.0.0",
     "pandas>=2.2.0",
     "numpy>=1.26.0",
+    "requests>=2.31.0",
 ]
 
 [project.optional-dependencies]

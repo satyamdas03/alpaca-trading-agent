@@ -2,6 +2,9 @@ import pandas as pd
 from src.signals.quality import quality_score
 from src.signals.momentum import momentum_score
 from src.signals.regime import classify_regime, adjust_weights, Regime
+from src.signals.value import value_score
+from src.signals.low_vol import low_vol_score
+from src.signals.sentiment import sentiment_score
 
 BASE_WEIGHTS = {
     "quality": 0.25,
@@ -23,16 +26,23 @@ class BullStrategy:
         self.weights = adjust_weights(BASE_WEIGHTS, self.regime)
 
     def generate_signals(self, prices: pd.DataFrame, fundamentals: dict | None = None,
-                         prev_fundamentals: dict | None = None) -> dict:
-        q_score = quality_score(fundamentals or {}, prev_fundamentals) / 9.0
+                         prev_fundamentals: dict | None = None,
+                         current_price: float | None = None,
+                         dark_pool_data: dict | None = None) -> dict:
+        # Quality: neutral (0.5) when no fundamentals available
+        q_raw = quality_score(fundamentals or {}, prev_fundamentals)
+        q_score = q_raw / 9.0 if (fundamentals and q_raw > 0) else 0.5
         m_score = self._normalize_momentum(momentum_score(prices))
+        v_score = value_score(fundamentals or {}, current_price)
+        lv_score = low_vol_score(prices)
+        s_score = sentiment_score(dark_pool_data or {})
 
         signals = {
             "quality": q_score,
             "momentum": m_score,
-            "value": 0.5,
-            "low_vol": 0.5,
-            "sentiment": 0.5,
+            "value": v_score,
+            "low_vol": lv_score,
+            "sentiment": s_score,
         }
 
         composite = sum(signals[k] * self.weights[k] for k in signals)
@@ -42,15 +52,3 @@ class BullStrategy:
 
     def _normalize_momentum(self, raw_momentum: float) -> float:
         return max(0.0, min(1.0, (raw_momentum + 0.5) / 1.0))
-
-    def pybroker_exec_fn(self):
-        def exec_fn(ctx):
-            if not ctx.long_pos():
-                signals = self.generate_signals(
-                    pd.DataFrame({"close": ctx.close}),
-                )
-                if signals["composite"] > 0.55:
-                    ctx.buy_shares = ctx.shares // 10
-                    ctx.stop_loss_pct = self.stop_loss_pct
-                    ctx.hold_bars = 21
-        return exec_fn
