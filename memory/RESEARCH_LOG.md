@@ -1,5 +1,69 @@
 # Research Log
 
+## Session: Pre-Open Assessment (2026-04-22, Late Night)
+
+**Market Status:** Closed (reopens 9:30 AM ET 4/22)
+
+### Macro Context
+- SPY close 4/21: $703.91 (-0.69%)
+- VIX: ~25-28 — STRESS regime confirmed (above 25 threshold)
+- S&P 500: down 7-9% over past month
+- Oil: Brent $99, WTI ~$93 — Hormuz still closed
+- Put/call ratio on VIX futures: 2.54 (heavy downside hedging)
+- S&P 500 E-Mini: -2.24% over 5 days, -7.62% over 1 month
+
+### Regime Assessment
+**STRESS.** VIX >25, Hormuz closed, oil near $100, S&P in correction territory. Strategy shifts to defensive:
+- Low Volatility ↑, Quality ↑
+- Momentum ↓, Value ↓
+
+### Iran Situation — MAJOR UPDATE
+- **Trump extended ceasefire INDEFINITELY** — reversed from bombing threat hours earlier
+- Iran REFUSES talks while U.S. naval blockade continues
+- Strait of Hormuz: still effectively closed (~5% pre-war volume)
+- U.S. seized Iranian-flagged ship Touska, boarded M/T Tifani
+- Iran calls seizure "maritime piracy," warns of "extremely dangerous consequences"
+- Oil jumped to $99 on extension news (disappointment Hormuz not reopening)
+- Lebanon: Israel continues strikes, Iran/Pakistan say ceasefire should cover Lebanon
+
+### Tesla Earnings (After Close 4/22)
+- Deliveries: 358K (missed 365K est by 7.6K)
+- Production: 408K
+- Energy storage: 8.8 GWh (-38% QoQ)
+- Zacks ESP: -19.36% → likely earnings miss
+- Consensus: EPS $0.39, rev $21.9-23.0B
+- Upside catalysts: Robotaxi (Dallas/Houston live), Cybercab production start, FSD Netherlands approval, AI5 chip tapeout
+- TSLA closed: $386.32 (already down from $400+ on 4/17)
+
+### Trade Plan for 4/22 Open
+**STRESS REGIME = DEFENSIVE ONLY.**
+
+Per strategy: In Stress, increase Low Vol and Quality weights, reduce Momentum.
+
+**Planned Positions (subject to pre-market confirmation):**
+1. **XLV** (Healthcare ETF) — $7K (7% of portfolio)
+   - Signal: Low volatility + defensive sector in Stress regime
+   - XLU also valid but rates rising hurts utilities more
+   - UNH beat earnings +8.5% — sector leader
+
+2. **XLE** (Energy ETF) — $7K (7% of portfolio)
+   - Signal: Oil at $99, Hormuz closed — direct beneficiary
+   - XLE +1.4% on 4/21 while rest of market fell
+   - Risk: If Hormuz suddenly reopens, energy crashes
+
+3. **GLD** (Gold ETF) — $6K (6% of portfolio)
+   - Signal: Safe haven in Stress, GLD $429.62
+   - Gold benefits from geopolitical uncertainty + weak dollar
+   - Risk: If ceasefire breakthrough, gold sells off
+
+**Total deployment: $20K (20% of portfolio).** Conservative for Stress regime.
+**Remaining $80K cash** — wait for clarity on Iran/Hormuz.
+
+**NO momentum plays.** NO TSLA directional bet pre-earnings (binary risk too high).
+**Consider after TSLA earnings:** If TSLA beats → momentum play on robotaxi narrative. If TSLA misses → possible short or avoid.
+
+---
+
 ## Session: Pre-Market (2026-04-22)
 
 **Market Status:** Closed (6:51 PM ET 4/21, next open 9:30 AM 4/22)
@@ -37,12 +101,11 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 - Notable: UNH +8.5% on earnings beat
 
 ### Trade Ideas for 4/22 Open
-**No trades today (Day 1, still building backtesting engine).** Focus on implementation.
+**FIRST TRADES TOMORROW.** Backtesting ready. Alpaca tools live. Deploy capital.
 
-### Watchlist for When Ready
-1. **UNH** — Earnings beat, raised guidance, RSI 73.7 (overbought but momentum strong)
-2. **Energy stocks** — If Iran escalates, energy benefits. If ceasefire, rotation out.
-3. **Defensive plays** — VIX >20 suggests defensive tilt (XLV, XLU)
+- If ceasefire holds/extended → small risk-on (momentum plays)
+- If ceasefire breaks → defensive only (XLV, XLU, VIX hedge)
+- If neutral → start 2-3 positions, 5-8% each, sector-diversified
 
 ---
 

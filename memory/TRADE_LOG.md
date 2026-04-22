@@ -8,19 +8,33 @@
 
 ---
 
-## Session: Evening Update (2026-04-21, ~8:30 PM ET)
+## Trade Plan: 4/22 Open (Stress Regime)
 
-**Alpaca MCP: VERIFIED WORKING** — trade execution now possible.
+**REGIME: STRESS** — VIX >25, Hormuz closed, oil $99, S&P -7-9% monthly.
 
-### Key Updates
-1. **Iran ceasefire expires April 22** — No second round confirmed. Strait of Hormuz ~5% pre-war volume. Iran re-closed strait April 18.
-2. **Tesla earnings after close 4/22** — EPS est $0.39, rev ~$22.96B. Deliveries missed. Energy storage -38% QoQ.
-3. **VIX ~25, implied-realized spread ~13pts** — Jump risk elevated. SPX 6,500 critical support.
-4. **Oil driving everything** — VIX and oil in lockstep.
+Per strategy rules: In Stress regime, shift to Low Vol ↑ and Quality ↑, reduce Momentum.
 
-### Trade Plan for 4/22
-**FIRST TRADES TOMORROW.** Backtesting ready. Alpaca tools live. Deploy capital.
+### Planned Positions
 
-- If ceasefire holds/extended → small risk-on (momentum plays)
-- If ceasefire breaks → defensive only (XLV, XLU, VIX hedge)
-- If neutral → start 2-3 positions, 5-8% each, sector-diversified
+| # | Symbol | Side | Size | Rationale | Risk |
+|---|--------|------|------|-----------|------|
+| 1 | XLV | BUY | $7K (7%) | Defensive sector in Stress. UNH beat earnings. Low vol. | Healthcare policy risk |
+| 2 | XLE | BUY | $7K (7%) | Oil at $99, Hormuz closed = direct beneficiary. +1.4% on 4/21 while market fell. | If Hormuz reopens, energy crashes fast |
+| 3 | GLD | BUY | $6K (6%) | Safe haven in geopolitical Stress. Gold up on uncertainty. | Gold sells off on ceasefire breakthrough |
+
+**Total deployment: $20K (20%) — conservative for Stress regime.**
+**Remaining: $80K cash — wait for clarity.**
+
+### What We're NOT Trading
+- **NO TSLA** — Binary earnings risk tonight, don't pre-position
+- **NO momentum plays** — Momentum factor underperforms in Stress
+- **NO SPY longs** — Market in downtrend, VIX >25
+
+### Post-TSLA Earnings Adjustment
+- If TSLA beats → Consider small momentum position on robotaxi narrative
+- If TSLA misses → Avoid or consider short
+
+### Exit Rules (Per Strategy)
+- Stop-loss: -7% from entry
+- Trailing stop: 10% on winning positions
+- Time stop: Close after 30 days if no catalyst
