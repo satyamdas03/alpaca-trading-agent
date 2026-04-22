@@ -155,11 +155,43 @@ alpaca-trading-agent/
 │   ├── trade_execution.md    # Alpaca MCP trade workflow
 │   ├── notification.md       # Gmail notification workflow
 │   └── journal.md            # Memory file update workflow
+├── src/
+│   ├── data/                 # Data fetchers + cache
+│   │   ├── cache.py          # Read-through Parquet/JSON cache with TTL
+│   │   ├── alpaca_fetcher.py # Alpaca price bars fetcher
+│   │   ├── edgar_fetcher.py  # SEC fundamentals via edgartools
+│   │   └── finra_fetcher.py  # FINRA dark pool ATS data
+│   ├── signals/               # Trading signals
+│   │   ├── quality.py         # Piotroski F-score + gross margin
+│   │   ├── momentum.py       # 12-1 month momentum ranking
+│   │   └── regime.py         # VIX-based regime classifier
+│   ├── strategy/
+│   │   └── bull_strategy.py  # Multi-factor composite strategy
+│   ├── sizing/
+│   │   └── kelly.py          # Half-Kelly position sizing
+│   ├── backtest/
+│   │   ├── runner.py         # Walk-forward runner
+│   │   └── metrics.py        # Sharpe, max DD, bootstrap CI
+│   └── ...
+├── tests/                     # 46 tests, all passing
 └── docs/
     └── superpowers/
-        └── specs/
-            └── 2026-04-21-trading-agent-design.md
+        └── ...
 ```
+
+## 🧮 Backtesting Engine
+
+Phase 1 backtesting validates the Quality+Momentum strategy with walk-forward analysis:
+
+```bash
+# Run full test suite
+pytest tests/ -v
+
+# Run backtest on SPY (requires Alpaca API keys)
+python -m src.backtest.runner --symbols SPY --start 2022-01-01 --end 2024-12-31
+```
+
+**Anti-overfitting guards:** Walk-forward validation, outlier year caps (60%), multi-regime Sharpe requirement, bootstrap CI, 8-parameter ceiling.
 
 ## ⚠️ Disclaimer
 

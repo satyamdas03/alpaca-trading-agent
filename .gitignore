@@ -5,3 +5,8 @@
 __pycache__/
 *.pyc
 .DS_Store
+data/prices/*.parquet
+data/fundamentals/*.json
+data/fundamentals/*.csv
+.pytest_cache/
+*.egg-info/
