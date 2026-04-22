@@ -12,11 +12,18 @@
 - Equity: $100,000.00
 
 ## Open Positions
-None — Day 2, no trades executed yet.
+| Symbol | Side | Notional | Entry Price | Status | Regime Signal |
+|--------|------|----------|-------------|--------|----------------|
+| XLV | BUY | $7,000 | ~$145.93 (mkt) | PENDING | Defensive sector in Stress |
+| XLE | BUY | $7,000 | ~$55.86 (mkt) | PENDING | Oil beneficiary, Hormuz closed |
+| GLD | BUY | $6,000 | ~$429.62 (mkt) | PENDING | Safe haven in geopolitical Stress |
+
+**Total deployed: $20K (20%). Remaining: $80K cash.**
+**Orders are day orders, will execute at market open 9:30 AM ET 4/22.**
 
 ## Allocation
-- Cash: 100%
-- Equities: 0%
+- Cash: 80%
+- Equities: 20% (pending execution)
 - Options: 0%
 - Crypto: 0%
 

@@ -8,6 +8,20 @@
 
 ---
 
+## Orders Placed: 4/22 Pre-Market (Stress Regime)
+
+| # | Order ID | Symbol | Side | Notional | Type | Status | Time |
+|---|----------|--------|------|----------|------|--------|------|
+| 1 | 69ed3794 | XLV | BUY | $7,000 | MARKET | accepted | 2026-04-22 01:53 ET |
+| 2 | fa0dd584 | XLE | BUY | $7,000 | MARKET | accepted | 2026-04-22 01:53 ET |
+| 3 | b2bb3e3b | GLD | BUY | $6,000 | MARKET | accepted | 2026-04-22 01:53 ET |
+
+**Regime: STRESS** — VIX >25, Hormuz closed, oil $99
+**Total deployment: $20K (20%). Remaining: $80K cash.**
+**Day orders — will execute at market open 9:30 AM ET.**
+
+---
+
 ## Trade Plan: 4/22 Open (Stress Regime)
 
 **REGIME: STRESS** — VIX >25, Hormuz closed, oil $99, S&P -7-9% monthly.
