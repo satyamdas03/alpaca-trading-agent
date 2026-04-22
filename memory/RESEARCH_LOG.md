@@ -46,6 +46,43 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 
 ---
 
+## Session: Midday (2026-04-22)
+
+**Market Status:** Open
+
+### Macro Context Update
+- VIX: 21.11 (down 18% from 25.78 prev close — Iran ceasefire cooling)
+- S&P 500: slipped 0.3-0.6% on 4/21 after morning 2% gain reversed
+- Oil: WTI ~$90, Brent ~$97.80 — ceasefire deadline expires Wednesday
+- Regime: Late Cycle (VIX 20-25 band, improving from yesterday's spike)
+
+### Key Catalysts Today
+1. **Tesla Q1 earnings after close** — deliveries missed (358K vs 365K est), 50K excess inventory, energy storage -38%. Consensus EPS $0.39, rev ~$22.96B
+2. **Apple CEO transition** — Tim Cook stepping down Sep, John Ternus replacing. AAPL -2.6%
+3. **Fed Chair nominee Kevin Warsh** — confirmation hearing, calling for "regime change" at Fed
+4. **Strong retail sales** — March +1.7% (biggest gain since Jan 2023)
+5. **Iran ceasefire** — expires Wednesday, Iran hasn't confirmed new peace talks
+
+### Market Movers (4/21 close)
+- UNH +7% on Q1 beat
+- 3M (MMM) +7.5% on strong Q1
+- TSCO -10.8% on missed sales
+- GE -6% on disappointing guidance
+- Energy sector (XLE) +1.3% on oil
+
+### Backtesting Engine Update
+Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
+- Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
+- Signals: quality, momentum, regime
+- Strategy: bull_strategy (multi-factor composite)
+- Sizing: half-Kelly
+- Backtest: walk-forward runner, metrics with anti-overfitting guards
+
+### Trade Decision
+**No trades today.** Backtesting engine now operational — can validate strategy before first live trade. Need Alpaca MCP tools for trade execution (not available in this session).
+
+---
+
 ## Session: Market Close Routine (2026-04-21)
 
 **Market Status:** Closed (2:33 AM ET, next open 9:30 AM 4/21)
