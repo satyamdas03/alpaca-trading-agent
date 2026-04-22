@@ -1,5 +1,72 @@
 # Research Log
 
+## Session: Evening Routine (2026-04-22, ~6:30 AM ET — market still closed)
+
+**Market Status:** Closed (opens 9:30 AM ET 4/22, closes 4 PM ET)
+**Key Event Tonight:** TSLA earnings after close (5:30 PM ET call)
+
+### Order Status
+All 3 orders still PENDING (status: new, filled_qty: 0). Day orders expire 4/22 8 PM UTC.
+- XLV BUY $7K (ID: 69ed3794)
+- XLE BUY $7K (ID: fa0dd584)
+- GLD BUY $6K (ID: b2bb3e3b)
+Orders will execute at market open 9:30 AM ET.
+
+### Account State
+- Cash: $100K, Portfolio: $100K (no positions yet)
+- Buying power: $180K (2x margin)
+- No fills, no P&L
+
+### Macro Update (4/22)
+- S&P 500 close 4/22: 7,064.01 (-0.63%)
+- VIX: ~21.11 (down 18% from 25.78 prev close — ceasefire extension cooling)
+- SPY: ~$706.78 (extended hours)
+- Oil: Brent ~$98-99, WTI ~$90-93 (Hormuz still closed)
+- Regime: **LATE CYCLE / STRESS BORDERLINE** — VIX dropping from >25 to ~21 but Hormuz still blocked
+
+### Iran/Hormuz — ESCALATION DESPITE CEASEFIRE
+1. **Trump extended ceasefire indefinitely** — at Pakistan's request, waiting for Iran "unified proposal"
+2. **U.S. naval blockade continues** — Iran calls it "act of war," won't negotiate until lifted
+3. **Strait of Hormuz STILL CLOSED** — IRGC attacked 3 ships on 4/22:
+   - One container ship hit by IRGC gunboat with guns and RPGs (bridge damaged)
+   - Two ships taken into IRGC custody (MSC Francesca, Epaminodes)
+   - This is SIGNIFICANT ESCALATION — active seizure of commercial vessels
+4. **Peace talks collapsed** — Islamabad round: neither side showed up
+   - U.S. delegation (led by VP JD Vance) never left Washington
+   - Iran never confirmed attendance
+5. **IRGC declared "peak readiness"** — displayed Khorramshahr-4 ballistic missile at rallies
+6. **Tasnim News (IRGC):** Iran did NOT request ceasefire extension, called it "means nothing"
+7. **UK/France convening 30+ nations** in London to plan force-based Hormuz reopening
+
+### Key Assessment
+**Ceasefire is symbolic. Reality on ground = escalation.** Ship seizures = new escalation level. Hormuz closed indefinitely. Oil likely stays elevated ($90-100+). VIX dropping on ceasefire headline but fundamentals still Stress-level.
+
+### TSLA Earnings Preview (Tonight After Close)
+- Consensus: EPS $0.35-0.39, Rev $21.4-22.96B
+- Deliveries already missed: 358K vs 365K est
+- Production > deliveries by 50K+ (inventory buildup)
+- Energy: 8.8 GWh (-38% QoQ, well below 12-14 GWh est)
+- Zacks ESP: -19.36% → likely miss
+- Key upside: Robotaxi expansion (Dallas/Houston), Cybercab production, FSD Netherlands
+- Key risk: Margin compression, demand slowdown, Musk divided attention (SpaceX/xAI IPO)
+- P/E: ~235 (extremely elevated, little room for disappointment)
+
+### TSLA Post-Earnings Trade Plan
+| Scenario | Action | Rationale |
+|----------|--------|-----------|
+| Beat EPS + strong guidance | Consider $3-5K momentum long | Robotaxi/AI narrative catalyst |
+| Beat EPS + weak guidance | No trade | Core business deteriorating |
+| Miss EPS, any guidance | Avoid or consider small short | Demand/margin concerns confirmed |
+| Mixed (beat rev, miss EPS) | No trade | Margin pressure, avoid binary |
+
+### 4/23 Trade Plan
+1. **Check if XLV/XLE/GLD filled** at open — confirm positions, set stop-losses
+2. **Check TSLA after-hours** — implement post-earnings plan above
+3. **Monitor Iran** — ship seizures = escalation risk. If Hormuz force-reopening announced, oil crashes fast (exit XLE immediately)
+4. **Regime reassessment** — VIX ~21 = Late Cycle, but Hormuz escalation could spike back to Stress overnight
+
+---
+
 ## Session: Pre-Open Assessment (2026-04-22, Late Night)
 
 **Market Status:** Closed (reopens 9:30 AM ET 4/22)

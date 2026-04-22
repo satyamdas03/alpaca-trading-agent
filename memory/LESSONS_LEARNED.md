@@ -12,6 +12,12 @@
 
 5. **TSLA earnings = binary event.** Don't pre-position. Wait for results, then decide.
 
+5. **IRGC ship seizures change the Hormuz calculus.** Commercial vessels being actively attacked and seized is escalation beyond just "blockade." Oil risk is higher than VIX implies — VIX dropped on ceasefire headline but fundamentals unchanged.
+
+6. **TSLA earnings = pure binary risk.** P/E of 235 means miss = big drop, beat = big pop. Don't size large either direction. If trading, keep to $3-5K max.
+
+7. **Day orders + paper trading = no partial fill risk.** But always verify fills at open before planning next moves.
+
 ---
 
 ## Rules
