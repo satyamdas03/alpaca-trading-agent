@@ -21,33 +21,26 @@
 
 ---
 
-## Trade Plan: 4/22 Open (Stress Regime)
+## Risk Management Orders (4/23 Pre-Market)
 
-**REGIME: STRESS** — VIX >25, Hormuz closed, oil $99, S&P -7-9% monthly.
+| # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Time |
+|---|----------|--------|------|-----|------|------------|--------|------|
+| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | accepted | 2026-04-23 00:05 ET |
+| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | accepted | 2026-04-23 00:05 ET |
+| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | accepted | 2026-04-23 00:05 ET |
 
-Per strategy rules: In Stress regime, shift to Low Vol ↑ and Quality ↑, reduce Momentum.
+**All GTC. Stop-loss at -7% from entry. Trailing stop on XLE blocked (shares held by stop order).**
 
-### Planned Positions
+---
 
-| # | Symbol | Side | Size | Rationale | Risk |
-|---|--------|------|------|-----------|------|
-| 1 | XLV | BUY | $7K (7%) | Defensive sector in Stress. UNH beat earnings. Low vol. | Healthcare policy risk |
-| 2 | XLE | BUY | $7K (7%) | Oil at $99, Hormuz closed = direct beneficiary. +1.4% on 4/21 while market fell. | If Hormuz reopens, energy crashes fast |
-| 3 | GLD | BUY | $6K (6%) | Safe haven in geopolitical Stress. Gold up on uncertainty. | Gold sells off on ceasefire breakthrough |
+## TSLA Earnings Decision (4/22 After Close)
 
-**Total deployment: $20K (20%) — conservative for Stress regime.**
-**Remaining: $80K cash — wait for clarity.**
+**TSLA Q1 2026 Results:**
+- EPS: $0.41 (beat $0.37 est) ✅
+- Revenue: $22.39B (miss vs $22.7B) ❌
+- Gross margin: 21.1% (up 478 bps YoY)
+- Capex guidance: $5B ABOVE prior → spending >$25B in 2026
+- Robotaxi: expanded to Dallas/Houston, unsupervised, no fleet size disclosed
+- After-hours: +4.3% initially, then gave back gains on spending news
 
-### What We're NOT Trading
-- **NO TSLA** — Binary earnings risk tonight, don't pre-position
-- **NO momentum plays** — Momentum factor underperforms in Stress
-- **NO SPY longs** — Market in downtrend, VIX >25
-
-### Post-TSLA Earnings Adjustment
-- If TSLA beats → Consider small momentum position on robotaxi narrative
-- If TSLA misses → Avoid or consider short
-
-### Exit Rules (Per Strategy)
-- Stop-loss: -7% from entry
-- Trailing stop: 10% on winning positions
-- Time stop: Close after 30 days if no catalyst
+**DECISION: NO TSLA TRADE.** EPS beat but revenue miss + massive spending increase = negative FCF. Stock gave back gains. Not a clean momentum signal.

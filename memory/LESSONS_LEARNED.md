@@ -18,6 +18,14 @@
 
 7. **Day orders + paper trading = no partial fill risk.** But always verify fills at open before planning next moves.
 
+7. **Day orders + paper trading = no partial fill risk.** But always verify fills at open before planning next moves.
+
+8. **TSLA EPS beat ≠ clean buy signal.** EPS beat $0.41 vs $0.37 but revenue miss + spending shock erased after-hours gains. Mixed signals = no trade. Wait for clean directional catalyst.
+
+9. **Stop-losses can block trailing stops.** Alpaca holds shares for stop orders, so you can't place a trailing stop on the same shares. Solution: cancel stop-loss, place trailing stop when position appreciates enough to justify it.
+
+10. **Defensive positions lag in relief rallies.** SPY +1.03% on 4/22, our portfolio -0.04%. That's the cost of Stress-regime positioning. Don't chase — regime hasn't shifted to Risk-On yet.
+
 ---
 
 ## Rules

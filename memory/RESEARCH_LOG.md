@@ -1,5 +1,61 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-04-23)
+
+**Market Status:** Closed (opens 9:30 AM ET 4/23)
+
+### TSLA Q1 2026 Earnings — MIXED, NO TRADE
+- **EPS: $0.41** (beat $0.37 est by 11%) ✅
+- **Revenue: $22.39B** (miss vs $22.7B est) ❌
+- **Gross margin: 21.1%** (up 478 bps YoY from 16.3%) — but benefited from one-time warranty adjustments and tariff refunds
+- **Free cash flow: $1.44B** — but capex guidance $5B ABOVE prior = negative FCF going forward
+- **Capex guidance: >$25B in 2026** (up from $20B+, more than double 2025's $8.5B)
+- **Robotaxi:** Expanded to Dallas/Houston, unsupervised, no fleet size disclosed
+- **Optimus Gen 3:** Didn't happen as promised, no new timeline
+- **Terafab:** 1TW AI computing facility in Austin, estimated $5T-$13T full buildout (not in capex guidance)
+- **After-hours:** +4.3% initially on EPS beat, then gave back gains on spending guidance
+- **TSLA closed:** $387.26, after-hours peaked $402.91
+
+**DECISION: NO TSLA TRADE.** Mixed results (EPS beat + revenue miss + spending shock). Not a clean directional signal. Stock likely to open flat to slightly down 4/23 as spending concerns dominate.
+
+### Iran/Hormuz — ESCALATION CONTINUES
+- **IRGC seized 2 ships** on 4/22: Epaminondas (Liberia-flagged) and MSC Francesca (Panama-flagged)
+- **Fired on 3 ships total** in Hormuz — bridge of one heavily damaged by RPG
+- **White House says seizures don't violate ceasefire** (not U.S./Israeli vessels)
+- **Diplomatic stalemate:** Iran won't talk until blockade lifted, U.S. won't lift until Iran negotiates
+- **Oil:** Brent briefly >$100, now ~$99. WTI ~$90-93
+- **EU warning:** €500M/day disruption cost, possible jet fuel/diesel shortages
+- **Recovery timeline:** 6-8 weeks after peace deal just to reposition tankers, another 2-5 weeks for insurance
+- **UK/France:** Convening 30+ nations in London to plan force-based Hormuz reopening
+- **Humanitarian cost:** 3,375+ killed in Iran, 2,290+ in Lebanon, 23 in Israel
+
+### Regime Assessment (4/23 Pre-Market)
+**LATE CYCLE, watching for Stress return.** VIX ~21 (below 25 threshold) but:
+- Hormuz ship seizures = real escalation, not reflected in VIX
+- Oil at $99-100 = inflation risk, Fed rate cut delays
+- Ceasefire holding (no airstrikes) but diplomacy deadlocked
+- If force-based reopening attempted → binary outcome: success = oil crash, failure = VIX spike
+
+**Strategy:** Maintain defensive positions (XLV/XLE/GLD). No new trades. $80K cash reserve. Wait for clarity.
+
+### Position Review
+| Symbol | Entry | Current | P&L | Action |
+|--------|-------|---------|-----|--------|
+| XLV | $146.73 | $146.52 | -0.14% | HOLD, stop at $136.46 |
+| XLE | $56.42 | $56.60 | +0.32% | HOLD, stop at $52.47 |
+| GLD | $435.66 | $433.92 | -0.40% | HOLD, stop at $405.17 |
+
+All positions within normal range. Stop-losses set. No exits needed.
+
+### New Trade Candidates — NONE TODAY
+Regime uncertain. VIX says Late Cycle but Hormuz escalation says Stress. Adding risk here is unwise. Cash is position. Wait for:
+1. Hormuz resolution (either direction) → then trade the outcome
+2. VIX break below 20 consistently → risk-on, momentum plays
+3. VIX spike above 30 → stress, add more defensive/hedges
+4. Major earnings catalysts later this week (Boeing, P&G)
+
+---
+
 ## Session: Evening Routine (2026-04-22, ~6:30 AM ET — market still closed)
 
 **Market Status:** Closed (opens 9:30 AM ET 4/22, closes 4 PM ET)
