@@ -33,6 +33,17 @@
 
 ---
 
+## Daily P&L Tracking
+
+| Date | Portfolio Value | Day P&L | Day P&L % | Cumulative P&L | S&P Day | S&P Cum |
+|------|----------------|---------|-----------|-----------------|---------|---------|
+| 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% |
+| 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% |
+
+**Notes:** Day 1 P&L is unrealized. Actual close prices from Alpaca show portfolio at $99,988.99. S&P significantly outperforming — defensive positioning is the drag.
+
+---
+
 ## TSLA Earnings Decision (4/22 After Close)
 
 **TSLA Q1 2026 Results:**
@@ -44,3 +55,15 @@
 - After-hours: +4.3% initially, then gave back gains on spending news
 
 **DECISION: NO TSLA TRADE.** EPS beat but revenue miss + massive spending increase = negative FCF. Stock gave back gains. Not a clean momentum signal.
+
+---
+
+## Position Performance Summary (4/23 Close)
+
+| Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |
+|--------|-------|---------|-----------|---------|------|-------------------|
+| XLV | $146.73 | $146.38 | -$16.59 | ~flat | $136.46 | -6.78% |
+| XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
+| GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
+
+**All positions well above stops. No exits triggered.**

@@ -1,5 +1,74 @@
 # Research Log
 
+## Session: Market Close Routine (2026-04-23)
+
+**Market Status:** Closed (4:00 PM ET 4/23)
+
+### Market Close Summary (4/23)
+- **S&P 500: 7,137.90 (+1.05%)** — 8th record close of 2026
+- **Nasdaq: 24,657.57 (+1.64%)** — record close
+- **Dow: 49,490.03 (+0.69%)**
+- **SPY: ~$711.21 (+1.01%)**
+
+### Regime Assessment: RISK-ON
+- VIX: ~17-18 (below 20 threshold = Risk-On confirmed)
+- S&P at record highs, 8th record of 2026
+- Tech leading: +2.31%, semis on 11-day win streak
+- Ceasefire holding, Trump softening on Fed/China
+
+### Sector Performance
+- Info Tech: +2.31% (15 of 16 sessions green)
+- Semiconductors: 11 consecutive winning sessions (record)
+- Energy (XLE): +1.20% (oil tailwind from Hormuz)
+- Healthcare (XLV): +0.32% (lagging in risk-on)
+- Gold (GLD): +1.32% (safe haven bid + inflation hedge)
+
+### Iran/Hormuz — ESCALATION CONTINUES
+- Iran **refuses to reopen** Hormuz while US blockade continues
+- IRGC **seized 2 ships** (MSC Francesca, Epaminondas), fired on 3
+- Only **1 ship** passed through Hormuz on 4/22 (vs 130/day normal)
+- WTI: $96.73 (+4.06%), Brent: $105.63 (+3.62%)
+- US intercepted 3 Iranian tankers near India/Malaysia/Sri Lanka
+- US seized Iranian tanker attempting to break blockade
+- Navy Secretary John Phelan departed abruptly (no reason given)
+- Diplomacy stalled: Iran won't talk until blockade lifted, US won't lift until Iran negotiates
+
+### Earnings After Hours (4/23)
+- **Boeing (BA):** Q1 beat — Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
+- **IBM:** Q1 beat — Rev $15.92B vs $15.62B, EPS $1.91 vs $1.81. But stock -6-7% AH on decelerating growth + AI disruption fears
+- **GE Vernova:** +13.75% (raised revenue forecast, best S&P performer)
+- **Micron:** +8.48% (AI memory demand, record close)
+- **United Airlines:** -5.58% (jet fuel costs from Hormuz)
+
+### Portfolio Performance Assessment
+
+**Critical issue: Portfolio significantly underperforming S&P.**
+
+| Metric | Portfolio | S&P 500 |
+|--------|-----------|----------|
+| Day 0 (4/22) | -0.007% | -0.63% |
+| Day 1 (4/23) | -0.011% est | +1.05% |
+| Cumulative | -0.011% | +0.42% |
+| YTD (approx) | ~flat | +4.27% |
+
+**Why underperforming:**
+1. **Defensive positioning in Risk-On regime** — XLV (healthcare) and GLD (gold) are hedges designed for Stress, not rally
+2. **Only 20% invested** — missing most of the +1.05% S&P move
+3. **XLE partially offsets** — energy benefiting from Hormuz/oil, but still small position
+
+### Tomorrow's Trade Plan (4/24)
+Regime is Risk-On (VIX < 20). Strategy says: increase Momentum, reduce Low Vol.
+
+**Options:**
+1. **Add momentum/tech position** — XLK or QQQ to capture risk-on rally
+2. **Maintain XLV** — healthcare has UNH tailwind, but lags in risk-on
+3. **Add to XLE** — Hormuz escalation continues, oil tailwind strong
+4. **Hold GLD** — gold still bid on geopolitical risk, but entry was high
+
+**Wait for 4/24 pre-market research before deciding.**
+
+---
+
 ## Session: Pre-Market Routine (2026-04-23)
 
 **Market Status:** Closed (opens 9:30 AM ET 4/23)
