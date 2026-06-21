@@ -43,13 +43,14 @@ In this note we prove that Griego's continuum relaxation, generalized to $k$ act
 
 \section{The continuum relaxation}
 
-Let $\mathcal P$ be the class of \emph{admissible continuum densities} $\rho:[0,1]\to\mathbb C$ for which there exist $\tau>0$ and $\alpha\in\mathbb C$ with $\Repart(\alpha)>0$ such that
+Let $\mathcal P$ be the class of \emph{admissible continuum densities} $\rho:[0,1]\to\mathbb C$ for which there exist $\tau\in(0,1/2)$ and $\alpha\in\mathbb C$ with $\Repart(\alpha)>0$ such that
 \begin{itemize}
 \item $\rho(u)=1-\alpha$ for $0\le u\le\tau$;
-\item $\rho$ is bounded and Riemann integrable on $(\tau,1]$;
+\item $\rho$ is bounded and Riemann integrable on $(\tau,1-\tau]$;
+\item $\rho(u)=1$ for $1-\tau<u\le1$ (the \emph{free block});
 \item $|\rho(u)|\le M_\rho$ for all $u$ and some finite $M_\rho>0$.
 \end{itemize}
-The final interval $(1-\tau,1]$, where $\rho(u)=1$, is called the \emph{free block}; it corresponds to the unimodular point $z=1$ in the discrete construction.
+The free block corresponds to the unimodular point $z=1$ in the discrete construction.
 
 For $\rho\in\mathcal P$ define the singular kernels
 \[
@@ -93,7 +94,7 @@ For every admissible step-function density $\rho\in\mathcal P$ and every $\varep
 \]
 Consequently
 \[
-\inf_{\rho\in\mathcal P}F[\rho]\le C_{42}.
+C_{42}\le\inf_{\rho\in\mathcal P}F[\rho].
 \]
 \end{thm}
 
