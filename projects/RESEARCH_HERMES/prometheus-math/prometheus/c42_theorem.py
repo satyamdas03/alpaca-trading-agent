@@ -63,8 +63,20 @@ class AdmissibleDensity:
 def density_from_kband_params(params: np.ndarray, k: int) -> AdmissibleDensity:
     """Convert the flat parameter vector used by c42_kband.py to AdmissibleDensity.
 
-    Parameter layout for k bands ( tk = 1 - t1 is fixed by symmetry ):
-        [t1, t2, ..., t_{k-1}, Re(alpha), Im(alpha), Re(eta2), Im(eta2), ..., Re(eta_k), Im(eta_k)]
+    This layout is byte-compatible with c42_kband.py: for k >= 3 the internal
+    cutoffs are encoded as fractions f_j in (0,1) and mapped to absolute cutoffs
+    by the same formula used in c42_kband._cutoffs_from_raw:
+
+        t_j = t1 + f_j * (1 - 2*t1)      for j = 1, ..., k-2
+
+    The first block ends at tau = t1, the internal bands occupy (t_j, t_{j+1}],
+    and the final cutoff is always t_k = 1 - t1 (the implicit free block).
+
+    Parameter layout for k bands (3k - 1 real numbers):
+        [t1,
+         f_1, ..., f_{k-2},                # only for k >= 3; fractions in (0,1)
+         Re(alpha), Im(alpha),
+         Re(eta_2), Im(eta_2), ..., Re(eta_k), Im(eta_k)]
     For k=2: [tau, Re(alpha), Im(alpha), Re(eta), Im(eta)]
     """
     params = np.asarray(params, dtype=float)
@@ -80,23 +92,23 @@ def density_from_kband_params(params: np.ndarray, k: int) -> AdmissibleDensity:
         bands = [(tau, 1.0 - tau, eta)]
         return AdmissibleDensity(alpha=alpha, tau=tau, bands=bands)
 
-    # k >= 3
+    # k >= 3: internal entries are fractions; map to absolute cutoffs.
     t1 = float(params[0])
-    cutoffs = list(params[1 : k - 1])  # t2, ..., t_{k-1}
     tk = 1.0 - t1
+    scale = tk - t1
+    fracs = np.sort(np.clip(np.asarray(params[1 : k - 1], dtype=float), 1e-12, 1 - 1e-12))
+    internal = t1 + fracs * scale
+    all_cutoffs = np.concatenate(([t1], internal, [tk]))
+
     alpha = complex(params[k - 1], params[k])
     eta_start = k + 1
     bands = []
-    prev = t1
-    for j in range(2, k + 1):
-        if j < k:
-            end = float(cutoffs[j - 2])
-        else:
-            end = tk
-        re_eta = float(params[eta_start + 2 * (j - 2)])
-        im_eta = float(params[eta_start + 2 * (j - 2) + 1])
-        bands.append((prev, end, complex(re_eta, im_eta)))
-        prev = end
+    for j in range(1, k):
+        start = float(all_cutoffs[j - 1])
+        end = float(all_cutoffs[j])
+        re_eta = float(params[eta_start + 2 * (j - 1)])
+        im_eta = float(params[eta_start + 2 * (j - 1) + 1])
+        bands.append((start, end, complex(re_eta, im_eta)))
     return AdmissibleDensity(alpha=alpha, tau=t1, bands=bands)
 
 
