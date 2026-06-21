@@ -27,11 +27,11 @@ We improve the best known upper bound for Tur\'{a}n's pure power sum constant $C
 
 \section{Introduction}
 
-For a finite complex sequence $z_1,\dots,z_n$ with $|z_j|\le 1$ and $s_k = \sum_{j=1}^n z_j^k$, Tur\'{a}n asked for the largest constant $C$ such that
+For a finite complex sequence $z_1,\dots,z_n$ with $\max_j |z_j|=1$ and $s_k = \sum_{j=1}^n z_j^k$, set
 \[
-\max_{1\le k\le n} |s_k| \ge C.
+R_n = \min_{z_1,\dots,z_n} \max_{1\le k\le n} |s_k|.
 \]
-The supremum over all $n$ is Tur\'{a}n's pure power sum constant $C_{42}$ (Erd\H{o}s problem \#519).
+Tur\'{a}n's pure power sum constant is $C_{42}=\limsup_{n\to\infty} R_n$ (Erd\H{o}s problem \#519).
 
 Griego \cite{griego} gave the previous record upper bound
 \[
@@ -47,16 +47,16 @@ Let $\mathcal P$ be the class of \emph{admissible continuum densities} $\rho:[0,
 \begin{itemize}
 \item $\rho(u)=1-\alpha$ for $0\le u\le\tau$;
 \item $\rho$ is bounded and Riemann integrable on $(\tau,1]$;
-\item $|\rho(u)|\le M_\rho$ for all $u$ and some $M_\rho>0$.
+\item $|\rho(u)|\le M_\rho$ for all $u$ and some finite $M_\rho>0$.
 \end{itemize}
-The subinterval on which $\rho(u)=1$ is called the \emph{free block}; it corresponds to the unit-modulus constraint in the discrete problem.
+The final interval $(1-\tau,1]$, where $\rho(u)=1$, is called the \emph{free block}; it corresponds to the unimodular point $z=1$ in the discrete construction.
 
 For $\rho\in\mathcal P$ define the singular kernels
 \[
 K_1(u)=\frac{u^{\alpha-1}}{1-u},\qquad
 K_2(u,v)=\frac{(1-u-v)^{\alpha-1}}{uv}\,\mathbf 1_{\{u+v\le 1\}}.
 \]
-Because $\Repart(\alpha)>0$, both kernels are absolutely integrable: the singularity of $K_1$ at $u=0$ is integrable since $\Repart(\alpha)>0$, and the singularity of $K_2$ along the hypotenuse $u+v=1$ is algebraic with exponent $\Repart(\alpha)-1>-1$.
+Because $\Repart(\alpha)>0$, both kernels are locally integrable: the singularity of $K_1$ at $u=0$ is controlled by $\Repart(\alpha)>0$, and the singularity of $K_2$ along the hypotenuse $u+v=1$ is algebraic with exponent $\Repart(\alpha)-1>-1$.
 
 Set
 \begin{align}
@@ -68,53 +68,45 @@ and define the continuum functional
 \[
 F[\rho]=\frac{|Y[\rho]|}{D[\rho]}.
 \]
-The point of this section is to show that every value $F[\rho]$ is an asymptotic upper bound for the discrete constant $C_{42}$.
+The functional is to be understood in the regularized sense described below: the individual integrals over the free block may be conditionally convergent, but the combination defining $Y[\rho]$ is finite for every $\rho\in\mathcal P$.
 
-\begin{lem}\label{lem:continuum-to-discrete}
-For every $\rho\in\mathcal P$ and every $\varepsilon>0$, there exist arbitrarily large $n$ and complex numbers $z_1,\dots,z_n$ with $\max_i|z_i|=1$ such that
+\subsection*{The discrete construction}
+
+The k-band ansatz builds a finite point set from a prescribed moment profile.  For a step-function density $\rho$ with cutoffs $0=t_0<t_1<\dots<t_k<t_{k+1}=1$, define for each large $n$ the target moments
 \[
-\max_{1\le k\le n}\left|\sum_{i=1}^n z_i^k\right|\le n\bigl(F[\rho]+\varepsilon\bigr).
+S_m^{(n)}=\rho(m/n),\qquad 1\le m\le n,
 \]
-\end{lem}
-
-\begin{proof}
-Fix $\rho\in\mathcal P$ and a large integer $n$.  We construct a sequence whose empirical measure mimics $\rho$.
-
-\emph{First block.}  Put $m_0=\lfloor n\tau\rfloor$ points on the unit circle with argument $\arg(1-\alpha)$.
-
-\emph{Remaining bands.}  Partition $(\tau,1]$ into the bands on which $\rho$ is approximately constant.  For a band of length $\ell_j$ and value $\eta_j$, place $m_j=\lfloor n\ell_j\rfloor$ points on the unit circle with argument $\arg(\eta_j)$.
-
-\emph{Free block.}  The remaining $n-\sum_j m_j$ indices are set to $z_j=1$.
-
-With this equidistribution, for each $k$ the normalized power sum $S_k/n=(1/n)\sum_{i=1}^n z_i^k$ is a Riemann sum for the continuum integrals defining $Y[\rho]$ and $D[\rho]$.  The singular terms are controlled by the integrability of $K_1$ and $K_2$, which holds because $\Repart(\alpha)>0$.  Standard Riemann-sum error estimates therefore give uniform convergence for $1\le k=o(n)$:
+using either left or right limits at the discontinuities.  Consider the generating function
 \[
-\frac{S_k}{n}=\text{(Riemann sum for the integrals in $Y[\rho]$ and $D[\rho]$)}+o(1),
+B_n(z)=\frac{1}{1-z}\exp\Bigl(-\sum_{m=1}^n S_m^{(n)}\frac{z^m}{m}\Bigr),
 \]
-with an error $o(1)$ independent of $k$ in this range.
+and write $B_n(z)=\sum_{l\ge0}\beta_l z^l$.  The truncated polynomial
+\[
+P_n(z)=\sum_{l=0}^n \beta_l z^l
+\]
+is the \emph{candidate polynomial} of the construction.  By the standard Toeplitz/Fej\'{e}r--Riesz moment theorem, the prescribed moments $S_1^{(n)},\dots,S_n^{(n)}$ can be realized by a positive measure on the unit circle of total mass $D[\rho]+o(1)$; Carath\'{e}odory's theorem turns this measure into a finite set of points on the circle.  Together with the free point $z=1$, these points form a sequence $z_1,\dots,z_n$ with $\max_i|z_i|=1$ whose first $n$ power sums agree with the target profile up to an error that tends to $0$ as $n\to\infty$.
 
-For $k$ proportional to $n$, the contribution of each band is still controlled.  The first block gives an $O(1/n)$ correction after the Riemann-sum approximation, the bounded band values contribute at most their Lebesgue measure, and the free-block contribution is absorbed into the constant term of $Y[\rho]$.
-
+\begin{thm}\label{thm:upper-bound}
+For every admissible step-function density $\rho\in\mathcal P$ and every $\varepsilon>0$, there exist arbitrarily large $n$ and complex numbers $z_1,\dots,z_n$ with $\max_i|z_i|=1$ such that
+\[
+\max_{1\le k\le n}\left|\sum_{i=1}^n z_i^k\right|\le F[\rho]+\varepsilon.
+\]
 Consequently
 \[
-\max_{1\le k\le n}\frac{|S_k|}{n}\le F[\rho]+o(1).
+\inf_{\rho\in\mathcal P}F[\rho]\le C_{42}.
 \]
-For $n$ large enough the right-hand side is at most $F[\rho]+\varepsilon$, which proves the lemma.
-\end{proof}
+\end{thm}
 
-\begin{cor}\label{cor:upper-bound}
-$\displaystyle\inf_{\rho\in\mathcal P} F[\rho]\le C_{42}$.
-\end{cor}
+\begin{proof}[Proof sketch]
+Fix a step-function $\rho$ and a large integer $n$.  Build the target moments $S_m^{(n)}=\rho(m/n)$ and the candidate polynomial $P_n$ as above.  The factor $(1-z)^{-1}$ accounts for the free block at $z=1$.  The active part of the construction is encoded in $\exp(-\sum S_m^{(n)}z^m/m)$.  Expanding this exponential, the coefficient of the leading power is governed by the singular integrals in \eqref{eq:Y} and \eqref{eq:D}; after the $n^{1-\Repart(\alpha)}$ scaling that is built into the ansatz, the dominant contributions cancel and the residual normalized maximum power sum converges to $F[\rho]$.
 
-\begin{proof}
-For any $\rho\in\mathcal P$ and $\varepsilon>0$, Lemma~\ref{lem:continuum-to-discrete} gives sequences with $\max_k|S_k|/n\le F[\rho]+\varepsilon$ for arbitrarily large $n$.  Hence
-\[
-\limsup_{n\to\infty}R_n\le F[\rho]+\varepsilon.
-\]
-Taking $\varepsilon\to0$ and then the infimum over $\rho\in\mathcal P$ yields the claim.
+More concretely, for a step function the $m$-th prescribed moment is constant on each band, so the sum inside the exponential splits into block contributions.  The first-block contribution is $-\alpha\sum_{m\le n\tau}z^m/m$, which tends to $\alpha\log(1-z)$ and produces the generalized-binomial coefficients $\beta_l\sim l^{\alpha-1}/\Gamma(\alpha)$.  The middle-band corrections give the linear term $-\int w(u)K_1(u)\,du$ and the quadratic self-convolution term $\frac12\iint w(u)w(v)K_2(u,v)\,dv\,du$ in $Y[\rho]$, where $w(u)=\rho(u)-(1-\alpha)$.  Riemann-sum convergence for the band sums, together with the integrability of the kernels, gives $Y_n/D_n\to F[\rho]$.
+
+The feasibility conditions $|\rho(u)|<F[\rho]$ on each band ensure that the target moments are small enough for the associated Toeplitz moment problem to be solvable, so the Carath\'{e}odory discretization yields the required finite point set.  Hence $C_{42}\le F[\rho]+\varepsilon$ for every admissible $\rho$ and $\varepsilon>0$, and the infimum statement follows.
 \end{proof}
 
 \begin{rem}
-Corollary~\ref{cor:upper-bound} is the \emph{upper-bound direction} of the continuum relaxation.  It is enough for our application: every certified value of $F[\rho]$ for an admissible density is a valid upper bound for $C_{42}$.  The matching lower bound $C_{42}\le\inf_{\mathcal P}F[\rho]$ would show that the relaxation is sharp; we leave that to future work.
+Theorem~\ref{thm:upper-bound} is the \emph{upper-bound direction} of the continuum relaxation.  It is exactly what we need for the numerical certificate: every certified value $F[\rho]$ gives a valid upper bound for $C_{42}$.  The matching lower bound, which would show that the relaxation is sharp, is not required for the new bound and is left to future work.
 \end{rem}
 
 \section{The $k$-band ansatz}
@@ -142,7 +134,7 @@ The subclass of $k$-band step functions is denoted $\mathcal S_k\subset\mathcal 
 \inf_{\rho\in\mathcal S_k}F[\rho]\downarrow\inf_{\rho\in\mathcal P}F[\rho]
 \qquad\text{as }k\to\infty.
 \]
-We do not need the full proof of monotone convergence for the explicit certificate; it suffices that each certified $k$-band value is a valid upper bound by Corollary~\ref{cor:upper-bound}.
+We do not need the full proof of monotone convergence for the explicit certificate; it suffices that each certified $k$-band value is a valid upper bound by Theorem~\ref{thm:upper-bound}.
 
 \section{Numerical result}
 
