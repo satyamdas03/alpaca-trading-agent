@@ -210,7 +210,11 @@ C_{42}\le C_{\rm high}+C_{\rm rem},
 \]
 where $C_{\rm high}$ is the interval upper bound on the quadrature-approximated functional and $C_{\rm rem}$ is the validated quadrature remainder.  Both quantities are computed entirely with interval arithmetic, so the bound holds for every point in the box.
 
-\section{Numerical result}
+\section{Explicit certificate}\label{sec:certificate}
+
+We instantiate the interval-computability framework of Section~\ref{sec:interval-computability} with the certified $k=3$ point.
+
+\subsection{Candidate point and decoded density}\label{sec:point}
 
 Using differential evolution, Latin-hypercube sampling, and local Nelder--Mead refinement, we found a feasible $k=3$ point with parameter vector
 \[
@@ -237,7 +241,7 @@ so the constraint margin is $6.6\times10^{-7}$.
 
 The structure is notable: the third band $[t_2,t_3]$ has width only $1.3\times10^{-4}$, producing a sharp boundary layer.  Moreover $\alpha\approx 1+0.363i$, so $1-\alpha$ is nearly pure imaginary.
 
-\section{Interval certificate}\label{sec:interval}
+\subsection{Interval certificate}\label{sec:interval}
 
 We certified the bound using the \texttt{mpmath.iv} interval arithmetic library at 50 decimal digits.  The 1D integrals $K$, $D$ and $A_{1,j}$ are evaluated as exact antiderivatives via the series
 \[
@@ -251,9 +255,9 @@ C_{42} \le C_{\rm iv}^{\rm upper} = 0.399333354781627.
 \]
 The verdict is \texttt{CERTIFIED}: every point in the box satisfies the constraints and the interval part of the bound is below Griego's record.
 
-\section{Validated quadrature remainder}
+\subsection{Validated quadrature remainder}
 
-The certificate of the preceding section applies to the functional evaluated by Gauss--Legendre quadrature.  To make the bound fully rigorous for the exact integrals, we add a validated remainder bound for the 2D quadrature error.
+The certificate of the preceding subsection applies to the functional evaluated by Gauss--Legendre quadrature.  To make the bound fully rigorous for the exact integrals, we add a validated remainder bound for the 2D quadrature error.
 
 After the graded substitution, the transformed integrand is smooth on $[t_{j-1},t_j]\times[0,1]$.  The product Gauss--Legendre error is bounded by an analytic-envelope estimate: if the transformed integrand is bounded by $M_0$ on a complex neighborhood of the integration domain and the nearest singularity is at distance $d$, then the $N$-node rule error is $O\bigl(M_0 L_u L_v (1+d/L)^{-2N}\bigr)$.  Applying this to each band pair $(j,l)$ and summing gives a total quadrature remainder of
 \[
