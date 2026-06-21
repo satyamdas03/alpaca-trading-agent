@@ -92,25 +92,26 @@ For every admissible step-function density $\rho\in\mathcal P$ and every $\varep
 \[
 \max_{1\le k\le n}\left|\sum_{i=1}^n z_i^k\right|\le F[\rho]+\varepsilon.
 \]
-Consequently
+Consequently, writing $\mathcal S\subset\mathcal P$ for the subclass of step-function densities,
 \[
-C_{42}\le\inf_{\rho\in\mathcal P}F[\rho].
+C_{42}\le\inf_{\rho\in\mathcal S}F[\rho].
 \]
+By the step-function density argument in Section~\ref{sec:k-band}, this implies $C_{42}\le\inf_{\rho\in\mathcal P}F[\rho]$.
 \end{thm}
 
 \begin{proof}[Proof sketch]
-Fix a step-function $\rho$ and a large integer $n$.  Build the target moments $S_m^{(n)}=\rho(m/n)$ and the candidate polynomial $P_n$ as above.  The factor $(1-z)^{-1}$ accounts for the free block at $z=1$.  The active part of the construction is encoded in $\exp(-\sum S_m^{(n)}z^m/m)$.  Expanding this exponential, the coefficient of the leading power is governed by the singular integrals in \eqref{eq:Y} and \eqref{eq:D}; after the $n^{1-\Repart(\alpha)}$ scaling that is built into the ansatz, the dominant contributions cancel and the residual normalized maximum power sum converges to $F[\rho]$.
+Fix a step-function $\rho$ and a large integer $n$.  Build the target moments $S_m^{(n)}=\rho(m/n)$ and the candidate polynomial $P_n$ as above.  The factor $(1-z)^{-1}$ accounts for the free block at $z=1$.  The active part of the construction is encoded in $\exp(-\sum S_m^{(n)}z^m/m)$.  Expanding this exponential, the coefficient of the leading power is governed by the singular integrals in \eqref{eq:Y} and \eqref{eq:D}; after the $n^{1-\Repart(\alpha)}$ scaling that is built into the ansatz, the dominant contributions cancel and the residual maximum power sum converges to $F[\rho]$.
 
-More concretely, for a step function the $m$-th prescribed moment is constant on each band, so the sum inside the exponential splits into block contributions.  The first-block contribution is $-\alpha\sum_{m\le n\tau}z^m/m$, which tends to $\alpha\log(1-z)$ and produces the generalized-binomial coefficients $\beta_l\sim l^{\alpha-1}/\Gamma(\alpha)$.  The middle-band corrections give the linear term $-\int w(u)K_1(u)\,du$ and the quadratic self-convolution term $\frac12\iint w(u)w(v)K_2(u,v)\,dv\,du$ in $Y[\rho]$, where $w(u)=\rho(u)-(1-\alpha)$.  Riemann-sum convergence for the band sums, together with the integrability of the kernels, gives $Y_n/D_n\to F[\rho]$.
+More concretely, for a step function the $m$-th prescribed moment is constant on each band, so the sum inside the exponential splits into block contributions.  On the first block $S_m=1-\alpha$, while the free-block factor contributes $-\log(1-z)$; together they give $\exp(\alpha\sum_{m\le n\tau}z^m/m)\to(1-z)^{-\alpha}$, whose coefficients are the generalized-binomial coefficients $\beta_l\sim l^{\alpha-1}/\Gamma(\alpha)$.  The middle-band corrections give the linear term $-\int w(u)K_1(u)\,du$ and the quadratic self-convolution term $\frac12\iint w(u)w(v)K_2(u,v)\,dv\,du$ in $Y[\rho]$, where $w(u)=\rho(u)-(1-\alpha)$.  Riemann-sum convergence for the band sums, together with the integrability of the kernels, gives $Y_n/D_n\to F[\rho]$.
 
-The feasibility conditions $|\rho(u)|<F[\rho]$ on each band ensure that the target moments are small enough for the associated Toeplitz moment problem to be solvable, so the Carath\'{e}odory discretization yields the required finite point set.  Hence $C_{42}\le F[\rho]+\varepsilon$ for every admissible $\rho$ and $\varepsilon>0$, and the infimum statement follows.
+The feasibility conditions $|\rho(u)|<F[\rho]$ on each band ensure that the target moments are small enough for the associated Toeplitz moment problem to be solvable, so the Carath\'{e}odory discretization yields the required finite point set.  Hence $C_{42}\le F[\rho]+\varepsilon$ for every admissible step-function $\rho$ and $\varepsilon>0$, and the infimum statement follows.
 \end{proof}
 
 \begin{rem}
 Theorem~\ref{thm:upper-bound} is the \emph{upper-bound direction} of the continuum relaxation.  It is exactly what we need for the numerical certificate: every certified value $F[\rho]$ gives a valid upper bound for $C_{42}$.  The matching lower bound, which would show that the relaxation is sharp, is not required for the new bound and is left to future work.
 \end{rem}
 
-\section{The $k$-band ansatz}
+\section{The $k$-band ansatz}\label{sec:k-band}
 
 We now restrict to step-function densities with at most $k$ active bands.  Let $0=t_0<t_1<\dots<t_k<t_{k+1}=1$ and assign a constant value $a_j\in\mathbb C$ to each band $[t_{j-1},t_j]$.  Writing $s=1-\alpha$ on the first block $[0,t_1]$ and $w_j=a_j-s$, the functional $F[\rho]=|Y[\rho]|/D[\rho]$ becomes
 \begin{align}
