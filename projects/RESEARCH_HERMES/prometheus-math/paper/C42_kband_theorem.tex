@@ -161,6 +161,55 @@ Monotonicity follows from Lemma~\ref{lem:monotone}.  For the limit, Lemma~\ref{l
 
 Consequently, each certified $k$-band value is a valid upper bound for $C_{42}$ by Theorem~\ref{thm:upper-bound}, and the continuum optimum can be approached arbitrarily closely by taking $k$ large enough.
 
+\section{Interval computability}\label{sec:interval-computability}
+
+The final ingredient is that the k-band functional can be evaluated with rigorous interval arithmetic, so every certified bound is a genuine theorem rather than a numerical observation.
+
+\subsection*{Parameter box}
+
+For $k$ bands the parameter vector has $3k-1$ real coordinates:
+\[
+(t_1,f_2,\dots,f_{k-1},\Repart\alpha,\Impart\alpha,
+\Repart\eta_2,\Impart\eta_2,\dots,\Repart\eta_k,\Impart\eta_k).
+\]
+The internal cutoffs are recovered from the fractions by
+\[
+t_j=t_1+f_j(1-2t_1),\qquad 2\le j\le k-1,
+\]
+and the symmetry condition fixes $t_k=1-t_1$.  A certificate is computed on a box of half-width $h$ (typically $h=10^{-12}$) centered at a candidate point.  Every quantity below is evaluated with interval arithmetic, so the result is valid for the entire box.
+
+\subsection*{Interval arithmetic}
+
+All computations use the \texttt{mpmath.iv} interval library at 50 decimal digits of precision.  Complex intervals are represented as $\texttt{mpc}(x,y)$, and every arithmetic operation is outward-rounded.  This turns the functional evaluation into an interval enclosure $[C_{\rm low},C_{\rm high}]$ valid for every parameter in the box.
+
+\subsection*{One-dimensional integrals}
+
+The 1D integrals $K$, $D$ and $A_{1,j}$ have the exact antiderivative
+\[
+I_A(x)=\sum_{r\ge0}\frac{x^{\alpha+r}}{\alpha+r},
+\qquad
+\int_a^b\frac{u^{\alpha-1}}{1-u}\,du=I_A(b)-I_A(a).
+\]
+In the interval implementation the infinite series is truncated after a finite number of terms and a rigorous geometric tail bound is added to the partial sum.  Because $|x^{\alpha+r}|\le x^{\Repart(\alpha)+r}$ for $0<x<1$, the discarded tail is enclosed by an interval geometric series, giving a mathematically exact enclosure of $I_A(x)$.
+
+\subsection*{Two-dimensional integrals}
+
+The 2D integrals $Q_{jl}$ have an algebraic singularity along the hypotenuse $u+v=1$.  After the graded substitution
+\[
+v=V_{\max}-L s^p,\qquad s\in[0,1],
+\]
+with $V_{\max}=\min(t_l,1-u)$ and $L=V_{\max}-t_{l-1}$, the transformed integrand is smooth.  The integral is then evaluated with Gauss--Legendre quadrature in both variables; all quadrature weights include the correct outer Jacobian $(b-a)/2$ and the inner Jacobian $Lp s^{p-1}$.  Because every operation uses interval arithmetic, the result is a rigorous enclosure of the quadrature approximation.
+
+\subsection*{Validated remainder and composition}
+
+The Gauss--Legendre enclosures of Section~\ref{sec:interval-computability} approximate the exact 2D integrals.  A separate validated remainder bound, implemented in \texttt{c42\_quadrature\_remainder.py}, accounts for the truncation error of the product rule on each band pair.  Summing the band-pair remainders gives an interval $[0,C_{\rm rem}]$.
+
+For a parameter box the final rigorous certificate is
+\[
+C_{42}\le C_{\rm high}+C_{\rm rem},
+\]
+where $C_{\rm high}$ is the interval upper bound on the quadrature-approximated functional and $C_{\rm rem}$ is the validated quadrature remainder.  Both quantities are computed entirely with interval arithmetic, so the bound holds for every point in the box.
+
 \section{Numerical result}
 
 Using differential evolution, Latin-hypercube sampling, and local Nelder--Mead refinement, we found a feasible $k=3$ point with parameter vector
