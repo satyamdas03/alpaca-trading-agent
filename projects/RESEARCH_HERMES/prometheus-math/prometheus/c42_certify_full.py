@@ -1,7 +1,6 @@
 """Full rigorous certificate: float check + interval check + quadrature remainder."""
 import numpy as np
 import mpmath as mp
-from mpmath import iv
 
 from prometheus.c42_kband import kband_bound_float, certify_kband_bound
 from prometheus.c42_theorem import density_from_kband_params
@@ -27,35 +26,43 @@ def certify_with_remainder(params: np.ndarray,
     Returns
     -------
     dict with keys:
-      float_C, interval_C_lower, interval_C_upper, remainder_upper,
-      total_upper_bound, constraints_ok, verdict
+      interval_C     : upper bound on the interval-arithmetic part (float)
+      remainder_C    : upper bound on the quadrature remainder (float)
+      total_upper_bound : interval_C + remainder_C (float)
+      constraints_ok : bool, whether |1-alpha| and |eta_j| are below C
+      verdict        : 'CERTIFIED' or 'FAILED'
     """
     params = np.asarray(params, dtype=float)
 
-    # 1. Float sanity check
-    float_C = kband_bound_float(params, k=k, terms=terms, QN=QN, Qp=Qp)
+    # 1. Float sanity check (used internally, not exposed)
+    C_float = kband_bound_float(params, k=k, terms=terms, QN=QN, Qp=Qp)[0]
+    if not np.isfinite(C_float):
+        return {
+            "interval_C": np.inf,
+            "remainder_C": np.inf,
+            "total_upper_bound": np.inf,
+            "constraints_ok": False,
+            "verdict": "FAILED",
+        }
 
     # 2. Interval certificate (quadrature-approximated functional)
     interval_result = certify_kband_bound(params, k=k, half_width=half_width,
                                           terms=terms, QN=QN, Qp=Qp)
-    interval_C_upper = interval_result["interval_C_upper"]
-    interval_C_lower = interval_result["interval_C_lower"]
+    interval_C = float(interval_result["interval_C_upper"])
     constraints_ok = interval_result["constraints_ok"]
 
     # 3. Quadrature remainder bound evaluated at the center density
     density = density_from_kband_params(params, k=k)
     remainder = total_Q_remainder(density, QN=QN, Qp=Qp)
-    remainder_upper = float(remainder.b)
+    remainder_C = float(remainder.b)
 
-    total_upper_bound = interval_C_upper + remainder_upper
+    total_upper_bound = interval_C + remainder_C
 
     verdict = "CERTIFIED" if (constraints_ok and total_upper_bound < 0.690653695151631) else "FAILED"
 
     return {
-        "float_C": float_C,
-        "interval_C_lower": interval_C_lower,
-        "interval_C_upper": interval_C_upper,
-        "remainder_upper": remainder_upper,
+        "interval_C": interval_C,
+        "remainder_C": remainder_C,
         "total_upper_bound": total_upper_bound,
         "constraints_ok": constraints_ok,
         "verdict": verdict,

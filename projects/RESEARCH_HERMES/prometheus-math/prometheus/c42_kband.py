@@ -559,13 +559,16 @@ def certify_kband_bound(params, k, half_width=1e-6, terms=4000, QN=80, Qp=4):
     Certify a k-band certificate in a small box around a float point.
 
     Returns a dict with keys:
-        verdict  : 'CERTIFIED' or 'INCONCLUSIVE'
-        C_iv     : interval enclosure of the bound
-        Y_iv     : interval enclosure of Y
-        D_iv     : interval enclosure of D
-        margin   : C_low - max(|1-alpha|, |eta_j|)_high
-        params   : the centre parameters used
-        box      : the constructed interval box
+        verdict            : 'CERTIFIED' or 'INCONCLUSIVE'
+        C_iv               : interval enclosure of the bound
+        interval_C_lower   : lower endpoint of C_iv (float)
+        interval_C_upper   : upper endpoint of C_iv (float)
+        Y_iv               : interval enclosure of Y
+        D_iv               : interval enclosure of D
+        margin             : C_low - max(|1-alpha|, |eta_j|)_high
+        params             : the centre parameters used
+        box                : the constructed interval box
+        constraints_ok     : bool, True iff margin > 0
     """
     p = np.asarray(params, dtype=float)
     ctx = mp.iv
