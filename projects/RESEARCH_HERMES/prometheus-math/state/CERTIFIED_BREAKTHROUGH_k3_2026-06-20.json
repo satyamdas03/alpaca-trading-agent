@@ -1,0 +1,56 @@
+{
+  "status": "CERTIFIED_BREAKTHROUGH",
+  "description": "Rigorous k=3 upper bound for Turan's C_42 constant, far below Griego's two-block record",
+  "date": "2026-06-20",
+  "griego_C": 0.690653695151631,
+  "rigorous_upper_bound": 0.399333354781627,
+  "improvement_over_griego": 0.291320340370004,
+  "relative_improvement": 0.421513,
+  "k": 3,
+  "best_search": "focused-lhs-sampler-a-polished",
+  "params": [
+    0.040511664590274124,
+    0.9999998528787128,
+    1.0047583326115217,
+    0.363102621255547,
+    0.310410208083373,
+    -0.00036734153660538993,
+    0.22134893688471718,
+    -0.3323721384294311
+  ],
+  "param_names": [
+    "t1",
+    "t2_fraction",
+    "re_alpha",
+    "im_alpha",
+    "re_eta2",
+    "im_eta2",
+    "re_eta3",
+    "im_eta3"
+  ],
+  "cutoffs": {
+    "t1": 0.040511664590274124,
+    "t2": 0.959488204469002,
+    "t3": 0.9594883354097259
+  },
+  "alpha": "1.0047583326115217 + 0.363102621255547i",
+  "eta2": "0.310410208083373 - 0.00036734153660538993i",
+  "eta3": "0.22134893688471718 - 0.3323721384294311i",
+  "certificate_box_half_width": 1e-12,
+  "interval_verdict": "CERTIFIED",
+  "interval_C": 0.3993333590882096,
+  "margin": 6.59181518758434e-07,
+  "certification_QN": 850,
+  "certification_terms": 4000,
+  "float_C_hi_res": 0.399333351092805,
+  "float_Y_hi_res": {
+    "real": 0.009749908160450719,
+    "imag": -0.012922750906005654
+  },
+  "float_D_hi_res": 0.0405380910953046,
+  "certification_notes": "Interval path evaluated with mpmath.iv at dps=50, terms=4000, QN=850, Qp=4 with validated quadrature remainder bound from c42_quadrature_remainder. 2D quadrature interval weights include correct ba/2 outer and wj/2 inner scaling. Certificate valid for all boxes half-width 1e-12 around the listed point. Constraint margin ~6.6e-7. Empirical QN convergence 400->2000 shows float C stable to ~2e-10. alpha = 1.00476+0.36310i (i.e. 1-alpha nearly pure imaginary); t2 and t3 nearly equal, forming a very thin third band near u=0.9595.",
+  "remainder_C": 3.8663021458692705e-05,
+  "total_upper_bound": 0.3993720221096683,
+  "constraints_ok": true,
+  "verdict": "CERTIFIED"
+}
