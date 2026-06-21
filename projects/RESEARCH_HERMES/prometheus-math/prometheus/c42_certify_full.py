@@ -26,7 +26,10 @@ def certify_with_remainder(params: np.ndarray,
     Returns
     -------
     dict with keys:
+      float_C        : float evaluation at the box center
       interval_C     : upper bound on the interval-arithmetic part (float)
+      interval_C_lower : lower bound on the interval-arithmetic part (float)
+      interval_C_upper : upper bound on the interval-arithmetic part (float)
       remainder_C    : upper bound on the quadrature remainder (float)
       total_upper_bound : interval_C + remainder_C (float)
       constraints_ok : bool, whether |1-alpha| and |eta_j| are below C
@@ -38,7 +41,10 @@ def certify_with_remainder(params: np.ndarray,
     C_float = kband_bound_float(params, k=k, terms=terms, QN=QN, Qp=Qp)[0]
     if not np.isfinite(C_float):
         return {
+            "float_C": np.inf,
             "interval_C": np.inf,
+            "interval_C_lower": np.inf,
+            "interval_C_upper": np.inf,
             "remainder_C": np.inf,
             "total_upper_bound": np.inf,
             "constraints_ok": False,
@@ -48,7 +54,9 @@ def certify_with_remainder(params: np.ndarray,
     # 2. Interval certificate (quadrature-approximated functional)
     interval_result = certify_kband_bound(params, k=k, half_width=half_width,
                                           terms=terms, QN=QN, Qp=Qp)
-    interval_C = float(interval_result["interval_C_upper"])
+    interval_C_lower = float(interval_result["interval_C_lower"])
+    interval_C_upper = float(interval_result["interval_C_upper"])
+    interval_C = interval_C_upper
     constraints_ok = interval_result["constraints_ok"]
 
     # 3. Quadrature remainder bound evaluated at the center density
@@ -61,7 +69,10 @@ def certify_with_remainder(params: np.ndarray,
     verdict = "CERTIFIED" if (constraints_ok and total_upper_bound < 0.690653695151631) else "FAILED"
 
     return {
+        "float_C": float(C_float),
         "interval_C": interval_C,
+        "interval_C_lower": interval_C_lower,
+        "interval_C_upper": interval_C_upper,
         "remainder_C": remainder_C,
         "total_upper_bound": total_upper_bound,
         "constraints_ok": constraints_ok,

@@ -18,8 +18,7 @@ def test_certify_full_k3_breaks_griego(certified_k3_params):
 
 
 def test_interval_encloses_float(certified_k3_params):
-    C_float = kband_bound_float(certified_k3_params, k=3)[0]
-    interval = certify_kband_bound(certified_k3_params, k=3, half_width=1e-12,
-                                 terms=500, QN=200, Qp=4)
-    assert interval["interval_C_lower"] <= C_float <= interval["interval_C_upper"]
-    assert interval["constraints_ok"]
+    result = certify_with_remainder(certified_k3_params, k=3, half_width=1e-12,
+                                     QN=50, terms=500, Qp=4)
+    assert result["interval_C_lower"] <= result["float_C"] <= result["interval_C_upper"]
+    assert result["constraints_ok"]
