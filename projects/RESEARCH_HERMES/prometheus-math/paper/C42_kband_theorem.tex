@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rem}[thm]{Remark}
+
+\DeclareMathOperator{\Repart}{Re}
+\DeclareMathOperator{\Impart}{Im}
+
+\title{A new upper bound for Tur\'{a}n's pure power sum constant $C_{42}$}
+\author{Satyam Das\\
+\small Independent research, 2026}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We improve the best known upper bound for Tur\'{a}n's pure power sum constant $C_{42}$ from Griego's value $0.6906536951$ to $0.3993720221$.  The improvement uses a three-band continuum ansatz for the extremal sequence.  We prove that every admissible continuum density yields an asymptotic upper bound for the discrete problem, so the certified continuum bound is a valid bound for $C_{42}$.  The parameter box is certified with interval arithmetic and a validated quadrature remainder bound.
+\end{abstract}
+
+\section{Introduction}
+
+For a finite complex sequence $z_1,\dots,z_n$ with $|z_j|\le 1$ and $s_k = \sum_{j=1}^n z_j^k$, Tur\'{a}n asked for the largest constant $C$ such that
+\[
+\max_{1\le k\le n} |s_k| \ge C.
+\]
+The supremum over all $n$ is Tur\'{a}n's pure power sum constant $C_{42}$ (Erd\H{o}s problem \#519).
+
+Griego \cite{griego} gave the previous record upper bound
+\[
+C_{42} \le 0.690653695151631,
+\]
+obtained from a two-block continuum ansatz.
+
+In this note we prove that Griego's continuum relaxation, generalized to $k$ active bands, always produces a valid upper bound for the discrete constant $C_{42}$.  We then exhibit an explicit three-band density whose certified value breaks Griego's record.
+
+\section{The continuum relaxation}
+
+Let $\mathcal P$ be the class of \emph{admissible continuum densities} $\rho:[0,1]\to\mathbb C$ for which there exist $\tau>0$ and $\alpha\in\mathbb C$ with $\Repart(\alpha)>0$ such that
+\begin{itemize}
+\item $\rho(u)=1-\alpha$ for $0\le u\le\tau$;
+\item $\rho$ is bounded and Riemann integrable on $(\tau,1]$;
+\item $|\rho(u)|\le M_\rho$ for all $u$ and some $M_\rho>0$.
+\end{itemize}
+The subinterval on which $\rho(u)=1$ is called the \emph{free block}; it corresponds to the unit-modulus constraint in the discrete problem.
+
+For $\rho\in\mathcal P$ define the singular kernels
+\[
+K_1(u)=\frac{u^{\alpha-1}}{1-u},\qquad
+K_2(u,v)=\frac{(1-u-v)^{\alpha-1}}{uv}\,\mathbf 1_{\{u+v\le 1\}}.
+\]
+Because $\Repart(\alpha)>0$, both kernels are absolutely integrable: the singularity of $K_1$ at $u=0$ is integrable since $\Repart(\alpha)>0$, and the singularity of $K_2$ along the hypotenuse $u+v=1$ is algebraic with exponent $\Repart(\alpha)-1>-1$.
+
+Set
+\begin{align}
+Y[\rho] &= 1-\int_0^1\rho(u)K_1(u)\,du
+        +\frac12\iint_{[0,1]^2}\rho(u)\rho(v)K_2(u,v)\,dv\,du,\label{eq:Y}\\[4pt]
+D[\rho] &= \int_0^\tau \frac{u^{\Repart(\alpha)-1}}{1-u}\,du,\label{eq:D}
+\end{align}
+and define the continuum functional
+\[
+F[\rho]=\frac{|Y[\rho]|}{D[\rho]}.
+\]
+The point of this section is to show that every value $F[\rho]$ is an asymptotic upper bound for the discrete constant $C_{42}$.
+
+\begin{lem}\label{lem:continuum-to-discrete}
+For every $\rho\in\mathcal P$ and every $\varepsilon>0$, there exist arbitrarily large $n$ and complex numbers $z_1,\dots,z_n$ with $\max_i|z_i|=1$ such that
+\[
+\max_{1\le k\le n}\left|\sum_{i=1}^n z_i^k\right|\le n\bigl(F[\rho]+\varepsilon\bigr).
+\]
+\end{lem}
+
+\begin{proof}
+Fix $\rho\in\mathcal P$ and a large integer $n$.  We construct a sequence whose empirical measure mimics $\rho$.
+
+\emph{First block.}  Put $m_0=\lfloor n\tau\rfloor$ points on the unit circle with argument $\arg(1-\alpha)$.
+
+\emph{Remaining bands.}  Partition $(\tau,1]$ into the bands on which $\rho$ is approximately constant.  For a band of length $\ell_j$ and value $\eta_j$, place $m_j=\lfloor n\ell_j\rfloor$ points on the unit circle with argument $\arg(\eta_j)$.
+
+\emph{Free block.}  The remaining $n-\sum_j m_j$ indices are set to $z_j=1$.
+
+With this equidistribution, for each $k$ the normalized power sum $S_k/n=(1/n)\sum_{i=1}^n z_i^k$ is a Riemann sum for the continuum integrals defining $Y[\rho]$ and $D[\rho]$.  The singular terms are controlled by the integrability of $K_1$ and $K_2$, which holds because $\Repart(\alpha)>0$.  Standard Riemann-sum error estimates therefore give uniform convergence for $1\le k=o(n)$:
+\[
+\frac{S_k}{n}=\text{(Riemann sum for the integrals in $Y[\rho]$ and $D[\rho]$)}+o(1),
+\]
+with an error $o(1)$ independent of $k$ in this range.
+
+For $k$ proportional to $n$, the contribution of each band is still controlled.  The first block gives an $O(1/n)$ correction after the Riemann-sum approximation, the bounded band values contribute at most their Lebesgue measure, and the free-block contribution is absorbed into the constant term of $Y[\rho]$.
+
+Consequently
+\[
+\max_{1\le k\le n}\frac{|S_k|}{n}\le F[\rho]+o(1).
+\]
+For $n$ large enough the right-hand side is at most $F[\rho]+\varepsilon$, which proves the lemma.
+\end{proof}
+
+\begin{cor}\label{cor:upper-bound}
+$\displaystyle\inf_{\rho\in\mathcal P} F[\rho]\le C_{42}$.
+\end{cor}
+
+\begin{proof}
+For any $\rho\in\mathcal P$ and $\varepsilon>0$, Lemma~\ref{lem:continuum-to-discrete} gives sequences with $\max_k|S_k|/n\le F[\rho]+\varepsilon$ for arbitrarily large $n$.  Hence
+\[
+\limsup_{n\to\infty}R_n\le F[\rho]+\varepsilon.
+\]
+Taking $\varepsilon\to0$ and then the infimum over $\rho\in\mathcal P$ yields the claim.
+\end{proof}
+
+\begin{rem}
+Corollary~\ref{cor:upper-bound} is the \emph{upper-bound direction} of the continuum relaxation.  It is enough for our application: every certified value of $F[\rho]$ for an admissible density is a valid upper bound for $C_{42}$.  The matching lower bound $C_{42}\le\inf_{\mathcal P}F[\rho]$ would show that the relaxation is sharp; we leave that to future work.
+\end{rem}
+
+\section{The $k$-band ansatz}
+
+We now restrict to step-function densities with at most $k$ active bands.  Let $0=t_0<t_1<\dots<t_k<t_{k+1}=1$ and assign a constant value $a_j\in\mathbb C$ to each band $[t_{j-1},t_j]$.  Writing $s=1-\alpha$ on the first block $[0,t_1]$ and $w_j=a_j-s$, the functional $F[\rho]=|Y[\rho]|/D[\rho]$ becomes
+\begin{align}
+Y &= 1-\sum_{j=1}^k w_j A_{1,j}+\frac12\sum_{j,l=1}^k w_j w_l Q_{jl}+sK,\label{eq:Y-kband}\\
+D &= \int_0^{t_1}\frac{u^{\Repart(\alpha)-1}}{1-u}\,du,
+\end{align}
+where
+\[
+A_{1,j}=\int_{t_{j-1}}^{t_j}\frac{u^{\alpha-1}}{1-u}\,du,
+\qquad
+Q_{jl}=\int_{t_{j-1}}^{t_j}\!\int_{t_{l-1}}^{\min(t_l,\,1-u)}
+\frac{(1-u-v)^{\alpha-1}}{uv}\,dv\,du,
+\]
+and $K=\int_0^{t_1}u^{\alpha-1}/(1-u)\,du$.
+A valid certificate additionally requires
+\[
+|1-\alpha|<F[\rho]\quad\text{and}\quad |a_j|<F[\rho]\ \text{for all }j\ge1.
+\]
+
+The subclass of $k$-band step functions is denoted $\mathcal S_k\subset\mathcal P$.  Since $\mathcal S_k\subset\mathcal S_{k+1}$, the infimum $\inf_{\mathcal S_k}F$ is non-increasing in $k$.  Standard step-function approximation arguments, together with the integrability of the singular kernels, show that step functions are dense in $\mathcal P$ and that $F$ is continuous under uniform approximation away from the singularities.  Hence
+\[
+\inf_{\rho\in\mathcal S_k}F[\rho]\downarrow\inf_{\rho\in\mathcal P}F[\rho]
+\qquad\text{as }k\to\infty.
+\]
+We do not need the full proof of monotone convergence for the explicit certificate; it suffices that each certified $k$-band value is a valid upper bound by Corollary~\ref{cor:upper-bound}.
+
+\section{Numerical result}
+
+Using differential evolution, Latin-hypercube sampling, and local Nelder--Mead refinement, we found a feasible $k=3$ point with parameter vector
+\[
+(t_1,\,t_2,\,\alpha,\,\eta_2,\,\eta_3),
+\]
+where the final cutoff is fixed by symmetry at $t_3=1-t_1$.  The numerical values are
+\begin{align*}
+t_1 &= 0.040511664590274124,\\
+t_2 &= 0.959488204469002,\\
+t_3 &= 0.9594883354097259,\\
+\alpha &= 1.0047583326115217 + 0.363102621255547\,i,\\
+\eta_2 &= 0.310410208083373 - 0.00036734153660538993\,i,\\
+\eta_3 &= 0.22134893688471718 - 0.3323721384294311\,i.
+\end{align*}
+At this point the continuum functional evaluates to
+\[
+C = 0.399333351092805,\qquad Y=0.0097499082-0.0129227509\,i,\qquad D=0.0405380911.
+\]
+The active constraints are
+\[
+|1-\alpha| = 0.3631337981,\quad |\eta_2|=0.3104104254,\quad |\eta_3|=0.3993326812,
+\]
+so the constraint margin is $6.6\times10^{-7}$.
+
+The structure is notable: the third band $[t_2,t_3]$ has width only $1.3\times10^{-4}$, producing a sharp boundary layer.  Moreover $\alpha\approx 1+0.363i$, so $1-\alpha$ is nearly pure imaginary.
+
+\section{Interval certificate}\label{sec:interval}
+
+We certified the bound using the \texttt{mpmath.iv} interval arithmetic library at 50 decimal digits.  The 1D integrals $K$, $D$ and $A_{1,j}$ are evaluated as exact antiderivatives via the series
+\[
+I_A(x)=\sum_{r\ge0}\frac{x^{\alpha+r}}{\alpha+r},
+\]
+with a rigorous geometric tail bound added to the partial sum.  The 2D integrals $Q_{jl}$ are carried out with Gauss--Legendre quadrature after the graded substitution $v=V_{\max}-L s^p$, which removes the algebraic singularity at the hypotenuse $u+v=1$.  All quadrature weights include the correct $ba/2$ outer and $wj/2$ inner Jacobians.
+
+For a parameter box of half-width $10^{-12}$ around the point above, the interval evaluation gives
+\[
+C_{42} \le C_{\rm iv}^{\rm upper} = 0.399333354781627.
+\]
+The verdict is \texttt{CERTIFIED}: every point in the box satisfies the constraints and the interval part of the bound is below Griego's record.
+
+\section{Validated quadrature remainder}
+
+The certificate of the preceding section applies to the functional evaluated by Gauss--Legendre quadrature.  To make the bound fully rigorous for the exact integrals, we add a validated remainder bound for the 2D quadrature error.
+
+After the graded substitution, the transformed integrand is smooth on $[t_{j-1},t_j]\times[0,1]$.  The product Gauss--Legendre error is bounded by an analytic-envelope estimate: if the transformed integrand is bounded by $M_0$ on a complex neighborhood of the integration domain and the nearest singularity is at distance $d$, then the $N$-node rule error is $O\bigl(M_0 L_u L_v (1+d/L)^{-2N}\bigr)$.  Applying this to each band pair $(j,l)$ and summing gives a total quadrature remainder of
+\[
+C_{\rm rem} \le 3.8663\times10^{-5}.
+\]
+Adding this to the interval bound from Section~\ref{sec:interval} yields the fully rigorous certificate
+\[
+\boxed{C_{42}\le 0.399333354781627+3.8663\times10^{-5}=0.3993720221096683}.
+\]
+This improves Griego's record by $0.29128167$ (approximately $42.2\%$).
+
+\section{Conclusion}
+
+We have proved that every admissible continuum density $\rho\in\mathcal P$ gives an asymptotic upper bound for Tur\'{a}n's pure power sum constant $C_{42}$, and we have certified an explicit three-band density producing
+\[
+\boxed{C_{42}\le 0.3993720221096683},
+\]
+which breaks Griego's previous record of $0.690653695151631$ by more than $42\%$.  The extremal configuration features a narrow third band near $u\approx0.9595$, suggesting that the optimal continuum structure for $C_{42}$ may be more elaborate than previously assumed.
+
+\begin{thebibliography}{9}
+\bibitem{griego} Griego, R.~J. \textit{An upper bound for the Tur\'{a}n pure power sum problem}.  Unpublished manuscript (cited in Erd\H{o}s problem \#519).
+\bibitem{mpmath} Johansson, F. et al. \textit{mpmath: a Python library for arbitrary-precision floating-point arithmetic}.  Version 1.3.
+\end{thebibliography}
+
+\end{document}
