@@ -247,7 +247,7 @@ We certified the bound using the \texttt{mpmath.iv} interval arithmetic library 
 \[
 I_A(x)=\sum_{r\ge0}\frac{x^{\alpha+r}}{\alpha+r},
 \]
-with a rigorous geometric tail bound added to the partial sum.  The 2D integrals $Q_{jl}$ are carried out with Gauss--Legendre quadrature after the graded substitution $v=V_{\max}-L s^p$, which removes the algebraic singularity at the hypotenuse $u+v=1$.  All quadrature weights include the correct $ba/2$ outer and $wj/2$ inner Jacobians.
+with a rigorous geometric tail bound added to the partial sum.  The 2D integrals $Q_{jl}$ are carried out with Gauss--Legendre quadrature after the graded substitution $v=V_{\max}-L s^p$, which removes the algebraic singularity at the hypotenuse $u+v=1$.  All quadrature weights include the correct outer Jacobian $(b-a)/2$ and the inner Jacobian $L p s^{p-1}$.
 
 For a parameter box of half-width $10^{-12}$ around the point above, the interval evaluation gives
 \[
