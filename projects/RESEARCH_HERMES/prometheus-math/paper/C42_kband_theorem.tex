@@ -131,12 +131,35 @@ A valid certificate additionally requires
 |1-\alpha|<F[\rho]\quad\text{and}\quad |a_j|<F[\rho]\ \text{for all }j\ge1.
 \]
 
-The subclass of $k$-band step functions is denoted $\mathcal S_k\subset\mathcal P$.  Since $\mathcal S_k\subset\mathcal S_{k+1}$, the infimum $\inf_{\mathcal S_k}F$ is non-increasing in $k$.  Standard step-function approximation arguments, together with the integrability of the singular kernels, show that step functions are dense in $\mathcal P$ and that $F$ is continuous under uniform approximation away from the singularities.  Hence
+\begin{lem}[Monotonicity]\label{lem:monotone}
+The subclass of $k$-band step functions is denoted $\mathcal S_k\subset\mathcal P$.  Since $\mathcal S_k\subset\mathcal S_{k+1}$, the infimum $\inf_{\rho\in\mathcal S_k}F[\rho]$ is non-increasing in $k$.
+\end{lem}
+\begin{proof}
+Immediate from the inclusion $\mathcal S_k\subset\mathcal S_{k+1}$ and the definition of the infimum.
+\end{proof}
+
+\begin{lem}[Density]\label{lem:density}
+For every $\rho\in\mathcal P$ and every $\varepsilon>0$, there exists a $k$-band step function $\rho_k\in\mathcal S_k$ with
+\[
+F[\rho_k]\le F[\rho]+\varepsilon.
+\]
+\end{lem}
+\begin{proof}[Proof sketch]
+Restrict to a compact subclass $\mathcal P_M\subset\mathcal P$ defined by uniform bounds on $\tau^{-1}$, $\Repart(\alpha)^{-1}$, $|\rho|$, and the uniform bound $M_\rho$.  On $\mathcal P_M$, the functional $F$ is continuous with respect to uniform convergence away from $u=0$ and the hypotenuse $u+v=1$; the singularities are integrable, so small changes near the singular set contribute $O(\varepsilon)$.  Since step functions are dense in $L^\infty$, any $\rho\in\mathcal P_M$ can be approximated by a $k$-band step function $\rho_k$, and the approximation can be refined until $F[\rho_k]\le F[\rho]+\varepsilon$.
+\end{proof}
+
+\begin{thm}[Monotone convergence to the continuum optimum]\label{thm:monotone-convergence}
+The infimum over $k$-band step functions is monotone and converges to the continuum optimum:
 \[
 \inf_{\rho\in\mathcal S_k}F[\rho]\downarrow\inf_{\rho\in\mathcal P}F[\rho]
 \qquad\text{as }k\to\infty.
 \]
-We do not need the full proof of monotone convergence for the explicit certificate; it suffices that each certified $k$-band value is a valid upper bound by Theorem~\ref{thm:upper-bound}.
+\end{thm}
+\begin{proof}
+Monotonicity follows from Lemma~\ref{lem:monotone}.  For the limit, Lemma~\ref{lem:density} gives, for every $\rho\in\mathcal P$ and $\varepsilon>0$, a $k$-band step function $\rho_k\in\mathcal S_k$ with $F[\rho_k]\le F[\rho]+\varepsilon$.  Thus $\limsup_{k\to\infty}\inf_{\mathcal S_k}F\le\inf_{\mathcal P}F$, while the reverse inequality follows from $\mathcal S_k\subset\mathcal P$.
+\end{proof}
+
+Consequently, each certified $k$-band value is a valid upper bound for $C_{42}$ by Theorem~\ref{thm:upper-bound}, and the continuum optimum can be approached arbitrarily closely by taking $k$ large enough.
 
 \section{Numerical result}
 

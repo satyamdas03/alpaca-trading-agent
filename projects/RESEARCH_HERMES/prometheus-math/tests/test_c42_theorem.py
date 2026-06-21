@@ -1,6 +1,7 @@
 import json
 import numpy as np
 import pytest
+from prometheus.c42_kband import GRIEGO_C
 from prometheus.c42_theorem import density_from_kband_params, F_functional
 
 
@@ -24,3 +25,13 @@ def test_certified_k3_density_reproduces_float(certified_k3_params):
     with open(path) as f:
         reference = json.load(f)["float_C_hi_res"]
     assert abs(C - reference) < FLOAT_REPRO_TOL
+
+
+def test_k3_beats_k2(certified_k3_params):
+    griego_2 = np.array([0.36988243, 0.61927309, 0.57623741, 0.59839764, -0.34485185])
+    d2 = density_from_kband_params(griego_2, k=2)
+    _, _, C2 = F_functional(d2, terms=3000, QN=500, Qp=4)
+    d3 = density_from_kband_params(certified_k3_params, k=3)
+    _, _, C3 = F_functional(d3, terms=3000, QN=500, Qp=4)
+    assert C3 < C2
+    assert C2 < GRIEGO_C + 1e-9
