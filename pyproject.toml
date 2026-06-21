@@ -1,0 +1,21 @@
+[project]
+name = "bull-backtest"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "edgartools>=5.30.0",
+    "alpaca-trade-api>=3.2.0",
+    "tenacity>=9.0.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

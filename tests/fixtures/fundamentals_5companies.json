@@ -1,0 +1,47 @@
+{
+  "AAPL": {
+    "revenue": 394328,
+    "gross_profit": 170782,
+    "net_income": 99803,
+    "total_assets": 352583,
+    "total_liabilities": 290437,
+    "current_assets": 134973,
+    "current_liabilities": 108829
+  },
+  "MSFT": {
+    "revenue": 211915,
+    "gross_profit": 147518,
+    "net_income": 72361,
+    "total_assets": 411976,
+    "total_liabilities": 191791,
+    "current_assets": 169684,
+    "current_liabilities": 95082
+  },
+  "GOOG": {
+    "revenue": 307394,
+    "gross_profit": 156633,
+    "net_income": 73795,
+    "total_assets": 365764,
+    "total_liabilities": 119098,
+    "current_assets": 152655,
+    "current_liabilities": 84526
+  },
+  "TSLA": {
+    "revenue": 96773,
+    "gross_profit": 17699,
+    "net_income": 14997,
+    "total_assets": 106158,
+    "total_liabilities": 53913,
+    "current_assets": 43787,
+    "current_liabilities": 32215
+  },
+  "AMZN": {
+    "revenue": 574785,
+    "gross_profit": 246695,
+    "net_income": 30425,
+    "total_assets": 420548,
+    "total_liabilities": 324243,
+    "current_assets": 172749,
+    "current_liabilities": 189567
+  }
+}
