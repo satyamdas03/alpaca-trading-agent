@@ -1,0 +1,38 @@
+[project]
+name = "aqra"
+version = "0.1.0"
+description = "Autonomous Quant Research Agent — dual-lane conformal strategy discovery"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "scikit-learn>=1.5",
+    "duckdb>=1.0",
+    "yfinance>=0.2.40",
+    "requests>=2.31",
+    "python-edgar>=2.0",
+    "polygon-api-client>=1.13",
+    "alpaca-py>=0.28",
+    "anthropic>=0.30",
+    "transformers>=4.41",
+    "torch>=2.3",
+    "hmmlearn>=0.3",
+    "fastapi>=0.111",
+    "uvicorn>=0.30",
+    "jinja2>=3.1",
+    "python-dotenv>=1.0",
+    "gitpython>=3.1",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.2", "pytest-asyncio>=0.23", "ruff>=0.4"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
