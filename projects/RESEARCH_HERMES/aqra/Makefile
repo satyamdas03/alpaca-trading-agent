@@ -1,5 +1,7 @@
 .PHONY: sync test lint format clean
 
+# The brief's literal `uv sync` does not install the optional dev extras that
+# contain pytest. Use `make sync` to get the full development environment.
 sync:
 	uv sync --extra dev
 
