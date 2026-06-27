@@ -8,6 +8,7 @@ dependencies = [
     "numpy>=1.26",
     "scipy>=1.13",
     "scikit-learn>=1.5",
+    "lxml>=5.0",
     "duckdb>=1.0",
     "yfinance>=0.2.40",
     "requests>=2.31",
