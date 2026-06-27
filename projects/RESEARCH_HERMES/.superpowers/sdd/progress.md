@@ -16,5 +16,5 @@ Task 15: complete
 Task 16: complete
 Task 17: complete (commit 3b4b01f)
 Task 18: complete (commit 447ccbf)
-Task 19: in progress
-Task 20: pending
+Task 19: complete (commit 6c78c0c)
+Task 20: complete
