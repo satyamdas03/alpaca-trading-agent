@@ -30,6 +30,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.2", "pytest-asyncio>=0.23", "ruff>=0.4"]
 
+[project.scripts]
+aqra = "aqra.cli:app"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
