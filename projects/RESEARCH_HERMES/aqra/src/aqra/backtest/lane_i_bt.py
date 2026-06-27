@@ -11,9 +11,9 @@ class LaneIBacktest:
         self.engine = BacktestEngine()
 
     def _signal(self, df: pd.DataFrame, candidate_id: str) -> pd.Series:
-        if candidate_id == "I_OVERNIGHT_GAP":
+        if candidate_id == "I_GAP":
             return rank_pct(df["overnight_gap"])
-        if candidate_id == "I_VOLUME_Z":
+        if candidate_id == "I_VOLUME":
             return rank_pct(df["volume_zscore"])
         if candidate_id == "I_SENTIMENT":
             return rank_pct(df["news_sentiment_zscore"])
