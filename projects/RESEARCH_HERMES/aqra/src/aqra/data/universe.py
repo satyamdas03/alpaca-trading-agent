@@ -90,3 +90,51 @@ class Universe:
         """Long-format record of changes for storage/audit: date, added, removed."""
         self._ensure_loaded()
         return self._changes.copy()
+
+    # Sentinels for the reconstructed horizon: membership before the earliest
+    # recorded change is unknowable from Wikipedia, so the earliest list is
+    # assumed to hold from HORIZON_START; open memberships run to HORIZON_END.
+    HORIZON_START = pd.Timestamp("2000-01-01")
+    HORIZON_END = pd.Timestamp("2100-01-01")
+
+    def intervals(self) -> pd.DataFrame:
+        """Per-ticker membership intervals: ticker, start_date, end_date.
+
+        Replays the changes table forward from the earliest reconstructable
+        membership.  end_date is exclusive.  Ticker renames (e.g. FB->META)
+        appear as a removal plus an addition.
+        """
+        self._ensure_loaded()
+        changes = self._changes.sort_values("date")  # ascending replay
+        earliest = changes["date"].min()
+        open_since: dict[str, pd.Timestamp] = {
+            t: self.HORIZON_START
+            for t in self.at_date(earliest - pd.Timedelta(days=1))
+        }
+        rows: list[dict] = []
+        for _, row in changes.iterrows():
+            added = row.get("added")
+            removed = row.get("removed")
+            if isinstance(removed, str) and removed and removed.lower() != "nan":
+                t = removed.strip()
+                if t in open_since:
+                    rows.append({"ticker": t, "start_date": open_since.pop(t),
+                                 "end_date": row["date"]})
+            if isinstance(added, str) and added and added.lower() != "nan":
+                t = added.strip()
+                open_since.setdefault(t, row["date"])
+        for t, start in open_since.items():
+            rows.append({"ticker": t, "start_date": start,
+                         "end_date": self.HORIZON_END})
+        out = pd.DataFrame(rows)
+        return out.sort_values(["ticker", "start_date"]).reset_index(drop=True)
+
+    def persist(self, db) -> int:
+        """Write membership intervals into the universe_membership table."""
+        iv = self.intervals()
+        db.conn.execute("DELETE FROM universe_membership")
+        db.conn.execute("""
+            INSERT INTO universe_membership (ticker, start_date, end_date)
+            SELECT ticker, start_date, end_date FROM iv
+        """)
+        return len(iv)

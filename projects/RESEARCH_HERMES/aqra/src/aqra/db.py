@@ -26,6 +26,14 @@ class AQRADatabase:
             )
         """)
         self.conn.execute("""
+            CREATE TABLE IF NOT EXISTS universe_membership (
+                ticker TEXT,
+                start_date DATE,
+                end_date DATE,
+                PRIMARY KEY (ticker, start_date)
+            )
+        """)
+        self.conn.execute("""
             CREATE TABLE IF NOT EXISTS lane_s_features (
                 ticker TEXT,
                 date DATE,

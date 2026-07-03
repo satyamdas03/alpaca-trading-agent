@@ -19,4 +19,9 @@ class LaneSSignalLibrary:
                 formula="rank(quality_score)", params={"holding_period": 21},
                 rationale="Piotroski/gross-margin quality factor"
             ),
+            SignalCandidate(
+                id="S_LOW_VOL", lane=Lane.STRUCTURAL, name="Low Volatility",
+                formula="rank(low_vol_score)", params={"holding_period": 21},
+                rationale="Ang et al. low-volatility anomaly (long low-vol, short high-vol)"
+            ),
         ]

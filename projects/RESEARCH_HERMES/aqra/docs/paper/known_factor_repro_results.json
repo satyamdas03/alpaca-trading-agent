@@ -1,0 +1,72 @@
+{
+  "run_date": "2026-07-03",
+  "window": [
+    "2012-01-01",
+    "2024-12-31"
+  ],
+  "holding_period": 21,
+  "cost_bps": 10.0,
+  "universe": "survivorship-bias-free historical S&P 500 constituents",
+  "results": [
+    {
+      "id": "S_MOM_12_1",
+      "name": "12-1 Momentum",
+      "sharpe": -0.093,
+      "ic": 0.0087,
+      "max_drawdown": -0.27,
+      "ann_turnover": 4.97,
+      "expected_range": [
+        -0.5,
+        0.5
+      ],
+      "consistent": true,
+      "reference": "Jegadeesh & Titman (1993); McLean & Pontiff (2016) decay",
+      "status": "OK"
+    },
+    {
+      "id": "S_VALUE",
+      "name": "Value Composite",
+      "sharpe": 0.017,
+      "ic": -0.0027,
+      "max_drawdown": -0.168,
+      "ann_turnover": 2.91,
+      "expected_range": [
+        -0.3,
+        0.5
+      ],
+      "consistent": true,
+      "reference": "Fama & French (1992); value winter 2012-2020",
+      "status": "OK"
+    },
+    {
+      "id": "S_QUALITY",
+      "name": "Quality",
+      "sharpe": 0.744,
+      "ic": 0.0533,
+      "max_drawdown": -0.23,
+      "ann_turnover": 1.1,
+      "expected_range": [
+        0.0,
+        1.5
+      ],
+      "consistent": true,
+      "reference": "Novy-Marx (2013)",
+      "status": "OK"
+    },
+    {
+      "id": "S_LOW_VOL",
+      "name": "Low Volatility",
+      "sharpe": -0.405,
+      "ic": -0.0138,
+      "max_drawdown": -0.374,
+      "ann_turnover": 4.33,
+      "expected_range": [
+        -1.0,
+        0.2
+      ],
+      "consistent": true,
+      "reference": "Ang et al. (2006); Frazzini & Pedersen (2014) \u2014 raw carries beta drag",
+      "status": "OK"
+    }
+  ]
+}

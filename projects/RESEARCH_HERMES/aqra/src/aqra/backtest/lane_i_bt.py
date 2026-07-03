@@ -1,5 +1,6 @@
 import pandas as pd
 from aqra.backtest.engine import BacktestEngine
+from aqra.backtest.universe_filter import membership_join
 from aqra.utils import rank_pct
 
 
@@ -22,11 +23,11 @@ class LaneIBacktest:
         return pd.Series(0.0, index=df.index)
 
     def _daily_returns(self, start: str, end: str, holding_period: int) -> pd.DataFrame:
-        query = """
-            SELECT ticker, date, adjusted_close
-            FROM raw_prices
-            WHERE date BETWEEN ? AND ?
-            ORDER BY ticker, date
+        query = f"""
+            SELECT p.ticker, p.date, p.adjusted_close
+            FROM raw_prices p {membership_join(self.db)}
+            WHERE p.date BETWEEN ? AND ?
+            ORDER BY p.ticker, p.date
         """
         end_dt = pd.Timestamp(end) + pd.Timedelta(days=2 * holding_period + 10)
         prices = self.db.conn.execute(query, [start, end_dt.strftime("%Y-%m-%d")]).fetchdf()
@@ -35,12 +36,12 @@ class LaneIBacktest:
         return prices[["ticker", "date", "ret_1d"]].dropna()
 
     def run(self, signal_candidate, start: str, end: str, holding_period: int = 1, cost_bps: float = 10.0) -> dict:
-        query = """
-            SELECT ticker, date, overnight_gap, volume_zscore,
-                   news_sentiment_zscore, earnings_surprise, insider_event_score
-            FROM lane_i_features
-            WHERE date BETWEEN ? AND ?
-            ORDER BY ticker, date
+        query = f"""
+            SELECT f.ticker, f.date, f.overnight_gap, f.volume_zscore,
+                   f.news_sentiment_zscore, f.earnings_surprise, f.insider_event_score
+            FROM lane_i_features f {membership_join(self.db, alias="f")}
+            WHERE f.date BETWEEN ? AND ?
+            ORDER BY f.ticker, f.date
         """
         features = self.db.conn.execute(query, [start, end]).fetchdf()
         if features.empty:
