@@ -200,7 +200,9 @@ def _M_far_ellipse(a_u: float, u_main_end: float, delta: float,
 
 def remainder_bound_Qjl_rigorous(a_u: float, b_u: float, a_v: float, b_v: float,
                                  alpha: complex, QN: int, Qp: float,
-                                 grid: int = 128) -> iv.mpf:
+                                 grid: int = 128,
+                                 delta_f: float = 0.015,
+                                 eps_u_f: float = 0.005) -> iv.mpf:
     """Rigorous remainder bound for the 2D Gauss--Legendre quadrature error in Q_{jl}.
 
     After the graded substitution v = Vmax - L s^p with Vmax = min(t_l, 1-u),
@@ -227,13 +229,17 @@ def remainder_bound_Qjl_rigorous(a_u: float, b_u: float, a_v: float, b_v: float,
         Resolution of the boundary sampling for the complex sup-norm.  A finer
         grid gives a tighter (but slower) bound.  The default 128 is a
         conservative compromise.
+    delta_f, eps_u_f : float
+        Split parameters: s-integration cut [0, delta] and u-tail length.
+        The tail/near bounds are N-independent, so these dominate the total
+        remainder once QN is large; shrinking them (at the cost of a larger
+        far-part sup-norm) tightens the bound.
     """
     ctx = iv
     alpha_iv = _intervalify(alpha)
     re_alpha = iv.re(alpha_iv)
     p_iv = ctx.mpf(str(Qp))
-    delta = ctx.mpf('0.015')
-    eps_u_f = 0.005  # u-tail length; balances tail size vs. analyticity margin
+    delta = ctx.mpf(str(delta_f))
     eps_u = ctx.mpf(str(eps_u_f))
 
     # Effective u-range where the hypotenuse is active and the inner v-interval
@@ -316,7 +322,7 @@ def remainder_bound_Qjl_rigorous(a_u: float, b_u: float, a_v: float, b_v: float,
 
     # Rigorous sup-norm on the product Bernstein ellipse, computed by interval
     # sampling of the distinguished boundary.
-    M_far = _M_far_ellipse(a_u, float(u_main_end), 0.015,
+    M_far = _M_far_ellipse(a_u, float(u_main_end), delta_f,
                            float(rho_u.a), float(rho_s.a),
                            a_v, alpha, Qp, grid=grid)
 
