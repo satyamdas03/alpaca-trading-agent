@@ -19,21 +19,19 @@ class LaneSBacktest:
             return rank_pct(df["quality_score"])
         return pd.Series(0.0, index=df.index)
 
-    def _forward_returns(self, start: str, end: str, holding_period: int) -> pd.DataFrame:
-        # Extend end date to capture forward returns for dates near the end.
+    def _daily_returns(self, start: str, end: str, holding_period: int) -> pd.DataFrame:
+        # Extend end date so the trailing holding window has data for IC.
         query = """
-            SELECT ticker, date, close
+            SELECT ticker, date, adjusted_close
             FROM raw_prices
             WHERE date BETWEEN ? AND ?
             ORDER BY ticker, date
         """
-        end_dt = pd.Timestamp(end) + pd.Timedelta(days=holding_period + 5)
+        end_dt = pd.Timestamp(end) + pd.Timedelta(days=2 * holding_period + 10)
         prices = self.db.conn.execute(query, [start, end_dt.strftime("%Y-%m-%d")]).fetchdf()
         prices = prices.sort_values(["ticker", "date"])
-        prices["forward_return"] = prices.groupby("ticker")["close"].transform(
-            lambda x: x.shift(-holding_period) / x - 1
-        )
-        return prices[["ticker", "date", "forward_return"]].dropna()
+        prices["ret_1d"] = prices.groupby("ticker")["adjusted_close"].pct_change()
+        return prices[["ticker", "date", "ret_1d"]].dropna()
 
     def run(self, signal_candidate, start: str, end: str, holding_period: int = 21, cost_bps: float = 10.0) -> dict:
         query = """
@@ -47,8 +45,8 @@ class LaneSBacktest:
         if features.empty:
             return {}
         features["signal"] = self._signal(features, signal_candidate.id)
-        fwd = self._forward_returns(start, end, holding_period)
-        df = features.merge(fwd, on=["ticker", "date"], how="inner")
+        rets = self._daily_returns(start, end, holding_period)
+        df = features.merge(rets, on=["ticker", "date"], how="inner")
         if df.empty:
             return {}
         return self.engine.run_single_signal(df, holding_period=holding_period, cost_bps=cost_bps)

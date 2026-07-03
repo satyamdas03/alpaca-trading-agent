@@ -204,7 +204,9 @@ def tmp_db(tmp_path):
 
 
 def test_full_pipeline_on_synthetic_data(tmp_path, tmp_db):
-    tickers = ["SYN_A", "SYN_B", "SYN_C", "SYN_D", "SYN_E"]
+    # 20 names: the cross-sectional engine needs >= 10 valid names per
+    # rebalance date to compute a Spearman IC.
+    tickers = [f"SYN_{chr(ord('A') + i)}" for i in range(20)]
     prices = _make_synthetic_prices(tickers, n_days=600, seed=42)
     _insert_raw_prices(tmp_db, prices)
 
