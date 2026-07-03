@@ -4,6 +4,11 @@ from prometheus.c42_certify_full import certify_with_remainder
 from prometheus.c42_kband import certify_kband_bound, kband_bound_float
 
 
+@pytest.mark.skip(reason="RETRACTED 2026-07-03: the old k=3 point (t1=0.04) violates the "
+                         "tau > 1/3 validity condition of Griego's construction, and the v1 "
+                         "linear kernel is wrong for asymmetric k>=3 bands. The 0.3993 value "
+                         "is not a bound on C_42. See test_c42_kband_v2.py and "
+                         "state/CERTIFIED_v2b_k3_2026-07-03.json for the valid record.")
 def test_certify_full_k3_breaks_griego(certified_k3_params):
     # QN=1700 is required for the rigorous 2D quadrature remainder to collapse;
     # at N=850 the Bernstein-ellipse far-bound is still too conservative.

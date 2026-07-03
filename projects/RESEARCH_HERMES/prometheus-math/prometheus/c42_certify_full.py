@@ -35,8 +35,16 @@ def _enlarge_Y_for_per_pair_remainder(Y_iv, D_iv, err_matrix, alpha_iv, eta_iv):
     """
     ctx = mp.iv
     s_iv = ctx.mpc(1, 0) - alpha_iv
-    # Full weight vector for bands 1..k.  Band 1 has eta_1=1-alpha, so w_1=0.
-    w_abs = [ctx.mpf('0')] + [_abs_iv(e - s_iv) for e in eta_iv]
+    # err_matrix rows/cols are indexed by density.bands, which contains ONLY the
+    # k-1 middle bands (eta_2 .. eta_k).  The weight vector must align with that
+    # indexing: w_abs[j] = |eta_{j+2} - (1-alpha)|.  (A previous version
+    # prepended a zero for the first block, shifting every weight by one and
+    # silently zeroing most of the propagated remainder.)
+    w_abs = [_abs_iv(e - s_iv) for e in eta_iv]
+    if len(w_abs) != len(err_matrix):
+        raise ValueError(
+            f"weight/err_matrix mismatch: {len(w_abs)} weights vs {len(err_matrix)} bands"
+        )
     E_Y = ctx.mpf('0')
     for j in range(len(err_matrix)):
         for l in range(len(err_matrix)):
@@ -152,5 +160,77 @@ def certify_with_remainder(params: np.ndarray,
         "d_tail": float(d_tail_iv.b),
         "total_upper_bound": total_upper_bound,
         "constraints_ok": constraints_ok,
+        "verdict": verdict,
+    }
+
+
+def certify_with_remainder_v2(params: np.ndarray,
+                              k: int,
+                              half_width: float = 1e-12,
+                              QN: int = 850,
+                              terms: int = 1000,
+                              Qp: float = 4.0,
+                              grid: int = 64) -> dict:
+    """Full-rigor certificate for the CORRECTED (v2) k-band functional.
+
+    Same structure as certify_with_remainder, but:
+      * uses the corrected linear kernel (1-u)^{alpha-1}/u via c42_kband_v2,
+      * enforces the validity condition t1 > 1/3 (quadratic truncation exact),
+      * propagates the per-pair 2D quadrature remainder with correctly aligned
+        band weights.
+    """
+    from prometheus.c42_kband_v2 import (kband_bound_float_v2,
+                                         certify_kband_bound_v2)
+
+    params = np.asarray(params, dtype=float)
+    C_float = kband_bound_float_v2(params, k=k, terms=terms, QN=QN, Qp=Qp)[0]
+
+    interval_result = certify_kband_bound_v2(params, k=k, half_width=half_width,
+                                             terms=terms, QN=QN, Qp=Qp)
+    Y_iv = interval_result["Y_iv"]
+    D_iv = interval_result["D_iv"]
+
+    density = density_from_kband_params(params, k=k)
+    err_matrix = []
+    q_total = iv.mpf('0')
+    for a_u, b_u, _ in density.bands:
+        row = []
+        for a_v, b_v, _ in density.bands:
+            e = remainder_bound_Qjl_rigorous(
+                a_u, b_u, a_v, b_v, density.alpha, QN, Qp, grid=grid
+            )
+            row.append(e)
+            q_total += e
+        err_matrix.append(row)
+
+    t_iv, alpha_iv, eta_iv = _unpack_interval(interval_result["box"], k)
+    Y_enl, D_enl = _enlarge_Y_for_per_pair_remainder(
+        Y_iv, D_iv, err_matrix, alpha_iv, eta_iv
+    )
+
+    t1 = float(params[0])
+    k_tail_iv = remainder_bound_K(t1, density.alpha, terms)
+    d_tail_iv = remainder_bound_D(t1, density.alpha, terms)
+    s_iv = mp.iv.mpc(1, 0) - alpha_iv
+    Y_true = Y_enl + s_iv * k_tail_iv
+    D_true = D_enl + d_tail_iv
+    C_true = _abs_iv(Y_true) / D_true
+
+    total_upper = float(C_true.b)
+    griego = 0.690653695151631
+    verdict = "CERTIFIED" if (interval_result["constraints_ok"]
+                              and interval_result["t1_above_one_third"]
+                              and total_upper < griego) else "FAILED"
+    return {
+        "float_C": float(C_float),
+        "interval_C_lower": float(interval_result["interval_C_lower"]),
+        "interval_C_upper": float(interval_result["interval_C_upper"]),
+        "q_remainder": float(q_total.b),
+        "k_tail": float(k_tail_iv.b),
+        "d_tail": float(d_tail_iv.b),
+        "total_upper_bound": total_upper,
+        "constraint_margin": float(interval_result["margin"].a),
+        "t1_above_one_third": interval_result["t1_above_one_third"],
+        "constraints_ok": interval_result["constraints_ok"],
         "verdict": verdict,
     }
