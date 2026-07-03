@@ -61,6 +61,29 @@ work (separate math track), NeuralQuant integration.
 - Jul 25-31: adversarial internal review (BEAR the paper itself + codex review), polish.
 - Aug 1: submit (buffer for CMT issues).
 
+## Amendment A1 (2026-07-03, CEO review): LLM-generated candidates
+
+Landscape review (FactorMAD ICAIF'25, QuantaAlpha, AlphaCrafter, QRAFTI) shows LLM
+factor-mining is crowded but statistically unaccountable. AQRA's differentiator becomes
+a generation layer feeding the existing gate — "agent proposes, statistics disposes":
+
+- **Constrained signal DSL** (`aqra/signals/dsl.py`): JSON AST over whitelisted
+  primitives (rank, zscore, ts_mean, delta, ratio, lag) and PIT features only;
+  lookahead impossible by construction; schema validator rejects everything else.
+- **LLM generator** (`aqra/generate/llm_generator.py`): Anthropic API proposes
+  candidates from the feature catalog + train-window-only accept/reject stats.
+  Never sees validation-window results. Mock mode for tests.
+- **Trials ledger** (`aqra/generate/ledger.py`): every candidate registered in DuckDB
+  BEFORE evaluation; BY-FDR corrects across the full ledger, not survivors. The
+  ledger is the paper's honest-accounting headline artifact.
+- Placebo protocol extends to generated candidates (shuffled labels must certify 0).
+
+Paper title updated: "AQRA: An Autonomous Conformal Agent that Proposes, Certifies,
+and Deploys Trading Strategies". Gaps renumbered: generation layer becomes gap 4.5,
+after known-factor reproduction, before full pipeline run. Schedule absorbs it in the
+Jul 10-16 experiments week. Full review record:
+`~/.gstack/projects/satyamdas03-alpaca-trading-agent/ceo-plans/2026-07-03-icaif-aqra-llm-candidates.md`
+
 ## Risks
 
 - Real-data certification may reject most/all candidates → reframed as trustworthiness
