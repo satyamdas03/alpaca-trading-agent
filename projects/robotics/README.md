@@ -127,11 +127,102 @@ In the latest run the planner produced identical samples (uncertainty 0.0),
 so no physics rollouts fired, but the ensemble planner, failure reporting, and
 closed-loop replanning all executed correctly.
 
+## Project history / this iteration
+
+This codebase was dormant and was revived with a focused build toward a
+novel, demo-able advancement: an **Uncertainty-Aware Physics-Coupled Local-LLM
+Planner for Multi-Robot Block Construction**.
+
+What was done in this iteration:
+
+1. **Project archaeology** — read every historical controller variant
+   (`llm_robot_controller.py`, `llm_robot_controller_ad.py`,
+   `llm_robot_controller_dynamic_replanning.py`, `llm_robot_controller_vision.py`,
+   and all `next_level/world_building_construction_*.py` files) to understand the
+   lineage, strengths, and weaknesses.
+
+2. **Direction selected** — from a brainstorming workflow, chose Direction #1:
+   make PyBullet an active reasoning module where the LLM emits plans with
+   per-step uncertainty, and high-uncertainty steps are validated by fast physics
+   rollouts before real execution.
+
+3. **Implementation base** — copied the most stable multi-robot stacking file
+   (`world_building_construction_COMPLETE.py`) into
+   `world_building_construction_uncertainty.py` and extended it.
+
+4. **Planner extensions**
+   - Added optional per-step `uncertainty` field to the system prompt.
+   - Added `temperature` control to `get_llm_plan()`.
+   - Added ensemble planning functions (`_step_key`, `_ensemble_uncertainty`,
+     `get_ensemble_plan`) that fuse N temperature-perturbed samples into one plan
+     with uncertainty scores.
+
+5. **Physics-coupled rollout infrastructure**
+   - `save_world_state()` / `load_world_state()` capture PyBullet physics state,
+     object positions/velocities, and Python-side robot mental state.
+   - `simulate_branch()` runs candidate plans at full speed in a reversible
+     snapshot, checks contact forces, and restores the world before returning.
+
+6. **Executor wiring** — `parse_and_execute()` triggers a physics rollout for
+   any step with `uncertainty >= UNCERTAINTY_ROLLOUT_THRESHOLD` (default 0.6) and
+   rejects the step if the rollout fails. Failed steps are reported back for
+   closed-loop LLM replanning.
+
+7. **Demo scenario** — changed the task from a vertical stack to a horizontal
+   **red-blue-red alternating wall** by adding `block_red_2` and target positions
+   `-2.25/-2.0/-1.75, 0, 0.1`.
+
+8. **Runtime metrics** — added counters for ensemble plans, replans, rollouts,
+   rollout rejections, executed steps, and failed steps, printed at demo end.
+
+9. **Automation flags** — added `BULL_AUTO_START=1` to skip the interactive
+   prompt and `BULL_DIRECT=1` to force PyBullet DIRECT mode for headless runs.
+
+10. **Unit tests** — created `tests/test_uncertainty_snapshot.py` with passing
+    tests for:
+    - Physics-state snapshot/restore
+    - Robot mental-state restore
+    - Branch simulator rejecting an unreachable placement
+
+11. **Model portability** — made the Ollama model a top-level constant
+    (`OLLAMA_MODEL = "qwen3.5:latest"`) so the demo adapts to whatever model is
+    installed locally.
+
+12. **Documentation & packaging** — wrote `README.md`, created
+    `requirements.txt`, and committed the work.
+
+13. **Live demo run** — executed the full demo in DIRECT mode. robot_0 and
+    robot_2 placed their blocks on the first try; robot_1 timed out moving to
+    `block_blue` and successfully replanned. Final metrics:
+    - ensemble_plans_generated: 4
+    - replan_attempts: 1
+    - failed_steps: 1
+    - steps_executed: 10
+    - rollouts_run: 0 (the current LLM produced identical samples at T=0.8)
+
+## Git status note
+
+There is no dedicated GitHub remote for this robotics subdirectory yet. The
+only configured `origin` is `alpaca-trading-agent`, which is a different project.
+If you want this on GitHub, create a new repository (e.g.,
+`satyamdas03/robotics-llm-construction`) and run:
+
+```bash
+cd C:/Users/point/projects/robotics
+git init
+git add .
+git commit -m "Initial commit: uncertainty-aware physics-coupled LLM planner"
+git remote add origin https://github.com/satyamdas03/YOUR_NEW_REPO.git
+git push -u origin main
+```
+
 ## Next steps / experiments
 
-- Raise ensemble temperature or add command ambiguity to trigger rollouts live.
+- Raise ensemble temperature or add command ambiguity to trigger live physics
+  rollouts in the demo.
 - Add vision-based world-state confidence (e.g., object detection score) into
   the uncertainty budget.
 - Compare wall-building success with vs. without physics rollouts across many
   randomized initial poses.
 - Export a trajectory video / metrics log for a paper or portfolio entry.
+- Move to a dedicated GitHub repository for the robotics project.
