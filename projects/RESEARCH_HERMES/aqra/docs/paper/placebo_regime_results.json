@@ -1,0 +1,401 @@
+{
+  "run_date": "2026-07-04",
+  "placebo": {
+    "design": "within-date signal permutation, validation window, seeds (11, 23, 47), BY alpha=0.20",
+    "trials": 18,
+    "certified": 0,
+    "rows": [
+      {
+        "id": "S_MOM_12_1",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -0.226,
+        "p_value": 0.70988,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.22604844079021874,
+          "ic": 0.013848036897937937,
+          "max_drawdown": -0.04950138508256999,
+          "mean_return": -1.637895188649956e-05,
+          "volatility": 0.0011502304535102596,
+          "turnover": 15.927058192266625
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_VALUE",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -1.349,
+        "p_value": 0.99951,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -1.3494501089236637,
+          "ic": -0.008005353838106988,
+          "max_drawdown": -0.3009510772230223,
+          "mean_return": -0.00023009915812342683,
+          "volatility": 0.0027068143323897564,
+          "turnover": 21.641648294941337
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_QUALITY",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -0.728,
+        "p_value": 0.96244,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.727781663241708,
+          "ic": -0.002856828901498361,
+          "max_drawdown": -0.22976896398722224,
+          "mean_return": -0.00016478661828768574,
+          "volatility": 0.0035943561103633963,
+          "turnover": 22.672682501435023
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_LOW_VOL",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -1.185,
+        "p_value": 0.99811,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -1.1854451021402217,
+          "ic": -0.0007731954265713653,
+          "max_drawdown": -0.13756850225819608,
+          "mean_return": -8.326398913385949e-05,
+          "volatility": 0.0011150030044460987,
+          "turnover": 16.11344761859341
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_GAP",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -3.148,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.147672578671371,
+          "ic": 0.003466871465128137,
+          "max_drawdown": -0.3038978460839917,
+          "mean_return": -0.00023595275891605583,
+          "volatility": 0.001189969361136602,
+          "turnover": 67.33891276500913,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_VOLUME",
+        "seed": 11,
+        "status": "OK",
+        "sharpe": -3.859,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.8590343701211722,
+          "ic": -0.004271296157932981,
+          "max_drawdown": -0.358485399232108,
+          "mean_return": -0.0002921207905912527,
+          "volatility": 0.0012016668791759377,
+          "turnover": 67.24727430257605,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_MOM_12_1",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": 0.254,
+        "p_value": 0.26736,
+        "lane": "S",
+        "metrics": {
+          "sharpe": 0.2537576186781263,
+          "ic": 0.017241944705112276,
+          "max_drawdown": -0.04461223383169204,
+          "mean_return": 1.6951369841176592e-05,
+          "volatility": 0.0010604397034129252,
+          "turnover": 15.926782009525665
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_VALUE",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": -0.233,
+        "p_value": 0.71608,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.2334848525660048,
+          "ic": 0.01921605725245777,
+          "max_drawdown": -0.1126327300658849,
+          "mean_return": -4.123907208280035e-05,
+          "volatility": 0.0028038220337906995,
+          "turnover": 21.608871265972617
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_QUALITY",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": -0.61,
+        "p_value": 0.9322,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.6102033451231137,
+          "ic": -0.011558995925040913,
+          "max_drawdown": -0.2611001320335982,
+          "mean_return": -0.00013998854758235705,
+          "volatility": 0.0036418176294198065,
+          "turnover": 22.671075122657825
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_LOW_VOL",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": -0.777,
+        "p_value": 0.97128,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.7770086341447212,
+          "ic": 0.0018511222824936025,
+          "max_drawdown": -0.08781980335393665,
+          "mean_return": -5.56747103708118e-05,
+          "volatility": 0.001137450201841241,
+          "turnover": 15.919022188926538
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_GAP",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": -3.199,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.1986295415529313,
+          "ic": 0.003567167294473679,
+          "max_drawdown": -0.3149456591996196,
+          "mean_return": -0.0002498675263693749,
+          "volatility": 0.0012400698365899842,
+          "turnover": 67.28683881734293,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_VOLUME",
+        "seed": 23,
+        "status": "OK",
+        "sharpe": -3.254,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.254039688989953,
+          "ic": 0.000988844581243186,
+          "max_drawdown": -0.3293297935904759,
+          "mean_return": -0.00026333628960698247,
+          "volatility": 0.0012846598076278898,
+          "turnover": 67.58404008332536,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_MOM_12_1",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -1.207,
+        "p_value": 0.99841,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -1.2071788392804939,
+          "ic": -0.004993323328773247,
+          "max_drawdown": -0.13361328619885887,
+          "mean_return": -8.63690382112822e-05,
+          "volatility": 0.0011357604456639684,
+          "turnover": 16.030103591259376
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_VALUE",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -0.869,
+        "p_value": 0.9832,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.8690938349144074,
+          "ic": -0.0216839958032392,
+          "max_drawdown": -0.20407008808912813,
+          "mean_return": -0.00014320376349867924,
+          "volatility": 0.0026157006054242345,
+          "turnover": 21.542412089294864
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_QUALITY",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -0.29,
+        "p_value": 0.76101,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -0.2900344309728127,
+          "ic": 0.012654456953830417,
+          "max_drawdown": -0.1377076938575358,
+          "mean_return": -6.537205554310923e-05,
+          "volatility": 0.003578020742159015,
+          "turnover": 22.51387884632722
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "S_LOW_VOL",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -1.158,
+        "p_value": 0.99767,
+        "lane": "S",
+        "metrics": {
+          "sharpe": -1.1581187755945166,
+          "ic": -0.0065266899376594835,
+          "max_drawdown": -0.1280205550017738,
+          "mean_return": -8.483195370121773e-05,
+          "volatility": 0.0011628043208777945,
+          "turnover": 15.93752299426445
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_GAP",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -3.552,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.5523797797019374,
+          "ic": 4.466538764049577e-05,
+          "max_drawdown": -0.3320358098842686,
+          "mean_return": -0.0002646159263949741,
+          "volatility": 0.001182488322090635,
+          "turnover": 67.26445328415481,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      },
+      {
+        "id": "I_VOLUME",
+        "seed": 47,
+        "status": "OK",
+        "sharpe": -3.587,
+        "p_value": 1.0,
+        "lane": "I",
+        "metrics": {
+          "sharpe": -3.5873222645899836,
+          "ic": 0.001983279107560965,
+          "max_drawdown": -0.32729079481932855,
+          "mean_return": -0.0002620118986448718,
+          "volatility": 0.0011594469744692832,
+          "turnover": 66.8767199131123,
+          "half_life": 0.0
+        },
+        "fdr_selected": false,
+        "cert_status": "REJECTED"
+      }
+    ]
+  },
+  "regimes": {
+    "note": "data horizon starts 2010-01-04; 2008 GFC unavailable",
+    "windows": {
+      "2011_downgrade_H2": [
+        "2011-07-01",
+        "2011-12-31"
+      ],
+      "2020_covid": [
+        "2020-01-01",
+        "2020-12-31"
+      ],
+      "2022_bear": [
+        "2022-01-01",
+        "2022-12-31"
+      ]
+    },
+    "rows": [
+      {
+        "id": "S_MOM_12_1",
+        "lane": "S",
+        "2011_downgrade_H2": -0.975,
+        "2020_covid": -0.372,
+        "2022_bear": 0.206
+      },
+      {
+        "id": "S_VALUE",
+        "lane": "S",
+        "2011_downgrade_H2": 0.814,
+        "2020_covid": -0.19,
+        "2022_bear": 0.337
+      },
+      {
+        "id": "S_QUALITY",
+        "lane": "S",
+        "2011_downgrade_H2": -1.707,
+        "2020_covid": 0.038,
+        "2022_bear": -0.88
+      },
+      {
+        "id": "S_LOW_VOL",
+        "lane": "S",
+        "2011_downgrade_H2": 0.903,
+        "2020_covid": -0.77,
+        "2022_bear": 0.406
+      },
+      {
+        "id": "I_GAP",
+        "lane": "I",
+        "2011_downgrade_H2": 1.073,
+        "2020_covid": -1.834,
+        "2022_bear": 0.775
+      },
+      {
+        "id": "I_VOLUME",
+        "lane": "I",
+        "2011_downgrade_H2": -2.491,
+        "2020_covid": -3.341,
+        "2022_bear": -1.635
+      }
+    ]
+  }
+}
