@@ -3,6 +3,8 @@
 \documentclass[sigconf,anonymous,review]{acmart}
 
 \usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
 
 %% ICAIF '26 metadata (update rights info from CMT instructions when issued).
 \setcopyright{acmlicensed}
@@ -84,7 +86,8 @@ model that can emit a thousand candidates per hour.
 
 AQRA (Autonomous Quantitative Research Agent) inverts the design. The
 generative freedom of the LLM is preserved, but every route from idea to
-capital passes through statistical machinery the model cannot negotiate with:
+capital passes through statistical machinery the model cannot negotiate with
+(Figure~\ref{fig:arch}):
 
 \begin{enumerate}
 \item \textbf{A constrained signal DSL.} Candidates are JSON abstract-syntax
@@ -150,6 +153,50 @@ trial registries---the instrument that reduced reported effect sizes in
 medicine when outcome switching became visible.
 
 \section{The AQRA Architecture}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  node distance=2.2mm and 4mm,
+  box/.style={draw, rounded corners=1pt, align=center,
+              inner sep=2.5pt, minimum height=4.5mm},
+  gate/.style={box, thick},
+  arr/.style={-{Stealth[length=1.6mm]}}
+]
+\node[box] (gen) {LLM generator};
+\node[box, right=8mm of gen] (dsl) {DSL validator};
+\node[gate, below=of dsl] (ledger) {trials ledger\\(register \emph{before} eval)};
+\node[box, below left=3mm and -6mm of ledger] (train) {train backtest\\2012--2018};
+\node[box, below right=3mm and -6mm of ledger] (val) {validation backtest\\2019--2024};
+\node[gate, below=11mm of ledger] (fdr) {conformal + BY-FDR\\over \emph{full} ledger};
+\node[gate, below=of fdr] (cert) {lane certifiers};
+\node[gate, right=6mm of cert] (bear) {BEAR review};
+\node[box, below=of cert] (reg) {registry};
+\node[gate, right=6mm of reg] (live) {live gate\\(paper, kill switches)};
+
+\draw[arr] (gen) -- (dsl);
+\draw[arr] (dsl) -- (ledger);
+\draw[arr] (ledger) -- (train);
+\draw[arr] (ledger) -- (val);
+\draw[arr] (val) -- (fdr);
+\draw[arr] (train.west) to[out=180, in=-90]
+  node[left, align=center, font=\tiny] {train-only\\feedback} (gen.south);
+\draw[arr] (fdr) -- (cert);
+\draw[arr] (cert) -- (bear);
+\draw[arr] (bear) |- (reg);
+\draw[arr] (reg) -- (live);
+\draw[dashed, thick]
+  ($(train.east)!0.5!(val.west) + (0,-4mm)$) --
+  ($(train.east)!0.5!(val.west) + (0,4mm)$)
+  node[above, font=\tiny] {wall};
+\end{tikzpicture}
+\caption{The closed loop: the agent proposes, the statistics dispose.
+Every proposal is ledgered before evaluation; the FDR correction is
+computed over the full ledger; the generator's feedback never crosses
+the train/validation wall.}
+\label{fig:arch}
+\end{figure}
 
 \subsection{Dual-lane design}
 
