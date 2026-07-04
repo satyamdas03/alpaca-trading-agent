@@ -1,0 +1,399 @@
+%% AQRA — ICAIF '26 submission (double-blind).
+%% Build: Overleaf (acmart is preinstalled) or `latexmk -pdf main.tex`.
+\documentclass[sigconf,anonymous,review]{acmart}
+
+\usepackage{booktabs}
+
+%% ICAIF '26 metadata (update rights info from CMT instructions when issued).
+\setcopyright{acmlicensed}
+\acmConference[ICAIF '26]{7th ACM International Conference on AI in Finance}%
+{November 14--17, 2026}{Milan, Italy}
+\acmYear{2026}
+
+\begin{document}
+
+\title{AQRA: An Autonomous Conformal Agent that Proposes, Certifies, and
+Deploys Trading Strategies}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Anonymous Institution}
+  \city{}
+  \country{}
+}
+
+\begin{abstract}
+Large language models are increasingly used to mine trading signals, yet the
+resulting agents are statistically unaccountable: they propose hundreds of
+hypotheses and report the survivors as if they were pre-specified. We present
+AQRA, an autonomous research agent in which \emph{the agent proposes and the
+statistics dispose}. An LLM generates candidate signals in a constrained
+domain-specific language whose grammar makes look-ahead impossible by
+construction; every proposal---including malformed and failed ones---is
+registered in an immutable trials ledger \emph{before} evaluation; and
+certification requires surviving a Benjamini--Yekutieli false-discovery-rate
+correction applied over the full ledger, conformal coverage checks, hard risk
+gates, and an adversarial LLM review chamber. On a survivorship-bias-free
+S\&P~500 universe (2010--2026), AQRA reproduces the post-publication behavior
+of four canonical factors, and then certifies \textbf{zero of fourteen}
+candidate strategies whose in-sample Sharpe ratios reached 1.2---because they
+failed to generalize out-of-sample. In placebo runs with cross-sectionally
+permuted signals, the gate certifies \textbf{zero of eighteen} impostors. We
+argue that a research agent's willingness to reject its own candidates is the
+correct headline metric for trustworthy AI in finance, and we release the full
+pipeline, ledger, and live paper-trading audit trail for reproduction.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010405.10010481.10010485</concept_id>
+  <concept_desc>Applied computing~Economics</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010147.10010178</concept_id>
+  <concept_desc>Computing methodologies~Artificial intelligence</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Applied computing~Economics}
+\ccsdesc[300]{Computing methodologies~Artificial intelligence}
+
+\keywords{LLM agents, trading strategies, conformal prediction, false
+discovery rate, multiple testing, backtest overfitting, pre-registration}
+
+\maketitle
+
+\section{Introduction}
+
+Three failure modes dominate quantitative strategy research: confirmation
+bias, multiple-testing abuse, and look-ahead leakage. LLM-based factor-mining
+agents amplify all three: they generate hypotheses at unprecedented rate,
+they are trained to please their operators, and nothing in their sampling
+process respects point-in-time data availability. Recent systems
+\cite{factormad,quantaalpha,alphacrafter,qrafti} demonstrate impressive
+generation capability but report survivors without charging the search
+process for its failures. The admonition of Harvey, Liu, and
+Zhu~\cite{harvey2016}---that a newly claimed factor should clear a
+$t$-statistic of 3.0 precisely because of the unreported multiplicity behind
+it---applies with more force, not less, when the researcher is a language
+model that can emit a thousand candidates per hour.
+
+AQRA (Autonomous Quantitative Research Agent) inverts the design. The
+generative freedom of the LLM is preserved, but every route from idea to
+capital passes through statistical machinery the model cannot negotiate with:
+
+\begin{enumerate}
+\item \textbf{A constrained signal DSL.} Candidates are JSON abstract-syntax
+trees over whitelisted point-in-time features and operators. Time-series
+operators reach strictly backward; cross-sectional operators act within a
+single date. Look-ahead is a type error, not a reviewer finding.
+\item \textbf{A trials ledger.} Every proposal is registered \emph{before}
+evaluation. Malformed proposals and failed backtests stay on the books with
+$p = 1$. The Benjamini--Yekutieli correction runs over the entire ledger, so
+each additional attempt raises the bar for all of them. You cannot un-try a
+hypothesis.
+\item \textbf{A train/validation wall.} The generator's feedback loop sees
+train-window statistics only. Validation-window results never reach the
+model, closing the leakage channel through which an LLM could overfit the
+held-out data across generations.
+\item \textbf{Independent certification.} Survivors of FDR selection must
+clear conformal coverage checks, hard Sharpe/drawdown/turnover gates, and an
+adversarial LLM review chamber (BEAR) that hunts for look-ahead bias, data
+mining, and missing economic rationale.
+\item \textbf{A live deployment gate.} Certified strategies deploy to paper
+trading with lane budgets, kill switches, and a git-tracked audit trail.
+\end{enumerate}
+
+Our contribution is the closed trustworthy loop, not the alpha. Indeed, our
+headline empirical results are refusals: on real data the full pipeline
+certifies 0/14 candidates (the best of which reached in-sample Sharpe 1.20),
+and 0/18 placebo impostors. We contend this is what an honest autonomous
+researcher looks like on a decade of large-cap US equities with free data,
+and that the ledger discipline---not the generation cleverness---is the
+transferable idea.
+
+\section{Related Work}
+
+\textbf{LLM agents for factor mining.} FactorMAD~\cite{factormad} uses
+multi-agent debate for interpretable alpha mining; QuantaAlpha%
+~\cite{quantaalpha} evolves factor populations; AlphaCrafter%
+~\cite{alphacrafter} builds full-stack multi-agent trading pipelines; QRAFTI%
+~\cite{qrafti} orchestrates empirical research workflows. These systems
+evaluate generated factors on held-out data but do not account for the number
+of draws taken, and none maintain a pre-registration ledger. AQRA is
+complementary: any of their generators could sit upstream of our gate.
+
+\textbf{Multiple testing in finance.} Bailey and L\'opez de Prado formalized
+backtest overfitting and the deflated Sharpe
+ratio~\cite{bailey2014,bailey2016}, and codified backtesting best
+practices~\cite{lopezdeprado2018}; Harvey, Liu, and
+Zhu~\cite{harvey2016} documented the
+multiplicity crisis in factor research; McLean and Pontiff~\cite{mclean2016}
+measured post-publication decay. The Benjamini--Yekutieli
+procedure~\cite{by2001} is valid under arbitrary dependence, which matters
+because trading-strategy $p$-values are strongly dependent. Our contribution
+is operational: the correction is enforced over a ledger the agent cannot
+bypass, rather than applied post hoc by a well-intentioned author.
+
+\textbf{Conformal prediction}~\cite{vovk2005,angelopoulos2021} provides
+finite-sample, distribution-free coverage guarantees. We use split-conformal
+intervals calibrated on the training window and report validation coverage
+per candidate; coverage degradation itself becomes a certification signal
+(Section~\ref{sec:coverage}).
+
+\textbf{Pre-registration.} Our ledger is the algorithmic analogue of clinical
+trial registries---the instrument that reduced reported effect sizes in
+medicine when outcome switching became visible.
+
+\section{The AQRA Architecture}
+
+\subsection{Dual-lane design}
+
+\begin{table}[h]
+\caption{Lane structure.}
+\label{tab:lanes}
+\begin{tabular}{llll}
+\toprule
+Lane & Sources & Horizon & Examples \\
+\midrule
+S --- structural & prices, fundamentals & 21\,d & momentum, value, quality \\
+I --- informational & prices, volume, events & 1--5\,d & overnight gap, volume \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Lanes have independent feature tables, calibration, backtests, certifiers,
+and turnover caps (Lane~S: $1.0\times$ annualized; Lane~I: higher cap with a
+signal half-life floor of 2 days).
+
+\subsection{The signal DSL}
+\label{sec:dsl}
+
+Candidates are JSON ASTs with node forms
+\texttt{\{feature\}},
+\texttt{\{op, arg\}} for unary operators
+(\texttt{rank}, \texttt{zscore}, \texttt{neg}, \texttt{abs}, \texttt{sign}),
+\texttt{\{op, arg, window\}} for time-series operators
+(\texttt{ts\_mean}, \texttt{ts\_std}, \texttt{delta}, \texttt{lag};
+$1 \le w \le 252$), and \texttt{\{op, left, right\}} for binary operators
+(\texttt{add}, \texttt{sub}, \texttt{mul}, \texttt{div}, \texttt{min},
+\texttt{max}); depth $\le 6$, nodes $\le 25$.
+
+\texttt{rank} and \texttt{zscore} act cross-sectionally within a date;
+\texttt{ts\_*} operators act per ticker and reach strictly backward. Because
+leaves are point-in-time features and no operator can reference the future,
+\textbf{look-ahead is unrepresentable}. A property test mutates all feature
+values after a cutoff date and asserts the signal before the cutoff is
+bit-identical. The hand-written factor library is itself expressed in the
+DSL, so library and generated candidates share one evaluation path and one
+ledger.
+
+\subsection{The trials ledger}
+
+Lifecycle: \texttt{REGISTERED} $\to$ \{\texttt{REJECTED\_INVALID},
+\texttt{REJECTED\_EVAL}, \texttt{EVALUATED}\}. Registration precedes
+evaluation; the ledger API raises on any attempt to record results for an
+unregistered trial. FDR selection queries the full ledger; non-evaluated
+trials enter at $p = 1.0$. In our tests, a marginal $p = 0.03$ candidate that
+survives BY correction alone is correctly killed once 200 failed attempts
+join the ledger.
+
+\subsection{Generation with a train/validation wall}
+
+The generator (an LLM accessed via API) receives the grammar, the feature
+catalogue, and per-trial feedback consisting of \emph{formula, status, train
+Sharpe, train IC}---never validation numbers. The prompt states the FDR
+consequence explicitly: ``each weak idea you emit makes the statistical bar
+higher for all of them.'' Malformed output is parsed defensively;
+unparseable proposals are ledgered as \texttt{REJECTED\_INVALID}. A
+deterministic mock mode makes the entire pipeline reproducible without API
+access.
+
+\subsection{Certification stack}
+
+For each evaluated candidate: (i) a one-sided $t$-test $p$-value on
+validation daily returns (proxy for the conformal $p$-value; both reported);
+(ii) BY-FDR at $\alpha = 0.20$ over the full ledger; (iii) conformal coverage
+of 90\% train-calibrated intervals on validation days; (iv) lane
+gates---Lane~S: Sharpe $\ge 0.6$, max drawdown $\ge -20\%$, turnover
+$\le 1.0\times$; Lane~I: half-life $\ge 2$\,d, turnover cap; (v) BEAR
+adversarial review (look-ahead, mining, lane misclassification, economic
+rationale, robustness). Only candidates passing all five stages receive a
+\texttt{CERTIFIED} dossier and reach the registry.
+
+\subsection{Backtest engine}
+
+Cross-sectional dollar-neutral long-short: signals are rank-demeaned into
+weights with gross exposure 1 on each rebalance date and applied from the
+next trading day; transaction costs (10\,bps) are charged on turnover;
+information coefficients are non-overlapping Spearman correlations at
+rebalance dates. Universe membership is enforced point-in-time
+(Section~\ref{sec:data}).
+
+\section{Data and the Ticker-Reuse Hazard}
+\label{sec:data}
+
+Universe: historical S\&P~500 constituency reconstructed from the index
+change log (897 membership intervals across 874 tickers, 2010--2026); bulk
+OHLCV prices; fundamentals from SEC EDGAR XBRL frames (keyless,
+point-in-time \texttt{available\_at} stamps).
+
+\textbf{A data-integrity finding worth reporting.} Free price feeds resolve
+tickers, not securities. After a constituent is delisted, its symbol is
+frequently reassigned or its series degrades: in our feed, post-2013
+``BMC'' prices belong to a different instrument trading near 22{,}700, and
+``PTV'' exhibits $\pm 4{,}900\%$ daily moves in 2016---five years after
+Pactiv was acquired. With naive backtests over all listed history, this
+garbage concentrates in the short leg of momentum (delisted losers) and
+flips its Sharpe from $-0.09$ to $\mathbf{-0.83}$: a purely artifactual
+result that would survive casual inspection because it
+\emph{underestimates} performance rather than inflating it. Enforcing
+constituency intervals as a point-in-time join removes every such episode
+without any outlier winsorization. We suspect a nontrivial share of
+published results on free data carry this defect.
+
+\section{Known-Factor Reproduction}
+
+The validation gate for the pipeline: canonical factors must behave as the
+\emph{post-publication} literature says they behaved in a large-cap universe
+over 2012--2024---not as their discovery papers say they behaved decades
+earlier.
+
+\begin{table}[h]
+\caption{Known-factor reproduction, S\&P~500, 2012--2024, dollar-neutral,
+10\,bps. Expected ranges encode post-publication large-cap findings.}
+\label{tab:repro}
+\begin{tabular}{lrrrl}
+\toprule
+Factor & Sharpe & IC & Turnover & Consistent \\
+\midrule
+Momentum 12-1~\cite{jt1993,mclean2016} & $-0.09$ & $+0.009$ & $5.0\times$ & yes \\
+Value (E/P+B/P)~\cite{ff1992} & $+0.02$ & $-0.003$ & $2.9\times$ & yes \\
+Quality (gross margin)~\cite{novymarx2013} & $+0.74$ & $+0.053$ & $1.1\times$ & yes \\
+Low volatility (raw)~\cite{ang2006,fp2014} & $-0.41$ & $-0.014$ & $4.3\times$ & yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Momentum's flat performance reflects the documented post-2010 large-cap
+decay and the 2016/2020--21 momentum crashes (visible in our regime table);
+value's flatness is the ``value winter''; raw dollar-neutral low-vol carries
+negative beta drag in a bull decade (the anomaly is a beta-adjusted
+claim~\cite{fp2014}). Quality is the era's robust survivor.
+
+\section{The Gate at Work}
+
+\subsection{Full pipeline run: an honest empty set}
+
+Six library candidates plus eight generated candidates were registered,
+trained on 2012--2018, and validated on 2019--2024. Three generated
+candidates failed evaluation (constant signals on placeholder features) and
+entered the ledger at $p = 1$.
+
+\textbf{Result: 0/14 certified.} The strongest candidate---quality---earned
+train Sharpe 1.20 but validation Sharpe 0.34 ($p = 0.21$) and failed FDR
+selection, the Sharpe floor, and the turnover cap. Every rejection reason is
+recorded in the run artifact. A system tuned to please its operator would
+have certified quality; the gate declined, and the train$\to$validation
+collapse in the very next column is why it was right to.
+
+\subsection{Placebo: the gate rejects impostors}
+
+Within-date cross-sectional permutation destroys the signal--return link
+while preserving both marginals. Three seeds $\times$ six candidates on the
+validation window: \textbf{0/18 certified}, mean placebo $p = 0.92$, no
+placebo trial passes FDR. The pipeline does not manufacture significance
+from noise.
+
+\subsection{Conformal coverage as a regime instrument}
+\label{sec:coverage}
+
+Intervals calibrated on 2012--2018 achieve less than the nominal 90\%
+coverage on 2019--2024 for most candidates---the validation window contains
+the COVID volatility regime. Rather than a failure, per-candidate coverage
+becomes a certification input (coverage floor) and a deployed-strategy
+retirement signal (rolling 30-day coverage).
+
+\subsection{Regime stress}
+
+\begin{table}[h]
+\caption{Regime-conditional Sharpe. Data horizon starts 2010; 2008 is
+reported as uncoverable.}
+\label{tab:regime}
+\begin{tabular}{lrrr}
+\toprule
+Candidate & 2011\,H2 & 2020 & 2022 \\
+\midrule
+Momentum & $-0.98$ & $-0.37$ & $+0.21$ \\
+Value & $+0.81$ & $-0.19$ & $+0.34$ \\
+Quality & $-1.71$ & $+0.04$ & $-0.88$ \\
+Low-vol & $+0.90$ & $-0.77$ & $+0.41$ \\
+Overnight gap & $+1.07$ & $-1.83$ & $+0.78$ \\
+Volume shock & $-2.49$ & $-3.34$ & $-1.64$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Defensive factors bid in the 2011/2022 drawdowns; momentum crashes in
+2020---patterns matching the literature, from a pipeline never shown these
+windows during construction.
+
+\section{Live Deployment}
+
+Certified strategies (currently: none---the registry honestly holds the
+empty set) deploy through a gate enforcing paper-only trading, lane budgets,
+daily loss limits, and drawdown kill switches; a monitor writes daily
+git-committed logs (portfolio value, per-strategy P\&L, rolling conformal
+coverage, retirement events). \emph{[To be completed with the live audit
+trail before submission; the gate design itself is part of the artifact.]}
+
+\section{Limitations}
+
+(1) The $t$-test $p$-value is a proxy; per-candidate conformal $p$-values
+are computed and reported side-by-side rather than unified. (2) Free
+fundamentals cover ${\sim}44\%$ of ticker-days for valuation and
+${\sim}11\%$ for quality---coverage bias toward larger, longer-listed firms.
+(3) BEAR runs in mock mode for the headline results; LLM-mode reviews are
+reported in the appendix. (4) Flat 10\,bps costs; no market impact. (5) One
+decade, one universe; the ledger discipline, not the specific gates, is the
+claimed contribution. (6) The headline run uses the deterministic mock
+generator for exact reproducibility; the LLM-mode run (appendix) is
+stochastic by nature.
+
+\section{Reproducibility}
+
+Single-command pipeline: \texttt{make ingest \&\& make paper} reproduces
+ingestion, factor reproduction, the pipeline run, and the placebo suite;
+all artifacts (ledger, run reports, placebo tables) are emitted as versioned
+JSON/markdown. An anonymized repository accompanies submission; mock mode
+reproduces every headline number without API keys.
+
+\section{Conclusion}
+
+AQRA demonstrates that an LLM research agent can be made statistically
+accountable without curtailing its generative freedom: constrain the
+hypothesis language so look-ahead cannot be expressed, register every
+attempt before evaluation, charge the whole ledger to every survivor, wall
+off the validation data from the feedback loop, and let independent gates
+dispose. On a decade of large-cap US equities with free data, the honest
+answer was the empty set---delivered with the placebo evidence to prove the
+gate can tell signal from noise, and a live audit trail to prove the loop
+closes. We offer the trials ledger as the missing organ of LLM-driven
+quantitative research.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\appendix
+
+\section{LLM-mode generation run}
+\emph{[Pending: proposal count, invalid rate, ledger growth, FDR threshold
+movement, any certified survivors.]}
+
+\section{BEAR prompts and review transcripts}
+\emph{[LLM mode pending; the mock rubric is included in the artifact.]}
+
+\end{document}
