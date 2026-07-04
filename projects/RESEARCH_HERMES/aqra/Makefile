@@ -1,4 +1,5 @@
-.PHONY: sync test lint format clean ingest certify deploy-dry monitor
+.PHONY: sync test lint format clean ingest certify deploy-dry monitor \
+        repro pipeline pipeline-llm placebo paper
 
 # Install all dependencies including pytest and dev tools.
 sync:
@@ -27,6 +28,22 @@ deploy-dry:
 
 monitor:
 	uv run aqra monitor
+
+# ICAIF '26 paper experiments (artifacts land in docs/paper/).
+repro:
+	uv run python scripts/known_factor_repro.py
+
+pipeline:
+	uv run python scripts/run_pipeline.py
+
+pipeline-llm:
+	uv run python scripts/run_pipeline.py --llm
+
+placebo:
+	PYTHONPATH=scripts uv run python scripts/placebo_regime.py
+
+# Full paper reproduction: every headline number, no API keys needed.
+paper: repro pipeline placebo
 
 # Remove caches and the virtual environment.
 clean:
