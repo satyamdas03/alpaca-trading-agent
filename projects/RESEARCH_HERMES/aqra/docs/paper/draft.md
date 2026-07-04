@@ -14,7 +14,7 @@ AQRA, an autonomous research agent in which *the agent proposes and the
 statistics dispose*. An LLM generates candidate signals in a constrained
 domain-specific language whose grammar makes look-ahead impossible by
 construction; every proposal — including malformed and failed ones — is
-registered in an immutable trials ledger *before* evaluation; and
+registered in a persistent trials ledger *before* evaluation; and
 certification requires surviving a Benjamini–Yekutieli false-discovery-rate
 correction applied over the full ledger, conformal coverage checks,
 hard risk gates, and an adversarial LLM review chamber. On a
@@ -25,8 +25,8 @@ reached 1.2 — because they failed to generalize out-of-sample. In placebo
 runs with cross-sectionally permuted signals, the gate certifies **zero of
 eighteen** impostors. We argue that a research agent's willingness to reject
 its own candidates is the correct headline metric for trustworthy AI in
-finance, and we release the full pipeline, ledger, and live paper-trading
-audit trail for reproduction.
+finance, and we release the full pipeline and trials ledger for reproduction,
+with a live paper-trading audit trail accompanying the deployment gate.
 
 ---
 
@@ -191,7 +191,7 @@ prices via bulk OHLCV download; fundamentals from SEC EDGAR XBRL frames
 tickers, not securities. After a constituent is delisted, its symbol is
 frequently reassigned or its series degrades: in our feed, post-2013 "BMC"
 prices belong to a different instrument trading near 22,700, and "PTV"
-exhibits ±4,900% daily moves in 2016 — five years after Pactiv was acquired.
+exhibits ±4,900% daily moves in 2016 — six years after Pactiv was acquired.
 With naive backtests over all listed history, this garbage concentrates in
 the short leg of momentum (delisted losers) and flips its Sharpe from
 −0.09 to **−0.83**: a purely artifactual result that would survive casual
@@ -240,7 +240,7 @@ in the very next column is why it was right to.
 
 Within-date cross-sectional permutation destroys the signal–return link
 while preserving both marginals. Three seeds x six candidates on the
-validation window: **0/18 certified**, mean placebo p = 0.92, no placebo
+validation window: **0/18 certified**, mean placebo p = 0.91, no placebo
 trial passes FDR. The pipeline does not manufacture significance from noise.
 
 ### 6.3 Conformal coverage as a regime instrument
