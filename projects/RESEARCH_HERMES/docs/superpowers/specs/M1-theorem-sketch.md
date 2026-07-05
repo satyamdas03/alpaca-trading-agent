@@ -53,6 +53,37 @@ measurability). The attack suite shows each premise is load-bearing:
 remove the wall and FDR fails empirically even with BY intact
 (no_wall: 79.9 false certs at $m = 400$).
 
+## 2.1 Conformal Theorem 1 (distribution-free wall)
+
+The parametric t-test in Theorem 1 can be replaced with a split-conformal
+p-value. The protocol now uses a **three-way split**:
+
+- $T_{\text{train}}$ — visible to the generator for building candidates.
+- $T_{\text{calib}}$ — visible only to the validator; used to calibrate
+  nonconformity scores.
+- $V$ — the held-out validation set; visible only to the validator.
+
+The train-only feedback wall is strengthened to: $G$ sees only
+$T_{\text{train}}$ and past train-measurable feedback. The validator computes
+a nonconformity score $s_i(v)$ for each validation observation using a score
+that is monotone in the evidence against the null (e.g. $s(r) = r$ for the
+one-sided test that the strategy has positive edge). The split-conformal
+p-value is
+
+$$p_i = \frac{1 + \#\{u \in T_{\text{calib}} : s_i(u) \ge s_i(v)\}}{|T_{\text{calib}}| + 1}.$$
+
+**Claim.** Under the same train-only wall, each $p_i$ is super-uniform under
+its null, because $a_i$ is independent of both $T_{\text{calib}}$ and $V$ and
+the conformal score is exchangeable under the null. Benjamini–Yekutieli at
+level $\alpha$ over the full ledger therefore controls
+$\mathrm{FDR} \le \alpha$ for every strategy of $G$, with **no parametric
+assumption** on returns.
+
+**Empirical footprint:** attack-suite arm `conformal` (three-way split +
+split-conformal p-value + BY over ledger). At $m=400$ hill-climb trials it
+produces **0.0 false certifications**, matching the t-test `protocol` arm and
+confirming the distribution-free version of the wall.
+
 ## 3. Theorem 2 (leaky wall): graceful degradation under bounded leakage
 
 Real systems leak: even publishing which candidates were *certified* is

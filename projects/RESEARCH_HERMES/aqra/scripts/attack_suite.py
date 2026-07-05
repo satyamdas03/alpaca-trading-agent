@@ -22,10 +22,15 @@ Defenses:
               and protocol (m=400: 1.5 vs 74.5 vs 0.05 false certs), showing
               leakage grows slowly but is not zero.
   protocol  — BY-FDR over the full ledger AND train-only feedback: candidates
-              are independent of the validation window, p-values valid
+              are independent of the validation window, p-values valid (t-test)
+  conformal — BY-FDR over the full ledger AND train-only feedback, but the
+              validator uses a three-way split (train/calibrate/test) and a
+              distribution-free split-conformal p-value. This removes the
+              parametric t-test caveat from Theorem 1.
 
 Prediction (kill criterion if it fails): naive false-certification count
-explodes with trials; no_wall inflates despite BY; protocol stays at ~alpha.
+explodes with trials; no_wall inflates despite BY; protocol and conformal
+stay at/below alpha.
 
 Usage: uv run python scripts/attack_suite.py [--trials 400] [--reps 20]
 Writes docs/paper/attack_results.{json,md} and attack_fdr.png.
@@ -39,7 +44,7 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 
-T_TRAIN, T_VAL, D_ASSETS = 252, 252, 50
+T_TRAIN, T_CALIB, T_VAL, D_ASSETS = 252, 252, 252, 50
 CERT_ALPHA_NAIVE = 0.05
 FDR_ALPHA = 0.20
 MUTATE_SD = 0.25
@@ -68,11 +73,28 @@ def pval(pnl: np.ndarray) -> float:
     return float(stats.ttest_1samp(pnl, 0.0, alternative="greater").pvalue)
 
 
+def conformal_pval(r_calib: np.ndarray, r_val: np.ndarray) -> float:
+    """Split-conformal p-value for positive edge, Bonferroni across val days.
+
+    Score = return itself; small p when validation returns are unusually large.
+    Under the null that calibration and validation returns are exchangeable,
+    each per-day p_j is super-uniform; min*p Bonferroni gives a valid
+    candidate-level p-value.
+    """
+    n_calib = len(r_calib)
+    m_val = len(r_val)
+    # p_j = (1 + #{calib returns >= val return j}) / (n_calib + 1)
+    p_day = (1 + np.sum(r_calib[:, None] >= r_val[None, :], axis=0)) / (n_calib + 1)
+    p_cand = p_day.min() * m_val
+    return float(min(p_cand, 1.0))
+
+
 def run_cell(defense: str, attacker: str, n_trials: int,
              rng: np.random.Generator) -> dict:
     """One (defense, attacker) cell on one fresh world. Returns cert counts."""
-    Z_train = rng.normal(0, 0.01, (T_TRAIN, D_ASSETS))   # train noise
-    Z_val = rng.normal(0, 0.01, (T_VAL, D_ASSETS))       # holdout noise
+    Z_train = rng.normal(0, 0.01, (T_TRAIN, D_ASSETS))     # generator's data
+    Z_calib = rng.normal(0, 0.01, (T_CALIB, D_ASSETS))   # validator calibration
+    Z_val = rng.normal(0, 0.01, (T_VAL, D_ASSETS))       # held-out test
 
     train_p, val_p = np.empty(n_trials), np.empty(n_trials)
     best_a, best_score = None, np.inf
@@ -85,8 +107,11 @@ def run_cell(defense: str, attacker: str, n_trials: int,
             a = best_a + rng.normal(0, MUTATE_SD, D_ASSETS)
         a = a / np.linalg.norm(a)
 
-        tp, vp = pval(Z_train @ a), pval(Z_val @ a)
-        train_p[i], val_p[i] = tp, vp
+        r_train, r_calib, r_val_vec = Z_train @ a, Z_calib @ a, Z_val @ a
+        tp = pval(r_train)
+        vp = pval(r_val_vec)
+        cp = conformal_pval(r_calib, r_val_vec)
+        train_p[i], val_p[i] = tp, (cp if defense == "conformal" else vp)
 
         # feedback channel differs by defense
         if attacker == "hillclimb":
@@ -98,7 +123,7 @@ def run_cell(defense: str, attacker: str, n_trials: int,
                 elif best_a is None:
                     pass  # keep sampling randomly until first accept
             else:
-                score = tp if defense == "protocol" else vp
+                score = tp if defense in ("protocol", "conformal") else vp
                 if score < best_score:
                     best_score, best_a = score, a.copy()
 
@@ -120,7 +145,7 @@ def main() -> None:
     args = ap.parse_args()
 
     checkpoints = [25, 50, 100, 200, args.trials]
-    defenses = ["naive", "no_wall", "metered", "protocol"]
+    defenses = ["naive", "no_wall", "metered", "protocol", "conformal"]
     attackers = ["hillclimb", "random"]
 
     results = {d: {a: {str(m): [] for m in checkpoints} for a in attackers}
@@ -144,9 +169,10 @@ def main() -> None:
 
     out = {
         "run_date": date.today().isoformat(),
-        "design": {"t_train": T_TRAIN, "t_val": T_VAL, "assets": D_ASSETS,
-                   "naive_alpha": CERT_ALPHA_NAIVE, "fdr_alpha": FDR_ALPHA,
-                   "reps": args.reps, "ground_truth": "all null"},
+        "design": {"t_train": T_TRAIN, "t_calib": T_CALIB, "t_val": T_VAL,
+                   "assets": D_ASSETS, "naive_alpha": CERT_ALPHA_NAIVE,
+                   "fdr_alpha": FDR_ALPHA, "reps": args.reps,
+                   "ground_truth": "all null"},
         "summary": summary,
     }
     docs = Path("docs/paper")
@@ -179,7 +205,8 @@ def main() -> None:
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots(figsize=(7, 4.5))
         styles = {"naive": "tab:red", "no_wall": "tab:orange",
-                  "metered": "tab:blue", "protocol": "tab:green"}
+                  "metered": "tab:blue", "protocol": "tab:green",
+                  "conformal": "tab:purple"}
         for d in defenses:
             ys = [summary[d]["hillclimb"][str(m)]["mean_false_certs"]
                   for m in checkpoints]
@@ -198,6 +225,7 @@ def main() -> None:
 
     print(json.dumps(summary["naive"]["hillclimb"], indent=1))
     print(json.dumps(summary["protocol"]["hillclimb"], indent=1))
+    print(json.dumps(summary["conformal"]["hillclimb"], indent=1))
     print("wrote docs/paper/attack_results.{json,md} + attack_fdr.png")
 
 

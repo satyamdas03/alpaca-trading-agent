@@ -49,12 +49,13 @@ Cheating-generator attack suite on synthetic + real panel data:
 ## M2 VERDICT (2026-07-04): SEPARATION CONFIRMED — thesis survives
 
 Commit e619731, artifacts aqra/docs/paper/attack_results.*. At m=400 trials,
-hill-climb attacker: naive 216.8 false certs (100% of campaigns), ledger-
-without-wall 79.9 DESPITE BY-FDR (adaptive feedback voids p-value validity —
-the theorem's empirical footprint), metered one-bit feedback 1.5 false certs
-(leaks, but slowly; Theorem 2 regime), full protocol 0.05 (at/below alpha).
-Control: no_wall vs random attacker ~0.05, isolating adaptivity as the
-breaking force. Next: M1 theorem sketch.
+hill-climb attacker: naive 216.9 false certs (100% of campaigns), ledger-
+without-wall 68.0 DESPITE BY-FDR (adaptive feedback voids p-value validity —
+the theorem's empirical footprint), metered one-bit feedback 2.15 false certs
+(leaks, but slowly; Theorem 2 regime), full protocol 0.0 (at/below alpha),
+conformal three-way-split p-value 0.0 (distribution-free wall; Conformal
+Theorem 1). Control: no_wall vs random attacker ~0.05, isolating adaptivity as
+the breaking force. Next: M1 theorem sketch.
 
 ## Program milestones
 
