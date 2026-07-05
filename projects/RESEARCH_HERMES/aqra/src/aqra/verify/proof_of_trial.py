@@ -20,7 +20,9 @@ from typing import Iterable
 
 from aqra.conformal.multiple_testing import (
     benjamini_yekutieli,
+    e_bh_rejections,
     online_by_rejections,
+    online_e_bh_rejections,
 )
 from aqra.generate.ledger import (
     STATUS_EVALUATED,
@@ -43,6 +45,7 @@ class TrialEntry:
     lane: str
     status: str
     p_value: float | None
+    e_value: float | None = None
     formula: str | None = None
     rationale: str | None = None
     source: str | None = None
@@ -59,6 +62,7 @@ class TrialEntry:
             "lane": self.lane,
             "status": self.status,
             "p_value": self.p_value,
+            "e_value": self.e_value,
             "formula": self.formula,
             "rationale": self.rationale,
             "source": self.source,
@@ -89,6 +93,7 @@ class TrialEntry:
             lane=d["lane"],
             status=d["status"],
             p_value=d.get("p_value"),
+            e_value=d.get("e_value"),
             formula=d.get("formula"),
             rationale=d.get("rationale"),
             source=d.get("source"),
@@ -135,7 +140,7 @@ class LedgerExporter:
         self.ledger = ledger
 
     def export(self, path: Path | str, alpha: float = 0.20,
-               online: bool = False) -> Path:
+               online: bool = False, use_e: bool = False) -> Path:
         """Write a JSON-line ledger plus recomputed certifications.
 
         Each line is one JSON object. The last metadata line contains the
@@ -144,7 +149,7 @@ class LedgerExporter:
         path = Path(path)
         rows = self.ledger.db.conn.execute(
             """SELECT trial_id, created_at, dsl_version, lane, status,
-                      p_value, formula, rationale, source, metrics_json
+                      p_value, e_value, formula, rationale, source, metrics_json
                FROM trials_ledger
                ORDER BY created_at"""
         ).fetchall()
@@ -153,7 +158,7 @@ class LedgerExporter:
         prev_hash = GENESIS_HASH
         for row in rows:
             (trial_id, created_at, dsl_version, lane, status,
-             p_value, formula, rationale, source, metrics_json) = row
+             p_value, e_value, formula, rationale, source, metrics_json) = row
             # created_at may be a datetime object or ISO string
             if isinstance(created_at, datetime):
                 created_at = created_at.isoformat()
@@ -165,6 +170,7 @@ class LedgerExporter:
                 lane=lane or "",
                 status=status,
                 p_value=p_value,
+                e_value=e_value,
                 formula=formula,
                 rationale=rationale,
                 source=source,
@@ -173,24 +179,34 @@ class LedgerExporter:
             entries.append(entry)
             prev_hash = entry.this_hash
 
-        # Recompute certifications from the exported p-values.
-        pvals, ids = [], []
+        # Recompute certifications from the exported p-values or e-values.
+        pvals, evals, ids = [], [], []
         for e in entries:
-            if e.status == STATUS_EVALUATED and e.p_value is not None:
-                pvals.append(e.p_value)
+            if e.status == STATUS_EVALUATED:
+                pvals.append(e.p_value if e.p_value is not None else 1.0)
+                evals.append(e.e_value if e.e_value is not None else 0.0)
                 ids.append(e.trial_id)
             else:
                 # Failed/invalid trials still count in the ledger but are
-                # not certifiable (p=1 for correction purposes).
+                # not certifiable.
                 pvals.append(1.0)
+                evals.append(0.0)
                 ids.append(e.trial_id)
 
-        if online:
-            selected = online_by_rejections(pvals, alpha)
-            method = "online_by"
+        if use_e:
+            if online:
+                selected = online_e_bh_rejections(evals, alpha)
+                method = "online_e_bh"
+            else:
+                selected = e_bh_rejections(evals, alpha)
+                method = "e_bh"
         else:
-            selected = benjamini_yekutieli(pvals, alpha)
-            method = "benjamini_yekutieli"
+            if online:
+                selected = online_by_rejections(pvals, alpha)
+                method = "online_by"
+            else:
+                selected = benjamini_yekutieli(pvals, alpha)
+                method = "benjamini_yekutieli"
         certified = {tid for tid, sel in zip(ids, selected) if sel}
 
         with path.open("w", encoding="utf-8") as f:
@@ -200,6 +216,7 @@ class LedgerExporter:
                 "_meta": True,
                 "alpha": alpha,
                 "method": method,
+                "use_e": use_e,
                 "n_trials": len(entries),
                 "certified": sorted(certified),
                 "genesis_hash": GENESIS_HASH,
@@ -230,7 +247,8 @@ class ProofOfTrialVerifier:
 
     def verify(self, claimed_certified: Iterable[str] | None = None,
                alpha: float | None = None,
-               online: bool | None = None) -> VerificationReport:
+               online: bool | None = None,
+               use_e: bool | None = None) -> VerificationReport:
         """Verify chain integrity and optionally recompute FDR selections.
 
         If `claimed_certified` is None, the verifier reads the certified set
@@ -240,7 +258,11 @@ class ProofOfTrialVerifier:
                                      n_evaluated=0, hash_chain_ok=True)
         report.certified_claimed = set(claimed_certified) if claimed_certified is not None else set(self.meta.get("certified", []))
         alpha = alpha if alpha is not None else self.meta.get("alpha", 0.20)
-        online = online if online is not None else (self.meta.get("method") == "online_by")
+        method = self.meta.get("method")
+        if use_e is None:
+            use_e = method in ("e_bh", "online_e_bh")
+        if online is None:
+            online = method in ("online_by", "online_e_bh")
 
         prev_hash = GENESIS_HASH
         for i, e in enumerate(self.entries):
@@ -259,20 +281,28 @@ class ProofOfTrialVerifier:
             prev_hash = e.this_hash or recomputed
 
         # Recompute FDR from the ledger.
-        pvals, ids = [], []
+        pvals, evals, ids = [], [], []
         for e in self.entries:
-            if e.status == STATUS_EVALUATED and e.p_value is not None:
-                pvals.append(e.p_value)
+            if e.status == STATUS_EVALUATED:
+                pvals.append(e.p_value if e.p_value is not None else 1.0)
+                evals.append(e.e_value if e.e_value is not None else 0.0)
                 ids.append(e.trial_id)
                 report.n_evaluated += 1
             else:
                 pvals.append(1.0)
+                evals.append(0.0)
                 ids.append(e.trial_id)
 
-        if online:
-            selected = online_by_rejections(pvals, alpha)
+        if use_e:
+            if online:
+                selected = online_e_bh_rejections(evals, alpha)
+            else:
+                selected = e_bh_rejections(evals, alpha)
         else:
-            selected = benjamini_yekutieli(pvals, alpha)
+            if online:
+                selected = online_by_rejections(pvals, alpha)
+            else:
+                selected = benjamini_yekutieli(pvals, alpha)
         report.certified_recomputed = {tid for tid, sel in zip(ids, selected) if sel}
 
         missing = report.certified_claimed - report.certified_recomputed

@@ -39,6 +39,7 @@ class TrialsLedger:
                 rationale TEXT,
                 status TEXT,
                 p_value DOUBLE,
+                e_value DOUBLE,
                 sharpe DOUBLE,
                 ic DOUBLE,
                 metrics_json TEXT,
@@ -92,17 +93,19 @@ class TrialsLedger:
         )
 
     def record_result(self, trial_id: str, metrics: dict, p_value: float,
+                      e_value: float | None = None,
                       train_sharpe: float | None = None,
                       train_ic: float | None = None):
         self._require_registered(trial_id)
         clean = {k: v for k, v in metrics.items() if k != "equity_curve"}
         self.db.conn.execute(
             """UPDATE trials_ledger
-               SET status = ?, p_value = ?, sharpe = ?, ic = ?,
+               SET status = ?, p_value = ?, e_value = ?, sharpe = ?, ic = ?,
                    metrics_json = ?, train_sharpe = ?, train_ic = ?
                WHERE trial_id = ?""",
-            [STATUS_EVALUATED, p_value, clean.get("sharpe"), clean.get("ic"),
-             json.dumps(clean, default=float), train_sharpe, train_ic, trial_id],
+            [STATUS_EVALUATED, p_value, e_value, clean.get("sharpe"),
+             clean.get("ic"), json.dumps(clean, default=float),
+             train_sharpe, train_ic, trial_id],
         )
 
     def select_fdr(self, alpha: float = 0.20) -> list[dict]:

@@ -77,6 +77,59 @@ This confirms the ledger/wall/FDR stack transfers outside quantitative
 finance: the primitive is a domain-agnostic guardrail for adaptive
 hypothesis generation.
 
+## PHASE A UPDATE (2026-07-05): E-value core implemented
+
+The breakthrough direction identified in `2026-07-05-breakthrough-analysis.md`
+has been implemented:
+
+- `aqra/src/aqra/conformal/evalue.py` — `EValue` primitive, p-value→e-value
+  conversion, and conformal e-value `E = -log P`.
+- `aqra/src/aqra/conformal/multiple_testing.py` — `e_bh_rejections`,
+  `online_e_bh_rejections` (e-LOND), and `dependence_adjusted_by`.
+- `aqra/src/aqra/generate/ledger.py` — `e_value` column added to the ledger.
+- `aqra/src/aqra/verify/proof_of_trial.py` — exporter/verifier support e-BH
+  and online e-BH hash-chain audits.
+- `aqra/scripts/attack_suite.py` — `e_bh`, `online_e_bh`, `dby` arms added.
+- `aqra/scripts/ml_benchmark_demo.py` — `--e-value` flag added.
+- `aqra/docs/paper/honest_agent_protocol.md` — rewritten around Theorem E
+  (e-value firewall), SparseValidate leakage pricing, and conformal e-values.
+- `aqra/tests/conformal/test_evalue_multiple_testing.py` — 8 new unit tests,
+  all passing.
+
+Attack suite full run at m=400:
+- `e_bh`: 0.00 false certs
+- `online_e_bh`: 0.00 false certs
+- `dby`: 0.00 false certs
+- `naive`: 216.85 false certs
+
+## PHASE B UPDATE (2026-07-05): SparseValidate leakage calculus implemented
+
+Phase B closes the leakage-accounting gap identified in the breakthrough
+analysis:
+
+- `aqra/src/aqra/conformal/multiple_testing.py` — `candidacy_threshold(alpha, m)`
+  and `sparse_validate_transfer_bound(m, k)` with exact combinatorial formula
+  and polynomial upper bound $(em/k)^k$.
+- `aqra/tests/conformal/test_evalue_multiple_testing.py` — tests for
+  candidacy-threshold sparsity, exact transfer bound, and polynomial dominance
+  over $2^m$.
+- `aqra/scripts/attack_suite.py` — new `sparse_metered` defense. It uses the
+  candidacy threshold $\lambda = \alpha / \log(m+1)$, expected accepts
+  $K_m \approx \lambda m$, and deflates universal e-values by the SparseValidate
+  factor $\mathcal{T}(m,K_m)$ before running e-BH.
+- `aqra/docs/paper/honest_agent_protocol.md` — Theorem S added: a formal
+  SparseValidate-corrected e-BH guarantee for the metered accept/reject channel,
+  with polynomial leakage factor priced into the e-values.
+
+Attack suite full run at $m=400$:
+- `sparse_metered`: **0.00 false certs** (conservative but valid worst-case
+  leakage pricing)
+- `metered`: 0.75 false certs (no SparseValidate correction)
+- `no_wall`: 91.55 false certs
+- `naive`: 200.80 false certs
+
+Next: Phase C (real LLM adaptive experiment with Anthropic API key).
+
 ## Program milestones
 
 - M1: formal threat model + theorem sketch (adaptive data analysis mapping) — DONE

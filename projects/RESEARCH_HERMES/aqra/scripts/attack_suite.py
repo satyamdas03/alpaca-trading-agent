@@ -16,11 +16,17 @@ Defenses:
   no_wall   — BY-FDR (alpha=0.20) over the full ledger, but feedback still
               exposes validation p: multiplicity is charged, yet adaptivity
               makes the p-values themselves anti-conservative
-  metered   — BY-FDR over the full ledger; feedback is ONE BIT per round
-              (validation p < 0.05 yes/no). Theorem 2's structured-leak
-              regime: <= m bits total budget. Empirically sits between no_wall
-              and protocol (m=400: 1.5 vs 74.5 vs 0.05 false certs), showing
-              leakage grows slowly but is not zero.
+  metered       — BY-FDR over the full ledger; feedback is ONE BIT per round
+                  (validation p < 0.05 yes/no). Theorem 2's structured-leak
+                  regime: <= m bits total budget. Empirically sits between no_wall
+                  and protocol (m=400: 1.5 vs 74.5 vs 0.05 false certs), showing
+                  leakage grows slowly but is not zero.
+  sparse_metered— Same one-bit feedback, but the final audit prices in the
+                  worst-case SparseValidate transfer bound. Candidacy threshold
+                  λ = α / log(m+1); expected accepts k ≈ λ m; e-values built
+                  from the λ-threshold are deflated by the polynomial factor
+                  Σ_{j=0}^k C(m,j) before e-BH. Demonstrates that leakage can
+                  be priced, even if the worst-case bound is conservative.
   protocol   — BY-FDR over the full ledger AND train-only feedback: candidates
                are independent of the validation window, p-values valid (t-test)
   conformal  — BY-FDR over the full ledger AND train-only feedback, but the
@@ -52,10 +58,16 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 
+from aqra.conformal.evalue import conformal_evalue, evalue_from_pvalue
 from aqra.conformal.multiple_testing import (
     benjamini_yekutieli,
+    candidacy_threshold,
+    dependence_adjusted_by,
+    e_bh_rejections as _e_bh_rejections,
     online_by_rejections as _online_by_rejections,
+    online_e_bh_rejections as _online_e_bh_rejections,
     online_lond_rejections as _online_lond_rejections,
+    sparse_validate_transfer_bound,
 )
 
 T_TRAIN, T_CALIB, T_VAL, D_ASSETS = 252, 252, 252, 50
@@ -77,6 +89,21 @@ def online_by_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
 def online_lond_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
     """LOND online FDR (numpy wrapper)."""
     return np.array(_online_lond_rejections(pvals.tolist(), alpha), dtype=bool)
+
+
+def e_bh_rejections(evals: np.ndarray, alpha: float) -> np.ndarray:
+    """E-BH rejection mask (numpy wrapper)."""
+    return np.array(_e_bh_rejections(evals.tolist(), alpha), dtype=bool)
+
+
+def online_e_bh_rejections(evals: np.ndarray, alpha: float) -> np.ndarray:
+    """Online e-BH (e-LOND) rejection mask (numpy wrapper)."""
+    return np.array(_online_e_bh_rejections(evals.tolist(), alpha), dtype=bool)
+
+
+def dby_reject(pvals: np.ndarray, alpha: float) -> np.ndarray:
+    """Dependence-adjusted BY rejection mask (numpy wrapper)."""
+    return np.array(dependence_adjusted_by(pvals.tolist(), alpha), dtype=bool)
 
 
 def pval(pnl: np.ndarray) -> float:
@@ -109,9 +136,17 @@ def run_cell(defense: str, attacker: str, n_trials: int,
     Z_calib = rng.normal(0, 0.01, (T_CALIB, D_ASSETS))   # validator calibration
     Z_val = rng.normal(0, 0.01, (T_VAL, D_ASSETS))       # held-out test
 
-    train_p, val_p = np.empty(n_trials), np.empty(n_trials)
+    # We keep p-values for p-value-based defenses and e-values for e-value defenses.
+    train_p = np.empty(n_trials)
+    val_p = np.empty(n_trials)
+    val_e = np.empty(n_trials)
     best_a, best_score = None, np.inf
     certified_naive = np.zeros(n_trials, dtype=bool)
+
+    # SparseValidate parameters for the sparse_metered defense.
+    lambda_sparse = candidacy_threshold(FDR_ALPHA, n_trials)
+    k_sparse = max(1, int(round(n_trials * lambda_sparse)))
+    sparse_factor = sparse_validate_transfer_bound(n_trials, k_sparse)
 
     for i in range(n_trials):
         if attacker == "random" or best_a is None:
@@ -124,7 +159,27 @@ def run_cell(defense: str, attacker: str, n_trials: int,
         tp = pval(r_train)
         vp = pval(r_val_vec)
         cp = conformal_pval(r_calib, r_val_vec)
-        train_p[i], val_p[i] = tp, (cp if defense == "conformal" else vp)
+        train_p[i] = tp
+
+        # Choose the score that the validator reports.
+        if defense in ("conformal", "e_bh", "online_e_bh"):
+            val_p[i] = cp
+        else:
+            val_p[i] = vp
+
+        # Build the e-value for this candidate. For e-value defenses we use the
+        # conformal e-value; for p-value defenses the e-value is not used.
+        if defense in ("e_bh", "online_e_bh"):
+            # Direct conformal e-value from the minimum nonconformity score.
+            min_score = r_val_vec.max()
+            val_e[i] = conformal_evalue(min_score, r_calib).value
+        elif defense == "sparse_metered":
+            # Universal e-value at the SparseValidate candidacy threshold.
+            val_e[i] = 1.0 / lambda_sparse if val_p[i] <= lambda_sparse else 0.0
+        else:
+            # Fallback: convert p-value to a universal e-value at a fixed threshold.
+            # This is only used for comparison, not for FDR control under leak.
+            val_e[i] = evalue_from_pvalue(val_p[i], threshold=CERT_ALPHA_NAIVE).value
 
         # feedback channel differs by defense
         if attacker == "hillclimb":
@@ -135,8 +190,18 @@ def run_cell(defense: str, attacker: str, n_trials: int,
                     best_a = a.copy()
                 elif best_a is None:
                     pass  # keep sampling randomly until first accept
+            elif defense == "sparse_metered":
+                # one-bit feedback gated by the SparseValidate candidacy threshold
+                if vp <= lambda_sparse:
+                    best_a = a.copy()
+                elif best_a is None:
+                    pass
             else:
-                score = tp if defense in ("protocol", "conformal", "online_by", "online_lond") else vp
+                # train-only defenses use train score; leaking defenses use validation score
+                if defense in ("protocol", "conformal", "online_by", "online_lond", "e_bh", "online_e_bh", "dby"):
+                    score = tp
+                else:
+                    score = vp
                 if score < best_score:
                     best_score, best_a = score, a.copy()
 
@@ -149,9 +214,21 @@ def run_cell(defense: str, attacker: str, n_trials: int,
         n_cert = int(online_by_rejections(val_p, FDR_ALPHA).sum())
     elif defense == "online_lond":
         n_cert = int(online_lond_rejections(val_p, FDR_ALPHA).sum())
+    elif defense == "e_bh":
+        n_cert = int(e_bh_rejections(val_e, FDR_ALPHA).sum())
+    elif defense == "online_e_bh":
+        n_cert = int(online_e_bh_rejections(val_e, FDR_ALPHA).sum())
+    elif defense == "dby":
+        n_cert = int(dby_reject(val_p, FDR_ALPHA).sum())
+    elif defense == "sparse_metered":
+        # Price the worst-case SparseValidate leakage by deflating e-values.
+        corrected_e = val_e / sparse_factor
+        n_cert = int(e_bh_rejections(corrected_e, FDR_ALPHA).sum())
     else:  # ledgered batch defenses: BY over ALL trials at the end of the campaign
         n_cert = int(by_reject(val_p, FDR_ALPHA).sum())
-    return {"n_certified_false": n_cert, "min_val_p": float(val_p.min())}
+    return {"n_certified_false": n_cert, "min_val_p": float(val_p.min()),
+            "lambda_sparse": float(lambda_sparse), "k_sparse": k_sparse,
+            "sparse_factor": float(sparse_factor)}
 
 
 def main() -> None:
@@ -162,8 +239,9 @@ def main() -> None:
     args = ap.parse_args()
 
     checkpoints = [25, 50, 100, 200, args.trials]
-    defenses = ["naive", "no_wall", "metered", "protocol", "conformal",
-                "online_by", "online_lond"]
+    defenses = ["naive", "no_wall", "metered", "sparse_metered", "protocol",
+                "conformal", "online_by", "online_lond",
+                "e_bh", "online_e_bh", "dby"]
     attackers = ["hillclimb", "random"]
 
     results = {d: {a: {str(m): [] for m in checkpoints} for a in attackers}
@@ -223,9 +301,11 @@ def main() -> None:
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots(figsize=(7, 4.5))
         styles = {"naive": "tab:red", "no_wall": "tab:orange",
-                  "metered": "tab:blue", "protocol": "tab:green",
-                  "conformal": "tab:purple", "online_by": "tab:cyan",
-                  "online_lond": "tab:pink"}
+                  "metered": "tab:blue", "sparse_metered": "tab:blue",
+                  "protocol": "tab:green", "conformal": "tab:purple",
+                  "online_by": "tab:cyan", "online_lond": "tab:pink",
+                  "e_bh": "tab:olive", "online_e_bh": "tab:brown",
+                  "dby": "tab:gray"}
         for d in defenses:
             ys = [summary[d]["hillclimb"][str(m)]["mean_false_certs"]
                   for m in checkpoints]
@@ -242,7 +322,8 @@ def main() -> None:
     except Exception as e:  # plot is a bonus, numbers are the artifact
         print(f"plot skipped: {e}")
 
-    for d in ["naive", "protocol", "conformal", "online_by", "online_lond"]:
+    for d in ["naive", "protocol", "conformal", "online_by", "online_lond",
+              "e_bh", "online_e_bh", "dby", "sparse_metered"]:
         print(f"--- {d} hillclimb ---")
         print(json.dumps(summary[d]["hillclimb"], indent=1))
     print("wrote docs/paper/attack_results.{json,md} + attack_fdr.png")

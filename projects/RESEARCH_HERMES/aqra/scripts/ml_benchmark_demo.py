@@ -18,9 +18,12 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 
+from aqra.conformal.evalue import conformal_evalue
 from aqra.conformal.multiple_testing import (
     benjamini_yekutieli,
+    e_bh_rejections,
     online_by_rejections,
+    online_e_bh_rejections,
 )
 from aqra.db import AQRADatabase
 from aqra.generate.ledger import TrialsLedger
@@ -102,14 +105,20 @@ def mutate(config: dict, rng: np.random.Generator):
     return child
 
 
-def run_demo(n_trials: int, wall: bool, online: bool, rng: np.random.Generator,
-             ledger: TrialsLedger | None = None) -> dict:
+def run_demo(
+    n_trials: int,
+    wall: bool,
+    online: bool,
+    use_e: bool,
+    rng: np.random.Generator,
+    ledger: TrialsLedger | None = None,
+) -> dict:
     """Run one ML campaign."""
     X_train, y_train, X_calib, y_calib, X_val, y_val = load_data()
     base_acc = baseline_accuracy(y_val)
 
     best_config, best_score = None, -np.inf
-    pvals, configs, trial_ids, val_accs = [], [], [], []
+    pvals, evals, configs, trial_ids, val_accs = [], [], [], [], []
 
     for i in range(n_trials):
         if best_config is None or rng.random() < 0.1:
@@ -137,6 +146,20 @@ def run_demo(n_trials: int, wall: bool, online: bool, rng: np.random.Generator,
         excess = val_correct - baseline_correct
         pval = ttest_pvalue(excess)
         pvals.append(pval)
+
+        # Conformal e-value: nonconformity score = -val_acc (lower = better).
+        # Under the null of no edge, validation accuracy is exchangeable w.r.t.
+        # calibration accuracy, so the conformal e-value has expectation <= 1.
+        calib_scores = -np.array([accuracy(linear_predict(X_calib, np.array(c["weights"]), c["bias"]), y_calib)
+                                   for c in [config]])
+        # Use a per-candidate calibration score distribution: compare this
+        # candidate's validation score against its own calibration scores.
+        # In this simple demo we approximate with the single calibration score.
+        calib_score = -calib_acc
+        val_score = -val_acc
+        e_val = conformal_evalue(val_score, [calib_score]).value
+        evals.append(e_val)
+
         configs.append(config)
 
         if ledger is not None:
@@ -154,6 +177,7 @@ def run_demo(n_trials: int, wall: bool, online: bool, rng: np.random.Generator,
                 metrics={"train_acc": train_acc, "calib_acc": calib_acc,
                          "val_acc": val_acc},
                 p_value=pval,
+                e_value=e_val,
             )
 
         # feedback channel: under the wall the generator sees only train-side
@@ -161,14 +185,20 @@ def run_demo(n_trials: int, wall: bool, online: bool, rng: np.random.Generator,
         if wall:
             score = train_acc
         else:
-            score = -pval  # lower validation p-value = better hill-climb score
+            score = -pval if not use_e else -e_val  # lower validation p/e = better
         if score > best_score:
             best_score, best_config = score, config
 
-    if online:
-        selected = online_by_rejections(pvals, ALPHA)
+    if use_e:
+        if online:
+            selected = online_e_bh_rejections(evals, ALPHA)
+        else:
+            selected = e_bh_rejections(evals, ALPHA)
     else:
-        selected = benjamini_yekutieli(pvals, ALPHA)
+        if online:
+            selected = online_by_rejections(pvals, ALPHA)
+        else:
+            selected = benjamini_yekutieli(pvals, ALPHA)
     n_cert = int(sum(selected))
     best_val = max(val_accs) if val_accs else 0.0
     return {
@@ -178,6 +208,7 @@ def run_demo(n_trials: int, wall: bool, online: bool, rng: np.random.Generator,
         "baseline_val_acc": float(base_acc),
         "wall": wall,
         "online": online,
+        "use_e": use_e,
     }
 
 
@@ -188,7 +219,9 @@ def main():
     ap.add_argument("--wall", action="store_true",
                     help="Use train-only feedback wall (honest protocol)")
     ap.add_argument("--online", action="store_true",
-                    help="Use online BY instead of batch BY")
+                    help="Use online procedure instead of batch")
+    ap.add_argument("--e-value", action="store_true", dest="use_e",
+                    help="Use e-BH / online e-BH instead of BY-FDR")
     ap.add_argument("--export-ledger", type=Path,
                     help="Export the last repetition's ledger to this path")
     args = ap.parse_args()
@@ -200,19 +233,23 @@ def main():
         db = AQRADatabase(":memory:")
         ledger = TrialsLedger(db)
         try:
-            out = run_demo(args.trials, args.wall, args.online, rng, ledger=ledger)
+            out = run_demo(args.trials, args.wall, args.online, args.use_e,
+                           rng, ledger=ledger)
             results.append(out)
             if args.export_ledger and rep == args.reps - 1:
                 LedgerExporter(ledger).export(
-                    args.export_ledger, alpha=ALPHA, online=args.online
+                    args.export_ledger, alpha=ALPHA, online=args.online,
+                    use_e=args.use_e
                 )
                 print(f"Exported ledger to {args.export_ledger}")
         finally:
             db.close()
 
     mean_cert = float(np.mean([r["n_certified"] for r in results]))
+    method = "e-BH" if args.use_e else "BY-FDR"
+    mode = "online" if args.online else "batch"
     print(f"Campaigns: {args.reps}, trials/campaign: {args.trials}")
-    print(f"Protocol wall={args.wall}, online={args.online}")
+    print(f"Protocol wall={args.wall}, method={method}, mode={mode}")
     print(f"Mean certified configs: {mean_cert:.2f}")
     print(f"Baseline val acc: {results[0]['baseline_val_acc']:.3f}")
     print(f"Best observed val acc: {np.mean([r['best_val_acc'] for r in results]):.3f}")
