@@ -60,16 +60,34 @@ LORD-style fixed-spending `online_lond` 0.45 (empirical probe, unproved under
 shared-$V$ dependence). Control: no_wall vs random attacker 0.0, isolating
 adaptivity as the breaking force. Next: M3 cross-domain demo.
 
+## M3 VERDICT (2026-07-05): TRANSFER CONFIRMED — not finance-specific
+
+`aqra/scripts/ml_benchmark_demo.py`: synthetic 50-feature binary
+classification with independent labels (pure-noise, all-null world).  A
+linear-classifier generator hill-climbs for 400 trials:
+
+- **Without wall** (feedback = validation p-value): mean 0.50 false
+  certifications; generator overfits noise in the holdout.
+- **With wall + batch BY-FDR** (feedback = train accuracy only): mean 0.00
+  false certifications.
+- **With wall + online BY** (`--online`): mean 0.00 false certifications.
+- Exported ledgers verify independently with `verify_ledger.py`.
+
+This confirms the ledger/wall/FDR stack transfers outside quantitative
+finance: the primitive is a domain-agnostic guardrail for adaptive
+hypothesis generation.
+
 ## Program milestones
 
 - M1: formal threat model + theorem sketch (adaptive data analysis mapping) — DONE
 - M2: attack suite + separation plot (start immediately, synthetic data) — DONE
 - M3: cross-domain instantiation (ML benchmark claims — test-set overfitting
-  on a public dataset) to demonstrate universality beyond finance — NEXT
+  on a public dataset) to demonstrate universality beyond finance — DONE
+  (`aqra/scripts/ml_benchmark_demo.py`)
 - M4: hash-chained public ledger format ("Proof-of-Trial") + verifier tool — DONE
   (`aqra/src/aqra/verify/proof_of_trial.py`, `aqra/scripts/verify_ledger.py`)
 - M5: paper targeting a general venue (NeurIPS/ICML class) with AQRA/ICAIF
-  as the domain instantiation citation
+  as the domain instantiation citation — NEXT
 
 ## Relationship to ICAIF sprint
 

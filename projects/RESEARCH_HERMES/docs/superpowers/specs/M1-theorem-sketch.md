@@ -205,7 +205,9 @@ strategies are exactly those selected by BY-FDR (or online-BY) over the
 3. **Cross-domain transfer.** Port the grammar/ledger/online-FDR stack to a
    non-finance adaptive-generation problem (e.g., ML hyperparameter search
    or benchmark gaming) so the primitive is tested outside its home domain
-   (milestone M3).
+   (milestone M3).  **Status:** initial demo completed with a synthetic-ML
+   no-signal linear-classifier search (`aqra/scripts/ml_benchmark_demo.py`);
+   wall/no-wall separation reproduced.
 
 ## 8. Honest assessment
 
