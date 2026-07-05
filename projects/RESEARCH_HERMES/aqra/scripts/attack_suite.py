@@ -52,6 +52,12 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 
+from aqra.conformal.multiple_testing import (
+    benjamini_yekutieli,
+    online_by_rejections as _online_by_rejections,
+    online_lond_rejections as _online_lond_rejections,
+)
+
 T_TRAIN, T_CALIB, T_VAL, D_ASSETS = 252, 252, 252, 50
 CERT_ALPHA_NAIVE = 0.05
 FDR_ALPHA = 0.20
@@ -60,46 +66,17 @@ MUTATE_SD = 0.25
 
 def by_reject(pvals: np.ndarray, alpha: float) -> np.ndarray:
     """Benjamini-Yekutieli rejection mask (arbitrary dependence)."""
-    m = len(pvals)
-    if m == 0:
-        return np.zeros(0, dtype=bool)
-    order = np.argsort(pvals)
-    c_m = np.sum(1.0 / np.arange(1, m + 1))
-    thresh = np.arange(1, m + 1) / m * alpha / c_m
-    ok = pvals[order] <= thresh
-    k = np.max(np.where(ok)[0]) + 1 if ok.any() else 0
-    mask = np.zeros(m, dtype=bool)
-    if k:
-        mask[order[:k]] = True
-    return mask
+    return np.array(benjamini_yekutieli(pvals.tolist(), alpha), dtype=bool)
 
 
 def online_by_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
-    """Sequential BY-FDR over prefixes: rejection set at each step t.
-
-    At time t we run Benjamini-Yekutieli on the first t p-values. Because
-    the prefix is a fixed (non-data-dependent) subset and BY controls FDR
-    under arbitrary dependence, FDR <= alpha at every audit time t.
-    We report the rejection mask at the final step t = len(pvals).
-    """
-    n = len(pvals)
-    mask = np.zeros(n, dtype=bool)
-    for t in range(1, n + 1):
-        mask[:t] = by_reject(pvals[:t], alpha)
-    return mask
+    """Sequential BY-FDR over prefixes (numpy wrapper)."""
+    return np.array(_online_by_rejections(pvals.tolist(), alpha), dtype=bool)
 
 
 def online_lond_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
-    """LOND online FDR with a fixed spending sequence.
-
-    alpha_i = alpha * gamma_i where gamma_i = 6 / (pi^2 * i^2) sums to 1.
-    Reject H_i if p_i <= alpha_i. Under independent p-values this controls
-    FDR <= alpha; here it is included as an empirical power probe under the
-    train-only wall (the rigorous anytime guarantee is online_by).
-    """
-    n = len(pvals)
-    gamma = 6.0 / (np.pi ** 2 * np.arange(1, n + 1) ** 2)
-    return pvals <= alpha * gamma
+    """LOND online FDR (numpy wrapper)."""
+    return np.array(_online_lond_rejections(pvals.tolist(), alpha), dtype=bool)
 
 
 def pval(pnl: np.ndarray) -> float:

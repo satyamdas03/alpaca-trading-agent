@@ -58,15 +58,16 @@ split p-value 0.0 (distribution-free wall; Conformal Theorem 1), sequential-
 BY online prefix `online_by` 0.0 (anytime-valid immortal wall; Theorem 3),
 LORD-style fixed-spending `online_lond` 0.45 (empirical probe, unproved under
 shared-$V$ dependence). Control: no_wall vs random attacker 0.0, isolating
-adaptivity as the breaking force. Next: M3 cross-domain demo + M4 verifier.
+adaptivity as the breaking force. Next: M3 cross-domain demo.
 
 ## Program milestones
 
-- M1: formal threat model + theorem sketch (adaptive data analysis mapping)
-- M2: attack suite + separation plot (start immediately, synthetic data)
+- M1: formal threat model + theorem sketch (adaptive data analysis mapping) — DONE
+- M2: attack suite + separation plot (start immediately, synthetic data) — DONE
 - M3: cross-domain instantiation (ML benchmark claims — test-set overfitting
-  on a public dataset) to demonstrate universality beyond finance
-- M4: hash-chained public ledger format ("Proof-of-Trial") + verifier tool
+  on a public dataset) to demonstrate universality beyond finance — NEXT
+- M4: hash-chained public ledger format ("Proof-of-Trial") + verifier tool — DONE
+  (`aqra/src/aqra/verify/proof_of_trial.py`, `aqra/scripts/verify_ledger.py`)
 - M5: paper targeting a general venue (NeurIPS/ICML class) with AQRA/ICAIF
   as the domain instantiation citation
 

@@ -160,34 +160,61 @@ price the correction accordingly.
 The last row is the control that isolates *adaptivity* (not dependence,
 not multiplicity) as the breaking force.
 
-## 6. Open problems (the research program)
+## 6. Proof-of-Trial verifier (M4): don't trust the agent
+
+A theorem is not enough for a deployed primitive. The agent could lie about
+which trials it ran or which ones it certified. The Proof-of-Trial
+artifact makes the ledger independently auditable.
+
+`aqra/src/aqra/verify/proof_of_trial.py` exports the DuckDB-backed
+`TrialsLedger` to a hash-chained JSON-line file:
+
+- Every trial record carries `previous_hash` and `this_hash`.
+- `this_hash` is a SHA-256 digest of all other canonical fields (trial id,
+  timestamp, DSL version, lane, status, p-value, formula, rationale,
+  source, metrics).
+- The metadata line at the end publishes the FDR level, the correction
+  method (`benjamini_yekutieli` or `online_by`), and the claimed certified
+  set.
+
+`ProofOfTrialVerifier` independently:
+
+1. Walks the chain and checks that each `this_hash` matches the recomputed
+   hash and that each `previous_hash` links to the previous record.
+2. Recomputes the FDR correction from the published p-values.
+3. Compares the recomputed certified set to the claimed set and reports any
+   discrepancy.
+
+This turns the protocol's statistical guarantee into a publicly checkable
+object: anyone with the ledger file can verify that the certified
+strategies are exactly those selected by BY-FDR (or online-BY) over the
+*full* ledger, without trusting the agent that produced the candidates.
+
+## 7. Open problems (the research program)
 
 1. **Tight budget accounting for structured feedback.** Our protocol leaks
    exactly: train stats (0 bits about $V$) + per-campaign certification
    decisions (≤ #certified bits). Sharpen $2^B$ for this structured channel;
    worst-case exponential pricing is likely far too pessimistic.
-2. **Verifier artifact.** Hash-chained ledger format + independent checker:
-   third parties recompute the correction from the transcript without
-   trusting the agent ("Proof-of-Trial", milestone M4).
-3. **LORD-style online FDR under shared-$V$ dependence.** `online_lond`
+2. **LORD-style online FDR under shared-$V$ dependence.** `online_lond`
    works empirically in our null world but has no proof under the
    shared-validation dependence created by the cheating generator.
    SAFFRON/ADDIS-style adaptive weights and a martingale proof may close
    this, or the shared-$V$ structure may invalidate it — a crisp kill
    criterion.
-4. **Cross-domain transfer.** Port the grammar/ledger/online-FDR stack to a
+3. **Cross-domain transfer.** Port the grammar/ledger/online-FDR stack to a
    non-finance adaptive-generation problem (e.g., ML hyperparameter search
    or benchmark gaming) so the primitive is tested outside its home domain
    (milestone M3).
 
-## 7. Honest assessment
+## 8. Honest assessment
 
 Theorem 1 is an assembly of known parts whose value is the enforceable
 protocol; Theorem 2 is an application of known transfer lemmas with a new
-operational target. The conformal and online extensions (§2.1, §3) remove
-two operational caveats that would block real deployment. The candidate
-breakthrough is the *combination*: grammar + ledger + metered feedback +
-online FDR + verifier = empirical claims from adversarial agents that
-third parties can check. Kill criteria stay live: if §6.1's sharpened
-accounting collapses to triviality, or the cross-domain demo shows the
-primitive does not transfer, say so.
+operational target. The conformal, online, and verifier extensions
+(§2.1, §3, §6) remove the operational caveats that would block real
+deployment. The candidate breakthrough is the *combination*: grammar +
+ledger + metered feedback + online FDR + verifier = empirical claims from
+adversarial agents that third parties can check. Kill criteria stay live:
+if §7.1's sharpened accounting collapses to triviality, or the cross-domain
+demo shows the primitive does not transfer, say so.
