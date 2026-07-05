@@ -21,16 +21,24 @@ Defenses:
               regime: <= m bits total budget. Empirically sits between no_wall
               and protocol (m=400: 1.5 vs 74.5 vs 0.05 false certs), showing
               leakage grows slowly but is not zero.
-  protocol  — BY-FDR over the full ledger AND train-only feedback: candidates
-              are independent of the validation window, p-values valid (t-test)
-  conformal — BY-FDR over the full ledger AND train-only feedback, but the
-              validator uses a three-way split (train/calibrate/test) and a
-              distribution-free split-conformal p-value. This removes the
-              parametric t-test caveat from Theorem 1.
+  protocol   — BY-FDR over the full ledger AND train-only feedback: candidates
+               are independent of the validation window, p-values valid (t-test)
+  conformal  — BY-FDR over the full ledger AND train-only feedback, but the
+               validator uses a three-way split (train/calibrate/test) and a
+               distribution-free split-conformal p-value. This removes the
+               parametric t-test caveat from Theorem 1.
+  online_by  — Anytime-valid online FDR: at each audit time t the validator
+               applies BY-FDR over the first t ledger entries. Candidates are
+               independent of V (train-only wall), so super-uniformity holds at
+               every t and the rejection set at any time controls FDR <= alpha.
+               This is the immortal-agent version of Theorem 1.
+  online_lord— Empirical LORD probe (Javanmard-Montanari spending) under the
+               same wall. Not proved under the shared-V dependence, but
+               included as a power comparison.
 
 Prediction (kill criterion if it fails): naive false-certification count
-explodes with trials; no_wall inflates despite BY; protocol and conformal
-stay at/below alpha.
+explodes with trials; no_wall inflates despite BY; protocol, conformal and
+online defenses stay at/below alpha.
 
 Usage: uv run python scripts/attack_suite.py [--trials 400] [--reps 20]
 Writes docs/paper/attack_results.{json,md} and attack_fdr.png.
@@ -64,6 +72,34 @@ def by_reject(pvals: np.ndarray, alpha: float) -> np.ndarray:
     if k:
         mask[order[:k]] = True
     return mask
+
+
+def online_by_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
+    """Sequential BY-FDR over prefixes: rejection set at each step t.
+
+    At time t we run Benjamini-Yekutieli on the first t p-values. Because
+    the prefix is a fixed (non-data-dependent) subset and BY controls FDR
+    under arbitrary dependence, FDR <= alpha at every audit time t.
+    We report the rejection mask at the final step t = len(pvals).
+    """
+    n = len(pvals)
+    mask = np.zeros(n, dtype=bool)
+    for t in range(1, n + 1):
+        mask[:t] = by_reject(pvals[:t], alpha)
+    return mask
+
+
+def online_lond_rejections(pvals: np.ndarray, alpha: float) -> np.ndarray:
+    """LOND online FDR with a fixed spending sequence.
+
+    alpha_i = alpha * gamma_i where gamma_i = 6 / (pi^2 * i^2) sums to 1.
+    Reject H_i if p_i <= alpha_i. Under independent p-values this controls
+    FDR <= alpha; here it is included as an empirical power probe under the
+    train-only wall (the rigorous anytime guarantee is online_by).
+    """
+    n = len(pvals)
+    gamma = 6.0 / (np.pi ** 2 * np.arange(1, n + 1) ** 2)
+    return pvals <= alpha * gamma
 
 
 def pval(pnl: np.ndarray) -> float:
@@ -123,7 +159,7 @@ def run_cell(defense: str, attacker: str, n_trials: int,
                 elif best_a is None:
                     pass  # keep sampling randomly until first accept
             else:
-                score = tp if defense in ("protocol", "conformal") else vp
+                score = tp if defense in ("protocol", "conformal", "online_by", "online_lond") else vp
                 if score < best_score:
                     best_score, best_a = score, a.copy()
 
@@ -132,7 +168,11 @@ def run_cell(defense: str, attacker: str, n_trials: int,
 
     if defense == "naive":
         n_cert = int(certified_naive.sum())
-    else:  # ledgered defenses: BY over ALL trials at the end of the campaign
+    elif defense == "online_by":
+        n_cert = int(online_by_rejections(val_p, FDR_ALPHA).sum())
+    elif defense == "online_lond":
+        n_cert = int(online_lond_rejections(val_p, FDR_ALPHA).sum())
+    else:  # ledgered batch defenses: BY over ALL trials at the end of the campaign
         n_cert = int(by_reject(val_p, FDR_ALPHA).sum())
     return {"n_certified_false": n_cert, "min_val_p": float(val_p.min())}
 
@@ -145,7 +185,8 @@ def main() -> None:
     args = ap.parse_args()
 
     checkpoints = [25, 50, 100, 200, args.trials]
-    defenses = ["naive", "no_wall", "metered", "protocol", "conformal"]
+    defenses = ["naive", "no_wall", "metered", "protocol", "conformal",
+                "online_by", "online_lond"]
     attackers = ["hillclimb", "random"]
 
     results = {d: {a: {str(m): [] for m in checkpoints} for a in attackers}
@@ -206,7 +247,8 @@ def main() -> None:
         fig, ax = plt.subplots(figsize=(7, 4.5))
         styles = {"naive": "tab:red", "no_wall": "tab:orange",
                   "metered": "tab:blue", "protocol": "tab:green",
-                  "conformal": "tab:purple"}
+                  "conformal": "tab:purple", "online_by": "tab:cyan",
+                  "online_lond": "tab:pink"}
         for d in defenses:
             ys = [summary[d]["hillclimb"][str(m)]["mean_false_certs"]
                   for m in checkpoints]
@@ -223,9 +265,9 @@ def main() -> None:
     except Exception as e:  # plot is a bonus, numbers are the artifact
         print(f"plot skipped: {e}")
 
-    print(json.dumps(summary["naive"]["hillclimb"], indent=1))
-    print(json.dumps(summary["protocol"]["hillclimb"], indent=1))
-    print(json.dumps(summary["conformal"]["hillclimb"], indent=1))
+    for d in ["naive", "protocol", "conformal", "online_by", "online_lond"]:
+        print(f"--- {d} hillclimb ---")
+        print(json.dumps(summary[d]["hillclimb"], indent=1))
     print("wrote docs/paper/attack_results.{json,md} + attack_fdr.png")
 
 

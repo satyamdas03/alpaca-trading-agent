@@ -14,45 +14,45 @@
     "naive": {
       "hillclimb": {
         "25": {
-          "mean_false_certs": 4.35,
+          "mean_false_certs": 4.95,
           "any_false_cert_rate": 0.9
         },
         "50": {
-          "mean_false_certs": 15.15,
+          "mean_false_certs": 13.55,
           "any_false_cert_rate": 1.0
         },
         "100": {
-          "mean_false_certs": 33.7,
+          "mean_false_certs": 36.8,
           "any_false_cert_rate": 1.0
         },
         "200": {
-          "mean_false_certs": 98.55,
+          "mean_false_certs": 86.05,
           "any_false_cert_rate": 1.0
         },
         "400": {
-          "mean_false_certs": 216.9,
+          "mean_false_certs": 211.4,
           "any_false_cert_rate": 1.0
         }
       },
       "random": {
         "25": {
-          "mean_false_certs": 1.25,
-          "any_false_cert_rate": 0.75
+          "mean_false_certs": 1.2,
+          "any_false_cert_rate": 0.5
         },
         "50": {
-          "mean_false_certs": 2.8,
+          "mean_false_certs": 2.45,
           "any_false_cert_rate": 0.95
         },
         "100": {
-          "mean_false_certs": 5.1,
-          "any_false_cert_rate": 0.95
+          "mean_false_certs": 5.8,
+          "any_false_cert_rate": 1.0
         },
         "200": {
-          "mean_false_certs": 10.35,
+          "mean_false_certs": 10.05,
           "any_false_cert_rate": 1.0
         },
         "400": {
-          "mean_false_certs": 20.25,
+          "mean_false_certs": 17.9,
           "any_false_cert_rate": 1.0
         }
       }
@@ -60,42 +60,42 @@
     "no_wall": {
       "hillclimb": {
         "25": {
-          "mean_false_certs": 3.25,
-          "any_false_cert_rate": 0.55
+          "mean_false_certs": 1.4,
+          "any_false_cert_rate": 0.35
         },
         "50": {
-          "mean_false_certs": 1.9,
-          "any_false_cert_rate": 0.25
+          "mean_false_certs": 4.05,
+          "any_false_cert_rate": 0.35
         },
         "100": {
-          "mean_false_certs": 4.05,
-          "any_false_cert_rate": 0.5
+          "mean_false_certs": 5.4,
+          "any_false_cert_rate": 0.3
         },
         "200": {
-          "mean_false_certs": 21.35,
-          "any_false_cert_rate": 0.75
+          "mean_false_certs": 24.1,
+          "any_false_cert_rate": 0.6
         },
         "400": {
-          "mean_false_certs": 68.0,
-          "any_false_cert_rate": 0.75
+          "mean_false_certs": 43.85,
+          "any_false_cert_rate": 0.7
         }
       },
       "random": {
         "25": {
           "mean_false_certs": 0.1,
-          "any_false_cert_rate": 0.1
+          "any_false_cert_rate": 0.05
         },
         "50": {
-          "mean_false_certs": 0.1,
-          "any_false_cert_rate": 0.1
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
         },
         "100": {
           "mean_false_certs": 0.1,
           "any_false_cert_rate": 0.1
         },
         "200": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
         },
         "400": {
           "mean_false_certs": 0.0,
@@ -106,66 +106,66 @@
     "metered": {
       "hillclimb": {
         "25": {
-          "mean_false_certs": 0.3,
-          "any_false_cert_rate": 0.15
+          "mean_false_certs": 0.75,
+          "any_false_cert_rate": 0.35
         },
         "50": {
-          "mean_false_certs": 1.15,
-          "any_false_cert_rate": 0.3
+          "mean_false_certs": 0.4,
+          "any_false_cert_rate": 0.15
         },
         "100": {
-          "mean_false_certs": 0.2,
-          "any_false_cert_rate": 0.1
+          "mean_false_certs": 0.8,
+          "any_false_cert_rate": 0.35
         },
         "200": {
-          "mean_false_certs": 0.2,
-          "any_false_cert_rate": 0.1
+          "mean_false_certs": 0.9,
+          "any_false_cert_rate": 0.25
         },
         "400": {
-          "mean_false_certs": 2.15,
-          "any_false_cert_rate": 0.3
+          "mean_false_certs": 2.5,
+          "any_false_cert_rate": 0.25
         }
       },
       "random": {
         "25": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
         },
         "50": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
         },
         "100": {
-          "mean_false_certs": 0.05,
+          "mean_false_certs": 0.1,
           "any_false_cert_rate": 0.05
         },
         "200": {
-          "mean_false_certs": 0.05,
+          "mean_false_certs": 0.2,
           "any_false_cert_rate": 0.05
         },
         "400": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
         }
       }
     },
     "protocol": {
       "hillclimb": {
         "25": {
-          "mean_false_certs": 0.1,
+          "mean_false_certs": 0.05,
           "any_false_cert_rate": 0.05
         },
         "50": {
-          "mean_false_certs": 0.1,
-          "any_false_cert_rate": 0.05
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
         },
         "100": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.15,
+          "any_false_cert_rate": 0.1
         },
         "200": {
-          "mean_false_certs": 0.0,
-          "any_false_cert_rate": 0.0
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.05
         },
         "400": {
           "mean_false_certs": 0.0,
@@ -175,19 +175,19 @@
       "random": {
         "25": {
           "mean_false_certs": 0.1,
-          "any_false_cert_rate": 0.05
+          "any_false_cert_rate": 0.1
         },
         "50": {
           "mean_false_certs": 0.0,
           "any_false_cert_rate": 0.0
         },
         "100": {
-          "mean_false_certs": 0.3,
-          "any_false_cert_rate": 0.25
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
         },
         "200": {
-          "mean_false_certs": 0.15,
-          "any_false_cert_rate": 0.15
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
         },
         "400": {
           "mean_false_certs": 0.0,
@@ -238,6 +238,98 @@
         "400": {
           "mean_false_certs": 0.0,
           "any_false_cert_rate": 0.0
+        }
+      }
+    },
+    "online_by": {
+      "hillclimb": {
+        "25": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.05
+        },
+        "50": {
+          "mean_false_certs": 0.4,
+          "any_false_cert_rate": 0.15
+        },
+        "100": {
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
+        },
+        "200": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
+        },
+        "400": {
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
+        }
+      },
+      "random": {
+        "25": {
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
+        },
+        "50": {
+          "mean_false_certs": 0.15,
+          "any_false_cert_rate": 0.15
+        },
+        "100": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
+        },
+        "200": {
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
+        },
+        "400": {
+          "mean_false_certs": 0.0,
+          "any_false_cert_rate": 0.0
+        }
+      }
+    },
+    "online_lond": {
+      "hillclimb": {
+        "25": {
+          "mean_false_certs": 0.25,
+          "any_false_cert_rate": 0.2
+        },
+        "50": {
+          "mean_false_certs": 0.25,
+          "any_false_cert_rate": 0.15
+        },
+        "100": {
+          "mean_false_certs": 0.05,
+          "any_false_cert_rate": 0.05
+        },
+        "200": {
+          "mean_false_certs": 0.15,
+          "any_false_cert_rate": 0.15
+        },
+        "400": {
+          "mean_false_certs": 0.45,
+          "any_false_cert_rate": 0.3
+        }
+      },
+      "random": {
+        "25": {
+          "mean_false_certs": 0.25,
+          "any_false_cert_rate": 0.25
+        },
+        "50": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
+        },
+        "100": {
+          "mean_false_certs": 0.25,
+          "any_false_cert_rate": 0.2
+        },
+        "200": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
+        },
+        "400": {
+          "mean_false_certs": 0.1,
+          "any_false_cert_rate": 0.1
         }
       }
     }

@@ -51,7 +51,7 @@ train-window information only — then for every strategy of $G$:
 constrains $a_i$'s semantics; ledger fixes $m$; wall fixes the feedback
 measurability). The attack suite shows each premise is load-bearing:
 remove the wall and FDR fails empirically even with BY intact
-(no_wall: 79.9 false certs at $m = 400$).
+(no_wall: 43.85 false certs at $m = 400$).
 
 ## 2.1 Conformal Theorem 1 (distribution-free wall)
 
@@ -84,7 +84,44 @@ split-conformal p-value + BY over ledger). At $m=400$ hill-climb trials it
 produces **0.0 false certifications**, matching the t-test `protocol` arm and
 confirming the distribution-free version of the wall.
 
-## 3. Theorem 2 (leaky wall): graceful degradation under bounded leakage
+## 3. Theorem 3 (immortal wall): anytime online FDR control
+
+Theorem 1 certifies a *batch* of $m$ trials. A live research agent never
+stops; it keeps proposing indefinitely. We want an **anytime** guarantee:
+at every audit time $t = 1, 2, \dots$, the set of rejections made up to $t$
+controls $\mathrm{FDR} \le \alpha$.
+
+**Setup.** Maintain the train-only feedback wall of Theorem 1, but now the
+validator applies a multiple-testing correction to the *prefix* of the ledger
+at each time $t$. The most direct valid choice is **sequential
+Benjamini–Yekutieli**: at time $t$, run BY-FDR on $(p_1, \dots, p_t)$.
+
+**Claim.** For every $t$ and every strategy of $G$:
+
+1. The prefix $(a_1, \dots, a_t)$ is independent of $V$ (the wall prevents
+   any $a_i$ from using validation-side information).
+2. Therefore each $p_i$ in the prefix is marginally super-uniform under its
+   null, regardless of dependence among the $p_i$.
+3. Benjamini–Yekutieli on the prefix controls $\mathrm{FDR}(t) \le \alpha$.
+
+Because the prefix at time $t$ is not selected based on the data (it is
+just the first $t$ registered trials), this is a valid fixed-set application
+of BY at each $t$. The guarantee holds **simultaneously at all $t$**: the
+rejection set reported at any audit time is FDR-controlled.
+
+**Operational meaning.** The ledger can publish a running certified set at
+any moment — e.g. every day, after every LLM proposal — without waiting for a
+batch endpoint. An immortal agent can trial forever; the FDR promise is
+perpetual.
+
+**Empirical footprint:** attack-suite arm `online_by` (sequential BY over
+prefixes + train-only wall). At $m=400$ hill-climb trials it produces
+**0.0 false certifications**, matching `protocol` and `conformal`. The arm
+`online_lond` implements a LORD-style fixed-spending probe; it also stays
+near zero in our null world but is not proved under the shared-$V$ dependence
+of the attack model.
+
+## 4. Theorem 2 (leaky wall): graceful degradation under bounded leakage
 
 Real systems leak: even publishing which candidates were *certified* is
 feedback about $V$ (≈1 bit per certification decision).
@@ -107,41 +144,50 @@ new** — in particular the operational reading: *the protocol can meter the
 channel* (e.g., accept/reject-only feedback ⇒ $B \le$ #decisions bits) and
 price the correction accordingly.
 
-## 4. Mapping to the attack suite (e619731)
+## 5. Mapping to the attack suite (e619731)
 
 | Suite arm | Model | Predicted | Observed (m=400, hill-climb) |
 |---|---|---|---|
-| naive | unbounded leakage, no correction | FDR → 1 | 216.8 false certs, 100% |
-| no_wall | unbounded leakage + BY | premise of Thm 1 broken; BY powerless | 79.9 false certs |
-| protocol | $B = 0$ (Thm 1) | FDR ≤ α | 0.05 false certs |
-| no_wall + random attacker | valid p's (no adaptivity) | BY holds | ≈ 0.05 |
+| naive | unbounded leakage, no correction | FDR → 1 | 211.4 false certs, 100% |
+| no_wall | unbounded leakage + BY | premise of Thm 1 broken; BY powerless | 43.85 false certs |
+| protocol | $B = 0$ (Thm 1) | FDR ≤ α | 0.0 false certs |
+| metered | bounded leakage $B > 0$ (Thm 2) | FDR ≤ α with corrected level | 2.5 false certs (uncorrected BY level; expected to drop to ≈0 with $\alpha/2^B$) |
+| conformal | $B = 0$, three-way split + conformal p-value (§2.1) | FDR ≤ α, no parametric assumption | 0.0 false certs |
+| online_by | $B = 0$, sequential BY over prefixes (§3) | anytime FDR ≤ α | 0.0 false certs |
+| online_lond | LORD-style fixed-spending probe | empirical, not yet proved under shared-$V$ dependence | 0.45 false certs |
+| no_wall + random attacker | valid p's (no adaptivity) | BY holds | 0.0 false certs |
 
-The fourth row is the control that isolates *adaptivity* (not dependence,
+The last row is the control that isolates *adaptivity* (not dependence,
 not multiplicity) as the breaking force.
 
-## 5. Open problems (the research program)
+## 6. Open problems (the research program)
 
 1. **Tight budget accounting for structured feedback.** Our protocol leaks
    exactly: train stats (0 bits about $V$) + per-campaign certification
    decisions (≤ #certified bits). Sharpen $2^B$ for this structured channel;
    worst-case exponential pricing is likely far too pessimistic.
-2. **Conformal p-values.** Replace the t-test with conformal p-values on
-   exchangeable validation blocks → distribution-free, finite-sample
-   version of Theorem 1 (removes the parametric caveat from A2). Natural
-   fit — AQRA already has the conformal machinery.
-3. **Online FDR for immortal agents.** A live agent never stops trialing;
-   replace batch BY with online FDR (LORD/SAFFRON/ADDIS, Ramdas et al.) so
-   the ledger supports continuous certification with anytime guarantees.
-4. **Verifier artifact.** Hash-chained ledger format + independent checker:
+2. **Verifier artifact.** Hash-chained ledger format + independent checker:
    third parties recompute the correction from the transcript without
    trusting the agent ("Proof-of-Trial", milestone M4).
+3. **LORD-style online FDR under shared-$V$ dependence.** `online_lond`
+   works empirically in our null world but has no proof under the
+   shared-validation dependence created by the cheating generator.
+   SAFFRON/ADDIS-style adaptive weights and a martingale proof may close
+   this, or the shared-$V$ structure may invalidate it — a crisp kill
+   criterion.
+4. **Cross-domain transfer.** Port the grammar/ledger/online-FDR stack to a
+   non-finance adaptive-generation problem (e.g., ML hyperparameter search
+   or benchmark gaming) so the primitive is tested outside its home domain
+   (milestone M3).
 
-## 6. Honest assessment
+## 7. Honest assessment
 
 Theorem 1 is an assembly of known parts whose value is the enforceable
 protocol; Theorem 2 is an application of known transfer lemmas with a new
-operational target. The candidate breakthrough is the *combination*:
-grammar + ledger + metered feedback + online FDR + verifier = empirical
-claims from adversarial agents that third parties can check. Kill
-criteria stay live: if §5.1's sharpened accounting collapses to triviality
-or the conformal version fails on real panels, say so.
+operational target. The conformal and online extensions (§2.1, §3) remove
+two operational caveats that would block real deployment. The candidate
+breakthrough is the *combination*: grammar + ledger + metered feedback +
+online FDR + verifier = empirical claims from adversarial agents that
+third parties can check. Kill criteria stay live: if §6.1's sharpened
+accounting collapses to triviality, or the cross-domain demo shows the
+primitive does not transfer, say so.

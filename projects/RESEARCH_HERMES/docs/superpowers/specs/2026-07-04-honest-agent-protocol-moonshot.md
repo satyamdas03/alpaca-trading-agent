@@ -46,16 +46,19 @@ Cheating-generator attack suite on synthetic + real panel data:
   of trials. Prediction: naive curve climbs toward 1, protocol curve stays
   ≤ α. That plot is Figure 1 of the breakthrough paper.
 
-## M2 VERDICT (2026-07-04): SEPARATION CONFIRMED — thesis survives
+## M2 VERDICT (2026-07-05): SEPARATION CONFIRMED — thesis survives
 
-Commit e619731, artifacts aqra/docs/paper/attack_results.*. At m=400 trials,
-hill-climb attacker: naive 216.9 false certs (100% of campaigns), ledger-
-without-wall 68.0 DESPITE BY-FDR (adaptive feedback voids p-value validity —
-the theorem's empirical footprint), metered one-bit feedback 2.15 false certs
-(leaks, but slowly; Theorem 2 regime), full protocol 0.0 (at/below alpha),
-conformal three-way-split p-value 0.0 (distribution-free wall; Conformal
-Theorem 1). Control: no_wall vs random attacker ~0.05, isolating adaptivity as
-the breaking force. Next: M1 theorem sketch.
+Commit e619731 (+ uncommitted online-FDR extension), artifacts
+aqra/docs/paper/attack_results.*. At m=400 trials, hill-climb attacker:
+naive 211.4 false certs (100% of campaigns), ledger-without-wall 43.85 DESPITE
+BY-FDR (adaptive feedback voids p-value validity — the theorem's empirical
+footprint), metered one-bit feedback 2.5 false certs (leaks, but slowly;
+Theorem 2 regime), full protocol 0.0 (at/below alpha), conformal three-way-
+split p-value 0.0 (distribution-free wall; Conformal Theorem 1), sequential-
+BY online prefix `online_by` 0.0 (anytime-valid immortal wall; Theorem 3),
+LORD-style fixed-spending `online_lond` 0.45 (empirical probe, unproved under
+shared-$V$ dependence). Control: no_wall vs random attacker 0.0, isolating
+adaptivity as the breaking force. Next: M3 cross-domain demo + M4 verifier.
 
 ## Program milestones
 
