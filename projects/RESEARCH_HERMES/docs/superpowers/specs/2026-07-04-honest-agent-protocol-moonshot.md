@@ -46,6 +46,16 @@ Cheating-generator attack suite on synthetic + real panel data:
   of trials. Prediction: naive curve climbs toward 1, protocol curve stays
   ≤ α. That plot is Figure 1 of the breakthrough paper.
 
+## M2 VERDICT (2026-07-04): SEPARATION CONFIRMED — thesis survives
+
+Commit e619731, artifacts aqra/docs/paper/attack_results.*. At m=400 trials,
+hill-climb attacker: naive 216.8 false certs (100% of campaigns), ledger-
+without-wall 79.9 DESPITE BY-FDR (adaptive feedback voids p-value validity —
+the theorem's empirical footprint), metered one-bit feedback 1.5 false certs
+(leaks, but slowly; Theorem 2 regime), full protocol 0.05 (at/below alpha).
+Control: no_wall vs random attacker ~0.05, isolating adaptivity as the
+breaking force. Next: M1 theorem sketch.
+
 ## Program milestones
 
 - M1: formal threat model + theorem sketch (adaptive data analysis mapping)

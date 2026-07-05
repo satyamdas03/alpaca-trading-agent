@@ -16,6 +16,11 @@ Defenses:
   no_wall   — BY-FDR (alpha=0.20) over the full ledger, but feedback still
               exposes validation p: multiplicity is charged, yet adaptivity
               makes the p-values themselves anti-conservative
+  metered   — BY-FDR over the full ledger; feedback is ONE BIT per round
+              (validation p < 0.05 yes/no). Theorem 2's structured-leak
+              regime: <= m bits total budget. Empirically sits between no_wall
+              and protocol (m=400: 1.5 vs 74.5 vs 0.05 false certs), showing
+              leakage grows slowly but is not zero.
   protocol  — BY-FDR over the full ledger AND train-only feedback: candidates
               are independent of the validation window, p-values valid
 
@@ -84,9 +89,18 @@ def run_cell(defense: str, attacker: str, n_trials: int,
         train_p[i], val_p[i] = tp, vp
 
         # feedback channel differs by defense
-        score = tp if defense == "protocol" else vp
-        if attacker == "hillclimb" and score < best_score:
-            best_score, best_a = score, a.copy()
+        if attacker == "hillclimb":
+            if defense == "metered":
+                # one bit: attacker only learns accept/reject; on accept it
+                # re-bases the climb, otherwise keeps the current base
+                if vp < CERT_ALPHA_NAIVE:
+                    best_a = a.copy()
+                elif best_a is None:
+                    pass  # keep sampling randomly until first accept
+            else:
+                score = tp if defense == "protocol" else vp
+                if score < best_score:
+                    best_score, best_a = score, a.copy()
 
         if defense == "naive":
             certified_naive[i] = vp < CERT_ALPHA_NAIVE
@@ -106,7 +120,7 @@ def main() -> None:
     args = ap.parse_args()
 
     checkpoints = [25, 50, 100, 200, args.trials]
-    defenses = ["naive", "no_wall", "protocol"]
+    defenses = ["naive", "no_wall", "metered", "protocol"]
     attackers = ["hillclimb", "random"]
 
     results = {d: {a: {str(m): [] for m in checkpoints} for a in attackers}
@@ -165,7 +179,7 @@ def main() -> None:
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots(figsize=(7, 4.5))
         styles = {"naive": "tab:red", "no_wall": "tab:orange",
-                  "protocol": "tab:green"}
+                  "metered": "tab:blue", "protocol": "tab:green"}
         for d in defenses:
             ys = [summary[d]["hillclimb"][str(m)]["mean_false_certs"]
                   for m in checkpoints]
