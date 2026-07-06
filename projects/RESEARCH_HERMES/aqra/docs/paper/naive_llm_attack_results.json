@@ -1,0 +1,16 @@
+{
+  "model": "llama3:8b",
+  "defense": "naive",
+  "trials": 30,
+  "reps": 3,
+  "run_date": "2026-07-06",
+  "result": {
+    "defense": "naive",
+    "model": "llama3:8b",
+    "trials": 30,
+    "reps": 3,
+    "mean_false_certs": 1.6666666666666667,
+    "any_false_cert_rate": 0.6666666666666666,
+    "std_false_certs": 2.0816659994661326
+  }
+}

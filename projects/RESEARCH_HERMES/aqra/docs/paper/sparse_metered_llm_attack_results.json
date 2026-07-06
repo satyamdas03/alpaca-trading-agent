@@ -1,0 +1,16 @@
+{
+  "model": "llama3:8b",
+  "defense": "sparse_metered",
+  "trials": 30,
+  "reps": 3,
+  "run_date": "2026-07-06",
+  "result": {
+    "defense": "sparse_metered",
+    "model": "llama3:8b",
+    "trials": 30,
+    "reps": 3,
+    "mean_false_certs": 0.0,
+    "any_false_cert_rate": 0.0,
+    "std_false_certs": 0.0
+  }
+}

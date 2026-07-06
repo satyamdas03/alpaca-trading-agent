@@ -22,9 +22,11 @@ import argparse
 import json
 import os
 import re
+import time
 from datetime import date
 from pathlib import Path
 
+import httpx
 import numpy as np
 from scipy import stats
 
@@ -149,12 +151,41 @@ def parse_vector(text: str, d: int) -> np.ndarray | None:
     return vec / norm
 
 
+def _call_ollama(base_url: str, model: str, messages: list[dict],
+                 max_tokens: int = 1024, max_retries: int = 5) -> str:
+    """Call Ollama /api/chat directly with httpx; long timeout for model load."""
+    url = base_url.rstrip("/") + "/api/chat"
+    payload = {
+        "model": model,
+        "messages": messages,
+        "stream": False,
+        "options": {"num_predict": max_tokens},
+    }
+    for attempt in range(max_retries):
+        try:
+            with httpx.Client(timeout=300.0) as http:
+                r = http.post(url, json=payload)
+                r.raise_for_status()
+                data = r.json()
+            return str(data.get("message", {}).get("content", ""))
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise
+            wait = 2 ** attempt
+            print(f"    ollama call failed (attempt {attempt + 1}/{max_retries}): {e} — retry in {wait}s")
+            time.sleep(wait)
+    return ""
+
+
 def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) -> dict:
     """One defense cell with a real LLM generator on one fresh world."""
     api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY not set")
-    client = Anthropic(api_key=api_key)
+    base_url = os.environ.get("ANTHROPIC_BASE_URL")
+    if not api_key and not base_url:
+        raise RuntimeError("ANTHROPIC_API_KEY or ANTHROPIC_BASE_URL must be set")
+    use_ollama = bool(base_url)
+    if not use_ollama:
+        client = Anthropic(api_key=api_key, timeout=120.0)
 
     Z_train = rng.normal(0, 0.01, (T_TRAIN, D_ASSETS))
     Z_calib = rng.normal(0, 0.01, (T_CALIB, D_ASSETS))
@@ -180,17 +211,20 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) 
         vec = None
         for attempt in range(3):
             try:
-                response = client.messages.create(
-                    model=model,
-                    max_tokens=1024,
-                    messages=messages,
-                )
-                text = next(
-                    (block.text for block in response.content
-                     if getattr(block, "type", None) == "text"),
-                    None,
-                )
-                if text is None:
+                if use_ollama:
+                    text = _call_ollama(base_url, model, messages, max_tokens=1024)
+                else:
+                    response = client.messages.create(
+                        model=model,
+                        max_tokens=1024,
+                        messages=messages,
+                    )
+                    text = next(
+                        (block.text for block in response.content
+                         if getattr(block, "type", None) == "text"),
+                        None,
+                    )
+                if not text:
                     continue
                 vec = parse_vector(text, D_ASSETS)
                 if vec is not None:
@@ -267,61 +301,121 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) 
     }
 
 
+DEFENSES = ["naive", "no_wall", "metered", "sparse_metered",
+            "protocol", "conformal", "online_by", "online_lond",
+            "e_bh", "online_e_bh", "dby"]
+
+
+def run_defense(defense: str, n_trials: int, reps: int, model: str,
+                rng_master: np.random.Generator) -> dict:
+    """Run one defense for the requested number of reps."""
+    counts = []
+    for rep in range(reps):
+        rng = np.random.default_rng(rng_master.integers(2**63))
+        cell = run_cell(defense, n_trials, model, rng)
+        counts.append(cell["n_certified_false"])
+        print(f"  {defense} rep {rep + 1}/{reps}: {cell['n_certified_false']} false certs, "
+              f"min val p={cell['min_val_p']:.4g}")
+    return {
+        "defense": defense,
+        "model": model,
+        "trials": n_trials,
+        "reps": reps,
+        "mean_false_certs": float(np.mean(counts)),
+        "any_false_cert_rate": float(np.mean(np.array(counts) > 0)),
+        "std_false_certs": float(np.std(counts, ddof=1)) if reps > 1 else 0.0,
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--trials", type=int, default=50)
-    ap.add_argument("--reps", type=int, default=5)
+    ap.add_argument("--reps", type=int, default=3)
     ap.add_argument("--seed", type=int, default=7)
-    ap.add_argument("--defense", type=str, default="sparse_metered",
-                    choices=["naive", "no_wall", "metered", "sparse_metered",
-                             "protocol", "conformal", "online_by", "online_lond",
-                             "e_bh", "online_e_bh", "dby"])
+    ap.add_argument("--defenses", type=str,
+                    default="naive,metered,sparse_metered,protocol,e_bh",
+                    help="comma-separated list of defenses to run")
     ap.add_argument("--model", type=str, default=DEFAULT_MODEL)
     args = ap.parse_args()
 
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        raise SystemExit("Set ANTHROPIC_API_KEY before running.")
+    if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_BASE_URL")):
+        raise SystemExit("Set ANTHROPIC_API_KEY or ANTHROPIC_BASE_URL before running.")
+
+    chosen = [d for d in args.defenses.split(",") if d in DEFENSES]
+    if not chosen:
+        raise SystemExit(f"No valid defenses selected. Choose from {DEFENSES}")
 
     rng_master = np.random.default_rng(args.seed)
-    counts = []
-    for rep in range(args.reps):
-        rng = np.random.default_rng(rng_master.integers(2**63))
-        cell = run_cell(args.defense, args.trials, args.model, rng)
-        counts.append(cell["n_certified_false"])
-        print(f"rep {rep + 1}/{args.reps}: {cell['n_certified_false']} false certs, "
-              f"min val p={cell['min_val_p']:.4g}")
+    summaries = []
+    for defense in chosen:
+        print(f"\n=== running {defense} ===")
+        summaries.append(run_defense(defense, args.trials, args.reps,
+                                     args.model, rng_master))
 
-    summary = {
-        "defense": args.defense,
+    out = {
         "model": args.model,
         "trials": args.trials,
         "reps": args.reps,
-        "mean_false_certs": float(np.mean(counts)),
-        "any_false_cert_rate": float(np.mean(np.array(counts) > 0)),
-        "std_false_certs": float(np.std(counts, ddof=1)) if args.reps > 1 else 0.0,
         "run_date": date.today().isoformat(),
+        "results": {s["defense"]: s for s in summaries},
     }
 
     docs = Path("docs/paper")
     docs.mkdir(parents=True, exist_ok=True)
-    (docs / "llm_attack_results.json").write_text(json.dumps(summary, indent=2),
+
+    # Aggregate file (used when multiple defenses are run in one invocation)
+    (docs / "llm_attack_results.json").write_text(json.dumps(out, indent=2),
                                                 encoding="utf-8")
 
     lines = [
-        f"# Real-LLM Adaptive Experiment (Phase C) — {args.defense}",
+        "# Real-LLM Adaptive Experiment (Phase C)",
         "",
         f"Model: `{args.model}` | Trials: {args.trials} | Reps: {args.reps}",
         f"Ground truth: all null. Any certification = false discovery.",
         "",
-        f"- Mean false certs: **{summary['mean_false_certs']:.2f}**",
-        f"- Any-false-cert rate: {summary['any_false_cert_rate']:.0%}",
-        f"- Std dev: {summary['std_false_certs']:.2f}",
-        "",
-        f"Run date: {summary['run_date']}",
+        "| Defense | Mean false certs | Any-false-cert rate | Std dev |",
+        "|---|---|---|---|",
     ]
+    for s in summaries:
+        lines.append(
+            f"| {s['defense']} | {s['mean_false_certs']:.2f} | "
+            f"{s['any_false_cert_rate']:.0%} | {s['std_false_certs']:.2f} |"
+        )
+    lines += ["", f"Run date: {out['run_date']}"]
     (docs / "llm_attack_results.md").write_text("\n".join(lines) + "\n",
                                                  encoding="utf-8")
-    print("wrote docs/paper/llm_attack_results.{json,md}")
+
+    # Per-defense files (used when each defense is run in its own process)
+    for s in summaries:
+        d = s["defense"]
+        per = {
+            "model": args.model,
+            "defense": d,
+            "trials": args.trials,
+            "reps": args.reps,
+            "run_date": out["run_date"],
+            "result": s,
+        }
+        (docs / f"{d}_llm_attack_results.json").write_text(
+            json.dumps(per, indent=2), encoding="utf-8"
+        )
+        per_lines = [
+            f"# Real-LLM Adaptive Experiment (Phase C) — {d}",
+            "",
+            f"Model: `{args.model}` | Trials: {args.trials} | Reps: {args.reps}",
+            f"Ground truth: all null. Any certification = false discovery.",
+            "",
+            f"- Mean false certs: **{s['mean_false_certs']:.2f}**",
+            f"- Any-false-cert rate: {s['any_false_cert_rate']:.0%}",
+            f"- Std dev: {s['std_false_certs']:.2f}",
+            "",
+            f"Run date: {out['run_date']}",
+        ]
+        (docs / f"{d}_llm_attack_results.md").write_text(
+            "\n".join(per_lines) + "\n", encoding="utf-8"
+        )
+
+    print("\nwrote docs/paper/llm_attack_results.{json,md} and per-defense files")
 
 
 if __name__ == "__main__":

@@ -179,6 +179,20 @@ Synthetic 50-feature binary classification, labels independent of features. Cand
 
 Exported ledgers verify independently. The separation transfers outside finance, and the e-value firewall matches the p-value wall without requiring the train-only independence assumption when the e-values are valid.
 
+### 4.3 M4: Real LLM adaptive generator
+
+The previous experiments used hand-coded hill climbers. To test whether an actual generative model can exploit the feedback channel, we replace the hill climber with a local LLM (`llama3:8b` via Ollama). Each round the LLM proposes a dollar-neutral weight vector over 10 synthetic assets and receives defense-specific feedback. The world is all-null (iid Gaussian returns), so any certification is a false discovery.
+
+| Defense | Model | Trials | Reps | Mean false certs | Any-false-cert rate |
+|---|---|---|---|---|---|
+| naive | llama3:8b | 30 | 3 | 1.67 | 67% |
+| metered | llama3:8b | 30 | 3 | 0.00 | 0% |
+| sparse_metered | llama3:8b | 30 | 3 | 0.00 | 0% |
+| protocol | llama3:8b | 30 | 3 | 0.00 | 0% |
+| e_bh | llama3:8b | 30 | 3 | 0.00 | 0% |
+
+The real LLM with full validation feedback produces false certifications in two out of three independent runs; every firewall variant suppresses them. This is the first empirical evidence that the protocol controls an adaptive LLM generator, not just a hand-coded optimizer. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py` and the per-defense result files in `docs/paper/*_llm_attack_results.json`.
+
 ---
 
 ## 5. Discussion and Limitations
