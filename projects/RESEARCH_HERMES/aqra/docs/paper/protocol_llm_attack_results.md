@@ -1,6 +1,6 @@
 # Real-LLM Adaptive Experiment (Phase C) — protocol
 
-Model: `llama3:8b` | Trials: 30 | Reps: 3
+Model: `llama3:8b` | Trials: 50 | Reps: 5
 Ground truth: all null. Any certification = false discovery.
 
 - Mean false certs: **0.00**
