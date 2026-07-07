@@ -24,6 +24,37 @@ def sparse_validate_transfer_bound(m: int, k: int) -> float:
     return math.exp(k * (1.0 + math.log(m / k)))
 
 
+def maximal_leakage_bound(lambda_m: float) -> float:
+    """Maximal leakage (bits) of a metered accept/reject bit under the null.
+
+    For a candidacy threshold lambda_m with Pr(A_i = 1 | null) <= lambda_m,
+    the maximal leakage from the validation sample V to the single accept bit
+    A_i is bounded by log_2(1 / lambda_m). See Esposito, Gastpar & Issa (2019).
+    """
+    if lambda_m <= 0 or lambda_m >= 1:
+        raise ValueError("lambda_m must be in (0, 1)")
+    return math.log2(1.0 / lambda_m)
+
+
+def maximal_leakage_evalue(p: float, lambda_m: float) -> float:
+    """Leakage-corrected e-value for the metered one-bit channel.
+
+    The uncorrected candidate e-value I{p <= lambda_m} / lambda_m has null
+    expectation at most 1, but adaptive dependence across rounds can inflate it.
+    Maximal leakage prices that dependence by 2^{-L}, where L is the number of
+    bits leaked about V. Using the single-round bound L = log_2(1/lambda_m),
+    the correction factor is exactly lambda_m, yielding the corrected e-value
+
+        e^* = 2^{-L} * I{p <= lambda_m} / lambda_m
+            = I{p <= lambda_m}.
+
+    This is a valid e-value under the null: E[e^* | null] <= lambda_m <= 1.
+    """
+    if lambda_m <= 0 or lambda_m >= 1:
+        raise ValueError("lambda_m must be in (0, 1)")
+    return 1.0 if p <= lambda_m else 0.0
+
+
 def candidacy_threshold(alpha: float, m: int) -> float:
     """SparseValidate candidacy threshold: lambda = alpha / log(m + 1).
 

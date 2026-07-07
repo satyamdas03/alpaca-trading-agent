@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import pytest
 
@@ -7,6 +9,8 @@ from aqra.conformal.multiple_testing import (
     candidacy_threshold,
     dependence_adjusted_by,
     e_bh_rejections,
+    maximal_leakage_bound,
+    maximal_leakage_evalue,
     online_e_bh_rejections,
     sparse_validate_transfer_bound,
 )
@@ -128,3 +132,56 @@ def test_sparse_validate_bound_small_k():
 
 def test_candidacy_threshold_decreases_with_m():
     assert candidacy_threshold(0.20, 10) > candidacy_threshold(0.20, 1000)
+
+
+def test_maximal_leakage_bound():
+    lam = 0.05
+    assert maximal_leakage_bound(lam) == pytest.approx(math.log2(1.0 / lam))
+
+
+def test_maximal_leakage_bound_invalid_lambda():
+    with pytest.raises(ValueError):
+        maximal_leakage_bound(0.0)
+    with pytest.raises(ValueError):
+        maximal_leakage_bound(1.0)
+    with pytest.raises(ValueError):
+        maximal_leakage_bound(-0.1)
+
+
+def test_maximal_leakage_evalue_shape():
+    lam = 0.05
+    assert maximal_leakage_evalue(0.01, lam) == 1.0
+    assert maximal_leakage_evalue(0.05, lam) == 1.0
+    assert maximal_leakage_evalue(0.0500001, lam) == 0.0
+    assert maximal_leakage_evalue(0.5, lam) == 0.0
+
+
+def test_maximal_leakage_evalue_null_expectation():
+    """Under super-uniform null, corrected e-value expectation <= 1."""
+    rng = np.random.default_rng(7)
+    lam = 0.05
+    n = 20000
+    pvals = rng.uniform(0, 1, size=n)
+    evals = [maximal_leakage_evalue(p, lam) for p in pvals]
+    # E[I{P <= lam}] = lam, so mean should be close to lam << 1.
+    assert np.mean(evals) <= lam * 1.2
+
+
+def test_maximal_leakage_correction_factor_matches_bound():
+    """2^{-L(lambda)} * 1/lambda should equal 1 for the single-round bound."""
+    lam = 0.08
+    leakage = maximal_leakage_bound(lam)
+    correction = 2.0 ** (-leakage)
+    assert correction * (1.0 / lam) == pytest.approx(1.0)
+
+
+def test_maximal_leakage_smaller_than_sparsevalidate():
+    """For typical m, the maximal-leakage factor 2^L = 1/lambda is much smaller
+    than the SparseValidate polynomial transcript factor, showing tighter theory."""
+    m = 400
+    alpha = 0.20
+    lam = candidacy_threshold(alpha, m)
+    expected_k = max(1, int(round(m * lam)))
+    sv_factor = sparse_validate_transfer_bound(m, expected_k)
+    ml_factor = 2.0 ** maximal_leakage_bound(lam)
+    assert ml_factor < sv_factor
