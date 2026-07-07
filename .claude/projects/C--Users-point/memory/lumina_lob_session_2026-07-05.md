@@ -1,6 +1,6 @@
 ---
 name: lumina-lob-session-2026-07-05
-description: Complete session record for Lumina LOB limit order book simulator — ALL SIX PHASES COMPLETE (CP0.1→CP6.6), 308 tests, 100% package coverage, v0.1.1 tag pushed, docs/quality/packaging gaps fixed, ruff and mypy clean, sdist+wheel build verified, GitHub Actions CI green on 9 OS/Python matrix jobs, GitHub Pages docs site live, PyPI publish workflow ready pending trusted-publishing configuration, GitHub profile pin requires manual UI action.
+description: Complete session record for Lumina LOB limit order book simulator — ALL SIX PHASES COMPLETE (CP0.1→CP6.6), 308 tests, 100% package coverage, PyPI PUBLISHED (v0.1.4 live with Windows/macOS wheels + sdist), docs/quality/packaging gaps fixed, ruff and mypy clean, GitHub Actions CI green, GitHub Pages docs site live, GitHub profile pin requires manual UI action.
 metadata:
   node_type: memory
   type: project
@@ -19,8 +19,8 @@ metadata:
 **Project root:** `C:\Users\point\projects\janestreet\01_LuminaLOB_LimitOrderBook_Simulator`
 **GitHub remote:** `https://github.com/satyamdas03/lumina-lob.git`
 **Branch:** `main`
-**Latest commit:** `6ac0fc9` — "fix: complete v0.1.1 — docs, lint, types, packaging, sdist" (pushed 2026-07-07; fixes documentation contradictions, ruff/mypy errors, and sdist packaging; tag `v0.1.1` is live).
-**Previous commit:** `e72aeb6` — "ci: fetch full git history so release tag tests pass".
+**Latest commit:** `19e3eff` — "docs: PyPI publish complete, remove first-time setup caveat" (pushed 2026-07-07; README now reflects live PyPI status).
+**Previous commits:** `d9b31ec` — "ci: build wheels on Windows/macOS, sdist on Ubuntu" (v0.1.4 tag published to PyPI); `6ac0fc9` — "fix: complete v0.1.1 — docs, lint, types, packaging, sdist"; `e72aeb6` — "ci: fetch full git history so release tag tests pass".
 **Full session transcript:** `C:\Users\point\.claude\projects\C--Users-point-projects-janestreet\9324512f-cccd-44a2-a4c8-367da19986d3.jsonl`
 
 ## Why this project exists
@@ -874,8 +874,7 @@ TOTAL                                         1584      0   100%
 The Lumina LOB project has reached the end of the 28-checkpoint plan. There are no further scheduled checkpoints.
 
 Remaining manual actions outside this session:
-1. Enable trusted publishing for `lumina-lob` on PyPI (the `v0.1.1` tag is already pushed; the publish job will run automatically once trusted publishing is configured).
-2. Pin the repository on the GitHub profile via the GitHub UI.
+1. Pin the repository on the GitHub profile via the GitHub UI.
 
 ## Restart instructions for a fresh session
 
@@ -923,10 +922,27 @@ A deep review found the repo was functionally complete but not *release-complete
 - Remote: `https://github.com/satyamdas03/lumina-lob.git`
 - GitHub Actions `build.yml` triggered on the tag (run `28836297150`).
   - **Build matrix:** 9/9 jobs passed (ubuntu/windows/macos × Python 3.11/3.12/3.13), producing wheels + sdist.
-  - **Publish to PyPI:** failed with `invalid-publisher: valid token, but no corresponding publisher` — trusted publishing is not yet configured on PyPI.
+  - **Publish to PyPI:** failed with `invalid-publisher: valid token, but no corresponding publisher` — trusted publishing was not yet configured on PyPI.
   - Claims rendered by the action: `repo:satyamdas03/lumina-lob:environment:pypi`, workflow `satyamdas03/lumina-lob/.github/workflows/build.yml@refs/tags/v0.1.1`.
 - README updated with exact PyPI trusted-publishing setup steps and the claim values (commit `910a827`, then `a31bd82` corrected workflow name to filename-only `build.yml`).
-- The only remaining blocker is the repository owner logging into PyPI and adding the pending publisher.
+- Repository owner completed PyPI trusted-publishing setup.
+
+### PyPI publish success — v0.1.4
+
+- Tag: `v0.1.4` (commit `d9b31ec`)
+- GitHub Actions run: `28837440652`
+- Result: **Build wheels + Publish to PyPI both succeeded**
+- PyPI project: https://pypi.org/project/lumina-lob/
+- Files published:
+  - `lumina_lob-0.1.4-cp311-cp311-win_amd64.whl`
+  - `lumina_lob-0.1.4-cp312-cp312-win_amd64.whl`
+  - `lumina_lob-0.1.4-cp313-cp313-win_amd64.whl`
+  - `lumina_lob-0.1.4-cp311-cp311-macosx_10_14_universal2.whl`
+  - `lumina_lob-0.1.4-cp312-cp312-macosx_10_14_universal2.whl`
+  - `lumina_lob-0.1.4-cp313-cp313-macosx_10_14_universal2.whl`
+  - `lumina_lob-0.1.4.tar.gz` (sdist for Linux and other platforms)
+- README updated to remove the first-time setup caveat (commit `19e3eff`).
+- `pip install lumina-lob` is now live.
 
 ## Related memories
 

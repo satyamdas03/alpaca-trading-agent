@@ -1,6 +1,6 @@
 # Memory Index
 
-- [Lumina LOB Session 2026-07-05](lumina_lob_session_2026-07-05.md) — **READ FIRST for lumina-lob work.** ALL 28 checkpoints CP0.1→CP6.6 complete, 308 tests green, ruff+mypy clean, sdist+wheel packaging fixed, v0.1.1 tag pushed, GitHub Actions CI green, GitHub Pages docs live; PyPI trusted publishing still pending manual setup.
+- [Lumina LOB Session 2026-07-05](lumina_lob_session_2026-07-05.md) — **READ FIRST for lumina-lob work.** ALL 28 checkpoints CP0.1→CP6.6 complete, 308 tests green, ruff+mypy clean, PyPI PUBLISHED (v0.1.4 live), GitHub Actions CI green, GitHub Pages docs live.
 
 - [Jane Street / Quant Trading 3-Year Roadmap 2026-2029](satyam_janestreet_quant_roadmap_2026-2029.md) — Complete career strategy: Jane Street dossier, candidate profile analysis, 3-year roadmap to Jane Street/Citadel/Optiver/IMC Australia, DOCX artifact, Part 13 with all preparation resources, and Part 14 with six live GitHub portfolio repos (lumina-lob, factor-forge, conformal-finance, stresstest-ai, quant-voice, optiver-repro).
 
