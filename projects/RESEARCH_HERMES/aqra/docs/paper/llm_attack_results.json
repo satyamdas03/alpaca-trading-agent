@@ -1,17 +1,165 @@
 {
-  "model": "mistral",
-  "trials": 30,
-  "reps": 3,
-  "run_date": "2026-07-07",
-  "results": {
-    "sparse_metered": {
+  "run_date": "2026-07-06",
+  "records": [
+    {
+      "model": "llama3:8b",
+      "defense": "naive",
+      "trials": 50,
+      "reps": 5,
+      "run_date": "2026-07-06",
+      "result": {
+        "defense": "naive",
+        "model": "llama3:8b",
+        "trials": 50,
+        "reps": 5,
+        "mean_false_certs": 1.4,
+        "any_false_cert_rate": 0.4,
+        "std_false_certs": 2.6076809620810595
+      }
+    },
+    {
+      "model": "llama3:8b",
+      "defense": "protocol",
+      "trials": 50,
+      "reps": 5,
+      "run_date": "2026-07-06",
+      "result": {
+        "defense": "protocol",
+        "model": "llama3:8b",
+        "trials": 50,
+        "reps": 5,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "llama3:8b",
+      "defense": "metered",
+      "trials": 50,
+      "reps": 5,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "metered",
+        "model": "llama3:8b",
+        "trials": 50,
+        "reps": 5,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "llama3:8b",
+      "defense": "e_bh",
+      "trials": 50,
+      "reps": 5,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "e_bh",
+        "model": "llama3:8b",
+        "trials": 50,
+        "reps": 5,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "llama3:8b",
       "defense": "sparse_metered",
+      "trials": 50,
+      "reps": 5,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "sparse_metered",
+        "model": "llama3:8b",
+        "trials": 50,
+        "reps": 5,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
       "model": "mistral",
+      "defense": "naive",
       "trials": 30,
       "reps": 3,
-      "mean_false_certs": 0.0,
-      "any_false_cert_rate": 0.0,
-      "std_false_certs": 0.0
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "naive",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 1.0,
+        "any_false_cert_rate": 0.6666666666666666,
+        "std_false_certs": 1.0
+      }
+    },
+    {
+      "model": "mistral",
+      "defense": "protocol",
+      "trials": 30,
+      "reps": 3,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "protocol",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "mistral",
+      "defense": "metered",
+      "trials": 30,
+      "reps": 3,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "metered",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "mistral",
+      "defense": "e_bh",
+      "trials": 30,
+      "reps": 3,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "e_bh",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "mistral",
+      "defense": "sparse_metered",
+      "trials": 30,
+      "reps": 3,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "sparse_metered",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
     }
-  }
+  ]
 }

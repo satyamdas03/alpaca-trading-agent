@@ -181,17 +181,22 @@ Exported ledgers verify independently. The separation transfers outside finance,
 
 ### 4.3 M4: Real LLM adaptive generator
 
-The previous experiments used hand-coded hill climbers. To test whether an actual generative model can exploit the feedback channel, we replace the hill climber with a local LLM (`llama3:8b` via Ollama). Each round the LLM proposes a dollar-neutral weight vector over 10 synthetic assets and receives defense-specific feedback. The world is all-null (iid Gaussian returns), so any certification is a false discovery.
+The previous experiments used hand-coded hill climbers. To test whether an actual generative model can exploit the feedback channel, we replace the hill climber with local LLMs (`llama3:8b` and `mistral` via Ollama). Each round the LLM proposes a dollar-neutral weight vector over 10 synthetic assets and receives defense-specific feedback. The world is all-null (iid Gaussian returns), so any certification is a false discovery.
 
 | Defense | Model | Trials | Reps | Mean false certs | Any-false-cert rate |
 |---|---|---|---|---|---|
-| naive | llama3:8b | 30 | 3 | 1.67 | 67% |
-| metered | llama3:8b | 30 | 3 | 0.00 | 0% |
-| sparse_metered | llama3:8b | 30 | 3 | 0.00 | 0% |
-| protocol | llama3:8b | 30 | 3 | 0.00 | 0% |
-| e_bh | llama3:8b | 30 | 3 | 0.00 | 0% |
+| naive | llama3:8b | 50 | 5 | 1.40 | 40% |
+| protocol | llama3:8b | 50 | 5 | 0.00 | 0% |
+| metered | llama3:8b | 50 | 5 | 0.00 | 0% |
+| e_bh | llama3:8b | 50 | 5 | 0.00 | 0% |
+| sparse_metered | llama3:8b | 50 | 5 | 0.00 | 0% |
+| naive | mistral | 30 | 3 | 1.00 | 67% |
+| protocol | mistral | 30 | 3 | 0.00 | 0% |
+| metered | mistral | 30 | 3 | 0.00 | 0% |
+| e_bh | mistral | 30 | 3 | 0.00 | 0% |
+| sparse_metered | mistral | 30 | 3 | 0.00 | 0% |
 
-The real LLM with full validation feedback produces false certifications in two out of three independent runs; every firewall variant suppresses them. This is the first empirical evidence that the protocol controls an adaptive LLM generator, not just a hand-coded optimizer. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py` and the per-defense result files in `docs/paper/*_llm_attack_results.json`.
+The real LLM with full validation feedback produces false certifications under both models (`llama3:8b`: 1.40 mean over 5 reps; `mistral`: 1.00 mean over 3 reps); every firewall variant suppresses them across both models. This is the first empirical evidence that the protocol controls adaptive LLM generators, not just hand-coded optimizers, and that the separation generalizes across model families. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py` and the per-defense result files in `docs/paper/*_llm_attack_results.json`; a combined table and figure are in `docs/paper/llm_attack_results.{md,png}`.
 
 ---
 

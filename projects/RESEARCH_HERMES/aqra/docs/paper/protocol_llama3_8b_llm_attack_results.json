@@ -1,0 +1,16 @@
+{
+  "model": "llama3:8b",
+  "defense": "protocol",
+  "trials": 50,
+  "reps": 5,
+  "run_date": "2026-07-06",
+  "result": {
+    "defense": "protocol",
+    "model": "llama3:8b",
+    "trials": 50,
+    "reps": 5,
+    "mean_false_certs": 0.0,
+    "any_false_cert_rate": 0.0,
+    "std_false_certs": 0.0
+  }
+}

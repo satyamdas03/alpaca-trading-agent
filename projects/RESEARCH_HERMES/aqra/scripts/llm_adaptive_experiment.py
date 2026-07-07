@@ -469,6 +469,8 @@ def main() -> None:
                                                  encoding="utf-8")
 
     # Per-defense files (used when each defense is run in its own process)
+    # Include model in filename so different-model runs do not clobber each other.
+    model_slug = args.model.replace(":", "_")
     for s in summaries:
         d = s["defense"]
         per = {
@@ -479,11 +481,12 @@ def main() -> None:
             "run_date": out["run_date"],
             "result": s,
         }
-        (docs / f"{d}_llm_attack_results.json").write_text(
+        base = f"{d}_{model_slug}_llm_attack_results"
+        (docs / f"{base}.json").write_text(
             json.dumps(per, indent=2), encoding="utf-8"
         )
         per_lines = [
-            f"# Real-LLM Adaptive Experiment (Phase C) — {d}",
+            f"# Real-LLM Adaptive Experiment (Phase C) — {d} ({args.model})",
             "",
             f"Model: `{args.model}` | Trials: {args.trials} | Reps: {args.reps}",
             f"Ground truth: all null. Any certification = false discovery.",
@@ -494,7 +497,7 @@ def main() -> None:
             "",
             f"Run date: {out['run_date']}",
         ]
-        (docs / f"{d}_llm_attack_results.md").write_text(
+        (docs / f"{base}.md").write_text(
             "\n".join(per_lines) + "\n", encoding="utf-8"
         )
 
