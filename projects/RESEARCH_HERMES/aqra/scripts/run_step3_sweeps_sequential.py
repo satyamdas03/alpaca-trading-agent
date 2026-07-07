@@ -27,6 +27,7 @@ def run_defense(defense: str) -> None:
         "--model", "llama3:8b",
         "--trials", "50",
         "--reps", "5",
+        "--workers", "4",
     ]
     line = f"\n=== {datetime.now()}: running {defense} ===\n"
     print(line, end="")

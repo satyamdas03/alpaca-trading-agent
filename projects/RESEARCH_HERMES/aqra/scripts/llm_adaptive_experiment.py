@@ -23,6 +23,7 @@ import json
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
@@ -152,7 +153,7 @@ def parse_vector(text: str, d: int) -> np.ndarray | None:
 
 
 def _call_ollama(base_url: str, model: str, messages: list[dict],
-                 max_tokens: int = 1024, max_retries: int = 5) -> str:
+                 max_tokens: int = 256, max_retries: int = 5) -> str:
     """Call Ollama /api/chat directly with httpx; long timeout for model load."""
     url = base_url.rstrip("/") + "/api/chat"
     payload = {
@@ -177,15 +178,117 @@ def _call_ollama(base_url: str, model: str, messages: list[dict],
     return ""
 
 
-def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) -> dict:
+def _llm_vector(
+    base_url: str | None,
+    api_key: str | None,
+    model: str,
+    messages: list[dict],
+    use_ollama: bool,
+    fallback_rng: np.random.Generator,
+) -> np.ndarray:
+    """Get one dollar-neutral vector from the LLM, falling back to random."""
+    client = None
+    if not use_ollama:
+        client = Anthropic(api_key=api_key, timeout=120.0)
+
+    vec = None
+    for attempt in range(3):
+        try:
+            if use_ollama:
+                text = _call_ollama(base_url, model, messages, max_tokens=256)
+            else:
+                assert client is not None
+                response = client.messages.create(
+                    model=model,
+                    max_tokens=256,
+                    messages=messages,
+                )
+                text = next(
+                    (block.text for block in response.content
+                     if getattr(block, "type", None) == "text"),
+                    None,
+                )
+            if not text:
+                continue
+            vec = parse_vector(text, D_ASSETS)
+            if vec is not None:
+                break
+        except Exception as e:
+            if attempt == 2:
+                print(f"    LLM failed after 3 attempts: {e}")
+            continue
+
+    if vec is None:
+        # Fallback: random unit vector if parsing fails.
+        vec = fallback_rng.normal(0, 1, D_ASSETS)
+        vec = vec - vec.mean()
+        vec = vec / np.linalg.norm(vec)
+    return vec
+
+
+def _evaluate_trial(
+    i: int,
+    defense: str,
+    model: str,
+    messages: list[dict],
+    base_url: str | None,
+    api_key: str | None,
+    use_ollama: bool,
+    Z_train: np.ndarray,
+    Z_calib: np.ndarray,
+    Z_val: np.ndarray,
+    lambda_sparse: float,
+    rng: np.random.Generator,
+) -> dict:
+    """Run one LLM trial and return metrics for that trial."""
+    vec = _llm_vector(base_url, api_key, model, messages, use_ollama, rng)
+    r_train = Z_train @ vec
+    r_calib = Z_calib @ vec
+    r_val_vec = Z_val @ vec
+    tp = pval(r_train)
+    vp = pval(r_val_vec)
+    cp = conformal_pval(r_calib, r_val_vec)
+
+    if defense in ("conformal", "e_bh", "online_e_bh"):
+        val_p_i = cp
+    else:
+        val_p_i = vp
+
+    if defense in ("e_bh", "online_e_bh"):
+        min_score = r_val_vec.max()
+        val_e_i = conformal_evalue(min_score, r_calib).value
+    elif defense == "sparse_metered":
+        val_e_i = 1.0 / lambda_sparse if val_p_i <= lambda_sparse else 0.0
+    else:
+        val_e_i = evalue_from_pvalue(val_p_i, threshold=CERT_ALPHA_NAIVE).value
+
+    if defense == "naive":
+        certified = vp < CERT_ALPHA_NAIVE
+    elif defense == "metered":
+        certified = vp < CERT_ALPHA_NAIVE
+    elif defense == "sparse_metered":
+        certified = vp <= lambda_sparse
+    else:
+        certified = False
+
+    return {
+        "trial": i,
+        "train_p": tp,
+        "val_p": vp,
+        "val_p_for_correction": val_p_i,
+        "val_e": val_e_i,
+        "certified": certified,
+    }
+
+
+def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator,
+             workers: int = 1) -> dict:
     """One defense cell with a real LLM generator on one fresh world."""
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     base_url = os.environ.get("ANTHROPIC_BASE_URL")
     if not api_key and not base_url:
         raise RuntimeError("ANTHROPIC_API_KEY or ANTHROPIC_BASE_URL must be set")
     use_ollama = bool(base_url)
-    if not use_ollama:
-        client = Anthropic(api_key=api_key, timeout=120.0)
 
     Z_train = rng.normal(0, 0.01, (T_TRAIN, D_ASSETS))
     Z_calib = rng.normal(0, 0.01, (T_CALIB, D_ASSETS))
@@ -194,7 +297,6 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) 
     val_p = np.empty(n_trials)
     val_e = np.empty(n_trials)
     train_p = np.empty(n_trials)
-    history: list[dict] = []
 
     lambda_sparse = candidacy_threshold(FDR_ALPHA, n_trials)
     k_sparse = max(1, int(round(n_trials * lambda_sparse)))
@@ -202,77 +304,55 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator) 
 
     system = SYSTEM_PROMPT.format(d_assets=D_ASSETS)
 
+    # Sequentially build history so the LLM sees prior feedback; but dispatch
+    # LLM calls concurrently because each trial only depends on history up to i.
+    history: list[dict] = []
+    trial_results: list[dict | None] = [None] * n_trials
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures: dict = {}
+        for i in range(n_trials):
+            user = build_feedback(defense, history, lambda_sparse)
+            messages = [{"role": "user", "content": user}]
+            if i == 0:
+                messages.insert(0, {"role": "assistant", "content": system})
+
+            trial_rng = np.random.default_rng(rng.integers(2**63))
+            future = pool.submit(
+                _evaluate_trial,
+                i,
+                defense,
+                model,
+                messages,
+                base_url,
+                api_key,
+                use_ollama,
+                Z_train,
+                Z_calib,
+                Z_val,
+                lambda_sparse,
+                trial_rng,
+            )
+            futures[future] = i
+            # Advance history with a placeholder; result will be merged in order.
+            history.append({"trial": i, "train_p": 1.0, "val_p": 1.0, "certified": False})
+
+        for future in futures:
+            i = futures[future]
+            trial_results[i] = future.result()
+
     for i in range(n_trials):
-        user = build_feedback(defense, history, lambda_sparse)
-        messages = [{"role": "user", "content": user}]
-        if i == 0:
-            messages.insert(0, {"role": "assistant", "content": system})
-
-        vec = None
-        for attempt in range(3):
-            try:
-                if use_ollama:
-                    text = _call_ollama(base_url, model, messages, max_tokens=1024)
-                else:
-                    response = client.messages.create(
-                        model=model,
-                        max_tokens=1024,
-                        messages=messages,
-                    )
-                    text = next(
-                        (block.text for block in response.content
-                         if getattr(block, "type", None) == "text"),
-                        None,
-                    )
-                if not text:
-                    continue
-                vec = parse_vector(text, D_ASSETS)
-                if vec is not None:
-                    break
-            except Exception as e:
-                if attempt == 2:
-                    raise RuntimeError(f"LLM failed at trial {i}: {e}") from e
-
-        if vec is None:
-            # Fallback: random unit vector if parsing fails.
-            vec = rng.normal(0, 1, D_ASSETS)
-            vec = vec - vec.mean()
-            vec = vec / np.linalg.norm(vec)
-
-        r_train, r_calib, r_val_vec = Z_train @ vec, Z_calib @ vec, Z_val @ vec
-        tp = pval(r_train)
-        vp = pval(r_val_vec)
-        cp = conformal_pval(r_calib, r_val_vec)
-
-        train_p[i] = tp
-        if defense in ("conformal", "e_bh", "online_e_bh"):
-            val_p[i] = cp
-        else:
-            val_p[i] = vp
-
-        if defense in ("e_bh", "online_e_bh"):
-            min_score = r_val_vec.max()
-            val_e[i] = conformal_evalue(min_score, r_calib).value
-        elif defense == "sparse_metered":
-            val_e[i] = 1.0 / lambda_sparse if val_p[i] <= lambda_sparse else 0.0
-        else:
-            val_e[i] = evalue_from_pvalue(val_p[i], threshold=CERT_ALPHA_NAIVE).value
-
-        # Adaptive feedback for the next LLM prompt.
-        certified = False
-        if defense == "naive":
-            certified = vp < CERT_ALPHA_NAIVE
-        elif defense == "metered":
-            certified = vp < CERT_ALPHA_NAIVE
-        elif defense == "sparse_metered":
-            certified = vp <= lambda_sparse
-
-        history.append({
-            "trial": i,
-            "train_p": tp,
-            "val_p": vp,
-            "certified": certified,
-        })
+        res = trial_results[i]
+        assert res is not None
+        train_p[i] = res["train_p"]
+        val_p[i] = res["val_p_for_correction"]
+        val_e[i] = res["val_e"]
+        history[i] = {
+            "trial": res["trial"],
+            "train_p": res["train_p"],
+            "val_p": res["val_p"],
+            "certified": res["certified"],
+        }
 
     if defense == "naive":
         n_cert = int((val_p < CERT_ALPHA_NAIVE).sum())
@@ -307,12 +387,12 @@ DEFENSES = ["naive", "no_wall", "metered", "sparse_metered",
 
 
 def run_defense(defense: str, n_trials: int, reps: int, model: str,
-                rng_master: np.random.Generator) -> dict:
+                rng_master: np.random.Generator, workers: int = 1) -> dict:
     """Run one defense for the requested number of reps."""
     counts = []
     for rep in range(reps):
         rng = np.random.default_rng(rng_master.integers(2**63))
-        cell = run_cell(defense, n_trials, model, rng)
+        cell = run_cell(defense, n_trials, model, rng, workers=workers)
         counts.append(cell["n_certified_false"])
         print(f"  {defense} rep {rep + 1}/{reps}: {cell['n_certified_false']} false certs, "
               f"min val p={cell['min_val_p']:.4g}")
@@ -336,6 +416,8 @@ def main() -> None:
                     default="naive,metered,sparse_metered,protocol,e_bh",
                     help="comma-separated list of defenses to run")
     ap.add_argument("--model", type=str, default=DEFAULT_MODEL)
+    ap.add_argument("--workers", type=int, default=1,
+                    help="concurrent LLM calls per rep (Ollama only; default 1)")
     args = ap.parse_args()
 
     if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_BASE_URL")):
@@ -350,7 +432,8 @@ def main() -> None:
     for defense in chosen:
         print(f"\n=== running {defense} ===")
         summaries.append(run_defense(defense, args.trials, args.reps,
-                                     args.model, rng_master))
+                                     args.model, rng_master,
+                                     workers=args.workers))
 
     out = {
         "model": args.model,
