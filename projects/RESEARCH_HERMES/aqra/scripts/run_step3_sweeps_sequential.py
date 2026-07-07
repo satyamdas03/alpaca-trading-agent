@@ -43,7 +43,9 @@ def run_defense(defense: str) -> None:
 
 
 def main() -> None:
-    LOG.write_text(f"=== STEP 3/10 START: {datetime.now()} ===\n", encoding="utf-8")
+    header = f"\n=== STEP 3/10 RESTART: {datetime.now()} ===\n"
+    LOG.write_text(LOG.read_text() + header, encoding="utf-8")
+    print(header, end="")
     run_defense("metered")
     run_defense("e_bh")
     end = f"\n=== STEP 3/10 DONE: {datetime.now()} ===\n"

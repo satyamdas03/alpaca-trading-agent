@@ -5,6 +5,6 @@ Ground truth: all null. Any certification = false discovery.
 
 | Defense | Mean false certs | Any-false-cert rate | Std dev |
 |---|---|---|---|
-| protocol | 0.00 | 0% | 0.00 |
+| e_bh | 0.00 | 0% | 0.00 |
 
-Run date: 2026-07-06
+Run date: 2026-07-07

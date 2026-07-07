@@ -2,10 +2,10 @@
   "model": "llama3:8b",
   "trials": 50,
   "reps": 5,
-  "run_date": "2026-07-06",
+  "run_date": "2026-07-07",
   "results": {
-    "protocol": {
-      "defense": "protocol",
+    "e_bh": {
+      "defense": "e_bh",
       "model": "llama3:8b",
       "trials": 50,
       "reps": 5,

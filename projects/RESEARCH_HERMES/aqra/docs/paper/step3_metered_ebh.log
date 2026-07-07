@@ -1,0 +1,32 @@
+=== STEP 3/10 START: 2026-07-07 11:09:30.940637 ===
+
+=== 2026-07-07 11:09:30.941040: running metered ===
+
+=== running metered ===
+  metered rep 1/5: 0 false certs, min val p=0.01725
+  metered rep 2/5: 0 false certs, min val p=0.1861
+  metered rep 3/5: 0 false certs, min val p=0.03101
+  metered rep 4/5: 0 false certs, min val p=0.0538
+  metered rep 5/5: 0 false certs, min val p=0.05196
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== 2026-07-07 11:40:57.390791: running e_bh ===
+
+=== running e_bh ===
+  e_bh rep 1/5: 0 false certs, min val p=0.996
+  e_bh rep 2/5: 0 false certs, min val p=0.996
+  e_bh rep 3/5: 0 false certs, min val p=0.996
+
+=== STEP 3/10 RESTART: 2026-07-07 12:42:47.159675 ===
+
+=== 2026-07-07 12:42:47.160156: running metered ===
+
+=== running metered ===
+  e_bh rep 4/5: 0 false certs, min val p=0.996
+  metered rep 1/5: 0 false certs, min val p=0.01725
+  e_bh rep 5/5: 0 false certs, min val p=0.996
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== STEP 3/10 DONE: 2026-07-07 13:59:51.016937 ===
