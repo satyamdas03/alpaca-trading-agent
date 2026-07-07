@@ -925,7 +925,7 @@ A deep review found the repo was functionally complete but not *release-complete
   - **Build matrix:** 9/9 jobs passed (ubuntu/windows/macos × Python 3.11/3.12/3.13), producing wheels + sdist.
   - **Publish to PyPI:** failed with `invalid-publisher: valid token, but no corresponding publisher` — trusted publishing is not yet configured on PyPI.
   - Claims rendered by the action: `repo:satyamdas03/lumina-lob:environment:pypi`, workflow `satyamdas03/lumina-lob/.github/workflows/build.yml@refs/tags/v0.1.1`.
-- README updated with exact PyPI trusted-publishing setup steps and the claim values (commit `910a827`).
+- README updated with exact PyPI trusted-publishing setup steps and the claim values (commit `910a827`, then `a31bd82` corrected workflow name to filename-only `build.yml`).
 - The only remaining blocker is the repository owner logging into PyPI and adding the pending publisher.
 
 ## Related memories
