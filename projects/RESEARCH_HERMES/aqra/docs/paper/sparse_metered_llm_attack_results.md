@@ -1,10 +1,10 @@
 # Real-LLM Adaptive Experiment (Phase C) — sparse_metered
 
-Model: `llama3:8b` | Trials: 30 | Reps: 3
+Model: `llama3:8b` | Trials: 50 | Reps: 5
 Ground truth: all null. Any certification = false discovery.
 
 - Mean false certs: **0.00**
 - Any-false-cert rate: 0%
 - Std dev: 0.00
 
-Run date: 2026-07-06
+Run date: 2026-07-07

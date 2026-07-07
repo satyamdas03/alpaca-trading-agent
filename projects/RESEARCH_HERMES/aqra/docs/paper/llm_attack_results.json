@@ -4,8 +4,8 @@
   "reps": 5,
   "run_date": "2026-07-07",
   "results": {
-    "e_bh": {
-      "defense": "e_bh",
+    "sparse_metered": {
+      "defense": "sparse_metered",
       "model": "llama3:8b",
       "trials": 50,
       "reps": 5,

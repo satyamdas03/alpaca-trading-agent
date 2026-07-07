@@ -1,0 +1,12 @@
+=== STEP 4/10 START: 2026-07-07 14:09:29.846490 ===
+
+=== running sparse_metered ===
+  sparse_metered rep 1/5: 0 false certs, min val p=0.007185
+  sparse_metered rep 2/5: 0 false certs, min val p=0.1655
+  sparse_metered rep 3/5: 0 false certs, min val p=0.01411
+  sparse_metered rep 4/5: 0 false certs, min val p=0.01499
+  sparse_metered rep 5/5: 0 false certs, min val p=0.1188
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== STEP 4/10 DONE: 2026-07-07 14:29:05.201739 ===
