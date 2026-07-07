@@ -1,10 +1,10 @@
 # Real-LLM Adaptive Experiment (Phase C) — naive
 
-Model: `llama3:8b` | Trials: 50 | Reps: 5
+Model: `mistral` | Trials: 30 | Reps: 3
 Ground truth: all null. Any certification = false discovery.
 
-- Mean false certs: **1.40**
-- Any-false-cert rate: 40%
-- Std dev: 2.61
+- Mean false certs: **1.00**
+- Any-false-cert rate: 67%
+- Std dev: 1.00
 
-Run date: 2026-07-06
+Run date: 2026-07-07

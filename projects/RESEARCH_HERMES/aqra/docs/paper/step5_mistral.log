@@ -1,0 +1,48 @@
+=== STEP 5/10 START: 2026-07-07 14:31:31.120186 ===
+
+=== 2026-07-07 14:31:31.120662: running naive ===
+
+=== running naive ===
+  naive rep 1/3: 2 false certs, min val p=0.02017
+  naive rep 2/3: 0 false certs, min val p=0.1685
+  naive rep 3/3: 1 false certs, min val p=0.04472
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== 2026-07-07 14:51:56.156874: running protocol ===
+
+=== running protocol ===
+  protocol rep 1/3: 0 false certs, min val p=0.02017
+  protocol rep 2/3: 0 false certs, min val p=0.1685
+  protocol rep 3/3: 0 false certs, min val p=0.04472
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== 2026-07-07 17:52:06.662128: running metered ===
+
+=== running metered ===
+  metered rep 1/3: 0 false certs, min val p=0.02017
+  metered rep 2/3: 0 false certs, min val p=0.1685
+  metered rep 3/3: 0 false certs, min val p=0.04472
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== 2026-07-07 19:04:59.643187: running e_bh ===
+
+=== running e_bh ===
+  e_bh rep 1/3: 0 false certs, min val p=0.996
+  e_bh rep 2/3: 0 false certs, min val p=0.996
+  e_bh rep 3/3: 0 false certs, min val p=0.996
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== 2026-07-07 19:29:54.107363: running sparse_metered ===
+
+=== running sparse_metered ===
+  sparse_metered rep 1/3: 0 false certs, min val p=0.02017
+  sparse_metered rep 2/3: 0 false certs, min val p=0.1685
+  sparse_metered rep 3/3: 0 false certs, min val p=0.04472
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+
+=== STEP 5/10 DONE: 2026-07-07 19:57:14.630897 ===
