@@ -33,3 +33,5 @@ wrote docs/paper/llm_attack_results.{json,md} and per-defense files
   metered rep 2/5: 0 false certs, min val p=0.1861
   metered rep 3/5: 0 false certs, min val p=0.03101
   metered rep 4/5: 0 false certs, min val p=0.0538
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
