@@ -196,7 +196,7 @@ The previous experiments used hand-coded hill climbers. To test whether an actua
 | e_bh | mistral | 30 | 3 | 0.00 | 0% |
 | sparse_metered | mistral | 30 | 3 | 0.00 | 0% |
 
-The real LLM with full validation feedback produces false certifications under both models (`llama3:8b`: 1.40 mean over 5 reps; `mistral`: 1.00 mean over 3 reps); every firewall variant suppresses them across both models. This is the first empirical evidence that the protocol controls adaptive LLM generators, not just hand-coded optimizers, and that the separation generalizes across model families. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py` and the per-defense result files in `docs/paper/*_llm_attack_results.json`; a combined table and figure are in `docs/paper/llm_attack_results.{md,png}`.
+The real LLM with full validation feedback produces false certifications under both models (`llama3:8b`: 1.40 mean over 5 reps; `mistral`: 1.00 mean over 3 reps); every firewall variant suppresses them across both models. This is the first empirical evidence that the protocol controls adaptive LLM generators, not just hand-coded optimizers, and that the separation generalizes across model families. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py` and the per-defense result files in `docs/paper/*_llm_attack_results.json`; the combined table is in `docs/paper/llm_attack_results.md` and the comparison figure is in `docs/paper/llm_fdr_by_trials.png`.
 
 ---
 

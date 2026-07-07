@@ -4,7 +4,7 @@
 Reads docs/paper/*_llm_attack_results.json, writes:
 - docs/paper/llm_attack_results.json (combined)
 - docs/paper/llm_attack_results.md (combined table)
-- docs/paper/llm_attack_results.png (bar plot)
+- docs/paper/llm_fdr_by_trials.png (bar plot)
 """
 import json
 from pathlib import Path
@@ -85,10 +85,10 @@ def main() -> None:
     ax.legend(title="Model")
     ax.set_ylim(bottom=0)
     fig.tight_layout()
-    fig.savefig(DOCS / "llm_attack_results.png", dpi=150)
+    fig.savefig(DOCS / "llm_fdr_by_trials.png", dpi=150)
     print(f"wrote {DOCS / 'llm_attack_results.json'}")
     print(f"wrote {DOCS / 'llm_attack_results.md'}")
-    print(f"wrote {DOCS / 'llm_attack_results.png'}")
+    print(f"wrote {DOCS / 'llm_fdr_by_trials.png'}")
 
 
 if __name__ == "__main__":
