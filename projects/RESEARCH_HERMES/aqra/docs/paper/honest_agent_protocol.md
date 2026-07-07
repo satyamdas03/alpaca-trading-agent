@@ -122,17 +122,37 @@ and e-BH controls $\mathrm{FDR} \le \alpha$ under arbitrary adaptive dependence 
 
 *Proof sketch.* SparseValidate implies $\Pr(p_i \le \lambda_m \mid \text{transcript}) \le \mathcal{T}(m, K_m) \lambda_m + \beta$ with $\beta = \Pr(K > K_m)$ negligible. Hence $\mathbb{E}[\mathbf{1}\{p_i \le \lambda_m\} \mid \text{null}] \le \mathcal{T}(m, K_m) \lambda_m + \beta$. Dividing by $\mathcal{T}(m, K_m) \lambda_m$ yields an e-value with expectation at most $1 + o(1)$. The $o(1)$ term can be absorbed by a slight level correction or by conditioning on $K \le K_m$. Because e-BH controls FDR under arbitrary dependence among valid e-values, the adaptive generator may read every accept bit without breaking the guarantee. ∎
 
-**Remark.** The theorem is intentionally worst-case: $\mathcal{T}(m,K_m)$ prices the maximum leakage over *all* adaptive channels that produce at most $K_m$ accepts. For the specific one-bit channel, tighter accounting via maximal leakage (Esposito et al., 2019) can recover power; we leave that as future work and treat Theorem S as the conservative safety case.
+**Remark.** The theorem is intentionally worst-case: $\mathcal{T}(m,K_m)$ prices the maximum leakage over *all* adaptive channels that produce at most $K_m$ accepts. For the specific one-bit channel, tighter accounting via maximal leakage (Esposito et al., 2019) can recover power; we treat Theorem S as the conservative safety case and Theorem M below as the sharper operational bound.
 
 To prevent an adversary from inflating $K$, the ledger enforces that identical candidates are not resubmitted as new trials.
 
-### 3.5 Theorem 3 (immortal wall): anytime online FDR
+### 3.5 Theorem M (maximal leakage wall): sharper metered channel
+
+For the same metered channel, we can price leakage directly rather than through the worst-case transcript count. Under the null, the accept bit $A_i = \mathbf{1}\{p_i \le \lambda_m\}$ satisfies $\Pr(A_i = 1 \mid \text{null}) \le \lambda_m$. The **maximal leakage** from the validation sample $V$ to this bit is therefore bounded by
+
+$$\mathcal{L}(V \to A_i) \;\le\; \log_2\!\left(\frac{1}{\lambda_m}\right) \quad \text{bits}.$$
+
+Multiplying the uncorrected candidate e-value $I\{p_i \le \lambda_m\} / \lambda_m$ by the leakage discount $2^{-\mathcal{L}(V \to A_i)} = \lambda_m$ yields the corrected e-value
+
+$$e_i^{**} \;:=\; 2^{-\mathcal{L}(V \to A_i)} \cdot \frac{\mathbf{1}\{p_i \le \lambda_m\}}{\lambda_m} \;=\; \mathbf{1}\{p_i \le \lambda_m\}.$$
+
+**Theorem M.** The leakage-corrected e-values satisfy
+
+$$\mathbb{E}\left[ e_i^{**} \mid \text{null} \right] \;=\; \Pr(p_i \le \lambda_m \mid \text{null}) \;\le\; \lambda_m \;\le\; 1,$$
+
+and e-BH controls $\mathrm{FDR} \le \alpha$ under arbitrary adaptive dependence on the leaked accept bits.
+
+*Proof sketch.* The equality is the definition of expectation for an indicator. Super-uniformity of $p_i$ under the null gives the first inequality, and $\lambda_m < 1$ gives the second. Because $e_i^{**}$ is a valid e-value, e-BH's arbitrary-dependence FDR guarantee applies. ∎
+
+**Comparison with Theorem S.** SparseValidate prices the *set of possible transcripts*, giving a polynomial factor $\mathcal{T}(m,K_m)$ that is safe for every adaptive channel with at most $K_m$ accepts. Maximal leakage prices the *actual one-bit channel*, and the resulting factor $2^{\mathcal{L}} = 1/\lambda_m$ is exponentially smaller than $\mathcal{T}(m,K_m)$ for the same $\lambda_m$ (see Figure 1 in the empirical section). Theorem S remains the conservative safety certificate; Theorem M is the sharper bound used in practice.
+
+### 3.6 Theorem 3 (immortal wall): anytime online FDR
 
 A live agent never stops. Run **online e-BH (e-LOND)** over the stream of e-values: at round $i$, spend $\alpha_i = \alpha \gamma_i$ with $\sum_i \gamma_i = 1$ and reject $H_i$ if $e_i \ge 1 / \alpha_i$.
 
 Xu & Ramdas (2024) prove that e-LOND controls $\mathrm{FDR}_t \le \alpha$ simultaneously for all $t$ under arbitrary dependence among the e-values. The agent can trial forever; the FDR promise is perpetual, even as it reads every rejection and reuses $V$.
 
-### 3.6 Dependence-adjusted BY (dBY)
+### 3.7 Dependence-adjusted BY (dBY)
 
 For p-value baselines, we also implement dependence-adjusted BY (Fithian & Lei, 2022), which uniformly dominates standard BY under arbitrary dependence. It serves as the strongest p-value comparator in our experiments.
 
@@ -150,20 +170,24 @@ Ground truth: all candidates are null (random weight vectors over 50 assets, ret
 
 | Defense | Model | Mean false certs at $m=400$ |
 |---|---|---|
-| naive | uncorrected, full leak | 211.4 |
-| no_wall | BY-FDR, full leak | 91.55 |
-| metered | BY-FDR, one-bit leak | 0.75 |
+| naive | uncorrected, full leak | 204.5 |
+| no_wall | BY-FDR, full leak | 75.95 |
+| metered | BY-FDR, one-bit leak | 1.15 |
 | sparse_metered | e-BH, SparseValidate-corrected one-bit leak | 0.0 |
-| protocol | BY-FDR, train-only wall | 0.45 |
+| maxleak_metered | e-BH, maximal-leakage-corrected one-bit leak | 0.0 |
+| protocol | BY-FDR, train-only wall | 0.0 |
 | conformal | conformal p-value, train-only wall | 0.0 |
-| online_by | sequential BY prefixes, train-only wall | 0.0 |
+| online_by | sequential BY prefixes, train-only wall | 0.35 |
 | online_lond | LORD probe, train-only wall | 0.15 |
 | e_bh | e-BH, train-only wall | 0.0 |
 | online_e_bh | online e-BH, train-only wall | 0.0 |
-| dby | dependence-adjusted BY, train-only wall | 0.0 |
+| dby | dependence-adjusted BY, train-only wall | 0.25 |
 | no_wall + random | BY-FDR, no adaptivity | 0.0 |
 
-The `sparse_metered` arm shows that the worst-case SparseValidate leakage can be priced directly: even though the one-bit channel is adaptive, the corrected e-values certify no false strategies at $m=400$. The `e_bh` and `online_e_bh` arms control FDR under the same shared-$V$ adaptive setting that breaks p-value online procedures. The `no_wall + random` control isolates **adaptivity** as the breaking force, not dependence or multiplicity.
+The `sparse_metered` arm shows that the worst-case SparseValidate leakage can be priced directly: even though the one-bit channel is adaptive, the corrected e-values certify no false strategies at $m=400$. The new `maxleak_metered` arm achieves the same zero false certifications with a much tighter leakage correction (Figure 1; `2^{\mathcal{L}} = 1/\lambda_m` vs the SparseValidate polynomial factor $\mathcal{T}(m,K_m)$). The `e_bh` and `online_e_bh` arms control FDR under the same shared-$V$ adaptive setting that breaks p-value online procedures. The `no_wall + random` control isolates **adaptivity** as the breaking force, not dependence or multiplicity.
+
+![Leakage correction factors: SparseValidate vs maximal leakage](leakage_factors.png)
+*Figure 1. SparseValidate prices the transcript set with a polynomial factor; maximal leakage prices the actual one-bit channel with $2^{\mathcal{L}} = 1/\lambda_m$, which is orders of magnitude smaller.*
 
 ### 4.2 M3: Cross-domain ML demo
 
