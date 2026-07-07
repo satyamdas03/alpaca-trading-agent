@@ -27,6 +27,11 @@ Defenses:
                   from the λ-threshold are deflated by the polynomial factor
                   Σ_{j=0}^k C(m,j) before e-BH. Demonstrates that leakage can
                   be priced, even if the worst-case bound is conservative.
+  maxleak_metered— Same one-bit feedback, but the audit prices leakage via the
+                  sharper maximal-leakage bound L = log2(1/λ). The corrected
+                  e-value 2^{-L} * I{p <= λ} / λ = I{p <= λ} is valid under
+                  arbitrary adaptive dependence and is strictly tighter than
+                  the SparseValidate polynomial factor.
   protocol   — BY-FDR over the full ledger AND train-only feedback: candidates
                are independent of the validation window, p-values valid (t-test)
   conformal  — BY-FDR over the full ledger AND train-only feedback, but the
@@ -64,6 +69,7 @@ from aqra.conformal.multiple_testing import (
     candidacy_threshold,
     dependence_adjusted_by,
     e_bh_rejections as _e_bh_rejections,
+    maximal_leakage_evalue,
     online_by_rejections as _online_by_rejections,
     online_e_bh_rejections as _online_e_bh_rejections,
     online_lond_rejections as _online_lond_rejections,
@@ -176,6 +182,9 @@ def run_cell(defense: str, attacker: str, n_trials: int,
         elif defense == "sparse_metered":
             # Universal e-value at the SparseValidate candidacy threshold.
             val_e[i] = 1.0 / lambda_sparse if val_p[i] <= lambda_sparse else 0.0
+        elif defense == "maxleak_metered":
+            # Maximal-leakage-corrected e-value for the metered one-bit channel.
+            val_e[i] = maximal_leakage_evalue(val_p[i], lambda_sparse)
         else:
             # Fallback: convert p-value to a universal e-value at a fixed threshold.
             # This is only used for comparison, not for FDR control under leak.
@@ -190,8 +199,8 @@ def run_cell(defense: str, attacker: str, n_trials: int,
                     best_a = a.copy()
                 elif best_a is None:
                     pass  # keep sampling randomly until first accept
-            elif defense == "sparse_metered":
-                # one-bit feedback gated by the SparseValidate candidacy threshold
+            elif defense in ("sparse_metered", "maxleak_metered"):
+                # one-bit feedback gated by the candidacy threshold
                 if vp <= lambda_sparse:
                     best_a = a.copy()
                 elif best_a is None:
@@ -224,6 +233,9 @@ def run_cell(defense: str, attacker: str, n_trials: int,
         # Price the worst-case SparseValidate leakage by deflating e-values.
         corrected_e = val_e / sparse_factor
         n_cert = int(e_bh_rejections(corrected_e, FDR_ALPHA).sum())
+    elif defense == "maxleak_metered":
+        # Maximal-leakage-corrected e-values are already valid under adaptivity.
+        n_cert = int(e_bh_rejections(val_e, FDR_ALPHA).sum())
     else:  # ledgered batch defenses: BY over ALL trials at the end of the campaign
         n_cert = int(by_reject(val_p, FDR_ALPHA).sum())
     return {"n_certified_false": n_cert, "min_val_p": float(val_p.min()),
@@ -239,8 +251,8 @@ def main() -> None:
     args = ap.parse_args()
 
     checkpoints = [25, 50, 100, 200, args.trials]
-    defenses = ["naive", "no_wall", "metered", "sparse_metered", "protocol",
-                "conformal", "online_by", "online_lond",
+    defenses = ["naive", "no_wall", "metered", "sparse_metered", "maxleak_metered",
+                "protocol", "conformal", "online_by", "online_lond",
                 "e_bh", "online_e_bh", "dby"]
     attackers = ["hillclimb", "random"]
 
@@ -302,6 +314,7 @@ def main() -> None:
         fig, ax = plt.subplots(figsize=(7, 4.5))
         styles = {"naive": "tab:red", "no_wall": "tab:orange",
                   "metered": "tab:blue", "sparse_metered": "tab:blue",
+                  "maxleak_metered": "tab:blue",
                   "protocol": "tab:green", "conformal": "tab:purple",
                   "online_by": "tab:cyan", "online_lond": "tab:pink",
                   "e_bh": "tab:olive", "online_e_bh": "tab:brown",
@@ -323,7 +336,7 @@ def main() -> None:
         print(f"plot skipped: {e}")
 
     for d in ["naive", "protocol", "conformal", "online_by", "online_lond",
-              "e_bh", "online_e_bh", "dby", "sparse_metered"]:
+              "e_bh", "online_e_bh", "dby", "sparse_metered", "maxleak_metered"]:
         print(f"--- {d} hillclimb ---")
         print(json.dumps(summary[d]["hillclimb"], indent=1))
     print("wrote docs/paper/attack_results.{json,md} + attack_fdr.png")
