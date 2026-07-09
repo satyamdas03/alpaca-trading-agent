@@ -1,36 +1,32 @@
 {
-  "run_date": "2026-07-06",
+  "run_date": "2026-07-08",
   "records": [
     {
       "model": "llama3:8b",
       "defense": "naive",
-      "trials": 50,
-      "reps": 5,
-      "run_date": "2026-07-06",
+      "trials": 200,
+      "reps": 10,
+      "run_date": "2026-07-08",
       "result": {
         "defense": "naive",
         "model": "llama3:8b",
-        "trials": 50,
-        "reps": 5,
-        "mean_false_certs": 1.4,
-        "any_false_cert_rate": 0.4,
-        "std_false_certs": 2.6076809620810595
-      }
-    },
-    {
-      "model": "llama3:8b",
-      "defense": "protocol",
-      "trials": 50,
-      "reps": 5,
-      "run_date": "2026-07-06",
-      "result": {
-        "defense": "protocol",
-        "model": "llama3:8b",
-        "trials": 50,
-        "reps": 5,
-        "mean_false_certs": 0.0,
-        "any_false_cert_rate": 0.0,
-        "std_false_certs": 0.0
+        "trials": 200,
+        "reps": 10,
+        "mean_false_certs": 6.6,
+        "any_false_cert_rate": 0.8,
+        "std_false_certs": 5.4609726443393045,
+        "rep_counts": [
+          10,
+          0,
+          6,
+          6,
+          0,
+          13,
+          15,
+          11,
+          4,
+          1
+        ]
       }
     },
     {
@@ -51,12 +47,12 @@
     },
     {
       "model": "llama3:8b",
-      "defense": "e_bh",
+      "defense": "sparse_metered",
       "trials": 50,
       "reps": 5,
       "run_date": "2026-07-07",
       "result": {
-        "defense": "e_bh",
+        "defense": "sparse_metered",
         "model": "llama3:8b",
         "trials": 50,
         "reps": 5,
@@ -67,12 +63,68 @@
     },
     {
       "model": "llama3:8b",
-      "defense": "sparse_metered",
+      "defense": "maxleak_metered",
+      "trials": 200,
+      "reps": 10,
+      "run_date": "2026-07-09",
+      "result": {
+        "defense": "maxleak_metered",
+        "model": "llama3:8b",
+        "trials": 200,
+        "reps": 10,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0,
+        "rep_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "model": "llama3:8b",
+      "defense": "protocol",
+      "trials": 200,
+      "reps": 10,
+      "run_date": "2026-07-09",
+      "result": {
+        "defense": "protocol",
+        "model": "llama3:8b",
+        "trials": 200,
+        "reps": 10,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0,
+        "rep_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "model": "llama3:8b",
+      "defense": "e_bh",
       "trials": 50,
       "reps": 5,
       "run_date": "2026-07-07",
       "result": {
-        "defense": "sparse_metered",
+        "defense": "e_bh",
         "model": "llama3:8b",
         "trials": 50,
         "reps": 5,
@@ -99,22 +151,6 @@
     },
     {
       "model": "mistral",
-      "defense": "protocol",
-      "trials": 30,
-      "reps": 3,
-      "run_date": "2026-07-07",
-      "result": {
-        "defense": "protocol",
-        "model": "mistral",
-        "trials": 30,
-        "reps": 3,
-        "mean_false_certs": 0.0,
-        "any_false_cert_rate": 0.0,
-        "std_false_certs": 0.0
-      }
-    },
-    {
-      "model": "mistral",
       "defense": "metered",
       "trials": 30,
       "reps": 3,
@@ -131,12 +167,12 @@
     },
     {
       "model": "mistral",
-      "defense": "e_bh",
+      "defense": "sparse_metered",
       "trials": 30,
       "reps": 3,
       "run_date": "2026-07-07",
       "result": {
-        "defense": "e_bh",
+        "defense": "sparse_metered",
         "model": "mistral",
         "trials": 30,
         "reps": 3,
@@ -147,12 +183,28 @@
     },
     {
       "model": "mistral",
-      "defense": "sparse_metered",
+      "defense": "protocol",
       "trials": 30,
       "reps": 3,
       "run_date": "2026-07-07",
       "result": {
-        "defense": "sparse_metered",
+        "defense": "protocol",
+        "model": "mistral",
+        "trials": 30,
+        "reps": 3,
+        "mean_false_certs": 0.0,
+        "any_false_cert_rate": 0.0,
+        "std_false_certs": 0.0
+      }
+    },
+    {
+      "model": "mistral",
+      "defense": "e_bh",
+      "trials": 30,
+      "reps": 3,
+      "run_date": "2026-07-07",
+      "result": {
+        "defense": "e_bh",
         "model": "mistral",
         "trials": 30,
         "reps": 3,

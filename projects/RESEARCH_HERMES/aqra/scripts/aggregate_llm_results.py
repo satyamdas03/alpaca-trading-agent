@@ -5,6 +5,9 @@ Reads docs/paper/*_llm_attack_results.json, writes:
 - docs/paper/llm_attack_results.json (combined)
 - docs/paper/llm_attack_results.md (combined table)
 - docs/paper/llm_fdr_by_trials.png (bar plot)
+
+Supports multiple model families and the maxleak_metered defense added in
+Step 8/10 of the Honest Agent Protocol A+C push.
 """
 import json
 from pathlib import Path
@@ -24,14 +27,47 @@ def main() -> None:
     records = []
     for path in files:
         data = json.loads(path.read_text(encoding="utf-8"))
-        records.append(data)
+        # Normalize older and newer file formats.
+        model = data.get("model") or data["result"].get("model")
+        defense = data.get("defense") or data["result"].get("defense")
+        if data.get("result") is None:
+            # legacy single-defense aggregate format
+            result = {k: v for k, v in data.items() if k != "results"}
+        else:
+            result = data["result"]
+        records.append(
+            {
+                "model": model,
+                "defense": defense,
+                "trials": data.get("trials", result.get("trials")),
+                "reps": data.get("reps", result.get("reps")),
+                "run_date": data.get("run_date", result.get("run_date", "unknown")),
+                "result": result,
+            }
+        )
 
-    # Sort: models llama3:8b then mistral, defenses in protocol order.
-    defense_order = ["naive", "protocol", "metered", "e_bh", "sparse_metered"]
-    model_order = ["llama3:8b", "mistral"]
+    defense_order = [
+        "naive",
+        "no_wall",
+        "metered",
+        "sparse_metered",
+        "maxleak_metered",
+        "protocol",
+        "conformal",
+        "online_by",
+        "online_lond",
+        "e_bh",
+        "online_e_bh",
+        "dby",
+    ]
+    model_order = ["llama3:8b", "mistral", "gemma2:9b", "qwen2.5:7b", "llama3.1:8b"]
 
-    records.sort(key=lambda r: (model_order.index(r["model"]),
-                                defense_order.index(r["defense"])))
+    def sort_key(r: dict) -> tuple:
+        mod_idx = model_order.index(r["model"]) if r["model"] in model_order else 999
+        def_idx = defense_order.index(r["defense"]) if r["defense"] in defense_order else 999
+        return mod_idx, def_idx
+
+    records.sort(key=sort_key)
 
     out = {
         "run_date": records[0]["run_date"],
@@ -61,28 +97,28 @@ def main() -> None:
         "\n".join(lines) + "\n", encoding="utf-8"
     )
 
-    # Bar plot.
-    models = sorted({r["model"] for r in records}, key=lambda m: model_order.index(m))
-    defenses = [d for d in defense_order
-                if any(r["defense"] == d for r in records)]
+    # Bar plot: grouped by defense, one bar per model.
+    models = sorted({r["model"] for r in records}, key=lambda m: model_order.index(m) if m in model_order else 999)
+    defenses = [d for d in defense_order if any(r["defense"] == d for r in records)]
     x = np.arange(len(defenses))
-    width = 0.35
+    width = 0.8 / max(len(models), 1)
 
-    fig, ax = plt.subplots(figsize=(8, 4.5))
+    fig, ax = plt.subplots(figsize=(max(8, 1.2 * len(defenses)), 4.5))
     for i, model in enumerate(models):
         means = []
         for d in defenses:
-            rec = next((r for r in records if r["model"] == model
-                        and r["defense"] == d), None)
+            rec = next(
+                (r for r in records if r["model"] == model and r["defense"] == d), None
+            )
             means.append(rec["result"]["mean_false_certs"] if rec else 0.0)
-        ax.bar(x + (i - 0.5) * width, means, width, label=model)
+        ax.bar(x + (i - (len(models) - 1) / 2) * width, means, width, label=model)
 
     ax.set_ylabel("Mean false certifications")
     ax.set_title("Real-LLM adaptive attack: mean false certs by defense and model")
     ax.set_xticks(x)
-    ax.set_xticklabels(defenses, rotation=15, ha="right")
+    ax.set_xticklabels(defenses, rotation=20, ha="right")
     ax.axhline(0, color="black", linewidth=0.5)
-    ax.legend(title="Model")
+    ax.legend(title="Model", loc="upper right")
     ax.set_ylim(bottom=0)
     fig.tight_layout()
     fig.savefig(DOCS / "llm_fdr_by_trials.png", dpi=150)
