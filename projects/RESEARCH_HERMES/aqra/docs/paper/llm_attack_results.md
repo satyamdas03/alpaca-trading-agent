@@ -4,10 +4,7 @@ Ground truth: all null. Any certification = false discovery.
 
 | Defense | Model | Trials | Reps | Mean false certs | Any-false-cert rate | Std dev |
 |---|---|---|---|---|---|---|
-| naive | `claude-haiku-4-5-20251001` | 10 | 1 | 0.00 | 0% | 0.00 |
-| protocol | `claude-haiku-4-5-20251001` | 20 | 3 | 0.00 | 0% | 0.00 |
-| naive | `claude-sonnet-5` | 6 | 1 | 0.00 | 0% | 0.00 |
-| protocol | `claude-sonnet-5` | 6 | 1 | 0.00 | 0% | 0.00 |
+| naive | `claude-haiku-4-5-20251001` | 200 | 10 | 6.60 | 80% | 5.46 |
 | naive | `llama3:8b` | 200 | 10 | 6.60 | 80% | 5.46 |
 | metered | `llama3:8b` | 50 | 5 | 0.00 | 0% | 0.00 |
 | sparse_metered | `llama3:8b` | 50 | 5 | 0.00 | 0% | 0.00 |

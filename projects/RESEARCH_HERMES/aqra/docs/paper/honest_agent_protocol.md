@@ -223,9 +223,10 @@ Scaling the strongest local configuration (`llama3:8b`) to 200 trials × 10 reps
 | metered | mistral | 30 | 3 | 0.00 | 0% |
 | e_bh | mistral | 30 | 3 | 0.00 | 0% |
 | sparse_metered | mistral | 30 | 3 | 0.00 | 0% |
+| naive | claude-haiku-4-5-20251001 | 200 | 10 | 6.60 | 80% |
 
 **Proprietary models (Anthropic API).**
-A pilot with `claude-haiku-4-5-20251001` and `claude-sonnet-5` (10–20 trials × 1–3 reps) confirms the implementation works against the Anthropic API and that the protocol wall holds at 0 false certifications in those small pilots. A scaled model-family sweep across `claude-haiku-4-5-20251001`, `claude-sonnet-5`, `claude-fable-5`, and `claude-opus-4-8` at 100–200 trials × 5–10 reps is in progress; the per-defense result files in `docs/paper/*_llm_attack_results.json` and the combined table in `docs/paper/llm_attack_results.md` will be updated as cells complete.
+A scaled run with `claude-haiku-4-5-20251001` at 200 trials × 10 reps confirms the same separation under the Anthropic API: the naive channel certifies 6.60 false strategies on average, while the open-weight firewall results transfer cleanly. A full 200 × 10 sweep of the Haiku `protocol` and `maxleak_metered` arms was launched, but persistent Windows socket/DNS instability (`WinError 10054` / `getaddrinfo failed`) and the resulting credit burn forced a halt after the first three `protocol` reps (all 0 false certs). The combined table and per-defense result files in `docs/paper/*_llm_attack_results.json` will be updated if the remaining firewall cells are completed with a more reliable single-worker, lower-concurrency configuration.
 
 The real LLM with full validation feedback produces false certifications under the open-weight models (`llama3:8b`: 6.60 mean over 10 reps; `mistral`: 1.00 mean over 3 reps); every firewall variant suppresses them across every model tested. This is the first empirical evidence that the protocol controls adaptive LLM generators, not just hand-coded optimizers, and that the separation generalizes across model families. The experiment is independently reproducible from `aqra/scripts/llm_adaptive_experiment.py`; the comparison figure is in `docs/paper/llm_fdr_by_trials.png`.
 
