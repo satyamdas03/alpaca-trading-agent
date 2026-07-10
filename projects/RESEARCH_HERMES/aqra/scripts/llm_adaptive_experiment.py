@@ -29,9 +29,8 @@ from pathlib import Path
 
 import httpx
 import numpy as np
+from dotenv import load_dotenv
 from scipy import stats
-
-from anthropic import Anthropic
 
 from aqra.conformal.evalue import conformal_evalue, evalue_from_pvalue
 from aqra.conformal.multiple_testing import (
@@ -39,11 +38,14 @@ from aqra.conformal.multiple_testing import (
     candidacy_threshold,
     dependence_adjusted_by,
     e_bh_rejections as _e_bh_rejections,
+    maximal_leakage_evalue,
     online_by_rejections as _online_by_rejections,
     online_e_bh_rejections as _online_e_bh_rejections,
     online_lond_rejections as _online_lond_rejections,
     sparse_validate_transfer_bound,
 )
+
+load_dotenv(override=True)
 
 T_TRAIN, T_CALIB, T_VAL, D_ASSETS = 252, 252, 252, 10
 CERT_ALPHA_NAIVE = 0.05
@@ -119,6 +121,9 @@ def build_feedback(defense: str, history: list[dict], lambda_sparse: float) -> s
         elif defense == "sparse_metered":
             bit = "ACCEPT" if h["val_p"] <= lambda_sparse else "reject"
             lines.append(f"Trial {trial}: {bit} (sparse one-bit feedback, λ={lambda_sparse:.4f})")
+        elif defense == "maxleak_metered":
+            bit = "ACCEPT" if h["val_p"] <= lambda_sparse else "reject"
+            lines.append(f"Trial {trial}: {bit} (maximal-leakage one-bit feedback, λ={lambda_sparse:.4f})")
         elif defense in ("protocol", "conformal", "online_by", "online_lond", "e_bh", "online_e_bh", "dby"):
             lines.append(f"Trial {trial}: train p={h['train_p']:.4f} (validation withheld)")
         else:
@@ -178,6 +183,51 @@ def _call_ollama(base_url: str, model: str, messages: list[dict],
     return ""
 
 
+
+def _call_anthropic_raw(api_key: str, model: str, messages: list[dict],
+                        max_tokens: int = 256, max_retries: int = 6,
+                        timeout: float = 120.0) -> str:
+    """Call Anthropic /v1/messages directly with httpx.
+
+    We create a fresh httpx client per call and force Connection: close to avoid
+    the stuck-persistent-connection problem observed on Windows during long
+    scaling runs. Manual exponential backoff handles transient DNS and connection
+    resets; 429s are surfaced as HTTPStatusError and also retried.
+    """
+    url = "https://api.anthropic.com/v1/messages"
+    payload = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "messages": messages,
+    }
+    headers = {
+        "x-api-key": api_key,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+        "connection": "close",
+    }
+    for attempt in range(max_retries):
+        try:
+            with httpx.Client(
+                timeout=httpx.Timeout(timeout, connect=30.0),
+                limits=httpx.Limits(max_keepalive_connections=0, max_connections=2),
+            ) as http:
+                r = http.post(url, json=payload, headers=headers)
+                r.raise_for_status()
+                data = r.json()
+            for block in data.get("content", []):
+                if block.get("type") == "text":
+                    return block.get("text", "")
+            return ""
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise
+            wait = min(2 ** attempt + (hash(f"{model}_{attempt}") % 100) / 100.0, 60.0)
+            print(f"    anthropic raw call failed (attempt {attempt + 1}/{max_retries}): {e} — retry in {wait:.1f}s")
+            time.sleep(wait)
+    return ""
+
+
 def _llm_vector(
     base_url: str | None,
     api_key: str | None,
@@ -187,27 +237,14 @@ def _llm_vector(
     fallback_rng: np.random.Generator,
 ) -> np.ndarray:
     """Get one dollar-neutral vector from the LLM, falling back to random."""
-    client = None
-    if not use_ollama:
-        client = Anthropic(api_key=api_key, timeout=120.0)
-
     vec = None
     for attempt in range(3):
         try:
             if use_ollama:
                 text = _call_ollama(base_url, model, messages, max_tokens=256)
             else:
-                assert client is not None
-                response = client.messages.create(
-                    model=model,
-                    max_tokens=256,
-                    messages=messages,
-                )
-                text = next(
-                    (block.text for block in response.content
-                     if getattr(block, "type", None) == "text"),
-                    None,
-                )
+                assert api_key is not None
+                text = _call_anthropic_raw(api_key, model, messages, max_tokens=256)
             if not text:
                 continue
             vec = parse_vector(text, D_ASSETS)
@@ -259,6 +296,8 @@ def _evaluate_trial(
         val_e_i = conformal_evalue(min_score, r_calib).value
     elif defense == "sparse_metered":
         val_e_i = 1.0 / lambda_sparse if val_p_i <= lambda_sparse else 0.0
+    elif defense == "maxleak_metered":
+        val_e_i = maximal_leakage_evalue(val_p_i, lambda_sparse)
     else:
         val_e_i = evalue_from_pvalue(val_p_i, threshold=CERT_ALPHA_NAIVE).value
 
@@ -266,7 +305,7 @@ def _evaluate_trial(
         certified = vp < CERT_ALPHA_NAIVE
     elif defense == "metered":
         certified = vp < CERT_ALPHA_NAIVE
-    elif defense == "sparse_metered":
+    elif defense in ("sparse_metered", "maxleak_metered"):
         certified = vp <= lambda_sparse
     else:
         certified = False
@@ -281,14 +320,46 @@ def _evaluate_trial(
     }
 
 
+def _submit_batch(pool, defense, model, base_url, api_key, use_ollama,
+                  Z_train, Z_calib, Z_val, lambda_sparse, rng,
+                  history, system, batch_start, batch_end):
+    """Submit one batch of trials and return futures mapping."""
+    futures: dict = {}
+    for i in range(batch_start, batch_end):
+        user = build_feedback(defense, history, lambda_sparse)
+        messages = [{"role": "user", "content": user}]
+        if i == 0:
+            messages.insert(0, {"role": "assistant", "content": system})
+
+        trial_rng = np.random.default_rng(rng.integers(2**63))
+        future = pool.submit(
+            _evaluate_trial,
+            i,
+            defense,
+            model,
+            messages,
+            base_url,
+            api_key,
+            use_ollama,
+            Z_train,
+            Z_calib,
+            Z_val,
+            lambda_sparse,
+            trial_rng,
+        )
+        futures[future] = i
+    return futures
+
+
 def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator,
-             workers: int = 1) -> dict:
+             workers: int = 1, batch_delay: float = 0.0) -> dict:
     """One defense cell with a real LLM generator on one fresh world."""
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     base_url = os.environ.get("ANTHROPIC_BASE_URL")
     if not api_key and not base_url:
         raise RuntimeError("ANTHROPIC_API_KEY or ANTHROPIC_BASE_URL must be set")
-    use_ollama = bool(base_url)
+    # Prefer Anthropic when API key is available; otherwise assume Ollama.
+    use_ollama = bool(base_url) and not api_key
 
     Z_train = rng.normal(0, 0.01, (T_TRAIN, D_ASSETS))
     Z_calib = rng.normal(0, 0.01, (T_CALIB, D_ASSETS))
@@ -304,42 +375,37 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator,
 
     system = SYSTEM_PROMPT.format(d_assets=D_ASSETS)
 
-    # Sequentially build history so the LLM sees prior feedback; but dispatch
-    # LLM calls concurrently because each trial only depends on history up to i.
+    # Adaptive feedback must be sequential. To keep throughput high, run trials
+    # in batches of `workers`; each batch sees the true history of all prior
+    # batches, and only waits for its own slowest call.
     history: list[dict] = []
     trial_results: list[dict | None] = [None] * n_trials
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures: dict = {}
-        for i in range(n_trials):
-            user = build_feedback(defense, history, lambda_sparse)
-            messages = [{"role": "user", "content": user}]
-            if i == 0:
-                messages.insert(0, {"role": "assistant", "content": system})
-
-            trial_rng = np.random.default_rng(rng.integers(2**63))
-            future = pool.submit(
-                _evaluate_trial,
-                i,
-                defense,
-                model,
-                messages,
-                base_url,
-                api_key,
-                use_ollama,
-                Z_train,
-                Z_calib,
-                Z_val,
-                lambda_sparse,
-                trial_rng,
+        batch_start = 0
+        while batch_start < n_trials:
+            batch_end = min(batch_start + workers, n_trials)
+            futures = _submit_batch(
+                pool, defense, model, base_url, api_key, use_ollama,
+                Z_train, Z_calib, Z_val, lambda_sparse, rng,
+                history, system, batch_start, batch_end,
             )
-            futures[future] = i
-            # Advance history with a placeholder; result will be merged in order.
-            history.append({"trial": i, "train_p": 1.0, "val_p": 1.0, "certified": False})
-
-        for future in futures:
-            i = futures[future]
-            trial_results[i] = future.result()
+            for future in futures:
+                i = futures[future]
+                trial_results[i] = future.result()
+            # Update history with actual results before the next batch.
+            for i in range(batch_start, batch_end):
+                res = trial_results[i]
+                assert res is not None
+                history.append({
+                    "trial": res["trial"],
+                    "train_p": res["train_p"],
+                    "val_p": res["val_p"],
+                    "certified": res["certified"],
+                })
+            batch_start = batch_end
+            if batch_delay > 0 and batch_start < n_trials:
+                time.sleep(batch_delay)
 
     for i in range(n_trials):
         res = trial_results[i]
@@ -369,6 +435,9 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator,
     elif defense == "sparse_metered":
         corrected_e = val_e / sparse_factor
         n_cert = int(e_bh_rejections(corrected_e, FDR_ALPHA).sum())
+    elif defense == "maxleak_metered":
+        # Maximal-leakage-corrected e-values are already valid under adaptivity.
+        n_cert = int(e_bh_rejections(val_e, FDR_ALPHA).sum())
     else:
         n_cert = int(by_reject(val_p, FDR_ALPHA).sum())
 
@@ -381,22 +450,44 @@ def run_cell(defense: str, n_trials: int, model: str, rng: np.random.Generator,
     }
 
 
-DEFENSES = ["naive", "no_wall", "metered", "sparse_metered",
+DEFENSES = ["naive", "no_wall", "metered", "sparse_metered", "maxleak_metered",
             "protocol", "conformal", "online_by", "online_lond",
             "e_bh", "online_e_bh", "dby"]
 
 
 def run_defense(defense: str, n_trials: int, reps: int, model: str,
-                rng_master: np.random.Generator, workers: int = 1) -> dict:
-    """Run one defense for the requested number of reps."""
-    counts = []
-    for rep in range(reps):
+                rng_master: np.random.Generator, workers: int = 1,
+                resume: bool = False, batch_delay: float = 0.0) -> dict:
+    """Run one defense for the requested number of reps.
+
+    If resume=True and a per-defense output file exists, load completed reps
+    and continue from where the previous run stopped."""
+    model_slug = model.replace(":", "_")
+    per_file = Path("docs/paper") / f"{defense}_{model_slug}_llm_attack_results.json"
+    counts: list[int] = []
+    start_rep = 0
+    if resume and per_file.exists():
+        try:
+            data = json.loads(per_file.read_text(encoding="utf-8"))
+            stored = data.get("result", {})
+            if stored.get("trials") == n_trials and stored.get("reps") == reps:
+                existing = stored.get("rep_counts")
+                if isinstance(existing, list):
+                    counts = [int(c) for c in existing]
+                    start_rep = len(counts)
+                    print(f"  resuming {defense} {model} from rep {start_rep + 1}/{reps}")
+        except Exception as exc:
+            print(f"  resume failed: {exc}; starting fresh")
+
+    for rep in range(start_rep, reps):
         rng = np.random.default_rng(rng_master.integers(2**63))
-        cell = run_cell(defense, n_trials, model, rng, workers=workers)
+        cell = run_cell(defense, n_trials, model, rng, workers=workers,
+                        batch_delay=batch_delay)
         counts.append(cell["n_certified_false"])
         print(f"  {defense} rep {rep + 1}/{reps}: {cell['n_certified_false']} false certs, "
               f"min val p={cell['min_val_p']:.4g}")
-    return {
+
+    summary = {
         "defense": defense,
         "model": model,
         "trials": n_trials,
@@ -404,7 +495,9 @@ def run_defense(defense: str, n_trials: int, reps: int, model: str,
         "mean_false_certs": float(np.mean(counts)),
         "any_false_cert_rate": float(np.mean(np.array(counts) > 0)),
         "std_false_certs": float(np.std(counts, ddof=1)) if reps > 1 else 0.0,
+        "rep_counts": [int(c) for c in counts],
     }
+    return summary
 
 
 def main() -> None:
@@ -417,7 +510,11 @@ def main() -> None:
                     help="comma-separated list of defenses to run")
     ap.add_argument("--model", type=str, default=DEFAULT_MODEL)
     ap.add_argument("--workers", type=int, default=1,
-                    help="concurrent LLM calls per rep (Ollama only; default 1)")
+                    help="concurrent LLM calls per rep (default 1)")
+    ap.add_argument("--resume", action="store_true",
+                    help="resume from existing per-defense result files")
+    ap.add_argument("--batch-delay", type=float, default=0.0,
+                    help="seconds to sleep between batches (default 0)")
     args = ap.parse_args()
 
     if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_BASE_URL")):
@@ -433,7 +530,9 @@ def main() -> None:
         print(f"\n=== running {defense} ===")
         summaries.append(run_defense(defense, args.trials, args.reps,
                                      args.model, rng_master,
-                                     workers=args.workers))
+                                     workers=args.workers,
+                                     resume=args.resume,
+                                     batch_delay=args.batch_delay))
 
     out = {
         "model": args.model,
@@ -480,6 +579,7 @@ def main() -> None:
             "reps": args.reps,
             "run_date": out["run_date"],
             "result": s,
+            "rep_counts": s.get("rep_counts", []),
         }
         base = f"{d}_{model_slug}_llm_attack_results"
         (docs / f"{base}.json").write_text(

@@ -1,16 +1,40 @@
 {
   "model": "llama3:8b",
   "defense": "naive",
-  "trials": 50,
-  "reps": 5,
-  "run_date": "2026-07-06",
+  "trials": 200,
+  "reps": 10,
+  "run_date": "2026-07-08",
   "result": {
     "defense": "naive",
     "model": "llama3:8b",
-    "trials": 50,
-    "reps": 5,
-    "mean_false_certs": 1.4,
-    "any_false_cert_rate": 0.4,
-    "std_false_certs": 2.6076809620810595
-  }
+    "trials": 200,
+    "reps": 10,
+    "mean_false_certs": 6.6,
+    "any_false_cert_rate": 0.8,
+    "std_false_certs": 5.4609726443393045,
+    "rep_counts": [
+      10,
+      0,
+      6,
+      6,
+      0,
+      13,
+      15,
+      11,
+      4,
+      1
+    ]
+  },
+  "rep_counts": [
+    10,
+    0,
+    6,
+    6,
+    0,
+    13,
+    15,
+    11,
+    4,
+    1
+  ]
 }

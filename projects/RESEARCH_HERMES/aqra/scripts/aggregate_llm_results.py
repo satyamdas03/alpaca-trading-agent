@@ -60,7 +60,17 @@ def main() -> None:
         "online_e_bh",
         "dby",
     ]
-    model_order = ["llama3:8b", "mistral", "gemma2:9b", "qwen2.5:7b", "llama3.1:8b"]
+    model_order = [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-5",
+        "claude-fable-5",
+        "claude-opus-4-8",
+        "llama3:8b",
+        "mistral",
+        "gemma2:9b",
+        "qwen2.5:7b",
+        "llama3.1:8b",
+    ]
 
     def sort_key(r: dict) -> tuple:
         mod_idx = model_order.index(r["model"]) if r["model"] in model_order else 999

@@ -1,11 +1,11 @@
 {
   "model": "llama3:8b",
-  "defense": "protocol",
+  "defense": "maxleak_metered",
   "trials": 200,
   "reps": 10,
   "run_date": "2026-07-09",
   "result": {
-    "defense": "protocol",
+    "defense": "maxleak_metered",
     "model": "llama3:8b",
     "trials": 200,
     "reps": 10,

@@ -1,0 +1,167 @@
+=== PHASE 1 SCALED LLM START: 2026-07-08T18:58:54.170732 ===
+
+[1/6] Next cell: naive llama3:8b
+
+=== 2026-07-08T18:58:54.172035: skipping naive llama3:8b (already complete) ===
+
+[2/6] Next cell: protocol llama3:8b
+
+=== 2026-07-08T18:58:54.172855: running protocol llama3:8b (m=200, r=10) ===
+
+=== running protocol ===
+  protocol rep 4/10: 0 false certs, min val p=0.0058
+  protocol rep 1/10: 0 false certs, min val p=0.007185
+  protocol rep 5/10: 0 false certs, min val p=0.06062
+  protocol rep 2/10: 0 false certs, min val p=0.1389
+  protocol rep 6/10: 0 false certs, min val p=0.006166
+  protocol rep 3/10: 0 false certs, min val p=0.01411
+  protocol rep 7/10: 0 false certs, min val p=0.001325
+  protocol rep 4/10: 0 false certs, min val p=0.0058
+  protocol rep 8/10: 0 false certs, min val p=0.005513
+  protocol rep 5/10: 0 false certs, min val p=0.06062
+  protocol rep 9/10: 0 false certs, min val p=0.03403
+  protocol rep 6/10: 0 false certs, min val p=0.006166
+  protocol rep 10/10: 0 false certs, min val p=0.02809
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+=== 2026-07-08T23:33:30.700012: completed protocol llama3:8b ===
+
+[3/6] Next cell: maxleak_metered llama3:8b
+
+=== 2026-07-08T23:33:30.702329: running maxleak_metered llama3:8b (m=200, r=10) ===
+
+=== running maxleak_metered ===
+  protocol rep 7/10: 0 false certs, min val p=0.001325
+  maxleak_metered rep 1/10: 0 false certs, min val p=0.007185
+  protocol rep 8/10: 0 false certs, min val p=0.005513
+  maxleak_metered rep 2/10: 0 false certs, min val p=0.1389
+  protocol rep 9/10: 0 false certs, min val p=0.03403
+  maxleak_metered rep 3/10: 0 false certs, min val p=0.01411
+  protocol rep 10/10: 0 false certs, min val p=0.02809
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+=== 2026-07-09T01:14:51.183589: completed protocol llama3:8b ===
+
+[3/6] Next cell: maxleak_metered llama3:8b
+
+=== 2026-07-09T01:14:51.185609: running maxleak_metered llama3:8b (m=200, r=10) ===
+
+=== running maxleak_metered ===
+  maxleak_metered rep 4/10: 0 false certs, min val p=0.0058
+  maxleak_metered rep 1/10: 0 false certs, min val p=0.007185
+  maxleak_metered rep 5/10: 0 false certs, min val p=0.06062
+  maxleak_metered rep 2/10: 0 false certs, min val p=0.1389
+  maxleak_metered rep 6/10: 0 false certs, min val p=0.006166
+  maxleak_metered rep 3/10: 0 false certs, min val p=0.01411
+  maxleak_metered rep 7/10: 0 false certs, min val p=0.001325
+  maxleak_metered rep 4/10: 0 false certs, min val p=0.0058
+  maxleak_metered rep 8/10: 0 false certs, min val p=0.005513
+  maxleak_metered rep 5/10: 0 false certs, min val p=0.06062
+  maxleak_metered rep 9/10: 0 false certs, min val p=0.03403
+  maxleak_metered rep 6/10: 0 false certs, min val p=0.006166
+  maxleak_metered rep 10/10: 0 false certs, min val p=0.02809
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+=== 2026-07-09T03:13:19.925242: completed maxleak_metered llama3:8b ===
+
+[4/6] Next cell: naive mistral
+
+=== 2026-07-09T03:13:19.926004: running naive mistral (m=200, r=10) ===
+
+=== running naive ===
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  maxleak_metered rep 7/10: 0 false certs, min val p=0.001325
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s    ollama call failed (attempt 2/5): timed out — retry in 2s
+
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 3/5): timed out — retry in 4s    ollama call failed (attempt 3/5): timed out — retry in 4s
+
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  naive rep 1/10: 10 false certs, min val p=0.007185
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  maxleak_metered rep 8/10: 0 false certs, min val p=0.005513
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  naive rep 2/10: 0 false certs, min val p=0.1389
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  maxleak_metered rep 9/10: 0 false certs, min val p=0.03403
+    ollama call failed (attempt 1/5): timed out — retry in 1s    ollama call failed (attempt 1/5): timed out — retry in 1s
+
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 2/5): timed out — retry in 2s
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 3/5): timed out — retry in 4s    ollama call failed (attempt 3/5): timed out — retry in 4s
+
+    ollama call failed (attempt 3/5): timed out — retry in 4s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 4/5): timed out — retry in 8s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  naive rep 3/10: 6 false certs, min val p=0.01411
+    ollama call failed (attempt 1/5): timed out — retry in 1s    ollama call failed (attempt 1/5): timed out — retry in 1s
+
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+    ollama call failed (attempt 1/5): timed out — retry in 1s
+  maxleak_metered rep 10/10: 0 false certs, min val p=0.02809
+
+wrote docs/paper/llm_attack_results.{json,md} and per-defense files
+=== 2026-07-09T05:21:50.189677: completed maxleak_metered llama3:8b ===
+
+[4/6] Next cell: naive mistral
+
+=== 2026-07-09T05:21:50.191220: running naive mistral (m=200, r=10) ===
+
+=== running naive ===
+  naive rep 4/10: 6 false certs, min val p=0.0058
+  naive rep 1/10: 10 false certs, min val p=0.007185
+  naive rep 5/10: 0 false certs, min val p=0.06062
+  naive rep 2/10: 0 false certs, min val p=0.1389
