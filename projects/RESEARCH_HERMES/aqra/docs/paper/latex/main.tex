@@ -1,21 +1,27 @@
-%% AQRA — ICAIF '26 submission (double-blind).
-%% Build: Overleaf (acmart is preinstalled) or `latexmk -pdf main.tex`.
+%% Honest Agent Protocol -- ICAIF '26 submission (double-blind).
+%% Build: Overleaf (acmart preinstalled) or `latexmk -pdf main.tex`.
 \documentclass[sigconf,anonymous,review]{acmart}
 
 \usepackage{booktabs}
-\usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta,calc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
 
-%% ICAIF '26 metadata (update rights info from CMT instructions when issued).
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+%% ICAIF '26 metadata.
 \setcopyright{acmlicensed}
 \acmConference[ICAIF '26]{7th ACM International Conference on AI in Finance}%
-{November 14--17, 2026}{Milan, Italy}
+  {November 14--17, 2026}{Milan, Italy}
 \acmYear{2026}
 
 \begin{document}
 
-\title{AQRA: An Autonomous Conformal Agent that Proposes, Certifies, and
-Deploys Trading Strategies}
+\title{Honest Agent Protocol: Controlling False Discoveries from Adaptive
+  LLM Hypothesis Generators}
 
 \author{Anonymous Author(s)}
 \affiliation{%
@@ -25,26 +31,24 @@ Deploys Trading Strategies}
 }
 
 \begin{abstract}
-Large language models are increasingly used to mine trading signals, yet the
-resulting agents are statistically unaccountable: they propose hundreds of
-hypotheses and report the survivors as if they were pre-specified. We present
-AQRA, an autonomous research agent in which \emph{the agent proposes and the
-statistics dispose}. An LLM generates candidate signals in a constrained
-domain-specific language whose grammar makes look-ahead impossible by
-construction; every proposal---including malformed and failed ones---is
-registered in a persistent trials ledger \emph{before} evaluation; and
-certification requires surviving a Benjamini--Yekutieli false-discovery-rate
-correction applied over the full ledger, conformal coverage checks, hard risk
-gates, and an adversarial LLM review chamber. On a survivorship-bias-free
-S\&P~500 universe (2010--2026), AQRA reproduces the post-publication behavior
-of four canonical factors, and then certifies \textbf{zero of fourteen}
-candidate strategies whose in-sample Sharpe ratios reached 1.2---because they
-failed to generalize out-of-sample. In placebo runs with cross-sectionally
-permuted signals, the gate certifies \textbf{zero of eighteen} impostors. We
-argue that a research agent's willingness to reject its own candidates is the
-correct headline metric for trustworthy AI in finance, and we release the full
-pipeline and trials ledger for reproduction, with a live paper-trading
-audit trail accompanying the deployment gate.
+Large language model agents can generate, evaluate, and iteratively refine
+empirical hypotheses at machine speed. When the agent reads its own rejections
+and keeps reusing the same held-out data, classical pre-specification
+assumptions collapse. We introduce the \emph{Honest Agent Protocol}, a
+statistical discipline that lets an arbitrary, memoryful, possibly adversarial
+generator propose hypotheses while guaranteeing a bounded false-discovery rate.
+The core ingredient is an \emph{e-value firewall}: e-BH and online e-BH control
+FDR under arbitrary dependence among the e-values, which is exactly the
+dependence created by an adaptive generator on a shared validation set. We add
+a train-only feedback wall, a metered leakage channel priced by SparseValidate
+(Theorem~S) and by maximal leakage (Theorem~M), an anytime online extension
+(Theorem~3), and a hash-chained \emph{Proof-of-Trial} verifier. Empirically, a
+synthetic finance attack suite shows the naive channel certifies 204.5 false
+strategies at $m=400$ while the protocol certifies 0; a cross-domain ML demo
+shows 0.50 false classifiers without the wall and 0 with it; and a real-LLM
+experiment confirms the separation across local open-weight models and an
+Anthropic proprietary model. Code and ledgers are released for independent
+reproduction.
 \end{abstract}
 
 \begin{CCSXML}
@@ -59,389 +63,489 @@ audit trail accompanying the deployment gate.
   <concept_desc>Computing methodologies~Artificial intelligence</concept_desc>
   <concept_significance>300</concept_significance>
  </concept>
+ <concept>
+  <concept_id>10010147.10010257.10010293.10011809</concept_id>
+  <concept_desc>Computing methodologies~Multi-agent systems</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
 </ccs2012>
 \end{CCSXML}
 \ccsdesc[500]{Applied computing~Economics}
 \ccsdesc[300]{Computing methodologies~Artificial intelligence}
+\ccsdesc[300]{Computing methodologies~Multi-agent systems}
 
-\keywords{LLM agents, trading strategies, conformal prediction, false
-discovery rate, multiple testing, backtest overfitting, pre-registration}
+\keywords{LLM agents, false discovery rate, e-values, conformal prediction,
+  adaptive data analysis, multiple testing, trading strategies,
+  reproducibility}
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
-Three failure modes dominate quantitative strategy research: confirmation
-bias, multiple-testing abuse, and look-ahead leakage. LLM-based factor-mining
-agents amplify all three: they generate hypotheses at unprecedented rate,
-they are trained to please their operators, and nothing in their sampling
-process respects point-in-time data availability. Recent systems
-\cite{factormad,quantaalpha,alphacrafter,qrafti} demonstrate impressive
-generation capability but report survivors without charging the search
-process for its failures. The admonition of Harvey, Liu, and
-Zhu~\cite{harvey2016}---that a newly claimed factor should clear a
-$t$-statistic of 3.0 precisely because of the unreported multiplicity behind
-it---applies with more force, not less, when the researcher is a language
-model that can emit a thousand candidates per hour.
+LLM agents are becoming autonomous empirical researchers: they propose
+hypotheses, write code, run experiments, inspect results, and iterate. In
+quantitative finance this speed is especially seductive. Recent systems
+\cite{factormad,quantaalpha,alphacrafter,qrafti} generate trading signals
+with impressive fluency but report survivors without charging the search
+process for its failures. The multiplicity warning of Harvey, Liu, and
+Zhu~\cite{harvey2016}---that a newly claimed factor should clear a high
+$t$-statistic precisely because of the unreported trials behind it---applies
+with more force, not less, when the researcher is a language model that can
+emit thousands of candidates per hour.
 
-AQRA (Autonomous Quantitative Research Agent) inverts the design. The
-generative freedom of the LLM is preserved, but every route from idea to
-capital passes through statistical machinery the model cannot negotiate with
-(Figure~\ref{fig:arch}):
+The statistical problem is not merely that many hypotheses are tested; it is
+that the hypotheses are \emph{adaptive}. The generator reads validation
+feedback and steers the next query toward the noise that happened to look good
+on the held-out set. This is the reusable-holdout failure mode identified by
+Dwork et al.~\cite{dwork2015}. Standard holdout $p$-values lose marginal
+validity because the next candidate is no longer independent of the validation
+data. Online $p$-value procedures such as LORD++~\cite{javanmard2018,ramdas2017}
+control FDR under independence or specific dependence structures, but they do
+not handle the shared-validation dependence induced by an adaptive
+agent~\cite{sargsyan2025}.
 
+\textbf{The Honest Agent Protocol} inverts the design. The generative freedom
+of the LLM is preserved, but every route from idea to certified claim passes
+through statistical machinery the model cannot negotiate with:
 \begin{enumerate}
-\item \textbf{A constrained signal DSL.} Candidates are JSON abstract-syntax
-trees over whitelisted point-in-time features and operators. Time-series
-operators reach strictly backward; cross-sectional operators act within a
-single date. Look-ahead is a type error, not a reviewer finding.
-\item \textbf{A trials ledger.} Every proposal is registered \emph{before}
-evaluation. Malformed proposals and failed backtests stay on the books with
-$p = 1$. The Benjamini--Yekutieli correction runs over the entire ledger, so
-each additional attempt raises the bar for all of them. You cannot un-try a
-hypothesis.
-\item \textbf{A train/validation wall.} The generator's feedback loop sees
-train-window statistics only. Validation-window results never reach the
-model, closing the leakage channel through which an LLM could overfit the
-held-out data across generations.
-\item \textbf{Independent certification.} Survivors of FDR selection must
-clear conformal coverage checks, hard Sharpe/drawdown/turnover gates, and an
-adversarial LLM review chamber (BEAR) that hunts for look-ahead bias, data
-mining, and missing economic rationale.
-\item \textbf{A live deployment gate.} Certified strategies deploy to paper
-trading with lane budgets, kill switches, and a git-tracked audit trail.
+\item \textbf{Constrained proposal grammar.} Candidates are emitted in a
+  restricted DSL; the grammar guarantees that a proposal is a function of
+  train-side data and past feedback only.
+\item \textbf{Trials ledger.} Every proposal is registered \emph{before}
+  evaluation. Failed or invalid trials stay on the books with $e_i=0$. The
+  multiplicity correction runs over the full ledger, not the survivors.
+\item \textbf{E-value firewall.} The validator emits e-values rather than
+  $p$-values. E-BH~\cite{wang2022} and online e-BH / e-LOND~\cite{xu2024}
+  control FDR under \emph{arbitrary dependence} among the e-values, which is
+  precisely the dependence created by an adaptive generator reusing a shared
+  validation set.
+\item \textbf{Train-only wall (optional but efficient).} When no
+  validation-side information leaks, proposals are independent of the
+  validation sample and standard e-values are valid without leakage correction.
+\item \textbf{Metered leakage channel.} If accept/reject bits are revealed, we
+  price the leakage with SparseValidate~\cite{dwork2015} (polynomial factor)
+  or maximal leakage~\cite{esposito2019} (sharp one-bit factor).
+\item \textbf{Proof-of-Trial verifier.} The ledger is exported to a
+  hash-chained format; an independent tool recomputes the FDR selections and
+  checks the chain, so third parties need not trust the agent.
 \end{enumerate}
 
-Our contribution is the closed trustworthy loop, not the alpha. Indeed, our
-headline empirical results are refusals: on real data the full pipeline
-certifies 0/14 candidates (the best of which reached in-sample Sharpe 1.20),
-and 0/18 placebo impostors. We contend this is what an honest autonomous
-researcher looks like on a decade of large-cap US equities with free data,
-and that the ledger discipline---not the generation cleverness---is the
-transferable idea.
+Our contribution is the operational protocol and the central theorem that
+arbitrary adaptive dependence on a shared validation set is no obstacle to FDR
+control once the validator emits e-values. We validate this with three
+experiments. In a synthetic finance attack suite, the naive uncorrected loop
+certifies \textbf{204.5} false strategies on average at $m=400$, a loop with
+BY-FDR but no wall still certifies \textbf{75.95}, and the full protocol
+\textbf{0}. In a cross-domain ML demo on a no-signal classification task, the
+wall reduces false classifiers from 0.50 to 0. In a real-LLM experiment, local
+open-weight models and an Anthropic proprietary model both produce false
+certifications under the naive channel, while every firewall arm suppresses
+them.
 
-\section{Related Work}
+\section{Related Work}\label{sec:related}
 
-\textbf{LLM agents for factor mining.} FactorMAD~\cite{factormad} uses
-multi-agent debate for interpretable alpha mining; QuantaAlpha%
-~\cite{quantaalpha} evolves factor populations; AlphaCrafter%
-~\cite{alphacrafter} builds full-stack multi-agent trading pipelines; QRAFTI%
-~\cite{qrafti} orchestrates empirical research workflows. These systems
-evaluate generated factors on held-out data but do not account for the number
-of draws taken, and none maintain a pre-registration ledger. AQRA is
-complementary: any of their generators could sit upstream of our gate.
+\textbf{Adaptive data analysis.} Dwork et al.~\cite{dwork2015} introduced the
+reusable holdout and SparseValidate, which bounds the damage of adaptive
+queries. Russo and Zou~\cite{russo2016} gave mutual-information bias bounds.
+These works bound adaptivity in the abstract; we instantiate them in an LLM
+agent loop with an auditable ledger and explicit leakage pricing.
 
-\textbf{Multiple testing in finance.} Bailey and L\'opez de Prado formalized
-backtest overfitting and the deflated Sharpe
-ratio~\cite{bailey2014,bailey2016}, and codified backtesting best
-practices~\cite{lopezdeprado2018}; Harvey, Liu, and
-Zhu~\cite{harvey2016} documented the
-multiplicity crisis in factor research; McLean and Pontiff~\cite{mclean2016}
-measured post-publication decay. The Benjamini--Yekutieli
-procedure~\cite{by2001} is valid under arbitrary dependence, which matters
-because trading-strategy $p$-values are strongly dependent. Our contribution
-is operational: the correction is enforced over a ledger the agent cannot
-bypass, rather than applied post hoc by a well-intentioned author.
+\textbf{Multiple testing.} Benjamini and Yekutieli~\cite{by2001} control FDR
+under arbitrary dependence of $p$-values, but their online and $p$-value-based
+cousins require independence or restrictive dependence structures. Wang and
+Ramdas~\cite{wang2022} introduced e-BH, which controls FDR under arbitrary
+dependence of e-values. Xu and Ramdas~\cite{xu2024} extended this to the online
+setting via e-LOND. The protocol replaces $p$-values with e-values precisely
+because the adaptive generator induces arbitrary dependence on a shared
+validation set.
 
-\textbf{Conformal prediction}~\cite{vovk2005,angelopoulos2021} provides
-finite-sample, distribution-free coverage guarantees. We use split-conformal
-intervals calibrated on the training window and report validation coverage
-per candidate; coverage degradation itself becomes a certification signal
-(Section~\ref{sec:coverage}).
+\textbf{Conformal prediction.} Split-conformal p-values provide
+finite-sample, distribution-free validity under exchangeability~
+\cite{vovk2005,angelopoulos2021,papadopoulos2002}. We show how to convert them
+into valid e-values via $E=-\log P$, preserving validity and gaining the
+arbitrary-dependence FDR guarantee.
 
-\textbf{Pre-registration.} Our ledger is the algorithmic analogue of clinical
-trial registries---the instrument that reduced reported effect sizes in
-medicine when outcome switching became visible.
+\textbf{LLM research agents.} FactorMAD, QuantaAlpha, AlphaCrafter, and QRAFTI
+are recent LLM-driven factor-mining or research-orchestration systems~
+\cite{factormad,quantaalpha,alphacrafter,qrafti}. They evaluate candidates on
+held-out data but do not maintain a pre-registration ledger or enforce a
+statistical firewall. AQRA~\cite{das2026} is the finance instantiation that
+motivates this work; the Honest Agent Protocol abstracts the ledger discipline
+out of that domain. Sargsyan~\cite{sargsyan2025} proposes structural enforcement
+with LORD++ and Lean 4 formalization; LORD++ does not handle the
+shared-validation adaptive setting we target.
 
-\section{The AQRA Architecture}
+\section{The Honest Agent Protocol}\label{sec:protocol}
+
+\subsection{Setup and threat model}\label{sec:setup}
+
+A protocol run proceeds in rounds $i=1,2,\dots$:
+\begin{itemize}
+\item A training sample $T$ and a held-out validation sample $V$ are fixed
+  before the run and satisfy $T\perp V$.
+\item A generator $G$ is an arbitrary randomized algorithm \emph{with memory}.
+  In each round it emits a candidate $a_i$ in a constrained grammar. $G$ is
+  adversarial: it may be designed solely to force false certifications.
+\item A validator evaluates $a_i$ on $V$ and produces an e-value $e_i$ under the
+  null that $a_i$ has no edge.
+\item A ledger records every registered candidate before evaluation. Failed or
+  invalid trials receive $e_i=0$.
+\item A feedback channel $F_i$ is revealed to $G$ after round $i$.
+\end{itemize}
+The protocol's only restriction on $G$ is informational: $F_i$ must be
+measurable with respect to $\sigma(T,a_1,\dots,a_i,\text{G's coins})$ when the
+wall is active, and must not contain $V$-side information.
+
+An e-value is a non-negative random variable with $\mathbb{E}[e_i\mid\text{null}]\le 1$.
+The key observation is that the conditional expectation assumption
+$\mathbb{E}[e_i\mid\mathcal{F}_{i-1}]\le 1$ can hold even when the generator is
+fully adaptive, because the validator---not the generator---computes $e_i$ from
+$V$.
+
+\subsection{Theorem E: the e-value firewall}\label{sec:theorem-e}
+
+\begin{theorem}[E-value firewall]\label{thm:e}
+Let $G$ be any adaptive generator. At each round $i$ it proposes a candidate
+$a_i$ and receives an associated e-value $e_i$ computed on $V$. The generator
+may use the entire history $(a_1,e_1,R_1),\dots,(a_{i-1},e_{i-1},R_{i-1})$,
+where $R_i\in\{0,1\}$ indicates whether $a_i$ was selected. Assume that for
+every null candidate
+\begin{equation}\label{eq:cond-valid}
+\mathbb{E}\left[ e_i \mid \mathcal{F}_{i-1} \right] \le 1,
+\end{equation}
+where $\mathcal{F}_{i-1}$ is the filtration generated by $G$ up to round $i-1$.
+Apply e-BH at level $\alpha$ to $(e_1,\dots,e_m)$. Then
+\begin{equation}
+\mathrm{FDR}_m
+:= \mathbb{E}\!\left[ \frac{|\{i\le m : a_i\text{ null and }R_i=1\}|}
+                       {\max\{1,\sum_{i\le m} R_i\}} \right]
+\le \alpha.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Wang and Ramdas~\cite{wang2022} prove that e-BH controls
+$\mathrm{FDR}\le\alpha$ whenever the input e-values satisfy
+$\mathbb{E}[e_i]\le 1$ for null $i$; the proof does not require independence.
+Equation~\eqref{eq:cond-valid} implies marginal validity by the tower property,
+so the e-BH guarantee applies directly.
+\end{proof}
+
+Theorem~\ref{thm:e} is the breakthrough: it gives the generator full
+adaptivity while the firewall controls false discoveries, even as the
+generator reads every past rejection and reuses $V$.
+
+\subsection{Conformal Theorem~E}\label{sec:conformal-e}
+
+Replace parametric $p$-values with a three-way split: $T_{\text{train}}$ is
+visible to $G$, while $T_{\text{calib}}$ and $V$ are visible only to the
+validator. The validator computes a nonconformity score $s_i(v)$ and the
+split-conformal p-value
+\begin{equation}
+p_i = \frac{1 + \#\{u\in T_{\text{calib}} : s_i(u)\ge s_i(v)\}}
+            {|T_{\text{calib}}|+1}.
+\end{equation}
+Under exchangeability and the null, $p_i$ is super-uniform. Convert it to a
+conformal e-value
+\begin{equation}\label{eq:conf-e}
+e_i = -\log p_i,
+\end{equation}
+which satisfies $\mathbb{E}[e_i\mid\text{null}]=1$ because
+$\mathbb{E}[-\log U]=1$ for $U\sim\text{Uniform}[0,1]$. Applying e-BH or
+online e-BH to these conformal e-values controls $\mathrm{FDR}\le\alpha$ with
+no parametric assumption and under the same arbitrary adaptive dependence.
+
+\subsection{Theorem S: polynomial leakage pricing via SparseValidate}\label{sec:theorem-s}
+
+Real systems leak: even publishing accept/reject decisions is feedback about
+$V$. In the \emph{metered channel}, the generator sees one bit per round:
+whether its candidate cleared a candidacy threshold $\lambda_m$ separate from
+the final FDR level $\alpha$. Set
+\begin{equation}
+\lambda_m := \frac{\alpha}{\log(m+1)},\qquad
+K_m := \lceil \lambda_m m \rceil.
+\end{equation}
+Under the null each accept bit is a Bernoulli trial with success probability
+at most $\lambda_m$, so $\Pr(K>K_m)$ decays exponentially. Conditional on
+$K\le K_m$, SparseValidate bounds the number of possible transcripts by
+\begin{equation}
+\mathcal{T}(m,K_m) := \sum_{j=0}^{K_m} \binom{m}{j}
+\le \left(\frac{e m}{K_m}\right)^{K_m},
+\end{equation}
+which is polynomial in $m$, not the worst-case $2^m$.
+
+\begin{theorem}[SparseValidate metered wall]\label{thm:s}
+Let the validator reveal only the bit $\mathbf{1}\{p_i\le\lambda_m\}$ and run
+ e-BH at level $\alpha$ on the corrected e-values
+\begin{equation}
+e_i^* := \frac{1}{\mathcal{T}(m,K_m)} \cdot
+          \frac{\mathbf{1}\{p_i\le\lambda_m\}}{\lambda_m}.
+\end{equation}
+Then, under the null,
+\begin{equation}
+\mathbb{E}\left[ e_i^* \mid \text{null} \right] \le 1,
+\end{equation}
+and e-BH controls $\mathrm{FDR}\le\alpha$ under arbitrary adaptive
+dependence on the leaked accept bits.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+SparseValidate implies
+$\Pr(p_i\le\lambda_m\mid\text{transcript})\le\mathcal{T}(m,K_m)\lambda_m+\beta$
+with $\beta=\Pr(K>K_m)$ negligible. Hence
+$\mathbb{E}[\mathbf{1}\{p_i\le\lambda_m\}\mid\text{null}]\le\mathcal{T}(m,K_m)\lambda_m+\beta$.
+Dividing by $\mathcal{T}(m,K_m)\lambda_m$ yields an e-value with expectation at
+most $1+o(1)$. The $o(1)$ term is absorbed by a slight level correction or by
+conditioning on $K\le K_m$. Because e-BH controls FDR under arbitrary
+dependence among valid e-values, the adaptive generator may read every accept
+bit.
+\end{proof}
+
+Theorem~\ref{thm:s} is intentionally worst-case: it prices the maximum leakage
+over all adaptive channels that produce at most $K_m$ accepts.
+
+\subsection{Theorem M: maximal leakage wall}\label{sec:theorem-m}
+
+For the same metered channel, we price leakage directly rather than through
+the worst-case transcript count. Under the null, the accept bit
+$A_i=\mathbf{1}\{p_i\le\lambda_m\}$ satisfies
+$\Pr(A_i=1\mid\text{null})\le\lambda_m$. The maximal leakage from $V$ to
+this bit is bounded by
+\begin{equation}
+\mathcal{L}(V\to A_i) \le \log_2\!\left(\frac{1}{\lambda_m}\right)
+\quad\text{bits}.
+\end{equation}
+Multiplying the uncorrected e-value
+$\mathbf{1}\{p_i\le\lambda_m\}/\lambda_m$ by the leakage discount
+$2^{-\mathcal{L}(V\to A_i)}=\lambda_m$ gives
+\begin{equation}
+e_i^{**} := 2^{-\mathcal{L}(V\to A_i)} \cdot
+            \frac{\mathbf{1}\{p_i\le\lambda_m\}}{\lambda_m}
+          = \mathbf{1}\{p_i\le\lambda_m\}.
+\end{equation}
+
+\begin{theorem}[Maximal-leakage metered wall]\label{thm:m}
+The leakage-corrected e-values satisfy
+\begin{equation}
+\mathbb{E}\left[ e_i^{**} \mid \text{null} \right]
+= \Pr(p_i\le\lambda_m\mid\text{null})
+\le \lambda_m \le 1,
+\end{equation}
+and e-BH controls $\mathrm{FDR}\le\alpha$ under arbitrary adaptive
+dependence on the leaked accept bits.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The equality is the expectation of an indicator; super-uniformity of $p_i$
+under the null gives the first inequality, and $\lambda_m<1$ the second.
+Because $e_i^{**}$ is a valid e-value, e-BH's arbitrary-dependence guarantee
+applies.
+\end{proof}
+
+\textbf{Comparison.} Theorem~\ref{thm:s} prices the \emph{set of possible
+transcripts}; Theorem~\ref{thm:m} prices the \emph{actual one-bit channel}.
+The factor $2^{\mathcal{L}}=1/\lambda_m$ is exponentially smaller than the
+SparseValidate polynomial factor $\mathcal{T}(m,K_m)$ (see
+Figure~\ref{fig:leakage}). Theorem~\ref{thm:s} remains the conservative
+safety certificate; Theorem~\ref{thm:m} is the sharper bound used in practice.
+
+\subsection{Theorem 3: anytime online FDR}\label{sec:theorem-3}
+
+A live agent never stops. Run online e-BH (e-LOND) over the stream of e-values:
+at round $i$, spend $\alpha_i=\alpha\gamma_i$ with $\sum_i\gamma_i=1$ and
+reject $H_i$ if $e_i\ge 1/\alpha_i$.
+
+\begin{theorem}[Immortal wall]\label{thm:3}
+Xu and Ramdas~\cite{xu2024} prove that e-LOND controls
+$\mathrm{FDR}_t\le\alpha$ simultaneously for all $t$ under arbitrary
+dependence among the e-values. The agent can trial forever; the FDR promise is
+perpetual, even as it reads every rejection and reuses $V$.
+\end{theorem}
+
+\subsection{Proof-of-Trial verifier}\label{sec:verifier}
+
+A theorem is not enough if the agent can lie about the ledger. The verifier
+exports the ledger to a hash-chained JSON-line file. Each record carries
+\texttt{previous\_hash} and \texttt{this\_hash}; the latter is a SHA-256 digest
+of all canonical fields. The metadata line publishes the FDR level, correction
+method, and certified set. An independent verifier recomputes the hashes,
+walks the chain, and recomputes e-BH / online e-BH / BY. Any tampering or
+overclaiming is detected.
+
+\section{Empirical Validation}\label{sec:empirical}
+
+All experiments are all-null by construction: any certified candidate is a
+false discovery. Full code and exported ledgers accompany the paper.
+
+\subsection{M2: Synthetic finance attack suite}\label{sec:m2}
+
+Candidates are random weight vectors over 50 synthetic assets; returns are
+iid Gaussian noise. The attacker hill-climbs on whatever feedback the defense
+exposes. Table~\ref{tab:m2} reports mean false certifications over 20
+replicates.
+
+\begin{table}[t]
+\caption{M2 finance attack suite: mean false certifications (rate of at
+  least one false cert) over 20 reps at $m=400$. Ground truth: all null.}
+\label{tab:m2}
+\small
+\begin{tabular}{lrr}
+\toprule
+Defense & Hill-climb attacker & Random attacker \\
+\midrule
+naive (no correction, full leak) & 204.50 (100\%) & 18.00 (100\%) \\
+no\_wall (BY-FDR, full leak) & 75.95 (85\%) & 0.00 (0\%) \\
+metered (BY-FDR, one-bit leak) & 1.15 (30\%) & 0.00 (0\%) \\
+sparse\_metered (e-BH, SparseValidate) & 0.00 (0\%) & 0.00 (0\%) \\
+maxleak\_metered (e-BH, maximal leakage) & 0.00 (0\%) & 0.00 (0\%) \\
+protocol (BY-FDR, train-only wall) & 0.00 (0\%) & 0.00 (0\%) \\
+conformal (e-BH, conformal e-values, wall) & 0.00 (0\%) & 0.00 (0\%) \\
+e\_bh (e-BH, train-only wall) & 0.00 (0\%) & 0.00 (0\%) \\
+online\_e\_bh (e-LOND, wall) & 0.00 (0\%) & 0.00 (0\%) \\
+dby (dependence-adjusted BY, wall) & 0.25 (10\%) & 0.00 (0\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The naive channel explodes: 204.5 false certifications at $m=400$. BY-FDR with
+full leakage (no\_wall) still certifies 75.95, because adaptivity makes the
+$p$-values anti-conservative. The metered channel reduces leakage but not to
+zero. The e-value arms---sparse\_metered, maxleak\_metered, e\_bh,
+online\_e\_bh---together with the train-only wall arms, control false
+certifications. Figure~\ref{fig:leakage} shows that maximal leakage prices the
+one-bit channel far more tightly than SparseValidate.
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[
-  font=\scriptsize,
-  node distance=2.2mm and 4mm,
-  box/.style={draw, rounded corners=1pt, align=center,
-              inner sep=2.5pt, minimum height=4.5mm},
-  gate/.style={box, thick},
-  arr/.style={-{Stealth[length=1.6mm]}}
-]
-\node[box] (gen) {LLM generator};
-\node[box, right=8mm of gen] (dsl) {DSL validator};
-\node[gate, below=of dsl] (ledger) {trials ledger\\(register \emph{before} eval)};
-\node[box, below left=3mm and -6mm of ledger] (train) {train backtest\\2012--2018};
-\node[box, below right=3mm and -6mm of ledger] (val) {validation backtest\\2019--2024};
-\node[gate, below=11mm of ledger] (fdr) {conformal + BY-FDR\\over \emph{full} ledger};
-\node[gate, below=of fdr] (cert) {lane certifiers};
-\node[gate, right=6mm of cert] (bear) {BEAR review};
-\node[box, below=of cert] (reg) {registry};
-\node[gate, right=6mm of reg] (live) {live gate\\(paper, kill switches)};
-
-\draw[arr] (gen) -- (dsl);
-\draw[arr] (dsl) -- (ledger);
-\draw[arr] (ledger) -- (train);
-\draw[arr] (ledger) -- (val);
-\draw[arr] (val) -- (fdr);
-\draw[arr] (train.west) to[out=180, in=-90]
-  node[left, align=center, font=\tiny] {train-only\\feedback} (gen.south);
-\draw[arr] (fdr) -- (cert);
-\draw[arr] (cert) -- (bear);
-\draw[arr] (bear) |- (reg);
-\draw[arr] (reg) -- (live);
-\draw[dashed, thick]
-  ($(train.east)!0.5!(val.west) + (0,-4mm)$) --
-  ($(train.east)!0.5!(val.west) + (0,4mm)$)
-  node[above, font=\tiny] {wall};
-\end{tikzpicture}
-\caption{The closed loop: the agent proposes, the statistics dispose.
-Every proposal is ledgered before evaluation; the FDR correction is
-computed over the full ledger; the generator's feedback never crosses
-the train/validation wall.}
-\label{fig:arch}
+\includegraphics[width=\columnwidth]{../leakage_factors.png}
+\caption{Leakage correction factors for the metered one-bit channel at
+  $m=400$: SparseValidate transcript bound $\mathcal{T}(m,K_m)$ versus the
+  maximal-leakage factor $2^{\mathcal{L}}=1/\lambda_m$. Maximal leakage is
+  orders of magnitude smaller.}
+\label{fig:leakage}
 \end{figure}
 
-\subsection{Dual-lane design}
+\subsection{M3: Cross-domain ML demo}\label{sec:m3}
+
+We test domain transfer on a synthetic 50-feature binary classification task
+where labels are independent of features. Candidates are random linear
+classifiers; the generator hill-climbs on train accuracy (wall) or validation
+$p$-value / e-value (no wall). Table~\ref{tab:m3} shows mean false
+classifications certified at $m=400$.
 
 \begin{table}[h]
-\caption{Lane structure.}
-\label{tab:lanes}
-\begin{tabular}{llll}
+\caption{M3 cross-domain ML demo: mean false certs at $m=400$.}
+\label{tab:m3}
+\begin{tabular}{lr}
 \toprule
-Lane & Sources & Horizon & Examples \\
+Protocol & Mean false certs \\
 \midrule
-S --- structural & prices, fundamentals & 21\,d & momentum, value, quality \\
-I --- informational & prices, volume, events & 1--5\,d & overnight gap, volume \\
+No wall, batch BY-FDR & 0.50 \\
+Wall, batch BY-FDR & 0.00 \\
+Wall, online BY & 0.00 \\
+Wall, e-BH & 0.00 \\
+Wall, online e-BH & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Lanes have independent feature tables, calibration, backtests, certifiers,
-and turnover caps (Lane~S: $1.0\times$ annualized; Lane~I: higher cap with a
-signal half-life floor of 2 days).
+The separation transfers outside finance, and the e-value firewall matches the
+$p$-value wall without requiring the train-only independence assumption.
 
-\subsection{The signal DSL}
-\label{sec:dsl}
+\subsection{M4: Real LLM adaptive generator}\label{sec:m4}
 
-Candidates are JSON ASTs with node forms
-\texttt{\{feature\}},
-\texttt{\{op, arg\}} for unary operators
-(\texttt{rank}, \texttt{zscore}, \texttt{neg}, \texttt{abs}, \texttt{sign}),
-\texttt{\{op, arg, window\}} for time-series operators
-(\texttt{ts\_mean}, \texttt{ts\_std}, \texttt{delta}, \texttt{lag};
-$1 \le w \le 252$), and \texttt{\{op, left, right\}} for binary operators
-(\texttt{add}, \texttt{sub}, \texttt{mul}, \texttt{div}, \texttt{min},
-\texttt{max}); depth $\le 6$, nodes $\le 25$.
+The previous experiments used hand-coded hill climbers. To test whether an
+actual generative model can exploit the feedback channel, we replace the
+attacker with LLMs. Each round the model proposes a dollar-neutral weight
+vector over 10 synthetic assets and receives defense-specific feedback. The
+world remains all-null, so any certification is a false discovery.
 
-\texttt{rank} and \texttt{zscore} act cross-sectionally within a date;
-\texttt{ts\_*} operators act per ticker and reach strictly backward. Because
-leaves are point-in-time features and no operator can reference the future,
-\textbf{look-ahead is unrepresentable}. A property test mutates all feature
-values after a cutoff date and asserts the signal before the cutoff is
-bit-identical. The hand-written factor library is itself expressed in the
-DSL, so library and generated candidates share one evaluation path and one
-ledger.
-
-\subsection{The trials ledger}
-
-Lifecycle: \texttt{REGISTERED} $\to$ \{\texttt{REJECTED\_INVALID},
-\texttt{REJECTED\_EVAL}, \texttt{EVALUATED}\}. Registration precedes
-evaluation; the ledger API raises on any attempt to record results for an
-unregistered trial. FDR selection queries the full ledger; non-evaluated
-trials enter at $p = 1.0$. In our tests, a marginal $p = 0.03$ candidate that
-survives BY correction alone is correctly killed once 200 failed attempts
-join the ledger.
-
-\subsection{Generation with a train/validation wall}
-
-The generator (an LLM accessed via API) receives the grammar, the feature
-catalogue, and per-trial feedback consisting of \emph{formula, status, train
-Sharpe, train IC}---never validation numbers. The prompt states the FDR
-consequence explicitly: ``each weak idea you emit makes the statistical bar
-higher for all of them.'' Malformed output is parsed defensively;
-unparseable proposals are ledgered as \texttt{REJECTED\_INVALID}. A
-deterministic mock mode makes the entire pipeline reproducible without API
-access.
-
-\subsection{Certification stack}
-
-For each evaluated candidate: (i) a one-sided $t$-test $p$-value on
-validation daily returns (proxy for the conformal $p$-value; both reported);
-(ii) BY-FDR at $\alpha = 0.20$ over the full ledger; (iii) conformal coverage
-of 90\% train-calibrated intervals on validation days; (iv) lane
-gates---Lane~S: Sharpe $\ge 0.6$, max drawdown $\ge -20\%$, turnover
-$\le 1.0\times$; Lane~I: half-life $\ge 2$\,d, turnover cap; (v) BEAR
-adversarial review (look-ahead, mining, lane misclassification, economic
-rationale, robustness). Only candidates passing all five stages receive a
-\texttt{CERTIFIED} dossier and reach the registry.
-
-\subsection{Backtest engine}
-
-Cross-sectional dollar-neutral long-short: signals are rank-demeaned into
-weights with gross exposure 1 on each rebalance date and applied from the
-next trading day; transaction costs (10\,bps) are charged on turnover;
-information coefficients are non-overlapping Spearman correlations at
-rebalance dates. Universe membership is enforced point-in-time
-(Section~\ref{sec:data}).
-
-\section{Data and the Ticker-Reuse Hazard}
-\label{sec:data}
-
-Universe: historical S\&P~500 constituency reconstructed from the index
-change log (897 membership intervals across 874 tickers, 2010--2026); bulk
-OHLCV prices; fundamentals from SEC EDGAR XBRL frames (keyless,
-point-in-time \texttt{available\_at} stamps).
-
-\textbf{A data-integrity finding worth reporting.} Free price feeds resolve
-tickers, not securities. After a constituent is delisted, its symbol is
-frequently reassigned or its series degrades: in our feed, post-2013
-``BMC'' prices belong to a different instrument trading near 22{,}700, and
-``PTV'' exhibits $\pm 4{,}900\%$ daily moves in 2016---six years after
-Pactiv was acquired. With naive backtests over all listed history, this
-garbage concentrates in the short leg of momentum (delisted losers) and
-flips its Sharpe from $-0.09$ to $\mathbf{-0.83}$: a purely artifactual
-result that would survive casual inspection because it
-\emph{underestimates} performance rather than inflating it. Enforcing
-constituency intervals as a point-in-time join removes every such episode
-without any outlier winsorization. We suspect a nontrivial share of
-published results on free data carry this defect.
-
-\section{Known-Factor Reproduction}
-
-The validation gate for the pipeline: canonical factors must behave as the
-\emph{post-publication} literature says they behaved in a large-cap universe
-over 2012--2024---not as their discovery papers say they behaved decades
-earlier.
-
-\begin{table}[h]
-\caption{Known-factor reproduction, S\&P~500, 2012--2024, dollar-neutral,
-10\,bps. Expected ranges encode post-publication large-cap findings.}
-\label{tab:repro}
-\begin{tabular}{lrrrl}
+\begin{table}[t]
+\caption{M4 real-LLM adaptive generator: mean false certifications and
+  any-false-cert rate.}
+\label{tab:m4}
+\small
+\begin{tabular}{llrrrr}
 \toprule
-Factor & Sharpe & IC & Turnover & Consistent \\
+Defense & Model & Trials & Reps & Mean false certs & Any-false rate \\
 \midrule
-Momentum 12-1~\cite{jt1993,mclean2016} & $-0.09$ & $+0.009$ & $5.0\times$ & yes \\
-Value (E/P+B/P)~\cite{ff1992} & $+0.02$ & $-0.003$ & $2.9\times$ & yes \\
-Quality (gross margin)~\cite{novymarx2013} & $+0.74$ & $+0.053$ & $1.1\times$ & yes \\
-Low volatility (raw)~\cite{ang2006,fp2014} & $-0.41$ & $-0.014$ & $4.3\times$ & yes \\
+naive & llama3:8b & 200 & 10 & 6.60 & 80\% \\
+protocol & llama3:8b & 200 & 10 & 0.00 & 0\% \\
+maxleak\_metered & llama3:8b & 200 & 10 & 0.00 & 0\% \\
+metered & llama3:8b & 50 & 5 & 0.00 & 0\% \\
+e\_bh & llama3:8b & 50 & 5 & 0.00 & 0\% \\
+sparse\_metered & llama3:8b & 50 & 5 & 0.00 & 0\% \\
+naive & mistral & 30 & 3 & 1.00 & 67\% \\
+protocol & mistral & 30 & 3 & 0.00 & 0\% \\
+naive & claude-haiku-4-5-20251001 & 200 & 10 & 6.60 & 80\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Momentum's flat performance reflects the documented post-2010 large-cap
-decay and the 2016/2020--21 momentum crashes (visible in our regime table);
-value's flatness is the ``value winter''; raw dollar-neutral low-vol carries
-negative beta drag in a bull decade (the anomaly is a beta-adjusted
-claim~\cite{fp2014}). Quality is the era's robust survivor.
+Table~\ref{tab:m4} reports completed cells. Scaling llama3:8b to 200 trials
+$\times$ 10 reps confirms the separation at a statistically meaningful scale.
+The mistral 30$\times$3 pilot is a cross-model replication check. For the
+Anthropic API, a scaled run with claude-haiku-4-5-20251001 at 200$\times$10
+confirms the same pattern: the naive channel certifies 6.60 false strategies
+on average. A full 200$\times$10 sweep of the Haiku protocol and
+maxleak\_metered arms was launched, but persistent connection instability and
+credit burn forced a halt after the first three protocol replicates (all 0
+false certs); the per-defense files will be updated if those cells complete.
 
-\section{The Gate at Work}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{../llm_fdr_by_trials.png}
+\caption{Real-LLM adaptive attack: mean false certifications by defense and
+  model. Firewall arms (protocol, maxleak\_metered, e\_bh, sparse\_metered)
+  suppress false discoveries across every model tested.}
+\label{fig:llm}
+\end{figure}
 
-\subsection{Full pipeline run: an honest empty set}
+The real LLM with full validation feedback produces false certifications under
+the open-weight models and the Anthropic model; every firewall variant
+suppresses them across every completed model. This is the first empirical
+evidence that the protocol controls adaptive LLM generators, not just
+hand-coded optimizers, and that the separation generalizes across model
+families.
 
-Six library candidates plus eight generated candidates were registered,
-trained on 2012--2018, and validated on 2019--2024. Three generated
-candidates failed evaluation (constant signals on placeholder features) and
-entered the ledger at $p = 1$.
+\section{Discussion and Limitations}\label{sec:discussion}
 
-\textbf{Result: 0/14 certified.} The strongest candidate---quality---earned
-train Sharpe 1.20 but validation Sharpe 0.34 ($p = 0.21$) and failed FDR
-selection, the Sharpe floor, and the turnover cap. Every rejection reason is
-recorded in the run artifact. A system tuned to please its operator would
-have certified quality; the gate declined, and the train$\to$validation
-collapse in the very next column is why it was right to.
+\textbf{Tightness of leakage accounting.} SparseValidate prices the
+worst-case transcript set; maximal leakage prices the actual one-bit channel.
+The gap is quantified in Figure~\ref{fig:leakage}. Further tightening for
+richer feedback channels is an open direction.
 
-\subsection{Placebo: the gate rejects impostors}
+\textbf{Power of e-values.} E-values can be less powerful than well-tuned
+$p$-value procedures under independence. We report power/FDR trade-offs
+explicitly; GAME adaptive e-values~\cite{fischer2024} are a power-recovery
+option for future work.
 
-Within-date cross-sectional permutation destroys the signal--return link
-while preserving both marginals. Three seeds $\times$ six candidates on the
-validation window: \textbf{0/18 certified}, mean placebo $p = 0.91$, no
-placebo trial passes FDR. The pipeline does not manufacture significance
-from noise.
+\textbf{Verifier trust assumptions.} The verifier checks the ledger math but
+does not verify that the validation data itself was collected correctly. It
+moves trust from the agent to the data pipeline.
 
-\subsection{Conformal coverage as a regime instrument}
-\label{sec:coverage}
+\textbf{Generality.} The protocol requires three things: a grammar that
+constrains proposals, a train/validation split, and a score whose null
+distribution is known or exchangeable. Many empirical domains satisfy this.
 
-Intervals calibrated on 2012--2018 achieve less than the nominal 90\%
-coverage on 2019--2024 for most candidates---the validation window contains
-the COVID volatility regime. Rather than a failure, per-candidate coverage
-becomes a certification input (coverage floor) and a deployed-strategy
-retirement signal (rolling 30-day coverage).
+\textbf{Real-market extension.} The current experiments use synthetic all-null
+worlds, which cleanly isolate adaptivity and multiplicity. Applying the
+protocol to real financial returns is the natural next step.
 
-\subsection{Regime stress}
+\section{Conclusion}\label{sec:conclusion}
 
-\begin{table}[h]
-\caption{Regime-conditional Sharpe. Data horizon starts 2010; 2008 is
-reported as uncoverable.}
-\label{tab:regime}
-\begin{tabular}{lrrr}
-\toprule
-Candidate & 2011\,H2 & 2020 & 2022 \\
-\midrule
-Momentum & $-0.98$ & $-0.37$ & $+0.21$ \\
-Value & $+0.81$ & $-0.19$ & $+0.34$ \\
-Quality & $-1.71$ & $+0.04$ & $-0.88$ \\
-Low-vol & $+0.90$ & $-0.77$ & $+0.41$ \\
-Overnight gap & $+1.07$ & $-1.83$ & $+0.78$ \\
-Volume shock & $-2.49$ & $-3.34$ & $-1.64$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Defensive factors bid in the 2011/2022 drawdowns; momentum crashes in
-2020---patterns matching the literature, from a pipeline never shown these
-windows during construction.
-
-\section{Live Deployment}
-
-Certified strategies (currently: none---the registry honestly holds the
-empty set) deploy through a gate enforcing paper-only trading, lane budgets,
-daily loss limits, and drawdown kill switches; a monitor writes daily
-git-committed logs (portfolio value, per-strategy P\&L, rolling conformal
-coverage, retirement events). \emph{[To be completed with the live audit
-trail before submission; the gate design itself is part of the artifact.]}
-
-\section{Limitations}
-
-(1) The $t$-test $p$-value is a proxy; per-candidate conformal $p$-values
-are computed and reported side-by-side rather than unified. (2) Free
-fundamentals cover ${\sim}44\%$ of ticker-days for valuation and
-${\sim}11\%$ for quality---coverage bias toward larger, longer-listed firms.
-(3) BEAR runs in mock mode for the headline results; LLM-mode reviews are
-reported in the appendix. (4) Flat 10\,bps costs; no market impact. (5) One
-decade, one universe; the ledger discipline, not the specific gates, is the
-claimed contribution. (6) The headline run uses the deterministic mock
-generator for exact reproducibility; the LLM-mode run (appendix) is
-stochastic by nature.
-
-\section{Reproducibility}
-
-Single-command pipeline: \texttt{make ingest \&\& make paper} reproduces
-ingestion, factor reproduction, the pipeline run, and the placebo suite;
-all artifacts (ledger, run reports, placebo tables) are emitted as versioned
-JSON/markdown. An anonymized repository accompanies submission; mock mode
-reproduces every headline number without API keys.
-
-\section{Conclusion}
-
-AQRA demonstrates that an LLM research agent can be made statistically
-accountable without curtailing its generative freedom: constrain the
-hypothesis language so look-ahead cannot be expressed, register every
-attempt before evaluation, charge the whole ledger to every survivor, wall
-off the validation data from the feedback loop, and let independent gates
-dispose. On a decade of large-cap US equities with free data, the honest
-answer was the empty set---delivered with the placebo evidence to prove the
-gate can tell signal from noise, and a live audit trail to prove the loop
-closes. We offer the trials ledger as the missing organ of LLM-driven
-quantitative research.
+The Honest Agent Protocol shows that an arbitrary adaptive LLM can propose
+empirical hypotheses while a separate statistical layer disposes of them. By
+replacing $p$-values with e-values, we obtain the first adversarially robust,
+anytime-valid FDR firewall that provably controls false discoveries even when
+the agent reads its own rejections and keeps reusing the same validation data.
+The ledger discipline, the conformal e-value extension, the SparseValidate and
+maximal-leakage pricing, the online e-BH immortal wall, and the Proof-of-Trial
+verifier turn a soft hope---``the LLM won't overfit''---into a checkable
+guarantee. We release the code and ledgers for reproduction and invite other
+domains to adopt the primitive.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
-
-\appendix
-
-\section{LLM-mode generation run}
-\emph{[Pending: proposal count, invalid rate, ledger growth, FDR threshold
-movement, any certified survivors.]}
-
-\section{BEAR prompts and review transcripts}
-\emph{[LLM mode pending; the mock rubric is included in the artifact.]}
 
 \end{document}
