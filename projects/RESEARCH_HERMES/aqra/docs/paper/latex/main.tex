@@ -192,6 +192,7 @@ $V$.
 
 \begin{figure}[t]
 \centering
+\resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[
   font=\scriptsize,
   node distance=2.4mm and 7mm,
@@ -241,11 +242,12 @@ $V$.
 
 % The full-ledger FDR result is verified independently.
 \draw[arr] (fdr.east) -- (verif.west);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{Protocol overview. Every candidate is registered in the trials ledger
   before evaluation. The validator computes e-values on the held-out sample $V$,
   and the FDR correction runs over the full ledger. The generator's feedback
-  channel never crosses the train/validation wall.}
+  channel never crosses the wall between training and validation.}
 \label{fig:protocol}
 \end{figure}
 
