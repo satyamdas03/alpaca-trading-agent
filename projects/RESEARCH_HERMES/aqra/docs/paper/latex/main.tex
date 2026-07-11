@@ -1,13 +1,13 @@
 %% Honest Agent Protocol - ICAIF '26 submission (double-blind).
 %% Build: Overleaf (acmart preinstalled) or `latexmk -pdf main.tex`.
-\documentclass[sigconf,anonymous]{acmart}
+\documentclass[sigconf]{acmart}
 
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{amsmath,amsthm}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta,calc}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds}
 \emergencystretch=1em
 
 \theoremstyle{plain}
@@ -27,12 +27,13 @@
 \title{Honest Agent Protocol: Controlling False Discoveries from Adaptive
   LLM Hypothesis Generators}
 
-\author{Anonymous Author(s)}
+\author{Satyam Das}
 \affiliation{%
-  \institution{Anonymous Institution}
-  \city{}
-  \country{}
+  \institution{University of Technology Sydney}
+  \city{Sydney}
+  \country{Australia}
 }
+\email{satyam.das@student.uts.edu.au}
 
 \begin{abstract}
 Large language model agents now generate, evaluate, and refine empirical
@@ -193,31 +194,53 @@ $V$.
 \centering
 \begin{tikzpicture}[
   font=\scriptsize,
-  node distance=2mm and 6mm,
+  node distance=2.4mm and 7mm,
   box/.style={draw, rounded corners=1pt, align=center,
-              inner sep=2.5pt, minimum height=5mm},
+              inner sep=2.8pt, minimum height=5.2mm},
   gate/.style={box, thick},
-  arr/.style={-{Stealth[length=1.6mm]}}
+  arr/.style={-{Stealth[length=1.8mm]}},
+  lbl/.style={font=\tiny, align=center}
 ]
+% Top row: generator and grammar validator.
 \node[box] (gen) {LLM generator};
-\node[box, right=7mm of gen] (gram) {grammar\\validator};
-\node[gate, below=of gram] (ledger) {trials ledger\\(register before eval)};
-\node[box, below left=7mm and 1mm of ledger] (train) {train data\\$T$};
-\node[box, below right=7mm and 1mm of ledger] (val) {validation\\$V$};
-\node[gate, below=10mm of ledger] (fdr) {e-value FDR\\over full ledger};
-\node[gate, right=6mm of fdr] (verif) {Proof-of-Trial\\verifier};
+\node[box, right=16mm of gen] (gram) {grammar\\validator};
 
+% Ledger sits below the grammar validator.
+\node[gate, below=8mm of gram] (ledger) {trials ledger\\(register before eval)};
+
+% Train and validation columns, widely separated so the wall has room.
+\node[box, below left=14mm and 20mm of ledger] (train) {train data\\$T$};
+\node[box, below right=14mm and 20mm of ledger] (val) {validation\\$V$};
+
+% FDR layer and verifier sit BELOW the train/validation row (own row, no overlap).
+\node[gate, below=16mm of train] (fdr) {e-value FDR\\over full ledger};
+\node[gate, below=16mm of val]  (verif) {Proof-of-Trial\\verifier};
+
+% The train/validation wall: dashed line strictly in the gap between columns.
+\begin{scope}[on background layer]
+  \coordinate (wallx)   at ($(train.east)!0.5!(val.west)$);
+  \coordinate (walltop) at (wallx |- val.north);
+  \coordinate (wallbot) at (wallx |- verif.south);
+  \draw[dashed, thick] ([yshift=4mm]walltop) -- ([yshift=-4mm]wallbot);
+  \node[lbl, anchor=west] at ($(wallx)!0.5!(wallx|-fdr.center) + (1.2mm,3mm)$) {wall};
+\end{scope}
+
+% Flow arrows.
 \draw[arr] (gen) -- (gram);
 \draw[arr] (gram) -- (ledger);
-\draw[arr] (ledger) -- (train);
-\draw[arr] (ledger) -- (val);
-\draw[arr] (train.west) to[out=180, in=-90]
-  node[left, align=center, font=\tiny] {train-only\\feedback} (gen.south);
-\draw[arr] (val) -- (fdr);
-\draw[arr] (fdr) -- (verif);
-\draw[dashed, thick] ($(train.north east)!0.5!(val.north west) + (0,2mm)$)
-  -- ($(train.south east)!0.5!(val.south west) - (0,2mm)$)
-  node[midway, right=1mm, font=\tiny] {wall};
+\draw[arr] (ledger.south) to[out=-135,in=90] (train.north);
+\draw[arr] (ledger.south) to[out=-45, in=90] (val.north);
+
+% Train-only feedback loop stays entirely on the train side.
+\draw[arr] (train.west) to[out=170, in=-120]
+  node[lbl, left=1mm, pos=0.5] {train-only\\feedback} (gen.south);
+
+% Validation feeds both the FDR layer and the verifier.
+\draw[arr] (val.south) -- (verif.north);
+\draw[arr] (val.south west) to[out=-120,in=60] (fdr.north east);
+
+% The full-ledger FDR result is verified independently.
+\draw[arr] (fdr.east) -- (verif.west);
 \end{tikzpicture}
 \caption{Protocol overview. Every candidate is registered in the trials ledger
   before evaluation. The validator computes e-values on the held-out sample $V$,
