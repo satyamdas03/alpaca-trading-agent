@@ -1,0 +1,57 @@
+# Example Aureum Quant Kernel strategy DSL
+# A simple momentum strategy on US tech stocks, sector-neutralized.
+
+apiVersion: aureum.io/v1alpha1
+kind: Strategy
+metadata:
+  name: tech-momentum-sector-neutral
+  description: |
+    Long the top 20% of S&P 500 tech stocks by 12-1 month momentum,
+    neutralized by sector, with a 10% max-drawdown guardrail.
+  tags: [momentum, equity, sector-neutral]
+
+spec:
+  universe:
+    source: sp500
+    filter:
+      sector: Technology
+      min_price: 5.00
+      min_adv20: 1_000_000
+
+  schedule:
+    rebalance: 1M
+    lookback: 252d
+
+  signals:
+    - name: momentum_12_1
+      description: 12-month return excluding last month (Jegadeesh-Titman)
+      expr: returns(close, 252).sum() - returns(close, 21).sum()
+      type: return
+
+  ranking:
+    by: momentum_12_1
+    ascending: false
+
+  weights:
+    kind: equal
+    top_n: 0.20
+
+  risk:
+    max_drawdown:
+      value: 0.10
+      hard: true
+    max_leverage:
+      value: 1.00
+      hard: true
+    max_turnover_annual:
+      value: 0.30
+      hard: false
+
+  execution:
+    open: market_on_open
+    slippage: 0.0005
+
+  audit:
+    lineage: full
+    deterministic: true
+    deterministic_seed: 42

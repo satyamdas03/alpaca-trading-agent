@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-cache@v2
+      - name: Build Rust workspace
+        run: cargo build --workspace
+      - name: Test Rust workspace
+        run: cargo test --workspace
+      - name: Check formatting
+        run: cargo fmt -- --check
+      - name: Clippy
+        run: cargo clippy --workspace -- -D warnings
+
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-cache@v2
+      - uses: astral-sh/setup-uv@v3
+      - name: Install Python deps
+        run: uv sync --dev
+      - name: Build Python bindings
+        run: uv run maturin develop
+      - name: Lint Python
+        run: uv run ruff check bindings/python
+      - name: Type check Python
+        run: uv run mypy bindings/python
+      - name: Test Python
+        run: uv run pytest bindings/python
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install docs deps
+        run: pip install mkdocs-material
+      - name: Build docs
+        run: mkdocs build --strict
+        working-directory: docs

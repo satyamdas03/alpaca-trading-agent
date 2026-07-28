@@ -1,0 +1,46 @@
+site_name: Aureum Documentation
+site_description: Self-proving semantic kernel for finance
+site_author: Satyam Das
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: amber
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/point/aureum
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - tables
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - DSL Reference: dsl.md
+  - Architecture: architecture.md
+  - Roadmap: roadmap.md
+  - Contributing: contributing.md
