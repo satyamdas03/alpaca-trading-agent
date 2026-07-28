@@ -1,0 +1,19 @@
+[package]
+name = "aureum-py"
+version = "0.1.0"
+edition = "2021"
+authors = ["Satyam Das <satyamdas03@gmail.com>"]
+description = "PyO3 bindings for the Aureum financial semantic kernel"
+license = "Apache-2.0"
+repository = "https://github.com/point/aureum"
+rust-version = "1.80"
+
+[lib]
+name = "aureum_py"
+crate-type = ["cdylib"]
+
+[dependencies]
+aureum-core = { path = "../aureum-core" }
+pyo3 = { version = "0.22", features = ["extension-module"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
