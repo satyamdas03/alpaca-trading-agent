@@ -16,7 +16,7 @@ metadata:
     - - - project_hermes_trading
     - - - satyam_das_full_profile_2026-07-26
   originSessionId: afa7a233-a634-4cc0-8404-791012c04837
-  modified: 2026-07-30T04:13:49.294Z
+  modified: 2026-07-30T05:15:38.827Z
 ---
 
 # Project: QuantCoder-3B → AlphaWeaver-7B
@@ -1063,6 +1063,61 @@ If a new model starts this session, here is the exact restart order:
 2. Create a GitHub release tag for the first reproducible checkpoint.
 3. Generate additional verified examples focused on statistical factors (`beta`, `idiosyncratic_volatility`, rolling regression).
 4. Schedule the Qwen3.5-4B cloud training run once a 24 GB GPU is available.
+
+---
+
+# Part 21: Session Update 2026-07-30 (evening) — Phase 2A Code Complete, HF Upload Blocked, Phase 2 Plan Committed
+
+## Phase 2A: Hugging Face publication pipeline
+- Created `scripts/push_to_hub.py` — Typer CLI that:
+  - Loads `HF_TOKEN` from `.env`.
+  - Generates a model card from `configs/combined_config.json` and `logs/combined_eval.json`.
+  - Uses `huggingface_hub.create_repo` + `upload_folder` to push the LoRA adapter.
+- Created `tests/test_push_to_hub.py` — 4 pytest cases mocking HF Hub calls; all pass.
+- Updated `README.md` with Hugging Face badge, `from_pretrained` usage snippet, and benchmark table references.
+- Generated model card at `models/qwen2.5-1.5b-combined/lora_adapter/README.md`.
+- Commit `a26b27d` pushed to GitHub.
+- Full test suite: 16/16 passing.
+
+## Upload status
+- Target repo: `https://huggingface.co/satyamdas03/quantcoder-3b-qwen2.5-1.5b`
+- **Blocked:** both provided token values returned 401/403 from Hugging Face.
+  - First token: `[REDACTED HF TOKEN]` → 403 Forbidden on `create_repo`.
+  - Second token: `[REDACTED HF TOKEN]` → 401 Unauthorized (invalid token).
+  - `api.whoami()` confirmed the tokens are rejected.
+- Root cause: token values are either expired, truncated, or copied incorrectly; permissions screen looked correct.
+- Next step: run `huggingface-cli login --token <valid_write_token>` to cache a valid token, then retry.
+
+## Phase 2 plan committed
+- Created `C:\Users\point\projects\modelSD\docs\superpowers\plans\2026-07-30-quantcoder-3b-phase2.md`.
+- Phase 2 has 6 workstreams:
+  1. Publish weights on HF (blocked on token).
+  2. Scale dataset to 500+ and close `beta` statistical-factor gap.
+  3. Integrate conformal calibrated uncertainty into benchmark.
+  4. Train and publish `Qwen3.5-4B` adapter on cloud GPU.
+  5. Build FastAPI serving endpoint + HF dataset card.
+  6. Draft AlphaWeaver-7B research roadmap.
+- Tasks created in task list: #23–#28.
+
+## Current task status
+- Task #23 (HF publication): in progress, code done, upload blocked.
+- Tasks #24–#28: pending.
+
+## Updated blockers / next steps
+1. ~~Combined-dataset training.~~ ✅ Completed.
+2. ~~Diagnose evaluation failure.~~ ✅ Fixed; VAcc 64.3% captured.
+3. ~~Update README with real numbers.~~ ✅ Completed.
+4. **Phase 2A** — HF publish code done; need valid write token to complete upload.
+5. **Phase 2B** — scale dataset and fix `beta` (can run in parallel with token fix).
+6. **Phase 2C** — conformal calibration integration.
+7. **Phase 2D** — Qwen3.5-4B cloud training (needs 24 GB GPU).
+8. **Phase 2E** — FastAPI serving + dataset card.
+9. **Phase 2F** — AlphaWeaver-7B design spec.
+
+## Immediate next actions
+1. Fix HF token via `huggingface-cli login` and retry upload.
+2. Start Phase 2B dataset scaling (statistical-factor focus) in parallel if desired.
+3. Create GitHub `v0.2.0` release after HF upload succeeds.
 
 ---
 
