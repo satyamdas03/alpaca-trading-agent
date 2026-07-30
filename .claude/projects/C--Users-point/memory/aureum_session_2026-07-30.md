@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-30
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-07-30T11:03:15.209Z
+  modified: 2026-07-30T12:11:21.181Z
 ---
 
 # Aureum Session 2026-07-30 — Phase 3 Ship, Signals, Studio, and Landing Page
@@ -98,6 +98,21 @@ metadata:
 - Output format requires a one-sentence thesis, exact token usage, high-fidelity design, and rationale for one aesthetic risk.
 - The "one real aesthetic risk" is the **gold-leaf certificate component** as both proof object and brand signature.
 
+### 9. Applied the new Stitch-generated design system
+- Received new designs in `C:\Users\point\projects\newLanguage\stitch_aureum_ui_design_system\aureum\DESIGN.md` and `aureum_studio_dashboard\code.html`.
+- Implemented the full **Deep Space** Material 3 palette:
+  - Surface layers: `#14140f`, `#1c1c16`, `#20201a`, `#2b2a24`, `#36352f`.
+  - Primary: `#ecc246`; primary-container: `#c9a227`; on-surface: `#e6e2d9`; outline: `#99907b`.
+- Switched display typography to **Literata**; kept Inter for body and JetBrains Mono for technical data.
+- Added `AureumLogo` component based on the new interwoven-A mark.
+- Rebuilt `Dashboard.tsx` to match the Stitch mock:
+  - Fixed 80px left side nav (Dashboard, Editor, Models, Backtests, Settings).
+  - Fixed top app bar with "Aureum Studio" title, Mainnet/Staging tabs, health/notifications/profile icons.
+  - 12-column main canvas: 3-col Strategy Definition, 6-col YAML Editor (Monaco), 3-col Results + Certificate.
+- Redesigned `CertificateSeal` as a square gold-leaf card with corner hash marks, verified icon, SHA-256 checksum, and timestamp.
+- Updated `LandingPage`, `Pricing`, `PipelineHero`, `StrategyEditor`, `BacktestChart`, and `CertificateViewer` to use the new tokens.
+- Updated `tailwind.config.js` with the complete token scale and `index.css` with staggered fade-up animations and hash-mark helpers.
+
 ---
 
 ## Commits pushed to `main`
@@ -107,8 +122,9 @@ metadata:
 3. `d23f293` — ci(aureum): add PyPI publish workflow on version tags
 4. `3dec1ed` — feat(aureum): web dashboard, landing page, and more signals
 5. `4c6cea8` — feat(studio): design system, gold-leaf certificate seal, landing + pricing pages
+6. `134dc04` — feat(studio): apply new Stitch design system — Deep Space + Aureum Gold
 
-Final `main`: https://github.com/satyamdas03/aureum/tree/4c6cea8
+Final `main`: https://github.com/satyamdas03/aureum/tree/134dc04
 
 ---
 
@@ -153,6 +169,7 @@ Final `main`: https://github.com/satyamdas03/aureum/tree/4c6cea8
 - `frontend/web/src/components/CertificateViewer.tsx` (new)
 - `frontend/web/src/components/CertificateSeal.tsx` (new)
 - `frontend/web/src/components/BacktestChart.tsx` (new)
+- `frontend/web/src/components/AureumLogo.tsx` (new)
 - `frontend/web/public/aureum-mark.svg` (new)
 - `frontend/web/README.md` (new)
 

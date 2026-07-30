@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-07-30T11:03:39.107Z
+  modified: 2026-07-30T12:11:37.590Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -68,10 +68,17 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
   - Added 3 signals: `volatility_20d`, `sharpe_63d`, `mean_reversion_5_20`.
   - Built **Aureum Studio** web dashboard (Vite + React + TS + Monaco + Recharts) with `aureum.server` FastAPI backend.
   - Built distinctive landing page with animated strategy-to-certificate pipeline, deep navy + gold palette, Crimson Pro + Inter + JetBrains Mono typography.
+  - Added `/pricing` page and `CertificateSeal` gold-leaf component.
   - Frontend CI job added to `.github/workflows/ci.yml`.
   - Commit `3dec1ed` pushed to `main`.
+- **New Stitch design system applied**:
+  - Deep Space Material 3 palette (surface `#14140f`, primary `#ecc246`, primary-container `#c9a227`).
+  - Display typeface switched to **Literata**.
+  - New `AureumLogo` component and redesigned `CertificateSeal` with corner hash marks.
+  - Dashboard rebuilt with fixed 80px side nav, fixed top app bar, and 3-column main canvas matching the Stitch mock.
+  - Commit `134dc04` pushed to `main`.
 - **PyPI publish workflow added** (`.github/workflows/publish.yml`) using OIDC trusted publishing; awaiting `PYPI_API_TOKEN`/trusted-publisher setup.
-- Next: Phase 4 (cloud/onboarding polish, commercial landing + pricing, real-market data demos, or theorem-prover hardening).
+- Next: Phase 4 (cloud/onboarding polish, real-market data demos, or theorem-prover hardening).
 
 ---
 
