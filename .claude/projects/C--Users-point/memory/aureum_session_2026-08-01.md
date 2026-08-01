@@ -7,7 +7,7 @@ metadata:
   date: 2026-08-01
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-08-01T03:48:51.643Z
+  modified: 2026-08-01T03:56:05.758Z
 ---
 
 # Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated
@@ -47,6 +47,14 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
    - Pushed integrated `main` to `origin/main`: `3817df7..4a95786`.
    - Final QA on `main`: **160 passed, 1 skipped**; `ruff` clean; `mypy` clean.
 
+6. **README + dossier update**
+   - Updated `README.md` with Phase 4 edge table, runnable YAML/CLI examples, refreshed roadmap, repository structure, and test badge.
+   - Commit: `ba85c25` — `docs(aureum): update README with Phase 4 + all seven revolutionary edges`.
+   - Pushed README update to `origin/main`: `4a95786..ba85c25`.
+   - Re-ran full QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` clean.
+   - Updated this dossier (`aureum_session_2026-08-01.md`) and `project_aureum_financial_semantic_kernel.md` to record the README update and final commit.
+   - Pushed memory updates to parent repo.
+
 ## Final state — all seven edges in `main`
 
 | Edge | Branch / commit | Module | What landed |
@@ -71,6 +79,7 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
 - `pytest -q` in `bindings/python`: **160 passed, 1 skipped** (z3 optional).
 - `ruff check aureum tests`: clean.
 - `mypy aureum`: clean on 21 source files.
+- All changes pushed to `origin/main` on both `aureum` and the parent memory repo.
 
 ## Open work / next steps
 

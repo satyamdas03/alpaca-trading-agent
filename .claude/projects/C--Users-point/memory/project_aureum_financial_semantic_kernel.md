@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-01T03:49:00.256Z
+  modified: 2026-08-01T03:55:46.222Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -95,6 +95,9 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
   - Final QA: **160 Python tests pass, 1 skipped**; `ruff` clean; `mypy` clean.
   - Pushed to `origin/main`: `3817df7..4a95786`.
   - See [[aureum_session_2026-08-01.md]] for full integration record.
+- **README updated** ✅ to reflect Phase 4 + all seven edges with runnable YAML/CLI examples, refreshed roadmap, and new repository-structure table.
+  - Commit `ba85c25` pushed to `main`.
+  - Final QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` still clean.
 
 ---
 
