@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-07-30T12:11:37.590Z
+  modified: 2026-08-01T03:49:00.256Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -54,6 +54,7 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
 ## Current Status
 
 - GitHub repo `satyamdas03/aureum` is live.
+- **MPT + revolutionary-edge + end-state positioning research completed** as Phase 4 input — synthesis in [[aureum_mpt_research_2026-07-30]], [[aureum_revolutionary_edge_research_2026-07-30]], and [[aureum_endstate_positioning_2026-07-30]].
 - **Phase 1 (self-proving backtest certificate)** ✅ complete.
 - **Phase 2 (dimensional types, Alpaca adapter, SMT/Lean verifier bridge)** ✅ complete.
 - **Phase 3 (AI author + reflection loop)** ✅ complete, merged into `main`, and released as **v0.3.0**.
@@ -78,7 +79,22 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
   - Dashboard rebuilt with fixed 80px side nav, fixed top app bar, and 3-column main canvas matching the Stitch mock.
   - Commit `134dc04` pushed to `main`.
 - **PyPI publish workflow added** (`.github/workflows/publish.yml`) using OIDC trusted publishing; awaiting `PYPI_API_TOKEN`/trusted-publisher setup.
-- Next: Phase 4 (cloud/onboarding polish, real-market data demos, or theorem-prover hardening).
+- **Phase 4A (Provable MPT core / Edge 1)** ✅ complete and pushed as commit `3817df7` on 2026-08-01.
+  - Added `aureum.mpt` optimizers: mean-variance, GMVP, max-Sharpe, risk-parity, min-CVaR.
+  - Extended DSL with `spec.portfolio` block and `aureum frontier` CLI.
+  - Backtest runner now rebalances via MPT optimizers; certificate records `PortfolioConstruction` with weights history and optimizer-inputs hash.
+  - 77 Python tests pass, 1 skipped; pushed to `main`.
+- **Edges 2–7 integrated** ✅ complete and pushed as commit `4a95786` on 2026-08-01.
+  - Edge 2 — Causal MPT (`aureum.causal`): driver DAG + conditioned covariance.
+  - Edge 3 — Conformal portfolios (`aureum.conformal`): split-conformal prediction sets wrapped around MPT.
+  - Edge 4 — Neuro-symbolic alpha (`aureum.alpha`): `AlphaGrammar`, `AlphaMiner`, formula safety gating.
+  - Edge 5 — Semantic knowledge graph (`aureum.graph`): content-addressed entities + typed relations.
+  - Edge 6 — Differentiable execution (`aureum.diffopt`): JAX/Optax learned Sharpe optimizer with model lineage.
+  - Edge 7 — Economic-security audit (`aureum.econsec`): adversarial extractable-value analysis.
+  - Merged additively into `main` in shared orchestration files; all 7 edges now coexist.
+  - Final QA: **160 Python tests pass, 1 skipped**; `ruff` clean; `mypy` clean.
+  - Pushed to `origin/main`: `3817df7..4a95786`.
+  - See [[aureum_session_2026-08-01.md]] for full integration record.
 
 ---
 
