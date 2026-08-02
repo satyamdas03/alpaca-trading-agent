@@ -7,7 +7,7 @@ metadata:
   date: 2026-08-01
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-08-01T03:56:05.758Z
+  modified: 2026-08-02T02:40:12.005Z
 ---
 
 # Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated
@@ -52,7 +52,17 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
    - Commit: `ba85c25` — `docs(aureum): update README with Phase 4 + all seven revolutionary edges`.
    - Pushed README update to `origin/main`: `4a95786..ba85c25`.
    - Re-ran full QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` clean.
-   - Updated this dossier (`aureum_session_2026-08-01.md`) and `project_aureum_financial_semantic_kernel.md` to record the README update and final commit.
+
+7. **Phase 4 productization workflow + final v0.4.0 integration**
+   - Resumed after session compaction; manually verified the workflow-generated artifacts because the two verify agents failed due to transient `ollama.com` API 502 errors.
+   - Verified `examples/strategies/hero_phase4.yaml` and `tests/test_hero_phase4.py`.
+   - Ran the new regression test: **2 passed**.
+   - Ran full suite again: **162 passed, 1 skipped**.
+   - Found and fixed one stale unused `type: ignore` in `aureum/prover.py`; re-ran `mypy`: clean.
+   - Commit + push: `d4f9ddf` — `feat(aureum): v0.4.0 Phase 4 seven-edge integration`.
+   - Build artifacts produced: `aureum-0.4.0.tar.gz` and `aureum-0.4.0-py3-none-any.whl`.
+   - Updated `CHANGELOG.md`, `bindings/python/README.md`, and `pyproject.toml` version metadata.
+   - Updated this dossier and `project_aureum_financial_semantic_kernel.md` to record v0.4.0 status and PyPI blocker.
    - Pushed memory updates to parent repo.
 
 ## Final state — all seven edges in `main`
@@ -76,9 +86,10 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
 
 ## QA
 
-- `pytest -q` in `bindings/python`: **160 passed, 1 skipped** (z3 optional).
+- `pytest -q` in `bindings/python`: **162 passed, 1 skipped** (z3 optional).
 - `ruff check aureum tests`: clean.
 - `mypy aureum`: clean on 21 source files.
+- Hero regression test `tests/test_hero_phase4.py`: **2 passed**.
 - All changes pushed to `origin/main` on both `aureum` and the parent memory repo.
 
 ## Open work / next steps

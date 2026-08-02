@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-01T03:55:46.222Z
+  modified: 2026-08-02T02:39:29.305Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -98,6 +98,16 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
 - **README updated** ✅ to reflect Phase 4 + all seven edges with runnable YAML/CLI examples, refreshed roadmap, and new repository-structure table.
   - Commit `ba85c25` pushed to `main`.
   - Final QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` still clean.
+- **Phase 4 final integration + v0.4.0 ship prep** ✅ complete and pushed as commit `d4f9ddf` on 2026-08-01.
+  - Re-merged all seven edges into `main` with additive merge strategy; resolved conflict markers in `backtest.py`, `certificate.py`, `strategy.py`, `cli.py`, `docs/dsl.md`, and `docs/self-proving-backtest.md`.
+  - Added `examples/strategies/hero_phase4.yaml` — single strategy exercising Edges 2, 3, 4, 5, and 7 simultaneously.
+  - Added `bindings/python/tests/test_hero_phase4.py` — regression test asserting all edge lineage fields are populated in the certificate.
+  - Added `CHANGELOG.md` and `bindings/python/README.md` for PyPI.
+  - Bumped `pyproject.toml` to **v0.4.0**.
+  - Removed stale unused `type: ignore` in `aureum/prover.py` so `mypy` is fully clean.
+  - Final QA: **162 passed, 1 skipped**; `ruff` clean; `mypy` clean.
+  - Build artifacts produced: `aureum-0.4.0.tar.gz` and `aureum-0.4.0-py3-none-any.whl`.
+  - **Remaining blocker**: PyPI trusted publisher not yet configured on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`. User must add it before the GitHub publish workflow can upload.
 
 ---
 
