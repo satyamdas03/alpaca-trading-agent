@@ -1,20 +1,30 @@
 ---
 name: aureum_session_2026-08-01
-description: "Aureum session 2026-08-01: commit Phase 4A Provable MPT core, update memory dossiers, and launch parallel workflow for revolutionary Edges 2–7."
+description: "Aureum session 2026-08-01: ship Phase 4A Provable MPT core, integrate revolutionary Edges 2–7, extend verifier bridge, add Studio Phase 4 lineage panel, publish v0.4.0 release, and update memory dossiers end-to-end."
 metadata:
   node_type: memory
   type: project
   date: 2026-08-01
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-08-02T02:53:28.475Z
+  modified: 2026-08-02T03:02:31.580Z
 ---
 
-# Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated
+# Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated, v0.4.0 Released
 
 ## Summary
 
-Resumed from a session restart with full context recovery. Read all Aureum memory dossiers, explored both `newLanguage` (stale skeleton) and `aureum` (active repo), and confirmed the uncommitted Phase 4A MPT work in the working tree. Committed and pushed Phase 4A (Edge 1 — Provable MPT core), then launched a multi-agent workflow to design and implement the remaining six revolutionary edges in parallel. After the workflow completed, all six edge branches were merged into `main` additively and pushed to origin.
+Resumed from a session restart with full context recovery. The goal was to finish integrating all seven revolutionary Aureum edges into `main`, push everything, update the README and dossiers, then continue building toward something extraordinary: a self-proving semantic kernel for finance that closes the research-to-production rewrite gap.
+
+This session completed the full v0.4.0 Phase 4 ship:
+- Re-integrated all seven edges into `main` after resolving remaining merge conflicts.
+- Added the `hero_phase4.yaml` demo strategy and a regression test covering Edges 2, 3, 4, 5, and 7.
+- Extended the SMT/Lean verifier bridge to every Phase 4 claim.
+- Updated Aureum Studio with a Phase 4 lineage panel.
+- Published a launch narrative and GitHub release `v0.4.0` with wheel + sdist.
+- Preserved all context in memory dossiers.
+
+Final QA: **171 Python tests passed, 1 skipped**; `ruff` + `mypy` clean; frontend `tsc`, `vite build`, and `eslint` clean.
 
 ## Actions taken
 

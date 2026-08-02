@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-02T02:52:14.510Z
+  modified: 2026-08-02T03:01:51.615Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -48,6 +48,39 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
 - Theorem-prover-guarded AI agents (microsecond compliance checks).
 - Causal, not just correlational, strategy DSL.
 - Self-auditing digital twins of financial objects.
+
+---
+
+## 2026-08-01 — End-to-end Phase 4 ship summary
+
+This session resumed after a context compaction and pushed Aureum from "all edges integrated" to "fully productized and documented v0.4.0." The overall goal is to build a self-proving semantic kernel for finance that solves the quant research-to-production rewrite gap through reproducible, machine-checkable audit artifacts.
+
+What was accomplished end-to-end:
+
+1. **Verified the workflow-generated hero demo manually** because two subagent verify steps failed with transient `ollama.com` 502 errors.
+2. **Re-integrated all seven revolutionary edges** into `main` additively, resolving merge-conflict markers in shared orchestration files.
+3. **Shipped `examples/strategies/hero_phase4.yaml`** — one strategy exercising causal MPT, conformal portfolios, neuro-symbolic alpha, semantic knowledge graph, and economic-security audit simultaneously.
+4. **Added `tests/test_hero_phase4.py`** — regression test asserting every Phase 4 lineage field is populated in the certificate.
+5. **Bumped version to 0.4.0**, added `CHANGELOG.md` and a PyPI `README.md`, and removed a stale `type: ignore` in `prover.py`.
+6. **Extended the verifier bridge** so SMT-LIB and Lean 4 generators can encode Phase 4 claims (portfolio, causal, conformal, alpha, diffopt, graph, econsec).
+7. **Updated Aureum Studio** with a Phase 4 lineage panel visualizing hashes, coverage levels, alpha formulas, graph entities, and audit status.
+8. **Wrote `docs/phase4-launch.md`**, a public narrative explaining the seven edges and the real-world problem they solve.
+9. **Created GitHub release `v0.4.0`** with wheel and sdist attached.
+10. **Updated both memory dossiers** so the full context is preserved across sessions.
+
+Final QA across the entire stack:
+- Python: **171 passed, 1 skipped**; `ruff` clean; `mypy` clean.
+- Frontend: `tsc`, `vite build`, and `eslint` clean.
+- Git: all changes committed and pushed to `origin/main` on both `aureum` and the parent memory repo.
+
+**Remaining blockers**
+1. **PyPI publish**: needs trusted-publisher configuration on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`.
+2. **Real-market validation**: needs `ALPACA_API_KEY` and `ALPACA_SECRET_KEY` to fetch live bars and run `hero_phase4.yaml` against real data.
+
+**Next engineering priorities**
+- Theorem-prover hardening for MPT optimality, causal separation, and conformal coverage claims.
+- Live Alpaca paper-trading adapter for scheduled rebalancing.
+- Expand the semantic knowledge graph into contract lifecycle (ACTUS/CDM) and regulatory reporting objects.
 
 ---
 
