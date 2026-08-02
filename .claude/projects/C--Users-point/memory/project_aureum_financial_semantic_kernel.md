@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-02T02:39:29.305Z
+  modified: 2026-08-02T02:52:14.510Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -108,6 +108,20 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
   - Final QA: **162 passed, 1 skipped**; `ruff` clean; `mypy` clean.
   - Build artifacts produced: `aureum-0.4.0.tar.gz` and `aureum-0.4.0-py3-none-any.whl`.
   - **Remaining blocker**: PyPI trusted publisher not yet configured on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`. User must add it before the GitHub publish workflow can upload.
+- **Verifier bridge extended to Phase 4 edges** ✅ complete and pushed as commit `0d1a73e` on 2026-08-01.
+  - Added `PortfolioClaim`, `CausalClaim`, `ConformalClaim`, `AlphaClaim`, `DiffOptClaim`, `GraphClaim`, and `EconSecClaim` in `aureum/prover.py`.
+  - Added extractors for all Phase 4 certificate fields.
+  - Extended `SmtLibGenerator` and `Lean4Generator` to emit claims for portfolio construction, causal MPT, conformal coverage, alpha safety, differentiable execution lineage, knowledge graph, and economic-security audit.
+  - Added 11 new regression tests in `tests/test_prover.py`.
+  - Final QA: **171 passed, 1 skipped**; `ruff` + `mypy` clean.
+- **Aureum Studio Phase 4 lineage panel** ✅ complete and pushed as commit `c908ab9` on 2026-08-01.
+  - Extended `frontend/web/src/types.ts` with Phase 4 certificate fields.
+  - Added `Phase4Lineage` component showing portfolio construction details, causal/conformal/diffopt hashes, alpha formulas + safety verdicts, knowledge-graph entities, and economic-security audit status.
+  - Integrated the panel into `Dashboard.tsx`.
+  - Frontend `tsc`, `vite build`, and `eslint` all clean.
+- **Phase 4 public launch narrative** ✅ complete and pushed as commit `e5ba70e` on 2026-08-01.
+  - New `docs/phase4-launch.md` covering the seven edges, the research-to-production problem, hero strategy example, and roadmap.
+- **GitHub release v0.4.0** ✅ created at https://github.com/satyamdas03/aureum/releases/tag/v0.4.0 with wheel and sdist attached.
 
 ---
 

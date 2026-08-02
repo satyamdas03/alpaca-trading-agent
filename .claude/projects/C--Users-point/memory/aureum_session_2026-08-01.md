@@ -7,7 +7,7 @@ metadata:
   date: 2026-08-01
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-08-02T02:40:12.005Z
+  modified: 2026-08-02T02:53:28.475Z
 ---
 
 # Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated
@@ -47,13 +47,36 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
    - Pushed integrated `main` to `origin/main`: `3817df7..4a95786`.
    - Final QA on `main`: **160 passed, 1 skipped**; `ruff` clean; `mypy` clean.
 
-6. **README + dossier update**
-   - Updated `README.md` with Phase 4 edge table, runnable YAML/CLI examples, refreshed roadmap, repository structure, and test badge.
-   - Commit: `ba85c25` — `docs(aureum): update README with Phase 4 + all seven revolutionary edges`.
-   - Pushed README update to `origin/main`: `4a95786..ba85c25`.
-   - Re-ran full QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` clean.
+6. **Verifier bridge extended to Phase 4 edges**
+   - Commit: `0d1a73e` — `feat(aureum): extend verifier bridge to Phase 4 edges`.
+   - Added new claim dataclasses and extractors for portfolio construction, causal MPT, conformal portfolios, neuro-symbolic alpha, differentiable execution, knowledge graph, and economic security.
+   - Extended `SmtLibGenerator` and `Lean4Generator` to encode all Phase 4 claims.
+   - Added 11 new tests in `tests/test_prover.py`.
+   - Pushed to `origin/main`.
 
-7. **Phase 4 productization workflow + final v0.4.0 integration**
+7. **Aureum Studio Phase 4 lineage panel**
+   - Commit: `c908ab9` — `feat(studio): add Phase 4 lineage panel to Aureum Studio`.
+   - Extended frontend `Certificate` type with all Phase 4 fields.
+   - Built `Phase4Lineage` component and wired it into `Dashboard.tsx`.
+   - Frontend `tsc`, `vite build`, and `eslint` all clean.
+   - Pushed to `origin/main`.
+
+8. **Phase 4 public launch narrative**
+   - Commit: `e5ba70e` — `docs(aureum): add Phase 4 public launch narrative`.
+   - Added `docs/phase4-launch.md` explaining the seven edges, problem statement, hero strategy, and roadmap.
+   - Pushed to `origin/main`.
+
+9. **GitHub release v0.4.0**
+   - Tag `v0.4.0` pushed.
+   - Release created at https://github.com/satyamdas03/aureum/releases/tag/v0.4.0 with wheel + sdist attached.
+
+10. **README + dossier update**
+    - Updated `README.md` with Phase 4 edge table, runnable YAML/CLI examples, refreshed roadmap, repository structure, and test badge.
+    - Commit: `ba85c25` — `docs(aureum): update README with Phase 4 + all seven revolutionary edges`.
+    - Pushed README update to `origin/main`: `4a95786..ba85c25`.
+    - Re-ran full QA after README commit: **160 passed, 1 skipped**; `ruff` + `mypy` clean.
+
+11. **Phase 4 productization workflow + final v0.4.0 integration**
    - Resumed after session compaction; manually verified the workflow-generated artifacts because the two verify agents failed due to transient `ollama.com` API 502 errors.
    - Verified `examples/strategies/hero_phase4.yaml` and `tests/test_hero_phase4.py`.
    - Ran the new regression test: **2 passed**.
@@ -86,19 +109,24 @@ Resumed from a session restart with full context recovery. Read all Aureum memor
 
 ## QA
 
-- `pytest -q` in `bindings/python`: **162 passed, 1 skipped** (z3 optional).
+- `pytest -q` in `bindings/python`: **171 passed, 1 skipped** (z3 optional).
 - `ruff check aureum tests`: clean.
 - `mypy aureum`: clean on 21 source files.
 - Hero regression test `tests/test_hero_phase4.py`: **2 passed**.
+- Verifier bridge tests `tests/test_prover.py`: **13 passed, 1 skipped** (z3 optional).
+- Frontend: `tsc`, `vite build`, and `eslint` all clean.
 - All changes pushed to `origin/main` on both `aureum` and the parent memory repo.
 
 ## Open work / next steps
 
-- The seven-edge research + integration phase is complete. Consider:
-  - A single end-to-end demo strategy combining causal + conformal + neuro-symbolic alpha + audit.
-  - Release engineering: bump version, build wheel, tag release, publish to PyPI (token still pending).
-  - Frontend/Studio updates to visualize the new certificate fields (causal lineage, conformal widths, model hashes, economic-security report, knowledge graph).
-  - Theorem-prover hardening for the new objective types and audit claims.
+- The seven-edge research + integration phase is complete, plus verifier bridge, Studio lineage panel, and launch narrative.
+- **External blockers**
+  1. **PyPI publish**: requires trusted-publisher configuration on PyPI.org for repo `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`.
+  2. **Real-market validation**: requires `ALPACA_API_KEY` and `ALPACA_SECRET_KEY` in the environment to fetch live bars and run `hero_phase4.yaml` against real data.
+- **Next engineering work**
+  - Theorem-prover hardening: generate and check formal proofs for MPT optimality, causal separation, and conformal coverage claims.
+  - Live trading adapter: wire the paper Alpaca account to the Aureum backtest runner for scheduled rebalancing.
+  - Expand the semantic knowledge graph into cross-domain financial objects (ACTUS cashflows, CDM trades, regulatory reports).
 
 ---
 
