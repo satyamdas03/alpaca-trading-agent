@@ -7,7 +7,7 @@ metadata:
   date: 2026-08-01
   status: active
   originSessionId: 2da958bb-e1fb-4a8f-b58f-fc721fde46b6
-  modified: 2026-08-02T05:08:43.139Z
+  modified: 2026-08-02T05:51:51.988Z
 ---
 
 # Aureum Session 2026-08-01 — Phase 4A Shipped, Edges 2–7 Integrated, v0.4.0 Released
@@ -145,8 +145,8 @@ Result: GitHub Actions CI run #30733505916 on `9bb2b83` is **green** across all 
 
 - The seven-edge research + integration phase is complete, plus verifier bridge, Studio lineage panel, and launch narrative.
 - **External blockers**
-  1. **PyPI publish**: requires trusted-publisher configuration on PyPI.org for repo `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`. A logged-in PyPI session (password + 2FA) or a PyPI API token is required; recovery codes alone cannot authenticate.
-  2. **Real-market validation**: requires `ALPACA_SECRET_KEY` to pair with the already-captured API key (base URL `https://paper-api.alpaca.markets/v2`) so live bars can be fetched and `hero_phase4.yaml` can be run against real data.
+  1. ✅ **PyPI publish**: resolved. `aureum` v0.4.1 is live on PyPI via OIDC trusted publishing (workflow run #30734749919).
+  2. ✅ **Real-market validation**: resolved. Alpaca paper account ACTIVE; live tech-sector snapshot fetched; `hero_phase4_live.yaml` runs end-to-end against real data.
 - **Next engineering work**
   - Theorem-prover hardening: generate and check formal proofs for MPT optimality, causal separation, and conformal coverage claims.
   - Live trading adapter: wire the paper Alpaca account to the Aureum backtest runner for scheduled rebalancing.

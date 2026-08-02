@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-02T05:08:18.548Z
+  modified: 2026-08-02T05:51:38.615Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -79,6 +79,42 @@ The `main` CI had been failing since the v0.4.0 ship. Local `ruff` passed becaus
 
 ---
 
+## 2026-08-02 — PyPI trusted publishing + live Alpaca validation
+
+### What happened
+The PyPI trusted publisher was configured by the user. I bumped the version to **0.4.1** (cleaner than re-tagging the already-released `v0.4.0`), fixed a stale `__version__` hard-coded to `0.3.0`, and pushed the tag to trigger the publish workflow. I also ran the first real-market validation against Alpaca paper data.
+
+### Actions taken
+1. **Bumped version to 0.4.1**
+   - `bindings/python/pyproject.toml`: `0.4.0` → `0.4.1`
+   - `bindings/python/aureum/__init__.py`: `__version__` now reads from `pyproject.toml` (fallback `0.4.1`), fixing the stale `0.3.0` mismatch.
+   - Added 0.4.1 section to `CHANGELOG.md`.
+   - Commit `f8fab32`.
+
+2. **Created and pushed `v0.4.1` tag**
+   - Triggered `.github/workflows/publish.yml`.
+   - Publish workflow run #30734749919: **success**.
+   - Package live on PyPI: https://pypi.org/project/aureum/0.4.1/
+   - GitHub release created: https://github.com/satyamdas03/aureum/releases/tag/v0.4.1
+
+3. **Validated Alpaca paper credentials**
+   - Account status: ACTIVE
+   - Cash: $75,192.60; Buying power: $373,825.81
+   - Fetched live daily bars for AAPL/MSFT/GOOGL/AMZN/AVGO/META/NVDA.
+   - Built `examples/data/alpaca_tech_snapshot.csv` (3,829 rows, 547 trading days × 7 symbols) with deterministic `.snapshot.json`.
+   - Added `examples/strategies/hero_phase4_live.yaml` — a live-data variant of the hero strategy.
+   - Ran `aureum backtest` against the live snapshot: certificate generated with all Phase 4 edge fields populated.
+   - Live backtest results (2024-05-24 → 2026-07-31): total return +41.6%, CAGR 17.3%, Sharpe 1.01, max drawdown 19.1%, turnover 2.4%.
+   - Commit `b0d94a4` pushed to `main`.
+
+### Verification
+- PyPI: `pip install aureum==0.4.1` works.
+- GitHub Actions: CI green on `main`; publish workflow green on `v0.4.1`.
+- Local QA: **171 passed, 1 skipped**; `ruff` clean; `mypy` clean.
+- Live-market backtest: end-to-end success.
+
+---
+
 ## 2026-08-01 — End-to-end Phase 4 ship summary
 
 This session resumed after a context compaction and pushed Aureum from "all edges integrated" to "fully productized and documented v0.4.0." The overall goal is to build a self-proving semantic kernel for finance that solves the quant research-to-production rewrite gap through reproducible, machine-checkable audit artifacts.
@@ -102,12 +138,13 @@ Final QA across the entire stack:
 - Git: all changes committed and pushed to `origin/main` on both `aureum` and the parent memory repo.
 
 **Remaining blockers**
-1. **PyPI publish**: needs trusted-publisher configuration on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`. Requires either a logged-in PyPI session (password + 2FA) or a PyPI API token; recovery codes alone are not sufficient for login.
-2. **Real-market validation**: needs `ALPACA_SECRET_KEY` to pair with the already-captured API key, plus the base URL `https://paper-api.alpaca.markets/v2`, so live bars can be fetched and `hero_phase4.yaml` can be run against real data.
+- ✅ **PyPI publish**: resolved. `aureum` v0.4.1 is live on PyPI via OIDC trusted publishing.
+- ✅ **Real-market validation**: resolved. Alpaca paper credentials verified; live tech-sector snapshot fetched; `hero_phase4_live.yaml` runs end-to-end against real data.
+- **No external blockers remain.**
 
 **Next engineering priorities**
 - Theorem-prover hardening for MPT optimality, causal separation, and conformal coverage claims.
-- Live Alpaca paper-trading adapter for scheduled rebalancing.
+- Live Alpaca paper-trading adapter for scheduled rebalancing (move from backtest-only to executable paper orders).
 - Expand the semantic knowledge graph into contract lifecycle (ACTUS/CDM) and regulatory reporting objects.
 
 ---
