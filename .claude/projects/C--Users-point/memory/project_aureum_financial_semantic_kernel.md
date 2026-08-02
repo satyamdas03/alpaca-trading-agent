@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-02T03:01:51.615Z
+  modified: 2026-08-02T05:08:18.548Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -51,6 +51,34 @@ Layer 0: Semantic substrate — FIBO + CDM + ACTUS + custom ontologies, one cano
 
 ---
 
+## 2026-08-02 — CI lint/type gap fixed
+
+### What happened
+The `main` CI had been failing since the v0.4.0 ship. Local `ruff` passed because the installed version (0.15.12) was older than the `>=0.16.0` constraint used in CI. `mypy` also failed in CI because the workflow ran `mypy bindings/python` from the repo root, missing the `bindings/python/pyproject.toml` overrides, and because NumPy 2.5+ stubs require Python 3.12 type-statement syntax.
+
+### Fixes applied
+1. **Upgraded local ruff** to 0.16.1 and fixed all new lint errors:
+   - `PIE810` — merge `startswith` checks into tuple calls.
+   - `RUF012` — annotate immutable class-level sets/dicts as `ClassVar`.
+   - `RUF046` — remove redundant `int(round(...))` casts.
+   - `RUF059` — prefix unused unpacked variables with `_`.
+   - `BLE001` — catch specific YAML/ValueError in author; keep broad LLM catch with `noqa`.
+2. **Fixed CI `mypy` invocation** — run `mypy aureum` from `bindings/python` so project overrides apply.
+3. **Expanded mypy overrides** — add `fastapi.*`, `pydantic.*`, and `z3.*` to `ignore_missing_imports`.
+4. **Fixed test type errors** — `test_signals.py`, `test_causal.py`, `test_reflector.py`, `test_author.py`.
+5. **Bumped mypy target** to `python_version = "3.12"` to accommodate NumPy 2.5+ stubs while keeping runtime support at `>=3.11`.
+
+### Commits
+- `bf7ddab` fix(aureum): resolve ruff 0.16 lint errors and mypy z3 stub warning
+- `c70d58d` ci(aureum): fix mypy working directory and missing stub overrides
+- `9bb2b83` ci(aureum): set mypy python_version to 3.12 for numpy 2.5 stub compatibility
+
+### Verification
+- Local QA: **171 passed, 1 skipped**; `ruff` clean; `mypy` clean.
+- GitHub Actions CI run #30733505916 on `9bb2b83`: **success** across `rust`, `python (3.11/3.12/3.13)`, `frontend`, and `docs`.
+
+---
+
 ## 2026-08-01 — End-to-end Phase 4 ship summary
 
 This session resumed after a context compaction and pushed Aureum from "all edges integrated" to "fully productized and documented v0.4.0." The overall goal is to build a self-proving semantic kernel for finance that solves the quant research-to-production rewrite gap through reproducible, machine-checkable audit artifacts.
@@ -74,8 +102,8 @@ Final QA across the entire stack:
 - Git: all changes committed and pushed to `origin/main` on both `aureum` and the parent memory repo.
 
 **Remaining blockers**
-1. **PyPI publish**: needs trusted-publisher configuration on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`.
-2. **Real-market validation**: needs `ALPACA_API_KEY` and `ALPACA_SECRET_KEY` to fetch live bars and run `hero_phase4.yaml` against real data.
+1. **PyPI publish**: needs trusted-publisher configuration on PyPI.org for `satyamdas03/aureum`, workflow `publish.yml`, environment `pypi`. Requires either a logged-in PyPI session (password + 2FA) or a PyPI API token; recovery codes alone are not sufficient for login.
+2. **Real-market validation**: needs `ALPACA_SECRET_KEY` to pair with the already-captured API key, plus the base URL `https://paper-api.alpaca.markets/v2`, so live bars can be fetched and `hero_phase4.yaml` can be run against real data.
 
 **Next engineering priorities**
 - Theorem-prover hardening for MPT optimality, causal separation, and conformal coverage claims.
