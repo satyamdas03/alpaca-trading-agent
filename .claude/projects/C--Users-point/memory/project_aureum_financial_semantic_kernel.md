@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-02T05:51:38.615Z
+  modified: 2026-08-04T01:38:05.611Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -146,6 +146,46 @@ Final QA across the entire stack:
 - Theorem-prover hardening for MPT optimality, causal separation, and conformal coverage claims.
 - Live Alpaca paper-trading adapter for scheduled rebalancing (move from backtest-only to executable paper orders).
 - Expand the semantic knowledge graph into contract lifecycle (ACTUS/CDM) and regulatory reporting objects.
+
+---
+
+## 2026-08-02 — Live Alpaca paper-trading bridge shipped (v0.4.2)
+
+### What happened
+Implemented the live trading bridge end-to-end, moving Aureum from backtest-only reproducibility to executable, auditable Alpaca paper trading. Chose **Option B: local daemon / Windows Task Scheduler** as the execution model.
+
+### Components added
+- **`aureum.trading`** — `AlpacaTradingAdapter` (stdlib `urllib` only) with paper/live safety, kill switch, and `MarketClosedError`.
+- **`aureum.execution`** — `ExecutionBackend` protocol, `SimulatedExecutionBackend`, `AlpacaPaperExecutionBackend`, `LiveRunner`, and `LiveTradingConfig`.
+- **BacktestRunner refactor** — accepts an `execution_backend` while preserving exact legacy backtest parity.
+- **Certificate extension** — `LiveTradingCertificate` capturing target portfolio, pre/post account snapshots, orders, fills, risk checks, and errors.
+- **CLI commands** — `aureum account` and `aureum live` with `--check-only`, `--dry-run`, guardrail overrides, and kill-switch support.
+- **Scheduler scripts** — `scripts/aureum-daily-task.ps1`, `scripts/register-scheduled-task.ps1`, `scripts/.env.example`, and `scripts/README.md`.
+
+### Commits
+- `9f6a065` feat(bindings/python): live Alpaca paper-trading bridge + Windows scheduler
+- `a7af965` docs(aureum): add v0.4.2 changelog entry for live trading bridge
+- `47d4442` fix(execution): live backend liquidates non-target positions and records dry-run orders
+
+### Verification
+- Local QA: **196 passed, 1 skipped**; `ruff` clean; `mypy` clean across `aureum` and `tests`.
+- PowerShell scripts parse successfully.
+- Real Alpaca paper account validated:
+  - Credentials written to `bindings/python/scripts/.env` (gitignored).
+  - `aureum account --paper --ignore-market-hours` confirmed account `PA3M6G5LMKMI` is active; equity `$101,224.96`, cash `$75,192.60`, 4 open positions (`CINF`, `GLD`, `XLE`, `XLV`).
+  - `aureum live ... --check-only --paper --ignore-market-hours` produced a valid `LiveTradingCertificate`.
+  - `aureum live ... --dry-run --paper --ignore-market-hours --max-total-invested-pct 1.0 --max-single-position-pct 0.35` produced **11 intended orders**: sell the 4 legacy positions and buy 7 tech names (`AAPL`, `AMZN`, `AVGO`, `GOOGL`, `META`, `MSFT`, `NVDA`) per `hero_phase4_live.yaml`.
+- Pushed to `origin/main` on `satyamdas03/aureum`.
+
+### Critical post-ship fixes
+- `AlpacaPaperExecutionBackend` now sells positions not in the target portfolio.
+- `LiveRunner` now includes dry-run intended orders in the certificate.
+- `live-certificates/` added to `.gitignore`.
+
+### Next priorities
+- First real scheduled paper trade at market open (09:30 US/Eastern).
+- Post-trade notifications (email / MCP).
+- Reflection loop for live P&L and guardrail tuning.
 
 ---
 
