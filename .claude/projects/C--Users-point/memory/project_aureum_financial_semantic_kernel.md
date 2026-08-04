@@ -7,10 +7,65 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-04T01:38:05.611Z
+  modified: 2026-08-04T03:46:38.600Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
+
+## 2026-08-04 — Pre-market prep
+
+### Data refresh
+- **Status:** Data loaded successfully from refreshed tech snapshot.
+- **Date range:** 2024-05-01 to 2026-08-04
+- **Rows:** 3,955 daily bars
+
+### Account snapshot (pre-trade)
+- **Equity:** $101,215.77
+- **Cash:** $75,192.60
+- **Open positions (4):**
+  - CINF: 60 shares @ $178.25, market value $10,695.00, unrealized P/L +$620.40
+  - GLD: 0.772065 shares @ $372.36, market value $287.49, unrealized P/L -$48.88
+  - XLE: 124.07601 shares @ $58.84, market value $7,300.63, unrealized P/L +$300.61
+  - XLV: 47.70741 shares @ $162.24, market value $7,740.05, unrealized P/L +$740.05
+
+### Dry-run result
+- **Mode:** Paper, dry-run (no real orders submitted)
+- **Intended orders:** 4 sell-all orders that would close every existing position
+  - SELL XLV 47.70741 -> $7,740.05
+  - SELL GLD 0.772065 -> $287.49
+  - SELL XLE 124.07601 -> $7,300.63
+  - SELL CINF 60 -> $10,695.00
+- **Target portfolio:** EMPTY — strategy failed to produce target weights or buy orders
+- **Error:** `insufficient assets with required lookback (eligible_count=0)`
+- **Certificate:** `C:\Users\point\projects\aureum\live-certificates\dryrun-2026-08-04.json`
+- **Go/no-go verdict:** **NO-GO for live/paper rebalance.** The dry-run would leave the account 100% in cash with no replacement tech-sector holdings.
+
+### Notification layer status
+- **Files modified:** `aureum/notify.py`, `aureum/execution.py`, `aureum/cli.py`, `scripts/aureum-daily-task.ps1`, `tests/test_live_cli.py`, `tests/test_notify.py`
+- **Tests:** 202 passed, 1 skipped
+- **Lint:** `ruff` clean
+- **Type check:** `mypy` clean (24 source files)
+- **Sample notification:** `live-certificates/notifications/notification-sample-run-001-2026-08-04T12-00-00Z.json`
+
+### Scheduler registration status
+- **Task name:** `AureumDailyPaperTrading`
+- **Status:** Registered and manually started for validation
+- **Trigger:** Weekdays at 09:35 US/Eastern
+- **Next estimated run:** 2026-08-05 09:35:00
+- **Mode:** Paper trading (`AUREUM_FORCE_LIVE=false` in `scripts/.env`)
+- **Action:** `powershell.exe -ExecutionPolicy Bypass -File C:\Users\point\projects\aureum\bindings\python\scripts\aureum-daily-task.ps1`
+- **Manual step remaining:** The registered action uses the script defaults, which include `--paper` but **not `--dry-run`**. Once the target-portfolio blocker is cleared, confirm the desired runtime flags before the next scheduled run, or edit the scheduled task action to include `--dry-run` if continued dry-runs are intended.
+
+### Blockers before first scheduled paper trade
+1. **Strategy cannot build target portfolio.** `hero_phase4_live.yaml` (or the refreshed data pipeline) reports `eligible_count=0`; AAPL, MSFT, GOOGL, AMZN, META, NVDA, AVGO were all rejected for insufficient lookback. Diagnose whether the issue is missing/incomplete bars, a lookback window exceeding available history, a too-strict data-quality filter, or a stale symbol list.
+2. **No buy orders generated.** Until target weights appear, the runner can only produce sell-all orders, which would liquidate the existing positions and leave cash.
+3. **Dry-run -> paper flag transition.** Once target weights are produced and a clean dry-run is verified, decide whether the scheduled task should remain in `--dry-run` mode or lift to actual paper orders.
+
+### Next steps
+1. Inspect `live-certificates/dryrun-2026-08-04.json` and the refreshed tech snapshot to find why all 7 tech symbols were rejected.
+2. Fix data or strategy config, re-run `aureum live --dry-run --paper`, and confirm target weights + buy orders appear.
+3. After a clean dry-run, either update the scheduled task to include `--dry-run` or leave it as paper-only and monitor the first run.
+4. Commit and push the notification/scheduler changes once the no-go decision is recorded.
 
 ## 2026-07-28 Session Summary
 
