@@ -7,40 +7,49 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-04T04:07:26.685Z
+  modified: 2026-08-04T04:50:30.278Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
 
-## 2026-08-04 — Pre-market prep (corrected)
+## 2026-08-04 — Pre-market prep: complete
 
-### What happened
-The workflow's initial report of a target-portfolio failure was a false alarm caused by the subagent not sourcing `scripts/.env` before invoking `aureum live`. After sourcing the credentials correctly, the dry-run produced the expected 11 orders. The real bugs were in the PowerShell scheduler scripts: `.env` parsing used `$Matches.Groups` instead of the PowerShell hashtable `$Matches[1]/$Matches[2]`, the default registration pointed at synthetic data, and the scheduled time did not account for the AEST/US/Eastern offset.
+### Session overview
+Goal: get the first scheduled live Alpaca paper rebalance ready before the 2026-08-04 09:35 US/Eastern market-open window. This session ran a three-agent workflow in parallel to (1) refresh data and dry-run the live trade, (2) add post-run notifications, and (3) register the Windows scheduled task. The workflow initially reported a false "blocked" status because the data/agent did not source `scripts/.env`; the real fix was in the PowerShell scheduler scripts.
 
 ### Data refresh
-- **Status:** Refreshed from Alpaca paper.
 - **File:** `examples/data/alpaca_tech_snapshot.csv`
 - **Date range:** 2024-05-24 → 2026-07-31
 - **Rows:** 3,829 daily bars (7 symbols × 547 trading days)
 - **Symbols:** AAPL, AMZN, AVGO, GOOGL, META, MSFT, NVDA
-- **Sector column:** populated with `Technology` for all rows
+- **Sector column:** `Technology` for every row
+- **Snapshot metadata:** `examples/data/alpaca_tech_snapshot.snapshot.json`
+- **SHA-256:** `2091e260d76517fd74430c40964ef5f63c7f0bd4441a80594a075f3b86b29785`
 
-### Account snapshot (pre-trade)
-- **Account:** `PA3M6G5LMKMI` (paper)
+### Account snapshot
+- **Account:** `PA3M6G5LMKMI` (Alpaca paper)
 - **Status:** ACTIVE
 - **Equity:** ~$101,215
 - **Cash:** $75,192.60
-- **Open positions (4):** CINF, GLD, XLE, XLV (legacy holdings)
+- **Buying power:** ~$373,600
+- **Open positions (4):** CINF, GLD, XLE, XLV (legacy holdings, ~$26K total)
 
 ### Dry-run result
-- **Mode:** paper-dry-run (no real orders submitted)
-- **Target portfolio:** 7 tech names via conformalized maximum Sharpe
+Command used:
+```bash
+python -m aureum.cli live examples/strategies/hero_phase4_live.yaml \
+  --data examples/data/alpaca_tech_snapshot.csv \
+  --certificate live-certificates/live-2026-08-04-1404.json \
+  --paper --dry-run --ignore-market-hours
+```
+- **Mode:** `paper-dry-run` — no orders submitted
+- **Target portfolio (conformalized maximum Sharpe):**
   - AVGO 25.0%, NVDA 17.98%, META 16.38%, AMZN 14.95%, GOOGL 12.12%, MSFT 9.31%, AAPL 4.26%
 - **Intended orders (11):**
-  - SELL CINF 60 → $10,695
+  - SELL CINF 60 → ~$10,695
   - SELL GLD 0.772065 → ~$287
   - SELL XLE 124.07601 → ~$7,301
-  - SELL XLV 47.70741 → $7,740
+  - SELL XLV 47.70741 → ~$7,740
   - BUY AVGO 65.00 → ~$25,306
   - BUY MSFT 20.28 → ~$9,422
   - BUY AAPL 13.98 → ~$4,316
@@ -49,37 +58,59 @@ The workflow's initial report of a target-portfolio failure was a false alarm ca
   - BUY AMZN 55.75 → ~$15,135
   - BUY NVDA 90.65 → ~$18,196
 - **Certificate:** `live-certificates/live-2026-08-04-1404.json`
-- **Go/no-go verdict:** **GO for dry-run scheduled paper rebalance.** The target portfolio and diff orders are exactly what the strategy specifies.
+- **Go/no-go verdict:** **GO** — target portfolio and diff orders match the strategy exactly.
 
-### Notification layer status
-- **Files modified:** `aureum/notify.py` (new), `aureum/execution.py`, `aureum/cli.py`, `scripts/aureum-daily-task.ps1`, `tests/test_live_cli.py`, `tests/test_notify.py` (new)
-- **Tests:** 202 passed, 1 skipped
-- **Lint:** `ruff` clean
-- **Type check:** `mypy` clean
-- **Notification output:** each `LiveRunner` completion writes a deterministic `notification-{run_id}-{timestamp}.json` next to the certificate; the daily task also appends to `live-certificates/aureum-daily-task.log`.
+### Notification layer
+- **New files:** `aureum/notify.py`, `tests/test_notify.py`
+- **Modified files:** `aureum/execution.py`, `aureum/cli.py`, `scripts/aureum-daily-task.ps1`, `tests/test_live_cli.py`
+- **What it does:**
+  - `Notification` dataclass with `run_id`, `timestamp`, `level`, `title`, `body`, `metadata`.
+  - `write_notification(...)` → deterministic JSON file (`notification-{run_id}-{timestamp}.json`).
+  - `console_sink(...)` → one-line stdout summary.
+  - `file_and_console(...)` → both.
+  - `LiveRunner` emits notifications on completion, kill-switch activation, and errors.
+  - `aureum-daily-task.ps1` appends a timestamped, machine-readable line to `live-certificates/aureum-daily-task.log` after every step.
+- **QA:** 202 Python tests passed, 1 skipped; `ruff` clean; `mypy` clean.
 
-### Scheduler registration status
+### Scheduler fixes
+Bugs found and fixed in `bindings/python/scripts/aureum-daily-task.ps1` and `register-scheduled-task.ps1`:
+1. **`.env` parser:** original regex used `$Matches.Groups[1]`, which does not exist in PowerShell 5.1. Fixed to use the hashtable `$Matches[1]` / `$Matches[2]`.
+2. **Certificate/log paths:** were relative (`..\..\..\live-certificates`), producing inconsistent paths in logs. Fixed to resolve `$CertificateDir` once and use absolute paths throughout.
+3. **Default strategy/data:** `register-scheduled-task.ps1` defaulted to synthetic `momentum.yaml` + `synthetic_prices.csv`. Fixed to default to `hero_phase4_live.yaml` + `alpaca_tech_snapshot.csv`.
+4. **Run time:** defaults to `23:35` local AEST, which equals `09:35` US/Eastern, 5 minutes after the equity market open.
+5. **Safety:** `register-scheduled-task.ps1` now passes `-DryRun` by default. To submit real paper orders, re-run it **without** `-DryRun`.
+
+### Scheduled task status
 - **Task name:** `AureumDailyPaperTrading`
-- **Status:** Registered and manually validated via `Start-ScheduledTask`
-- **Trigger:** Weekdays at 23:35 local time (AEST) = 09:35 US/Eastern, 5 minutes after equity market open
-- **Action:** `powershell.exe -ExecutionPolicy Bypass -File "...\aureum-daily-task.ps1" -Strategy "...\hero_phase4_live.yaml" -Data "...\alpaca_tech_snapshot.csv" -DryRun`
-- **Mode:** `--paper --dry-run` (safe by default)
-- **Last validation run:** 2026-08-04 13:58:47 local, exit code 0, produced `live-2026-08-04-1358.json`
+- **State:** Ready
+- **Trigger:** Monday–Friday at 23:35 AEST / 09:35 US/Eastern
+- **Action:** `powershell.exe -ExecutionPolicy Bypass -File "C:\Users\point\projects\aureum\bindings\python\scripts\aureum-daily-task.ps1" -Strategy "C:\Users\point\projects\aureum\examples\strategies\hero_phase4_live.yaml" -Data "C:\Users\point\projects\aureum\examples\data\alpaca_tech_snapshot.csv" -DryRun`
+- **Mode:** `--paper --dry-run`
+- **Manual validation:** `Start-ScheduledTask -TaskName AureumDailyPaperTrading` ran at 2026-08-04 13:58:47 local, exited with code 0, and produced `live-certificates/live-2026-08-04-1358.json`.
 - **Next scheduled run:** 2026-08-04 23:35 AEST / 2026-08-04 09:35 US/Eastern
+- **Live output files:**
+  - Certificates: `live-certificates/live-YYYY-MM-DD-HHMM.json`
+  - Notifications: `live-certificates/notification-{run_id}-{timestamp}.json`
+  - Log: `live-certificates/aureum-daily-task.log`
 
-### To enable real paper orders later
+### To enable real paper order submission
 1. Re-run `register-scheduled-task.ps1` **without** `-DryRun`.
-2. Keep `AUREUM_FORCE_LIVE=false` in `scripts/.env`; `--paper` still submits to the Alpaca paper account.
+2. Keep `AUREUM_FORCE_LIVE=false` in `scripts/.env` so the task remains in the Alpaca paper account.
 3. Remove the kill-switch file at `scripts/kill.switch` if present.
-4. Optionally remove `-IgnoreMarketHours` so the task aborts when the market is closed.
+4. Optionally remove `-IgnoreMarketHours` from the task action so it aborts when the market is closed.
 
-### Commits
+### Commits pushed to `origin/main`
 - `50fa43cc` feat(aureum): notification layer + scheduled paper-trading wiring
 - `cc266be` fix(scheduler): correct .env parsing, absolute cert paths, hero strategy defaults, dry-run safety
 
-### Blockers
+### Memory repo update
+- Resolved a merge conflict in the memory repo (`MEMORY.md` and `project_aureum_financial_semantic_kernel.md`) caused by concurrent updates.
+- Pushed merge commit `22a6760` to `satyamdas03/alpaca-trading-agent`.
+
+### Current status
 - **No blockers remain** for the first scheduled dry-run paper rebalance.
-- Next decision point: whether to lift the scheduled task from `--dry-run` to actual paper order submission after observing one or two successful dry-runs.
+- The scheduled task will run tonight at 23:35 AEST / 09:35 US/Eastern in `--paper --dry-run` mode.
+- Next decision: after one or two successful dry-runs, decide whether to re-register the task without `-DryRun` to submit actual paper orders.
 
 ## 2026-07-28 Session Summary
 
