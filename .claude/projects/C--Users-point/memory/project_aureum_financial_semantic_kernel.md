@@ -7,65 +7,79 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-04T03:46:38.600Z
+  modified: 2026-08-04T04:05:46.400Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
 
-## 2026-08-04 — Pre-market prep
+## 2026-08-04 — Pre-market prep (corrected)
+
+### What happened
+The workflow's initial report of a target-portfolio failure was a false alarm caused by the subagent not sourcing `scripts/.env` before invoking `aureum live`. After sourcing the credentials correctly, the dry-run produced the expected 11 orders. The real bugs were in the PowerShell scheduler scripts: `.env` parsing used `$Matches.Groups` instead of the PowerShell hashtable `$Matches[1]/$Matches[2]`, the default registration pointed at synthetic data, and the scheduled time did not account for the AEST/US/Eastern offset.
 
 ### Data refresh
-- **Status:** Data loaded successfully from refreshed tech snapshot.
-- **Date range:** 2024-05-01 to 2026-08-04
-- **Rows:** 3,955 daily bars
+- **Status:** Refreshed from Alpaca paper.
+- **File:** `examples/data/alpaca_tech_snapshot.csv`
+- **Date range:** 2024-05-24 → 2026-07-31
+- **Rows:** 3,829 daily bars (7 symbols × 547 trading days)
+- **Symbols:** AAPL, AMZN, AVGO, GOOGL, META, MSFT, NVDA
+- **Sector column:** populated with `Technology` for all rows
 
 ### Account snapshot (pre-trade)
-- **Equity:** $101,215.77
+- **Account:** `PA3M6G5LMKMI` (paper)
+- **Status:** ACTIVE
+- **Equity:** ~$101,215
 - **Cash:** $75,192.60
-- **Open positions (4):**
-  - CINF: 60 shares @ $178.25, market value $10,695.00, unrealized P/L +$620.40
-  - GLD: 0.772065 shares @ $372.36, market value $287.49, unrealized P/L -$48.88
-  - XLE: 124.07601 shares @ $58.84, market value $7,300.63, unrealized P/L +$300.61
-  - XLV: 47.70741 shares @ $162.24, market value $7,740.05, unrealized P/L +$740.05
+- **Open positions (4):** CINF, GLD, XLE, XLV (legacy holdings)
 
 ### Dry-run result
-- **Mode:** Paper, dry-run (no real orders submitted)
-- **Intended orders:** 4 sell-all orders that would close every existing position
-  - SELL XLV 47.70741 -> $7,740.05
-  - SELL GLD 0.772065 -> $287.49
-  - SELL XLE 124.07601 -> $7,300.63
-  - SELL CINF 60 -> $10,695.00
-- **Target portfolio:** EMPTY — strategy failed to produce target weights or buy orders
-- **Error:** `insufficient assets with required lookback (eligible_count=0)`
-- **Certificate:** `C:\Users\point\projects\aureum\live-certificates\dryrun-2026-08-04.json`
-- **Go/no-go verdict:** **NO-GO for live/paper rebalance.** The dry-run would leave the account 100% in cash with no replacement tech-sector holdings.
+- **Mode:** paper-dry-run (no real orders submitted)
+- **Target portfolio:** 7 tech names via conformalized maximum Sharpe
+  - AVGO 25.0%, NVDA 17.98%, META 16.38%, AMZN 14.95%, GOOGL 12.12%, MSFT 9.31%, AAPL 4.26%
+- **Intended orders (11):**
+  - SELL CINF 60 → $10,695
+  - SELL GLD 0.772065 → ~$287
+  - SELL XLE 124.07601 → ~$7,301
+  - SELL XLV 47.70741 → $7,740
+  - BUY AVGO 65.00 → ~$25,306
+  - BUY MSFT 20.28 → ~$9,422
+  - BUY AAPL 13.98 → ~$4,316
+  - BUY GOOGL 34.47 → ~$12,273
+  - BUY META 29.78 → ~$16,576
+  - BUY AMZN 55.75 → ~$15,135
+  - BUY NVDA 90.65 → ~$18,196
+- **Certificate:** `live-certificates/live-2026-08-04-1404.json`
+- **Go/no-go verdict:** **GO for dry-run scheduled paper rebalance.** The target portfolio and diff orders are exactly what the strategy specifies.
 
 ### Notification layer status
-- **Files modified:** `aureum/notify.py`, `aureum/execution.py`, `aureum/cli.py`, `scripts/aureum-daily-task.ps1`, `tests/test_live_cli.py`, `tests/test_notify.py`
+- **Files modified:** `aureum/notify.py` (new), `aureum/execution.py`, `aureum/cli.py`, `scripts/aureum-daily-task.ps1`, `tests/test_live_cli.py`, `tests/test_notify.py` (new)
 - **Tests:** 202 passed, 1 skipped
 - **Lint:** `ruff` clean
-- **Type check:** `mypy` clean (24 source files)
-- **Sample notification:** `live-certificates/notifications/notification-sample-run-001-2026-08-04T12-00-00Z.json`
+- **Type check:** `mypy` clean
+- **Notification output:** each `LiveRunner` completion writes a deterministic `notification-{run_id}-{timestamp}.json` next to the certificate; the daily task also appends to `live-certificates/aureum-daily-task.log`.
 
 ### Scheduler registration status
 - **Task name:** `AureumDailyPaperTrading`
-- **Status:** Registered and manually started for validation
-- **Trigger:** Weekdays at 09:35 US/Eastern
-- **Next estimated run:** 2026-08-05 09:35:00
-- **Mode:** Paper trading (`AUREUM_FORCE_LIVE=false` in `scripts/.env`)
-- **Action:** `powershell.exe -ExecutionPolicy Bypass -File C:\Users\point\projects\aureum\bindings\python\scripts\aureum-daily-task.ps1`
-- **Manual step remaining:** The registered action uses the script defaults, which include `--paper` but **not `--dry-run`**. Once the target-portfolio blocker is cleared, confirm the desired runtime flags before the next scheduled run, or edit the scheduled task action to include `--dry-run` if continued dry-runs are intended.
+- **Status:** Registered and manually validated via `Start-ScheduledTask`
+- **Trigger:** Weekdays at 23:35 local time (AEST) = 09:35 US/Eastern, 5 minutes after equity market open
+- **Action:** `powershell.exe -ExecutionPolicy Bypass -File "...\aureum-daily-task.ps1" -Strategy "...\hero_phase4_live.yaml" -Data "...\alpaca_tech_snapshot.csv" -DryRun`
+- **Mode:** `--paper --dry-run` (safe by default)
+- **Last validation run:** 2026-08-04 13:58:47 local, exit code 0, produced `live-2026-08-04-1358.json`
+- **Next scheduled run:** 2026-08-04 23:35 AEST / 2026-08-04 09:35 US/Eastern
 
-### Blockers before first scheduled paper trade
-1. **Strategy cannot build target portfolio.** `hero_phase4_live.yaml` (or the refreshed data pipeline) reports `eligible_count=0`; AAPL, MSFT, GOOGL, AMZN, META, NVDA, AVGO were all rejected for insufficient lookback. Diagnose whether the issue is missing/incomplete bars, a lookback window exceeding available history, a too-strict data-quality filter, or a stale symbol list.
-2. **No buy orders generated.** Until target weights appear, the runner can only produce sell-all orders, which would liquidate the existing positions and leave cash.
-3. **Dry-run -> paper flag transition.** Once target weights are produced and a clean dry-run is verified, decide whether the scheduled task should remain in `--dry-run` mode or lift to actual paper orders.
+### To enable real paper orders later
+1. Re-run `register-scheduled-task.ps1` **without** `-DryRun`.
+2. Keep `AUREUM_FORCE_LIVE=false` in `scripts/.env`; `--paper` still submits to the Alpaca paper account.
+3. Remove the kill-switch file at `scripts/kill.switch` if present.
+4. Optionally remove `-IgnoreMarketHours` so the task aborts when the market is closed.
 
-### Next steps
-1. Inspect `live-certificates/dryrun-2026-08-04.json` and the refreshed tech snapshot to find why all 7 tech symbols were rejected.
-2. Fix data or strategy config, re-run `aureum live --dry-run --paper`, and confirm target weights + buy orders appear.
-3. After a clean dry-run, either update the scheduled task to include `--dry-run` or leave it as paper-only and monitor the first run.
-4. Commit and push the notification/scheduler changes once the no-go decision is recorded.
+### Commits
+- `50fa43cc` feat(aureum): notification layer + scheduled paper-trading wiring
+- `cc266be` fix(scheduler): correct .env parsing, absolute cert paths, hero strategy defaults, dry-run safety
+
+### Blockers
+- **No blockers remain** for the first scheduled dry-run paper rebalance.
+- Next decision point: whether to lift the scheduled task from `--dry-run` to actual paper order submission after observing one or two successful dry-runs.
 
 ## 2026-07-28 Session Summary
 
