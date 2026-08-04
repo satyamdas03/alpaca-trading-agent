@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-04T04:05:46.400Z
+  modified: 2026-08-04T04:07:26.685Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
