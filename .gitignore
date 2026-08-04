@@ -10,3 +10,4 @@ data/fundamentals/*.json
 data/fundamentals/*.csv
 .pytest_cache/
 *.egg-info/
+projects/darkwatch/
