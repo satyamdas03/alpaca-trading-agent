@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-04T04:50:30.278Z
+  modified: 2026-08-05T23:04:35.220Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -99,7 +99,43 @@ Bugs found and fixed in `bindings/python/scripts/aureum-daily-task.ps1` and `reg
 3. Remove the kill-switch file at `scripts/kill.switch` if present.
 4. Optionally remove `-IgnoreMarketHours` from the task action so it aborts when the market is closed.
 
+### Real-paper pre-flight readiness
+
+Three-agent workflow added the final opt-in safety layer for submitting real Alpaca paper orders.
+
+- **`--max-total-invested-pct` added to `aureum live`:** caps the total notional target; if the strategy naturally targets more, the target portfolio is scaled proportionally (fix in `aureum/execution.py`).
+- **`--submit-orders` opt-in flag added:** omitting it keeps the run in `paper-dry-run`; adding it prints `[Aureum] SUBMITTING REAL PAPER ORDERS` and switches to `paper`.
+- **Default remains dry-run** for both CLI and the scheduled task.
+- **`run-preflight.ps1` created:** one-shot market-open validation script that loads `scripts/.env`, runs a dry-run rebalance, and prints a go/no-go summary.
+
+**Verification numbers (verify agent):**
+- Equity: `$101,108.43`
+- `dry_run_total_target`: `$25,277.11`
+- `cap_pct_used`: `0.25`
+- `dry_run_orders_count`: `11`
+- `submit_orders_safety_works`: `true`
+- Per-symbol target notional:
+  - AAPL: `$1,077.71`
+  - AMZN: `$3,779.49`
+  - AVGO: `$6,319.28`
+  - GOOGL: `$3,064.65`
+  - META: `$4,139.26`
+  - MSFT: `$2,352.81`
+  - NVDA: `$4,543.91`
+- Per-symbol target weights:
+  - AAPL: `0.010659`
+  - AMZN: `0.037381`
+  - AVGO: `0.0625`
+  - GOOGL: `0.030311`
+  - META: `0.040939`
+  - MSFT: `0.02327`
+  - NVDA: `0.044941`
+- QA: `209 passed, 1 skipped`; `ruff` clean; `mypy` clean.
+
+**Remaining manual step:** run `run-preflight.ps1` at the next market open. If the dry-run certificate is clean, re-register `AureumDailyPaperTrading` without `-DryRun` to submit real paper orders.
+
 ### Commits pushed to `origin/main`
+- `593b468` feat(aureum): real-paper pre-flight CLI flags, scaling fix, and preflight script
 - `50fa43cc` feat(aureum): notification layer + scheduled paper-trading wiring
 - `cc266be` fix(scheduler): correct .env parsing, absolute cert paths, hero strategy defaults, dry-run safety
 
