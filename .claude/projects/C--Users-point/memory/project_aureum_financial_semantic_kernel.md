@@ -7,7 +7,7 @@ metadata:
   date: 2026-07-28
   status: active
   originSessionId: e0c66d0c-8a55-47b6-9496-7e163ea02d86
-  modified: 2026-08-05T23:04:35.220Z
+  modified: 2026-08-05T23:41:29.812Z
 ---
 
 # Aureum — Self-Proving Semantic Kernel for Finance
@@ -99,6 +99,46 @@ Bugs found and fixed in `bindings/python/scripts/aureum-daily-task.ps1` and `reg
 3. Remove the kill-switch file at `scripts/kill.switch` if present.
 4. Optionally remove `-IgnoreMarketHours` from the task action so it aborts when the market is closed.
 
+## 2026-08-06 — First real-paper rebalance armed
+
+### Session overview
+Goal: with one hour before the laptop had to sleep, finish the final preflight, harden the Windows scheduled task to survive sleep/wake, and upgrade it to submit real Alpaca paper orders at the 2026-08-06 09:35 US/Eastern market open. All manual steps from 2026-08-04 are now complete.
+
+### Preflight result
+Command used:
+```powershell
+.\scripts\run-preflight.ps1 -Strategy ..\examples\strategies\hero_phase4_live.yaml -Data ..\examples\data\alpaca_tech_snapshot.csv -MaxTotalInvestedPct 0.25
+```
+- **Mode:** `paper-dry-run`
+- **Account equity:** `$101,137.05`
+- **Orders generated:** `11`
+- **Errors:** `0`
+- **Certificate:** `live-certificates/preflight-2026-08-06-0934.json`
+- **Go/no-go verdict:** **GO** — safe to run with `-SubmitOrders` during market hours.
+
+### Scheduled task hardening
+The existing `AureumDailyPaperTrading` task was updated directly in Task Scheduler for sleep/wake reliability:
+- `WakeToRun = $true` (was already enabled).
+- `DisallowStartIfOnBatteries = $false` — will run even if unplugged.
+- `StopIfGoingOnBatteries = $false` — won’t abort if AC power is lost mid-run.
+- `RunOnlyIfNetworkAvailable = $true` — required for Alpaca API calls.
+- `StartWhenAvailable = $true` — catches up if wake is slightly delayed.
+- `LogonType = S4U` — runs without requiring an interactive logon after wake.
+- `RunLevel = Highest` — runs with administrator privileges.
+- Windows power-plan wake timers enabled on **both AC and DC** (`powercfg /setdcvalueindex`).
+
+### Real-paper order submission armed
+- **Task name:** `AureumDailyPaperTrading`
+- **State:** Ready
+- **Trigger:** Monday–Friday at 23:35 AEST / 09:35 US/Eastern
+- **Action (updated):**
+  ```
+  powershell.exe -ExecutionPolicy Bypass -File "C:\Users\point\projects\aureum\bindings\python\scripts\aureum-daily-task.ps1" -Strategy "C:\Users\point\projects\aureum\examples\strategies\hero_phase4_live.yaml" -Data "C:\Users\point\projects\aureum\examples\data\alpaca_tech_snapshot.csv" -SubmitOrders -MaxTotalInvestedPct 0.25
+  ```
+- **Mode:** `paper` (real orders to Alpaca paper account, capped at 25% of equity)
+- **Next scheduled run:** 2026-08-06 23:35 AEST / 2026-08-06 09:35 US/Eastern
+- **Expected behavior:** laptop wakes 5 minutes after market open, runs the rebalance, writes a `LiveTradingCertificate`, and emits a JSON notification.
+
 ### Real-paper pre-flight readiness
 
 Three-agent workflow added the final opt-in safety layer for submitting real Alpaca paper orders.
@@ -132,7 +172,7 @@ Three-agent workflow added the final opt-in safety layer for submitting real Alp
   - NVDA: `0.044941`
 - QA: `209 passed, 1 skipped`; `ruff` clean; `mypy` clean.
 
-**Remaining manual step:** run `run-preflight.ps1` at the next market open. If the dry-run certificate is clean, re-register `AureumDailyPaperTrading` without `-DryRun` to submit real paper orders.
+**Remaining manual step:** DONE. Preflight ran clean and `AureumDailyPaperTrading` has been re-registered without `-DryRun` and with `-SubmitOrders -MaxTotalInvestedPct 0.25`. The first capped real-paper rebalance will fire automatically at 2026-08-06 23:35 AEST / 09:35 US/Eastern, subject only to the laptop being able to wake from sleep.
 
 ### Commits pushed to `origin/main`
 - `593b468` feat(aureum): real-paper pre-flight CLI flags, scaling fix, and preflight script
