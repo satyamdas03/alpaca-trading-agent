@@ -3,7 +3,7 @@
 **Project name:** SynapseDB  
 **Codename origin:** `experimenting/database` session, 2026-08-09  
 **Classification:** Agent-Native Data Kernel (new category, not a traditional database)  
-**Status:** Planning complete; ready to start Phase 0 implementation  
+**Status:** Phase 0 complete; ready to start Phase 1 (derived view engine)  
 **Dossier rule:** Append-only updates. When user says `POINTBREAK`, append the next block of progress to the end of this file.
 
 ---
@@ -82,7 +82,7 @@ It is honest about limits and revolutionary within them.
 
 | Phase | Months | Goal |
 |-------|--------|------|
-| 0 | 1–3 | Durable temporal differential log |
+| 0 | 1–3 | Durable temporal differential log ✅ |
 | 1 | 4–8 | Incremental relational/document/time-series views |
 | 2 | 9–14 | SQL + document + time-series query surface |
 | 3 | 15–22 | Vector + graph as first-class views |
@@ -167,8 +167,62 @@ All files live in `.claude/scratchpad/` except this dossier, which lives at proj
 
 ## 12. POINTBREAK Update Log
 
-*No POINTBREAK updates yet. This section will be appended when the user triggers the keyword.*
+### 2026-08-09 — Phase 0 Skeleton Kernel Complete
+
+Phase 0 implementation finished in the `experimenting/database` repository. The temporal differential log now persists, verifies, recovers, and exposes a working CLI.
+
+**Deliverables completed:**
+- Rust workspace: `synapse-types`, `synapse-log`, `synapse-cli`
+- `(entity_id, attribute, value, timestamp, diff)` record model with `Added` / `Retracted` signs
+- Segment files with length-prefixed frames, 4-byte CRC32, magic + version header
+- `LocalLog` with batch append, random read by `LogPosition`, and `snapshot_as_of(t)`
+- Segment rotation at a configurable max-records-per-segment boundary
+- Merkle Mountain Range over every appended record for verifiable history
+- Crash recovery: scans segments, rebuilds MMR, truncates torn trailing bytes, re-opens for writes
+- Compaction: collapses add/retract pairs inside a closed segment to net multiplicities
+- CLI commands: `init`, `write`, `read`, `snapshot`, `verify`, `recover`
+- `README.md` with build/test instructions and acceptance-test throughput numbers
+- Acceptance test: `synapse-log/tests/acceptance.rs`
+
+**Test results:**
+- `cargo test --workspace --all-targets`: **32 passed, 0 failed, 1 ignored**  
+  - `synapse-types`: 14 passed  
+  - `synapse-log` unit + integration: 18 passed  
+  - `synapse-cli`: no unit tests yet (binary only)  
+- `cargo clippy --workspace --all-targets`: **clean**
+- 1M-write acceptance test (release, ignored by default): **0.682 s, ~1.47M records/s**, 10 segments, crash → recover → snapshot validated
+
+**CLI verified end-to-end:**
+```bash
+synapse init --dir /tmp/synapse --segments 100000
+synapse write --dir /tmp/synapse --entity 1 --attr name --value '"hello"' --ts 1
+synapse write --dir /tmp/synapse --entity 1 --attr name --value '"world"' --ts 2 --diff retracted
+synapse read --dir /tmp/synapse --offset 0
+synapse snapshot --dir /tmp/synapse --as-of 2
+synapse verify --dir /tmp/synapse
+synapse recover --dir /tmp/synapse
+```
+
+**Notable fixes during Phase 0:**
+- Added `LocalLog::flush()` to persist the active `SegmentWriter` (uses `BufWriter`) before crash tests or external file access.
+- Fixed `recovery_after_simulated_crash` and `recovery_keeps_appending` tests to flush and drop the log before corruption/recovery.
+- Implemented real CLI argument parsing with `clap`; commands now call `LocalLog` / `recover` directly.
+- Added `open_log()` helper in the CLI so existing directories are recovered and new directories are created.
+
+**Commit:** `f3d6622` — `synapsedb: Phase 0 skeleton kernel complete`  
+**Note:** Commit is local only. Remote points to `satyamdas03/alpaca-trading-agent.git`, which is the wrong repository for SynapseDB. Push to a dedicated SynapseDB repo when one is created.
+
+**Status update:**
+- Dossier status changed from *"Planning complete; ready to start Phase 0 implementation"* to *"Phase 0 complete; ready to start Phase 1 (derived view engine)"*.
+- Section 6 (build plan) now reflects Phase 0 as done.
+
+**Next: Phase 1 — Derived View Engine**
+- Create `synapse-views` crate.
+- Implement differential dataflow operators over the TDL.
+- Build incremental relational, document, and time-series views.
+- Materialize view state in an LSM-tree or embedded KV store.
+- Acceptance test: 100K account events; relational view stays consistent; time-series rollup updates in <1 s.
 
 ---
 
-**Last updated:** 2026-08-09 — dossier created, planning complete.
+**Last updated:** 2026-08-09 — Phase 0 complete.
