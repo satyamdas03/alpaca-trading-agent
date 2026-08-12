@@ -1,0 +1,67 @@
+<mujoco model="simple_6dof_serial_arm">
+  <!--
+    Minimal 6-revolute-joint spatial serial arm.
+    Six revolute joints -> 6 DOF, matching the 6 DOF of a free rigid body in 3D
+    (3 position + 3 orientation of the end-effector).
+  -->
+  <compiler angle="radian"/>
+  <option timestep="0.01" gravity="0 0 0"/>
+
+  <worldbody>
+    <light diffuse="0.5 0.5 0.5" pos="2 2 3" dir="-2 -2 -3"/>
+    <geom type="plane" size="2 2 0.1" rgba="0.2 0.2 0.2 1"/>
+
+    <!-- Base / ground link -->
+    <body name="base" pos="0 0 0">
+      <geom type="cylinder" size="0.12 0.08" rgba="0.4 0.4 0.4 1" euler="0 0 0"/>
+
+      <!-- Joint 1: waist (Z axis) -->
+      <body name="link1" pos="0 0 0.08">
+        <joint name="joint1" type="hinge" axis="0 0 1" range="-3.14 3.14" damping="0.1"/>
+        <geom type="capsule" fromto="0 0 0 0 0 0.5" size="0.06" rgba="0.9 0.3 0.3 1"/>
+
+        <!-- Joint 2: shoulder (Y axis) -->
+        <body name="link2" pos="0 0 0.5">
+          <joint name="joint2" type="hinge" axis="0 1 0" range="-1.57 1.57" damping="0.1"/>
+          <geom type="capsule" fromto="0 0 0 0.5 0 0" size="0.05" rgba="0.3 0.9 0.3 1"/>
+
+          <!-- Joint 3: elbow (Y axis) -->
+          <body name="link3" pos="0.5 0 0">
+            <joint name="joint3" type="hinge" axis="0 1 0" range="-1.57 1.57" damping="0.1"/>
+            <geom type="capsule" fromto="0 0 0 0.4 0 0" size="0.05" rgba="0.3 0.3 0.9 1"/>
+
+            <!-- Joint 4: wrist roll (X axis) -->
+            <body name="link4" pos="0.4 0 0">
+              <joint name="joint4" type="hinge" axis="1 0 0" range="-3.14 3.14" damping="0.05"/>
+              <geom type="capsule" fromto="0 0 0 0 0 0.15" size="0.04" rgba="0.9 0.9 0.3 1"/>
+
+              <!-- Joint 5: wrist pitch (Y axis) -->
+              <body name="link5" pos="0 0 0.15">
+                <joint name="joint5" type="hinge" axis="0 1 0" range="-1.57 1.57" damping="0.05"/>
+                <geom type="capsule" fromto="0 0 0 0 0 0.12" size="0.04" rgba="0.9 0.5 0.1 1"/>
+
+                <!-- Joint 6: wrist yaw (Z axis) -->
+                <body name="link6" pos="0 0 0.12">
+                  <joint name="joint6" type="hinge" axis="0 0 1" range="-3.14 3.14" damping="0.05"/>
+                  <geom type="box" size="0.06 0.02 0.02" rgba="0.1 0.9 0.9 1"/>
+
+                  <!-- End-effector site -->
+                  <site name="ee" pos="0.06 0 0" size="0.04" rgba="1 1 0 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor joint="joint1" gear="1" ctrlrange="-50 50"/>
+    <motor joint="joint2" gear="1" ctrlrange="-50 50"/>
+    <motor joint="joint3" gear="1" ctrlrange="-50 50"/>
+    <motor joint="joint4" gear="1" ctrlrange="-20 20"/>
+    <motor joint="joint5" gear="1" ctrlrange="-20 20"/>
+    <motor joint="joint6" gear="1" ctrlrange="-20 20"/>
+  </actuator>
+</mujoco>

@@ -1,0 +1,40 @@
+<mujoco model="simple_2r_planar_arm">
+  <!--
+    Minimal 2-revolute-joint planar arm.
+    Link lengths: L1 = 1.0 m, L2 = 0.8 m.
+    Two revolute joints -> 2 DOF.
+    Task space in the plane is (x, y) of the end-effector.
+  -->
+  <compiler angle="radian"/>
+  <option timestep="0.01" gravity="0 0 0"/>
+
+  <worldbody>
+    <light diffuse="0.5 0.5 0.5" pos="0 0 3" dir="0 0 -1"/>
+    <geom type="plane" size="2 2 0.1" rgba="0.2 0.2 0.2 1"/>
+
+    <!-- Base / link 0 -->
+    <body name="base" pos="0 0 0">
+      <geom type="cylinder" size="0.08 0.05" rgba="0.5 0.5 0.5 1" euler="0 0 0"/>
+
+      <!-- Joint 1: shoulder revolute about Z -->
+      <body name="link1" pos="0 0 0.05">
+        <joint name="joint1" type="hinge" axis="0 0 1" range="-3.14 3.14" damping="0.1"/>
+        <geom type="capsule" fromto="0 0 0 1 0 0" size="0.05" rgba="0.9 0.3 0.3 1"/>
+
+        <!-- Joint 2: elbow revolute about Z -->
+        <body name="link2" pos="1 0 0">
+          <joint name="joint2" type="hinge" axis="0 0 1" range="-3.14 3.14" damping="0.1"/>
+          <geom type="capsule" fromto="0 0 0 0.8 0 0" size="0.05" rgba="0.3 0.6 0.9 1"/>
+
+          <!-- End-effector marker -->
+          <site name="ee" pos="0.8 0 0" size="0.06" rgba="1 1 0 1"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor joint="joint1" gear="1" ctrlrange="-100 100"/>
+    <motor joint="joint2" gear="1" ctrlrange="-100 100"/>
+  </actuator>
+</mujoco>
