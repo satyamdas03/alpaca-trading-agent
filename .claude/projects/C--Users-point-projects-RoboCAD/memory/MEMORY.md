@@ -1,0 +1,14 @@
+- [Phase 3/4 completion & restart recovery](phase3-phase4-completion.md) — Phases 0–4 complete; stylus/face-click parameter guessing implemented end-to-end; 47 tests passing.
+- [Phase 5/6 completion](phase5-phase6-completion.md) — Onshape export/sync + manufacturing reports + robotics component templates complete; 57 tests passing.
+- [Impeccable UI redesign](impeccable-ui-redesign.md) — Full frontend redesign with Impeccable design skill; Precision Lab Instrument visual world; 56/57 tests pass.
+- [Google Stitch UI redesign](google-stitch-ui-redesign.md) — Kinetic Precision dark scientific-workstation UI integrated into the live React app; preserves all API contracts; includes recorded webm demo + GIF embed + README walkthrough; 56/57 tests pass; end-to-end verified.
+- [Engineer-grade roadmap](engineer-grade-roadmap.md) — Strategic decision to evolve RoboCAD from single-part prompt-to-code into feature-tree + constraints + assemblies + verification; Phases 8–14 defined and documented in README/PLAN.
+- [Phase 8 baseline complete](phase8-baseline-in-progress.md) — 30-prompt complexity baseline: 26/30 (86.7%) against `qwen3-coder:latest`; feature-tree schema v1.0.0 approved; new tests pass; report published at `benchmarks/complexity_baseline_2026-08-25.md`; unauthorized GEDA Bridge changes reverted.
+- [Phase 9 feature-tree backend](phase9-feature-tree-backend.md) — Structured feature-tree sidecar, transpiler to build123d, versioning store, backend endpoints, and frontend Feature Tree panel; full pytest suite 97 passed.
+- [Phase 10 sketch constraint solver](phase10-sketch-constraint-solver.md) — Internal 2D least-squares solver for distance/horizontal/vertical/coincident/concentric/equal/fix constraints integrated into the transpiler; 105 tests passing.
+- [Phase 11 assembly system](phase11-assembly-system.md) — Multi-part instances + LCS-based mates, `ai_cad/assembly.py`, assembly export, backend endpoint, frontend Assembly panel; 112 tests passing.
+- [Phase 12 verification + physics](phase12-verification-physics.md) — DFM rule engine, tolerance/fit checks, simple FEA, backend endpoints, frontend panels; 125 tests passing.
+- [Phase 13 model specialization](phase13-model-specialization.md) — Fine-tuning scaffolding + Claude 5 integration; 134 tests passing; T1–T4 quality gate achieved at 87.5% with `claude-sonnet-5-20250501`; Phase 13 green for Phase 14A.
+- [Claude 5 integration fixes](claude5-integration-fixes.md) — Anthropic SDK compatibility fixes and nested-fence extraction; full Phase 8 21/30 (70.0%), T4 4/6, T5 1/6; T1–T4 at 87.5%.
+- [PATH1 vs PATH2 strategic analysis](robocad-path-analysis.md) — GEDA Bridge (PATH1) vs voice-to-CAD-to-world-model (PATH2); Phase 13 gate cleared; Phase 14A GEDA Bridge is next.
+- [End-to-end vision roadmap](robocad-end-to-end-roadmap.md) — Phased 13–24 plan connecting current RoboCAD to the full voice/text → CAD → physical test → assembly → world model → HERMES → robot brain vision.
