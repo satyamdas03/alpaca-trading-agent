@@ -11,4 +11,5 @@
 - [Phase 13 model specialization](phase13-model-specialization.md) — Fine-tuning scaffolding + Claude 5 integration; 134 tests passing; T1–T4 quality gate achieved at 87.5% with `claude-sonnet-5-20250501`; Phase 13 green for Phase 14A.
 - [Claude 5 integration fixes](claude5-integration-fixes.md) — Anthropic SDK compatibility fixes and nested-fence extraction; full Phase 8 21/30 (70.0%), T4 4/6, T5 1/6; T1–T4 at 87.5%.
 - [PATH1 vs PATH2 strategic analysis](robocad-path-analysis.md) — GEDA Bridge (PATH1) vs voice-to-CAD-to-world-model (PATH2); Phase 13 gate cleared; Phase 14A GEDA Bridge is next.
+- [Phase 14A GEDA Bridge](phase14a-geda-bridge.md) — Simulation-ready MJCF/URDF bundle exporter implemented; `ai_cad/geda_bridge/`, backend endpoints, `SimulatePanel.jsx`, 148/148 tests passing.
 - [End-to-end vision roadmap](robocad-end-to-end-roadmap.md) — Phased 13–24 plan connecting current RoboCAD to the full voice/text → CAD → physical test → assembly → world model → HERMES → robot brain vision.
