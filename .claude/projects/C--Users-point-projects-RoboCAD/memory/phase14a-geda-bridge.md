@@ -5,12 +5,12 @@ metadata:
   node_type: memory
   type: project
   originSessionId: cb75c83a-be7b-4a7b-bc49-b8099018beb3
-  modified: 2026-08-27T08:36:56.587Z
+  modified: 2026-08-27T10:10:05.340Z
 ---
 
 Date: 2026-08-27.
 
-**Status:** Core implementation complete; tests passing; remaining runtime validation (MuJoCo/URDF loaders) optional.
+**Status:** ✅ Complete — MuJoCo runtime validation included.
 
 **What was built:**
 - `ai_cad/geda_bridge/` package:
@@ -28,11 +28,15 @@ Date: 2026-08-27.
 - `tests/test_geda_bridge.py` — 9 tests (cube, cylinder, L-bracket, 2-part assembly, gripper jaw, URDF/MJCF structure checks).
 - `tests/test_web_backend.py` — 4 new endpoint tests.
 - `tests/test_assembly.py` — duplicate-instance regression test + assertion update.
-- Full pytest suite: **148 passed** (was 134).
+- `tests/test_geda_bridge_runtime.py` — 4 MuJoCo runtime validation tests:
+  - `test_runtime_shape_cube` — cube shape loads in MJCF/URDF and simulates.
+  - `test_runtime_shape_cylinder` — cylinder shape loads in MJCF/URDF and simulates.
+  - `test_runtime_tree_l_bracket` — L-bracket feature-tree bundle loads and simulates.
+  - `test_runtime_tree_two_part_assembly` — two-part assembly bundle loads and simulates.
+- Full pytest suite: **152 passed** (was 148).
 
 **Known gaps / next work:**
-- Runtime validation with actual MuJoCo loader (requires `mujoco` dev dependency).
-- Runtime validation with URDF loader (e.g., `yourdfpy`).
+- Runtime validation with a standalone URDF loader (e.g., `yourdfpy`).
 - Collision mesh simplification / convex decomposition for complex parts.
 - Shared mesh reuse when multiple instances reference the same part (currently exports one STL per instance).
 
