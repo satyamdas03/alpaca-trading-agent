@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+spike/.cache/
+*.log
+# Allow this spike's dependency file despite parent *.txt ignore
+!requirements.txt
