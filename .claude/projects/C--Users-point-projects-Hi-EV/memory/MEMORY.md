@@ -1,0 +1,15 @@
+- [Hi-EV Web / Voice / HUD MVP](web-voice-hud-mvp.md) — browser-native voice/HUD face wired to local daemon; pushed to main.
+- [Hi-EV Phase A Prep Sprint 2026-09-17](hi-ev-phase-a-prep-sprint.md) — SQLite + sqlite-vec default, config blocklist, embeddings, migration discipline; unblocks Phase A.
+- [Hi-EV Roadmap 2026-09-17](hi-ev-roadmap-2026-09-17.md) — honest state assessment and phased path to the full operating-system vision.
+- [Hi-EV Phase A Semantic Memory](hi-ev-phase-a-semantic-memory.md) — Phase A shipped: chunking, embeddings, hybrid search, ev remember, grounded tools, daemon scheduler; committed and pushed.
+- [Hi-EV Phase B Reasoning Router + Eval](hi-ev-phase-b-reasoning-router-eval.md) — Phase B complete: reasoning router, streaming LLM, eval harness, guard model; all passing.
+- [Hi-EV Phase C Proactive Alerts + Persistent Context](hi-ev-phase-c-proactive-context.md) — Phase C shipped: persistent chat threads, proactive WebSocket alerts, morning brief, Telegram relay; verified end-to-end.
+- [Hi-EV Phase D Safe Autonomy + Desktop Presence](hi-ev-phase-d-safe-autonomy.md) — Phase D shipped: T2/T3 confirmation flow, CLI confirmation, desktop presence skeleton (hotkey, tray, wake word), live end-to-end smoke test passed.
+- [Hi-EV Phase E Launch MVP](hi-ev-phase-e-launch-mvp.md) — Phase E launch MVP shipped: local Windows installer, setup wizard, desktop entry point, graceful LLM-key fallback; 203 passed, 1 skipped.
+- [Hi-EV Phase F Plugin Architecture + Skills + Voice](hi-ev-phase-f-plugin-architecture.md) — Phase F shipped: OpenJarvis-style registry/ABCs, skills, local voice pipeline, desktop voice wiring, `/voice/chat`, `/skills`, `ev skills list`; auto-updater + desktop presence rewrite landed later; 253 passed, 1 skipped.
+- [Hi-EV Restart Handoff 2026-10-03](hi-ev-restart-handoff-2026-10-03.md) — session handoff note for the next fresh start; read after MEMORY.md.
+- [Hi-EV Phase G Tauri Wrapper Skeleton 2026-10-04](hi-ev-phase-g-tauri-wrapper-skeleton.md) — Phase G stream 1 complete: Tauri v2 native desktop shell, tray, global shortcut, daemon manager, Windows MSI installer built.
+- [Hi-EV End-to-End Launch Roadmap 2026-10-04](hi-ev-launch-roadmap-2026-10-04.md) — user-approved launch plan: phases G1-G6 (Tauri polish, watcher, voice, skill eval, security, final test sweep).
+- [Hi-EV Phase G1 Tauri Launch Polish 2026-10-04](hi-ev-phase-g1-tauri-launch-polish.md) — Phase G1 complete: icons, Python check, configurable shortcut, crash recovery, updates menu, smoke test; 255 passed, 1 skipped.
+- [Hi-EV Phase G2 File-System Watcher](hi-ev-phase-g2-file-system-watcher.md) — Phase G2 complete: watchdog incremental ingestion for notes vault, create/modify/delete handling, FastAPI lifespan hook, isolated deterministic tests; 260 passed, 1 skipped.
+- [Hi-EV Phase G3 Voice Checkpoint](hi-ev-phase-g3-voice-checkpoint.md) — Phase G3 complete: backend endpoints hardened and tested, setup wizard Voice section visible, `scripts/smoke_voice.py` added, Tauri/HUD mic fallback wired; 272 passed, 1 skipped.
