@@ -1,5 +1,114 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-10-22) — 6-MONTH RESUME
+
+**Date:** Thursday, October 22, 2026 | **Market opens:** 9:30 AM ET
+**⚠️ SESSION GAP:** Last session was April 23, 2026. All context below is freshly researched.
+
+### Regime Assessment: RISK-ON (with Late Cycle Oil Overlay)
+
+| Signal | Value | Reading |
+|--------|-------|---------|
+| VIX | ~16.68 (Saxo brief, Oct 22) | Risk-On ✅ (<20 threshold) |
+| S&P 500 | ~7,800 (+11.78% YTD as of Oct 1) | Risk-On ✅ |
+| Brent Crude | $108-$112 (Karmactive, AlJazeera Oct 22) | Late Cycle ⚠️ |
+| Hormuz Transits | Down 70% (254 vessels/week) | Late Cycle ⚠️ |
+| S&P Futures | Down ~0.9-1% pre-market (Yahoo Finance, Oct 22) | Caution ⚠️ |
+
+**FINAL REGIME: RISK-ON with Late Cycle Oil Overlay (HYBRID)**
+Per Lessons Learned #11: When VIX says Risk-On but macro says Late Cycle (oil >$100, geopolitical), use HYBRID approach. Do NOT blindly go full momentum. Maintain defensive positions, cautiously add momentum on pullbacks.
+
+### Macro Context
+
+**VIX: ~16.68** (below 20 = Risk-On territory)
+- One-day gauge (VVIX proxy) rose 1.61% to 11.38 on Oct 22 — slight unease
+- Broader options market still in contango, bullish long-run structure
+
+**S&P 500: ~7,800 range**
+- Oct 7 close: 7,801.77 (-0.2% on day, but above prior all-time high set August 2026)
+- Oct 1 close: 7,666.45 (+11.78% YTD, +0.19% on day)
+- Morgan Stanley data (Oct 2): 7,722.72 (+13.8% YTD)
+- Futures TODAY: down ~0.9-1% (oil/earnings concerns)
+
+**Oil & Hormuz — CRITICAL, WORSE THAN APRIL:**
+- Brent crude: $108-$112/bbl (up from ~$105 in April; pre-crisis was ~$72)
+- WTI crude: est ~$100-$106 (maintains ~$4-6 Brent-WTI spread)
+- Hormuz transit volume: DOWN 70% (254 vessels/week vs ~900/week normal)
+- Strait of Hormuz Closed tracker (straits.live): Day 235 as of Oct 22
+- Iran IRGC attacked 4 vessels in a single day (largest since war began)
+- Deutsche Bank: "number of attacks...as bad as it's ever been"
+- Diplomacy: Trump DENIES talks, Iran claims indirect via Pakistan/Qatar (unconfirmed)
+- Polymarket odds: 1% reopening by Oct 31, 12% by Dec 31 (Hormuz normal by year-end very unlikely)
+- **Thesis: XLE remains a strong hold. Oil will stay elevated through year-end.**
+
+**10Y Treasury Yield:** Not confirmed; est ~4.3-4.5% given oil inflation stickiness.
+
+### Earnings — October 22, 2026
+
+**Pre-market reporters today (78 companies):**
+- Procter & Gamble (PG): P&G fiscal Q1 2026 (CY Q3) — defensive consumer
+- Union Pacific (UNP): railroad, economic activity indicator
+- Valero Energy (VLO): refinery, direct Hormuz/oil beneficiary
+- Blackstone (BX): PE/credit, risk appetite indicator
+- Lockheed Martin (LMT): defense, geopolitical winner
+- Comcast (CMCSA): telecom/media
+- Spotify: growth tech
+
+**After close tonight:**
+- Western Digital (WDC), Newmont (NEM), Bloom Energy (BE)
+
+**Tesla (TSLA) — Reported Oct 21 after close:**
+- Q3 2026 deliveries: 486,532 vehicles (pre-released)
+- Q3 2026 EPS consensus: $0.43 (already down 14% YoY from prior year)
+- Q2 2026 context: EPS miss ($0.33 vs $0.50 est) → stock dropped ~4%+ AH
+- Actual Q3 2026 results: NOT confirmed (search returned preview only)
+- Expected open: Uncertain; Q2 2026 context suggests downside risk if Q3 misses
+
+**Meta Platforms (META) — Reports Oct 21 or Oct 28 (conflicting sources):**
+- Q2 2026 (Jul 29): Revenue $60.8B (+28% YoY), EPS $6.18 (missed)
+- Q3 2026 guidance: $61-64B revenue; consensus EPS ~$6.50
+- Not confirmed if reported Oct 21
+
+### Position Status (Estimates — Requires Alpaca Verification)
+
+| Symbol | Entry (Apr 22) | Est. Current | Est. Chg | Stop Status |
+|--------|---------------|-------------|---------|-------------|
+| XLE | $56.42 | ~$62-65 | +10-15% | ⚠️ EXPIRED Jul 22 |
+| GLD | $435.66 | ~$382 | -12%+ | ⚠️ EXPIRED Jul 22 |
+| XLV | $146.73 | Unknown | Unknown | ⚠️ EXPIRED Jul 22 |
+
+**CRITICAL:** All GTC stop-loss orders expired July 22, 2026. Positions unprotected.
+
+### Trade Plan (Manual Execution — Alpaca MCP DISCONNECTED)
+
+**IMMEDIATE (before 9:30 AM ET):**
+1. Login Alpaca paper account PA3M6G5LMKMI → verify actual positions and balances
+2. If GLD still open near $382: SELL MARKET → 12%+ loss, stop expired, thesis broken (gold declined despite geopolitical stress; oil alone does not support gold when dollar is strong)
+3. Reset XLE stop-loss: if held ~$62-64, set GTC STOP at 7% below current (~$57.66-59.52)
+4. Reset XLV stop-loss: set GTC STOP at 7% below current price
+
+**NEW TRADES — CONDITIONAL ON PORTFOLIO VERIFICATION:**
+
+| # | Action | Symbol | Notional | Rationale | Trigger |
+|---|--------|--------|----------|-----------|---------|
+| A | BUY | VLO | $7,000 | Valero direct refinery beneficiary of high oil; earnings today pre-market | After verifying PG/VLO earnings beat |
+| B | BUY | LMT | $7,000 | Lockheed Martin defense; geopolitical escalation = defense spending | After confirming earnings |
+| C | HOLD | XLE | existing | Hormuz 70% closed, Brent $112, thesis fully intact | No change |
+| D | SELL | GLD | existing | If confirmed ~$382 (-12%), thesis broken; stop expired | Verify actual price first |
+
+**DO NOT ADD** QQQ/XLK today: futures down ~1%, earnings binary risk (Tesla reaction unknown), oil spike. Wait for midday stability.
+
+**Wait for:** Tesla/Meta earnings reaction at open, Valero/Lockheed earnings results, futures settling.
+
+### Key Risks
+
+1. **Portfolio gap of 6 months** — actual positions/prices unknown until Alpaca verified
+2. **Futures down ~1%** — bad day to open new momentum positions
+3. **Tesla Q3 miss** — if EPS miss again (like Q2: $0.33 vs $0.50 est), tech sentiment damaged
+4. **Oil spike causality** — $112 Brent is inflationary, not purely bullish; may delay Fed cuts further → headwind for growth stocks
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

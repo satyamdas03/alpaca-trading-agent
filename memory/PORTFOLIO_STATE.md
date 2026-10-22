@@ -1,6 +1,6 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-10-22 Pre-Market Routine (⚠️ SESSION GAP: 6 months since last update 2026-04-23)
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -66,6 +66,31 @@ All positions well above stops. No exits triggered.
 - Portfolio YTD: -0.011% (since first trade 4/22)
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
+
+## ⚠️ CRITICAL STATUS UPDATE (2026-10-22)
+
+### Stop-Loss Orders EXPIRED
+All three GTC stop-loss orders (XLV $136.46, XLE $52.47, GLD $405.17) were set with expire 7/22.
+**They expired on July 22, 2026.** Current positions are UNPROTECTED.
+Action required: Login to Alpaca paper account PA3M6G5LMKMI and reset ALL stop-losses immediately.
+
+### Estimated Position State (requires Alpaca confirmation)
+| Symbol | Entry | Est. Current | Est. P&L | Status |
+|--------|-------|-------------|---------|--------|
+| XLV | $146.73 | Unknown | Unknown | May still be open |
+| XLE | $56.42 | ~$62-64 | +$10-13% est | Likely profitable; oil $108-$112 |
+| GLD | $435.66 | ~$382 (Oct 16 est) | ~-12%+ est | POSSIBLE LOSS — below expired stop |
+
+**GLD ALERT:** If GLD is near $382 (search data Oct 16), we are ~12%+ underwater from entry $435.66.
+The stop at $405.17 expired July 22. If position still open, this represents a ~$660 unrealized loss.
+Priority: Verify and SELL GLD if confirmed below $405.
+
+### Alpaca MCP Status
+- Alpaca MCP: DISCONNECTED (last verified 2026-04-23)
+- REST API: Use API key PK7CLPEOIIEKMEVPNWEF4GPL22 with paper endpoint as fallback
+- Manual execution required for all trades this session
+
+---
 
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026

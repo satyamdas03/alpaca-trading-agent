@@ -46,6 +46,18 @@
 
 ---
 
+## Session: 2026-10-22 (Pre-Market, 6-Month Resume)
+
+19. **GTC stop-losses expire — always check expiry dates.** Our April 2026 stops were set "GTC expire 7/22" (July 22). They expired and left positions unprotected for 3+ months. Lesson: When setting GTC orders, either (a) set annual expiry, or (b) include a calendar reminder to reset them. A stop-loss without renewal is not a stop-loss.
+
+20. **Session gaps are dangerous for risk management.** A 6-month gap between active sessions means: expired stops, unknown position prices, changed market regime. On every session resume after a gap >1 week, the FIRST action must be to verify all open positions and risk controls in Alpaca before anything else.
+
+21. **Hormuz escalation has a 6-month half-life minimum.** As of October 2026 (Day 235 of closure), Brent is at $112, transits down 70%, and Polymarket gives only 12% chance of normalization by December 31. The XLE thesis has remained valid for 6 months. Long-duration geopolitical theses can outlast typical swing trade timeframes.
+
+22. **GLD and oil can diverge.** Gold (GLD) dropped from ~$435 in April to ~$382 in October despite oil at $112 and continued Hormuz closure. The safe-haven bid in gold depends on broad risk-off (VIX), not just geopolitical tension. In a Risk-On (VIX 16.68) environment, gold loses its premium even with active conflict. Safe-haven thesis requires VIX correlation, not just headline risk.
+
+23. **Defensive positions booked wrong — risk-on market in 2026 rewarded growth.** S&P +11.78% YTD through October 1. Our portfolio started in defensive mode (XLV, GLD) and likely significantly underperformed. The shift from Stress to sustained Risk-On happened fast (by end of April), and we missed most of it.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
