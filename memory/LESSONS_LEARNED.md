@@ -1,5 +1,23 @@
 # Lessons Learned
 
+## Session: 2026-10-23 (Pre-Market — 6 Month Wake-Up)
+
+19. **GTC stop-loss orders expire after ~90 days on Alpaca.** Orders placed April 23 expired ~July 22, 2026. Positions were UNPROTECTED for 3 months. Critical failure. Fix: re-place stops immediately on every wake-up, or switch to trailing stops and monitor expiry.
+
+20. **6-month cash drag = -10% alpha vs S&P.** Portfolio +2.6% vs S&P +12.7% YTD. The 80% cash position was appropriate for stress regime entry but should have been deployed gradually as regime shifted Risk-On. Never maintain >50% cash in confirmed Risk-On regime.
+
+21. **Iran/Hormuz crisis persisted 6+ months.** XLE thesis proven correct — up ~20.5% since entry. Geopolitical crises involving major oil straits take years to resolve, not weeks. Hold commodity/energy positions through the cycle.
+
+22. **Market can make new highs despite geopolitical crises.** S&P +12.7% YTD while Hormuz still disrupted. Don't assume crisis = bear market. VIX is the key indicator, not headlines alone.
+
+23. **Big Tech capex cycles cause market sell-offs.** Meta Q3 2026 (-6.9%) and TSLA Q3 (-3%): both beat revenues but faced punishment for heavy capital spending. Pattern emerging: market is scrutinizing AI/robotics ROI, not just revenue growth. Track capex guidance as a warning signal.
+
+24. **Always verify stop-loss order status at session start.** Before any trading, confirm all protective orders are active. GTC ≠ permanent. Add "check stop-loss expiry" to startup protocol.
+
+25. **Routine gaps are dangerous.** 6-month gap between sessions (April 23 → October 23) means no midday adjustments, no stop-loss renewals, no regime reassessments. If scheduling fails, positions drift unmanaged. Implement backup notification alerts.
+
+---
+
 ## Session: 2026-04-22 (Pre-Open Assessment)
 
 1. **Ceasefire extensions can flip regime overnight.** Trump went from "bombing" to "indefinite extension" in hours. Oil jumped $4 on the news. Always check regime BEFORE trading, not from yesterday's notes.

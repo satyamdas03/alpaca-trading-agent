@@ -21,15 +21,59 @@
 
 ---
 
-## Risk Management Orders (4/23 Pre-Market)
+## Risk Management Orders (4/23 Pre-Market) — ⚠️ ALL EXPIRED ~7/22/2026
 
-| # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Time |
-|---|----------|--------|------|-----|------|------------|--------|------|
-| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | accepted | 2026-04-23 00:05 ET |
-| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | accepted | 2026-04-23 00:05 ET |
-| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | accepted | 2026-04-23 00:05 ET |
+| # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Placed | Expiry |
+|---|----------|--------|------|-----|------|------------|--------|--------|--------|
+| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | **EXPIRED** | 2026-04-23 | ~2026-07-22 |
+| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | **EXPIRED** | 2026-04-23 | ~2026-07-22 |
+| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | **EXPIRED** | 2026-04-23 | ~2026-07-22 |
 
-**All GTC. Stop-loss at -7% from entry. Trailing stop on XLE blocked (shares held by stop order).**
+⚠️ CRITICAL: Alpaca GTC orders typically expire after 90 days. These expired around July 22, 2026.
+Positions have been UNPROTECTED since then. Re-place immediately.
+
+---
+
+## URGENT: New Stop-Loss Orders to Place (2026-10-23)
+
+Based on estimated current prices from WebSearch research.
+**Execute manually via Alpaca web interface or REST API.**
+
+| # | Symbol | Side | Qty | Type | Stop Price | Est. Current | Distance | Notes |
+|---|--------|------|-----|------|------------|-------------|----------|-------|
+| 7 | XLV | SELL | 47 | STOP GTC | $153.45 | ~$165 est | -7.0% | Replace expired #4 |
+| 8 | XLE | SELL | 124 | STOP GTC | $63.24 | ~$68 est | -7.0% | Replace expired #5 |
+| 9 | GLD | SELL | 13 | STOP GTC | $423.15 | ~$455 est | -7.0% | Replace expired #6 |
+
+**Priority: Execute orders 7, 8, 9 BEFORE market open or at open.**
+**Note:** Verify current prices first. Adjust stop prices based on actual current levels.
+
+**Formula:** Stop = CurrentPrice × 0.93 (7% below current)
+
+---
+
+## Potential New Trades (2026-10-23 Watch List)
+
+### Option A: QQQ Dip Buy (If VIX stays below 20)
+- **Signal:** Nasdaq -2.9% Thursday (tech sell-off from META -6.9%, TSLA -3%)
+- **Thesis:** Risk-On regime intact (VIX 19.03). Dip in tech = entry opportunity.
+- **Size:** $10,000-$15,000 (10-15% of portfolio)
+- **Entry:** Market buy at open IF VIX below 20.0
+- **Stop:** -7% from entry
+- **Risk:** VIX breaks 20 → regime shifts to Late Cycle → reduce momentum positions
+
+### Option B: Add to XLE
+- **Signal:** XLE +20.5% since entry, Hormuz still disrupted, Brent ~$100+
+- **Thesis:** XLE thesis intact. Add to winner.
+- **Size:** $5,000-$7,000 additional (bring XLE to ~15% of portfolio)
+- **Entry:** Market buy at open
+- **Stop:** Same as new stop order above ($63.24 est)
+- **Risk:** Sudden Hormuz resolution = oil crash = stop triggered
+
+### No Action Scenario
+- **Condition:** VIX breaks above 20.0 at open → Late Cycle regime
+- **Action:** Only re-place stop-losses. No new positions.
+- **Hold:** All current positions (XLV, XLE, GLD all profitable)
 
 ---
 
@@ -39,8 +83,9 @@
 |------|----------------|---------|-----------|-----------------|---------|---------|
 | 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% |
 | 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% |
+| 10/23 | ~$102,570 est | N/A | N/A | ~+$2,570 | N/A | +12.7% YTD |
 
-**Notes:** Day 1 P&L is unrealized. Actual close prices from Alpaca show portfolio at $99,988.99. S&P significantly outperforming — defensive positioning is the drag.
+**Notes:** 6-month gap in tracking. Alpaca MCP unavailable. Values estimated via ETF price research.
 
 ---
 
@@ -66,4 +111,4 @@
 | XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
 | GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
 
-**All positions well above stops. No exits triggered.**
+All positions well above stops. No exits triggered.
