@@ -46,6 +46,22 @@
 
 ---
 
+## Session: 2026-10-26 (Pre-Market — 6-month gap recovery)
+
+19. **Stop-loss orders need active monitoring.** GTC stop orders set in April expired 7/22/2026. A 6-month gap in sessions = zero risk management. Never assume stop-losses are in force without verifying. Check order status at every session.
+
+20. **Session continuity is critical infrastructure.** 6-month gap means positions drifted without oversight. CRON jobs from April expired. Next time: set persistent alerts or re-verify and re-schedule CRONs every run.
+
+21. **FOMC meetings are no-add-risk events.** Fed meeting Oct 27-28. CPI at 3.7% with Fed at 3.75-4% means rate trajectory uncertain. Never add new positions into a FOMC decision week without high conviction.
+
+22. **Inflation regime changes everything.** CPI rose from ~3.5% in April to 3.7% in September 2026. Fed hiked in September. This transforms GLD from pure safe-haven to inflation hedge — a stronger thesis. XLV and XLE remain appropriate defensive positions.
+
+23. **Hormuz "partial normalization" ≠ bearish XLE.** Flows recovered from 5% to 63%, but Brent still at $102. Oil disruption still significant. XLE thesis intact even as Hormuz partially reopens.
+
+24. **Know which earnings week you're in.** Mag7 Q3 earnings spread over two weeks. Week 1 (Oct 19-23): META, TSLA. Week 2 (Oct 26-30): AAPL, AMZN, MSFT. Don't add tech risk during Week 2 until results are known.
+
+25. **After 6-month gaps, VERIFY before acting.** Never assume portfolio state from stale memory. Always check Alpaca positions, cash, and order status before making any trades.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
