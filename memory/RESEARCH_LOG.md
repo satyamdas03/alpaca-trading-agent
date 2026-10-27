@@ -1,5 +1,100 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-10-27)
+
+**Market Status:** Pre-market (opens 9:30 AM ET); session resumed after 6-month gap since Apr 23 2026
+
+### CRITICAL ALERT: 6-Month Gap
+Last session: 2026-04-23. Today: 2026-10-27. Portfolio has been on autopilot 6 months. Stop-loss GTC orders had expiry 7/22 — expired! Position risk: unknown. Immediate Alpaca account audit required.
+
+### Macro Context
+- **VIX: 18.51** — Below 20 threshold = RISK-ON (Bespoke Morning Lineup, Oct 27)
+  - 52-week range: 13.38–35.30. Near-20 border signals caution.
+  - "After a brief outburst last week, VIX is back below 20 and has been largely subdued for 6 months."
+  - Below pre-midterm historical median of 24.35 — market not pricing election risk
+- **S&P 500:** Up ~13.4% YTD through late August 2026; Monday close +0.7%
+- **Nasdaq 100:** +1.1% Monday; S&P 500 futures +0.1%, Nasdaq +0.11%, Dow +0.18% pre-market
+- **10Y yield / Fed funds:** Fed funds rate 3.75–4.00% (hike in September 2026)
+- **FOMC:** Meeting Oct 27–28; decision Wednesday Oct 28 2:00 PM ET. 84-87% probability HOLD. Chair Kevin Warsh (hawkish, "regime change" stance).
+
+### Iran / Hormuz — STILL STALEMATE (6 months later)
+- **No deal reached.** Iran rejected Trump's September proposal for ceasefire/enrichment cap.
+- Secretary Rubio (Oct 7): Iran "missed multiple chances" for a deal
+- Iran's position: Will not negotiate while US naval blockade continues; will never give up enrichment right
+- VP Vance: Deal must include meaningful cut to enrichment — Iran says non-starter
+- Tanker attacks ongoing — vessels rely on US military protection in Hormuz
+- Pakistan/Qatar mediating but no breakthrough
+- **WTI: $102.27 (+0.51% pre-market), Brent: $116.36 (+0.47%)**
+- Oil is up significantly from April ($96.73) — 5.8% WTI, 10.2% Brent
+- US gas average ~$4.10/gal (up ~27% since war started)
+
+### Position Estimates (No Alpaca MCP Access)
+| Symbol | Entry | Est. Current | Est. P&L | Stop Status |
+|--------|-------|-------------|----------|-------------|
+| XLE | $56.42 | ~$68.00 | +$11.58/sh (+20.5%) | Stop $52.47 EXPIRED 7/22 |
+| GLD | $435.66 | ~$382.55 | -$53.11/sh (-12.2%) | Stop $405.17 EXPIRED 7/22 (may have triggered BEFORE expiry) |
+| XLV | $146.73 | ~$147 est. | ~flat | Stop $136.46 EXPIRED 7/22 |
+
+**GLD analysis:** Stop was $405.17 GTC until 7/22. GLD data shows: May 29 ~$417, June 1 ~$411, late June ~$369. GLD likely fell through $405 in early-mid June → stop MAY have executed before 7/22 at ~$405. If NOT executed (stop expired first), GLD position is currently down 12.2% with no protection.
+
+**XLE analysis:** Oil surged from $96 (April) to $116 Brent today. XLE tracking at ~$68 vs $56.42 entry = +20.5% gain. Our best position by far. Oil thesis (Hormuz) remains intact.
+
+**XLV analysis:** Healthcare has been flat in 2026 Risk-On market (lagging tech). Rough estimate: ~flat P&L.
+
+### Regime Assessment: LATE CYCLE (Cautious Risk-On)
+- **VIX 18.51** = technically Risk-On (< 20), but right at border
+- **Oil $116 Brent** = inflation risk, supports Late Cycle concern  
+- **FOMC hawkish** = Fed rate 3.75–4.00%, risk of another hike in Dec
+- **Iran stalemate** = ongoing geopolitical Stress factor (but market discounting it — 6 months normalized)
+- **Earnings week** = binary risk for tech (MSFT, GOOGL, AMZN this week)
+- **Midterms in 1 week** = political uncertainty
+- **VERDICT: LATE CYCLE** — VIX barely in Risk-On, multiple headwinds from oil/Fed/Iran/midterms
+
+### Key Earnings This Week
+| Company | Date | Time | EPS Consensus | Notes |
+|---------|------|------|--------------|-------|
+| MSFT | Oct 28 (Wed) | AH 5:30PM ET | $4.71 | Copilot 50M users, AI momentum |
+| GOOGL | Oct 28 (Wed) | AH 4:30PM ET | $2.94 | Gemini Code Assist catalyst |
+| AMZN | Oct 29 (Thu) | AH 5:00PM ET | $2.01 | Cloud + Prime |
+| ELI LILLY | Oct 29 (Thu) | Pre-market | TBD | GLP-1 drugs |
+| EXXON | Oct 29 (Thu) | Pre-market | TBD | Oil earnings, XLE correlate |
+
+### Immediate Trade Actions Required
+**URGENT — before market open or at open:**
+
+1. **GLD: CHECK STATUS FIRST, THEN EXIT** — If still holding GLD (stop expired without firing): sell at market open. GLD at $382 is -12.2% from entry $435.66. Our stop was -7% ($405). This position violated our risk rule and must be exited immediately.
+   - Order: SELL 13 GLD MARKET at open (+ any fractional shares held)
+
+2. **XLE: RAISE STOP-LOSS** — XLE at ~$68 is +20.5% from entry. Old stop ($52.47) expired. Need new stop-loss immediately.
+   - New stop: $63.25 (locks in +12.1% minimum, -7% from current ~$68)
+   - Order: SELL STOP 124 XLE at $63.25 GTC (new expiry Jan 27, 2027)
+
+3. **XLV: EVALUATE AND LIKELY EXIT** — In Late Cycle / cautious Risk-On, healthcare lags tech. With ~flat P&L and wrong sector for regime, exit frees up capital.
+   - Order: SELL 47 XLV MARKET at open (if at or above $136)
+   - If XLV is below $140, hold for recovery — don't lock in loss below that
+
+4. **NEW POSITIONS: WAIT FOR FOMC** — Do not deploy new capital until after Wednesday's Fed decision (Oct 28 2PM ET). 
+   - If HOLD confirmed + MSFT/GOOGL beat earnings: consider QQQ $10K or XLK $10K
+   - If hawkish surprise or MSFT/GOOGL miss: hold cash
+
+### Post-FOMC Trade Candidates (If Risk-On confirmed)
+| Ticker | Type | Rationale | Target Size |
+|--------|------|-----------|------------|
+| QQQ | ETF | Broad Nasdaq momentum in Risk-On, cheap FOMC-cleared signal | $10K |
+| XLK | ETF | Tech sector in Risk-On, AI/cloud supercycle | $10K |
+| AMZN | Stock | Cloud strength, earnings catalyst Thursday | $5K |
+| XLE | Add | Oil thesis intact, raise stop and add on dip | $5K |
+
+Cash available (estimated): $80K + GLD proceeds (~$5,268) + possible XLV proceeds (~$7,000) = ~$92K deployable
+
+### Fundamental Risk Watch
+- **FOMC surprise hike** (13-16% probability) → VIX spike, exit risk-on positions
+- **MSFT/GOOGL earnings miss** → Nasdaq selloff, avoid QQQ/XLK
+- **Iran deal breakthrough** → Oil crash -20%+, exit XLE immediately
+- **Iran escalation (attack on US ships)** → VIX spike >25, shift to Stress regime
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

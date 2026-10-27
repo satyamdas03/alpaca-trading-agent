@@ -1,46 +1,63 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-10-27 Pre-Market Routine (6-month gap recovery)
 
 ## Account Overview
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
-- Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
+- Current Cash: $80,000.00 (estimated — actual state unknown, Alpaca MCP offline)
+- Total Portfolio Value: **ESTIMATED ~$101,200** (see position estimates below)
+- Buying Power: ~$181,200 (2x margin estimate)
 - Pattern Day Trader: No
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
 - Alpaca Paper: true
+- **WARNING: 6-month data gap. Last confirmed state: 2026-04-23. Audit account immediately.**
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+## Open Positions (ESTIMATED — Actual State Requires Alpaca Audit)
+| Symbol | Side | Qty | Entry Price | Est. Current | Est. Unreal. P&L | P&L % | Cost Basis | Est. Market Value |
+|--------|------|-----|-------------|-------------|-----------------|-------|------------|-------------------|
+| XLE | LONG | 124.076 | $56.42 | ~$68.00 | +$1,437 | +20.5% | $7,000.03 | ~$8,437 |
+| XLV | LONG | 47.707 | $146.73 | ~$147 | ~+$13 | ~+0.2% | $7,000.00 | ~$7,013 |
+| GLD | LONG? | 13.772 | $435.66 | ~$382.55 | ~-$731 | ~-12.2% | $6,000.00 | ~$5,269 |
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+**GLD STOP STATUS: UNCERTAIN**
+- Original stop: SELL 13 GLD at $405.17 GTC, expiry 7/22/2026
+- GLD data: fell from ~$427 (May 13) → $411 (June 1) → ~$369 (late June) → ~$382 (Oct 16)
+- GLD likely crossed $405.17 in early-mid June 2026 — stop MAY have executed
+- If stop executed: GLD sold at ~$405.17; 0.772 fractional shares still held at ~$382
+- If stop expired unused (unlikely given price path): full position still held at -12.2%
+- **ACTION REQUIRED: CHECK ACCOUNT, EXIT GLD IF STILL HELD**
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+**XLE STOP STATUS: EXPIRED**
+- Original stop: SELL 124 XLE at $52.47 GTC, expired 7/22/2026
+- XLE never came close to $52.47 (was $56-68+ range)
+- XLE stop expired harmlessly; position likely still held at ~$68 (+20.5%)
+- **ACTION REQUIRED: PLACE NEW STOP-LOSS AT $63.25 (locks in +12% from entry)**
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+**XLV STOP STATUS: EXPIRED**
+- Original stop: SELL 47 XLV at $136.46 GTC, expired 7/22/2026
+- XLV likely stayed in $140-155 range, stop never triggered
+- **ACTION: Evaluate for sale (wrong sector for regime)**
 
-## Allocation
-- Cash: 80.0%
-- Equities: 20.0%
+**Estimated Total Position Value:** ~$20,719 (if GLD still held) or ~$15,450 (if GLD stopped out)
+**Estimated Cash:** ~$80,000 (or ~$85,267 if GLD stop executed at $405.17)
+**Estimated Total Portfolio:** ~$100,719–$100,717
+
+### Stop-Loss Orders (ALL EXPIRED 7/22/2026 — MUST REPLACE)
+| Symbol | Side | Qty | Old Stop | Status | New Stop Needed |
+|--------|------|-----|---------|--------|----------------|
+| XLV | SELL | 47 | $136.46 | EXPIRED | $136.71 (-7%) |
+| XLE | SELL | 124 | $52.47 | EXPIRED | $63.25 (-7% from $68) |
+| GLD | SELL | 13 | $405.17 | EXPIRED (may have triggered) | EXIT or $356 |
+
+## Allocation (Estimated)
+- Cash: ~79-85% (depending on GLD stop execution)
+- Equities: ~15-21%
 - Options: 0%
 - Crypto: 0%
-- **Target in Risk-On: 40-50% equities (currently underdeployed)**
+- **Target in Late Cycle: 30-40% equities (still underdeployed)**
+- **After FOMC (Oct 28): Consider deploying up to 40% if Risk-On confirmed**
 
 ## Performance Tracking
 
@@ -49,53 +66,45 @@
 |------|--------|---------|-----------|----------|---------|---------|-------|
 | 4/22 | $100,000* | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% | +0.62% |
 | 4/23 | $99,988.99 | -$4.11 est | -0.004% | -$11.01 | +1.05% | +0.42% | -0.43% |
+| 10/27 | **~$100,717 est** | N/A | +0.73% since 4/23 | ~+$728 | **+13.4% YTD** | +13.8% | **~-13.1%** |
 
-*Portfolio history API shows $100,000 for 4/15-4/21 (no positions), then $99,993.10 on 4/22 close.
+*6-month gap. Portfolio estimate is unreliable without Alpaca account audit.*
 
-### Position P&L Detail
-| Symbol | Entry | Last Close | Entry→Close | Day Chg | Stop | Distance to Stop |
-|--------|-------|------------|-------------|---------|------|-------------------|
-| XLV | $146.73 | $146.38 | -$16.59 | 0.00% | $136.46 | -6.78% |
-| XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
-| GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
+### Benchmark Comparison (Estimated)
+- S&P 500 YTD 2026: +13.4% (through August; likely ~15% by October)
+- Portfolio YTD 2026 est: ~+0.7% (one winning position XLE +20%, offset by GLD losses + cash drag)
+- **Alpha: ~ -13% estimated** (massive underperformance due to 80% cash drag during 13%+ S&P rally)
+- Primary cause: Defensive positioning for Stress regime while market went Risk-On for 6 months
+- **Lesson: Being right on Iran/Hormuz (XLE +20%) but wrong on overall regime = still underperform**
 
-All positions well above stops. No exits triggered.
+### Position P&L Detail (ESTIMATED Oct 27)
+| Symbol | Entry | Est Current | Total P&L | Stop Status |
+|--------|-------|------------|----------|------------|
+| XLE | $56.42 | ~$68.00 | +$1,437 (+20.5%) | EXPIRED — need new stop at $63.25 |
+| XLV | $146.73 | ~$147 | ~+$13 (flat) | EXPIRED — need new stop at $136.71 |
+| GLD | $435.66 | ~$382.55 | -$731 (-12.2%) OR stopped at $405 (-$396) | UNCERTAIN — check Alpaca |
 
-### Benchmark Comparison
-- S&P 500 YTD: +4.27%
-- Portfolio YTD: -0.011% (since first trade 4/22)
-- **Alpha: -4.28%** (significantly underperforming)
-- Primary cause: defensive positioning in Risk-On market + 80% cash drag
+## Market Context (2026-10-27 Pre-Market)
+- S&P 500: Monday close +0.7%; YTD ~+13-15%
+- Nasdaq 100: Monday close +1.1%
+- S&P 500 futures: +0.1% (flat/marginally positive pre-market)
+- **VIX: 18.51** — Risk-On territory (Bespoke, Oct 27 2026)
+- Fed funds rate: 3.75–4.00% (hike in September 2026, hawkish Kevin Warsh as Chair)
+- Regime: **LATE CYCLE (cautious Risk-On)** — VIX < 20 but oil/Fed/Iran headwinds
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+### Oil (Hormuz Still Blocked — 6 Months Later)
+- **WTI: $102.27 (+0.51% pre-market)**
+- **Brent: $116.36 (+0.47% pre-market)**
+- Iran/Hormuz stalemate persists — no deal, tanker attacks ongoing
+- US gas avg: $4.10/gal (+27% since war start)
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
-
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
-
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
+### This Week's Key Events
+- **FOMC Decision: Oct 28 (Wed) 2:00 PM ET** — 84-87% HOLD at 3.75-4.00%
+- **MSFT earnings: Oct 28 (Wed) AH** — EPS consensus $4.71
+- **GOOGL earnings: Oct 28 (Wed) AH** — EPS consensus $2.94
+- **AMZN earnings: Oct 29 (Thu) AH** — EPS consensus $2.01
+- **US GDP Q3 data: Oct 29 (Thu)**
+- **US Midterm elections: Nov 3 (Tue)**
 
 ## Key Assessment
 **Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.

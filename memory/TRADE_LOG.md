@@ -33,6 +33,40 @@
 
 ---
 
+---
+
+## CRITICAL: Pending Orders — 2026-10-27 Pre-Market (Manual Execution Required)
+
+**Alpaca MCP Status:** DISCONNECTED (same as April). Orders below require MANUAL execution via Alpaca dashboard or REST API.
+
+### Step 1: Audit Account First
+Before placing any orders, log into Alpaca paper account (PA3M6G5LMKMI) and verify:
+- Which positions are still open
+- Whether GLD stop at $405.17 executed before 7/22 expiry
+- Current cash balance
+
+### Step 2: Action Orders
+
+| Priority | Action | Symbol | Qty | Type | Price/Stop | Rationale |
+|----------|--------|--------|-----|------|-----------|-----------|
+| 1 — URGENT | SELL (if held) | GLD | 13 | MARKET | At open | Below -7% threshold (-12.2%), no active stop |
+| 1 — URGENT | SELL (if held) | GLD fractional | ~0.772 | MARKET | At open | Same as above |
+| 2 | PLACE STOP | XLE | 124 | STOP GTC | $63.25 | Old stop expired, need protection on +20.5% winner |
+| 3 | ASSESS | XLV | 47 | SELL MARKET | At open | Healthcare lagging in Risk-On/Late Cycle — wrong sector |
+| 4 — WAIT | (No new positions) | — | — | — | — | Wait for FOMC Oct 28 2PM |
+
+### Step 3: Post-FOMC Candidates (If Fed holds AND Tech earnings beat)
+
+| Ticker | Action | Size | Type | Trigger |
+|--------|--------|------|------|---------|
+| QQQ | BUY | $10K | MARKET | After FOMC hold confirmed + MSFT/GOOGL beat |
+| XLK | BUY | $10K | MARKET | After FOMC hold confirmed + MSFT/GOOGL beat |
+| XLE | ADD | $5K | MARKET | Oil thesis intact, dip below $67 |
+
+**Do NOT execute Step 3 before Wednesday Oct 28 2PM ET.**
+
+---
+
 ## Daily P&L Tracking
 
 | Date | Portfolio Value | Day P&L | Day P&L % | Cumulative P&L | S&P Day | S&P Cum |
