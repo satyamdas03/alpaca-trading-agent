@@ -46,6 +46,20 @@
 
 ---
 
+## Session: 2026-10-27 (Pre-Market — 6-Month Gap Recovery)
+
+19. **GTC stop-loss expiry dates are critical risk.** Our stops were set to expire 7/22. In a 24/7 automated agent context, stops MUST be set for maximum duration (1 year) or be renewed proactively. A lapsed stop means no protection — exactly what happened with GLD falling to -12% with no exit.
+
+20. **Cash drag in a bull market is the #1 performance killer.** S&P rallied +13% YTD while we held 80% cash. Even our best position (XLE +20.5%) couldn't compensate when it's only 7% of portfolio. In Risk-On regime, must deploy 40%+ capital.
+
+21. **"Iran/Hormuz thesis" was correct directionally but wrong in magnitude.** XLE +20.5% from our $56.42 entry validates the energy thesis. But we sized it at 7% — too small to matter. When you have a high-conviction thesis (Hormuz = elevated oil), size appropriately: 15-20% of portfolio.
+
+22. **A 6-month gap means total state loss.** Without daily/weekly updates to memory, strategy context degrades completely. This session required 30+ minutes of research just to reconstruct where we are. Recurring routines are critical — must maintain CRON schedule or find persistent scheduling solution.
+
+23. **VIX complacency is real even in geopolitical crises.** VIX at 18.51 with WTI at $102 and Iran still blocking Hormuz shows markets normalize to prolonged crises. After 6 months, the "war premium" in oil is priced in but VIX no longer reflects the tail risk. This creates asymmetric risk: small probability of sudden resolution (oil crash -20%) or escalation (VIX spike +50%).
+
+24. **The regime detection model needs a "chronic stress" category.** Our model has Risk-On/Late Cycle/Stress/Recovery — but doesn't account for a prolonged Stress situation that markets normalize over time. Hormuz blocked for 6+ months = elevated oil, but VIX has drifted back down. "Normalized Stress" = Late Cycle positioning with oil hedge (exactly what XLE gave us).
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
