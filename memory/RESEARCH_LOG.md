@@ -1,5 +1,111 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-10-28)
+
+**Market Status:** Pre-market / Open (9:30 AM ET)
+**Note:** 6-month gap since last session (4/23/2026). Memory restored from files.
+
+### Macro Context — October 28, 2026
+
+#### VIX & S&P 500
+- **VIX: ~17.42-17.52** (Oct 27-28) — below 20 threshold = RISK-ON confirmed
+- **VIX change**: Down 4.7% from prior session (18.39 → 17.52)
+- **S&P 500**: ~7,722.60 on Oct 27 close (+0.60%), within 1.2% of all-time high
+- **Nasdaq**: +1.18% on Oct 28 (chips rally, oil slides)
+- **S&P 500 since April 23**: ~7,138 → 7,722 = +8.2% gain we MISSED
+
+#### Fed — FOMC Decision Today
+- **Meeting**: Oct 27-28, decision at 2:00 PM ET today
+- **Current rate**: 3.75%-4.00% (Fed hiked 25bps on Sep 16, 2026)
+- **Market expectation**: 87% HOLD, 13% odds of 25bps hike
+- **Assessment**: HOLD expected. If confirmed, neutral-to-positive for equities.
+
+#### Iran/Hormuz — ESCALATION CONTINUES (October Worst So Far)
+- **October 2026 = most intense attack period since March escalation** (per Marisks/Reuters)
+- **UKMTO**: 135 incidents recorded as of Oct 16, 2026
+- **Oct 22**: Tanker struck by unknown projectile in the strait
+- **Oct 24**: Iran reports tanker explosions; Trump hints at renewed strikes
+- **Traffic**: Only 4 transits/day (vs 85/day pre-crisis baseline) as of Oct 4
+- **Diplomacy**: Iran parliament speaker says strait won't open until Iran's 7 conditions met
+- **Oil**: Brent ~$101.50 (Oct 5), ~$104 (Oct 10) — elevated but below peak $105+
+- **Status**: STILL CLOSED, ESCALATING. No resolution in sight.
+
+#### Earnings This Week
+| Company | Date | Status |
+|---------|------|--------|
+| Alphabet (GOOGL) | Oct 28 (today) | After close — results tonight |
+| Microsoft (MSFT) | Oct 28 (today) | After close — results tonight |
+| Amazon (AMZN) | Oct 29 | After close tomorrow |
+| Apple (AAPL) | Nov 2 | Monday next week |
+
+---
+
+### Regime Assessment: RISK-ON (VIX Confirms) + Hormuz Overlay
+
+**REGIME: RISK-ON with persistent geopolitical risk premium**
+
+| Signal | Value | Verdict |
+|--------|-------|---------|
+| VIX | 17.42-17.52 | Risk-On (< 20) ✅ |
+| S&P vs 200MA | Near all-time high | Risk-On ✅ |
+| Nasdaq Oct 28 | +1.18% (chips rally) | Risk-On ✅ |
+| Oil (Brent) | ~$101-104 | Inflation risk ⚠️ |
+| Hormuz | 4 transits/day (< 5% normal) | Stress overlay ⚠️ |
+| Fed | Expected HOLD at 3.75-4% | Neutral → Positive ✅ |
+
+**Per STRATEGY.md hybrid rule (Lesson 11): VIX < 20 = Risk-On confirmed. But Hormuz still closed + oil >$100 = geopolitical stress overlay. Do NOT blindly shift to pure momentum. Use HYBRID approach:**
+- Increase Momentum exposure (factor weight ↑ per Risk-On)
+- Keep XLE (Hormuz thesis still valid and strengthening)
+- Keep GLD (geopolitical risk premium persists)
+- Consider reducing XLV (healthcare lags in Risk-On; been 6 months)
+
+---
+
+### Portfolio Status (Last Known 4/23/2026 — Requires Alpaca Verification)
+
+**WARNING: Alpaca MCP disconnected. Cannot verify current positions, P&L, or whether stops triggered over 6 months. The following is last known state.**
+
+| Symbol | Entry | Last Known Price | Entry Date | Stop Price | Status |
+|--------|-------|-----------------|-----------|------------|--------|
+| XLV | $146.73 | $146.38 (4/23) | 4/22 | $136.46 | UNKNOWN — verify |
+| XLE | $56.42 | $56.72 (4/23) | 4/22 | $52.47 | UNKNOWN — likely MUCH higher (oil at $101+) |
+| GLD | $435.66 | $433.43 (4/23) | 4/22 | $405.17 | UNKNOWN — likely higher (geopolitical bid) |
+
+**Key: XLE stop was $52.47 (-7%). With oil at $101-104, XLE likely traded significantly higher. Stop would NOT have triggered upside. But may have seen volatility.**
+
+---
+
+### Trade Plan — October 28, 2026
+
+**Priority 1: Verify current positions via Alpaca REST API**
+Without Alpaca MCP, must use REST API to check: current positions, fills, stop-loss status.
+
+**Priority 2: New momentum positions (Risk-On regime, GOOGL/MSFT earnings tonight)**
+
+Given Risk-On (VIX 17.5), S&P near highs, chip rally today:
+
+| # | Action | Symbol | Rationale | Size | Signal |
+|---|--------|--------|-----------|------|--------|
+| 1 | BUY | SMH or NVDA | Semiconductors rallying (chip stocks leading today), AI supercycle, GOOGL/MSFT capex tonight | $10,000 (10%) | Momentum + Risk-On |
+| 2 | BUY | QQQ or XLK | Tech momentum in Risk-On, Nasdaq at/near records | $10,000 (10%) | Momentum + Risk-On |
+| 3 | HOLD | XLE | Hormuz still closed, oil $101-104, thesis intact and strengthened | — | Hormuz supply shock |
+| 4 | HOLD | GLD | Geopolitical risk premium still bid, inflation hedge with oil elevated | — | Safe haven |
+| 5 | REVIEW | XLV | Healthcare underperforms in Risk-On. Check current price, consider sell if significantly underperforming | — | Regime misfit |
+
+**Wait-and-see: GOOGL/MSFT tonight.** If strong earnings + capex guidance → AI momentum play confirmed, add SMH/NVDA at next open (10/29).
+
+**Cash reserve**: Keep $60K+ in cash given Fed uncertainty (FOMC today) and Hormuz escalation risk.
+
+---
+
+### Key Risks to Plan
+1. **Fed surprises with hike (13% odds)** → risk-off, reduce exposure
+2. **Hormuz force-reopening attempt** → oil crash → exit XLE immediately
+3. **GOOGL/MSFT earnings miss** → tech selloff → delay momentum buys
+4. **Trump renewed strikes on Iran** → VIX spike → defensive positioning
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -366,6 +472,7 @@ All tools operational: get_clock, get_account_info, get_stock_snapshot, place_st
 ### Tesla Earnings Preview (4/22 After Close)
 - EPS consensus: $0.39 | Revenue: ~$22.96B
 - Deliveries already missed (358K vs 365K est)
+- Production > deliveries by 50K+ (inventory buildup)
 - Energy storage 8.8 GWh (-38% QoQ from 14.2 GWh) — big disappointment
 - Robotaxi expansion to Dallas/Houston, Cybercab production start this month
 - FSD approved in Netherlands (European expansion)
