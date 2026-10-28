@@ -44,6 +44,22 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-10-28 (Pre-Market — 6-month gap)
+
+19. **Session gaps are catastrophic for risk management.** GTC stop orders expired on 7/22/2026 (set for ~90 days from April). From late July onward, all 3 positions had NO stop-loss protection. This is unacceptable. Solution: Use rolling stop orders or check expiry dates and set reminders.
+
+20. **Hormuz closure thesis proved durable.** XLE was entered at $56.42 in April. Oil went from ~$57 to ~$101-104 (Brent) over 6 months. XLE almost certainly gained significantly. When a structural macro thesis is right, hold the position.
+
+21. **6 months of missed opportunities in Risk-On.** S&P 500 went from 7,138 to 7,722 (+8.2%) while we were at 20% allocation. Bull's biggest weakness is not deploying capital in Risk-On. Must improve deployment discipline.
+
+22. **CRON jobs expire — build redundancy.** All scheduled routines expired after 7 days unless re-created. This created a 6-month gap in trading activity. For persistence: document cron job IDs and re-create them at each session start.
+
+23. **October 2026 Hormuz = most intense period yet.** 135 incidents, 4 transits/day (vs 85 baseline), tankers struck/exploded in Oct. Oil persistent at $101-104. The thesis from April is now 6 months old and still valid — this is the longest supply disruption in history.
+
+24. **Fed hiked in September 2026 (25bps to 3.75-4.00%).** This means rates are HIGHER than April. Market still near all-time highs = "rate hikes didn't break the market" = resilient economy + AI supercycle overriding rate concerns.
+
+25. **GOOGL/MSFT earnings tonight are the key catalyst.** AI capex guidance will determine if chip stocks (SMH/NVDA) and tech (QQQ/XLK) continue their momentum or reverse. Wait for results before sizing new positions.
+
 ---
 
 ## Rules
