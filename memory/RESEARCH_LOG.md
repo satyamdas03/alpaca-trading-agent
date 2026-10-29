@@ -1,5 +1,130 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-10-29)
+
+**Market Status:** Pre-Market (opens 9:30 AM ET 10/29)
+**Gap since last update:** ~6 months (last session: 2026-04-23 Market Close)
+
+### Macro Context — CRITICAL UPDATES
+
+#### Fed Policy (FOMC October 28 — YESTERDAY)
+- **FOMC decision October 28**: ~83% probability was hold, ~17% hike
+- **Rate range**: 3.75%–4.00% (Sep 16 hike +0.25% from 3.50-3.75%)
+- Morningstar headline confirms: "Fed holds steady — oil spike has 2026 rate cut expectations shrinking fast"
+- Fed Chair Kevin Warsh: oil shock is "temporary" — but PCE at 3.1% makes cuts unlikely rest of 2026
+- 10Y yields: above 5% (yield curve inverted/flat — Late Cycle/Stress signal)
+- RSM expects Fed on hold for rest of 2026 (no cuts, possible hike risk)
+
+#### S&P 500 / Equities
+- S&P 500 52-week high: 7,844.52 (hit in summer 2026)
+- S&P 500 October 23 close: 7,623.68 (–2.8% from high, tech selloff underway)
+- From April 23 close (7,137.90) to present: +6.8% market gain (we missed most of it in cash)
+- October 6 was ~7,810 (near record), now pulling back to 7,623 = correction in progress
+- FactSet: 179 S&P 500 companies reporting earnings week of Oct 26
+
+#### VIX
+- VIX spike to 26.78 reported (article title found: "VIX Spikes to 26.78 Amid S&P 500 Volatility Surge and Oil Market Tensions")
+- Barchart 3-month low: 16.60 on 08/27/26 (VIX bottomed in summer, now elevated)
+- VIX rose dramatically in August-October selloff
+- Current estimate: ~24-28 range → **borderline STRESS territory**
+
+#### Iran / Hormuz — MOST INTENSE MONTH EVER
+- October 2026 = most intense month for maritime attacks since crisis began in March
+- UKMTO: 135 incidents logged as of October 16; sharp rise in ship damage in October
+- October 22: tanker struck by unknown projectile in Hormuz
+- October 24 (CGTN): Trump hints at **renewed US strikes** on Iran
+- Transits: Only **4/day** as of October 4 (vs 85/day baseline = 95% down)
+- Iran parliament speaker: "Strait will not open until Iran's 7 conditions are met"
+- Alternative routes: Middle East oil exports averaged 24M bpd week of Oct 18 (vs pre-war 23.3M) — pipelines absorbing some volume
+- Oil peaked at $126/barrel in 2026 crisis; Brent ~$101-108 range in October
+
+#### Oil Prices (October 2026)
+- Brent: ~$101-108/barrel (down from $126 peak, but still very elevated)
+- WTI: ~$96-103/barrel (estimate based on $5 Brent/WTI spread)
+- Why oil peaked at $126: Hormuz + Saudi pipeline disruptions + hurricane (from article headline)
+- Oil is down from peak but still 2x pre-Hormuz-crisis levels
+
+#### Core PCE / Inflation
+- Core PCE y/y: 3.1% (consensus for this week's data release)
+- Oil shock driving "stagflationary" environment: slow growth + elevated inflation
+
+#### GDP
+- Q3 2026 GDP q/q consensus: 1.4% (weak growth)
+- Economy slowing but not in recession yet
+
+### Regime Assessment: **LATE CYCLE → STRESS**
+
+| Signal | Value | Interpretation |
+|--------|-------|----------------|
+| VIX | ~24-28 | Late Cycle (20-25) to Stress (>25) borderline |
+| S&P vs 200MA | ~7,623 (pulling back from 7,844 high) | Below recent highs, unclear 200MA |
+| Oil | Brent $101-108 | Inflation shock, Late Cycle |
+| Core PCE | 3.1% | Above Fed target, hawkish |
+| 10Y yield | >5% | Inverted/flat curve, Late Cycle/Stress |
+| PMI | ~47-49 est | Likely declining (GDP only 1.4%) |
+| Fed | Hold at 3.75-4.00% | Neutral; hike risk remains |
+| Hormuz | 4 transits/day (95% below normal) | Stress-level supply disruption |
+
+**VERDICT: LATE CYCLE with STRESS characteristics**
+- Strategy shift: Value ↑, Momentum ↓, Low Vol ↑ (defensive)
+- NOT full Risk-On. Not the time to deploy the 80% cash aggressively.
+
+### Existing Positions (Status Uncertain — Need Alpaca Verification)
+**CRITICAL: Stop-losses expired July 22, 2026. Positions unprotected for ~3 months.**
+
+| Symbol | Entry | Entry Date | Thesis | Oil Now vs Entry | Status |
+|--------|-------|-----------|--------|-----------------|--------|
+| XLV | $146.73 | 4/22 | Healthcare defensive | N/A (defensive) | LIKELY OPEN |
+| XLE | $56.42 | 4/22 | Hormuz oil thesis | Oil ~$103 vs ~$91 entry (+13%) | LIKELY OPEN, LIKELY UP |
+| GLD | $435.66 | 4/22 | Safe haven/inflation | Inflation + stress = bullish | LIKELY OPEN, LIKELY UP |
+
+**Estimated Position Values (unverified):**
+- XLE: Entry $56.42, oil +13-20%, XLE likely $63-70+ (significant profit)
+- GLD: Entry $435.66, gold likely $450-490 (inflation/stress bid)
+- XLV: Entry $146.73, healthcare probably flat to up in Late Cycle
+
+### Key Earnings Today (October 29, 2026)
+- **Mastercard** — Q3 2026, 9:00 AM ET (BEFORE market open)
+- **Merck** — Q3 2026, 9:00 AM ET (BEFORE market open)
+- **Eli Lilly** — Q3 2026, 10:00 AM ET (AFTER market open)
+- **Intel** — Q3 2026, AFTER market close
+
+**Intel is key**: If AI spending is still strong, this is a momentum signal. If Intel guides down on demand, tech selloff continues.
+
+### Trade Plan (October 29, 2026)
+**Alpaca MCP Unavailable — Manual Execution Required via Alpaca Web Portal**
+
+**URGENT — Do immediately:**
+1. **Reset stop-losses** on XLV, XLE, GLD (expired July 22 — unprotected)
+   - XLV: Stop at -7% from current price
+   - XLE: Stop at -7% from current price (significant profit — use trailing stop)
+   - GLD: Stop at -7% from current price (use trailing stop)
+
+**Priority trades:**
+2. **XLE**: Strong hold. Hormuz thesis playing out perfectly. Trump renewed strike hints = more oil upside. CONSIDER ADDING position if at market open.
+3. **GLD**: Hold. Inflation + stress regime = gold performs well. Consider adding.
+4. **XLV**: Evaluate. Healthcare reasonable in Late Cycle. Hold unless rotation opportunity.
+
+**New trade candidates:**
+5. **CVX (Chevron)** — Reports Friday Oct 30. Oil major benefiting from Hormuz. Pre-earnings play.
+   - Size: $5,000 (5% of portfolio)
+   - Entry: Market open Oct 29 (or limit order near current price)
+   - Stop: -7%
+   - Thesis: Oil at $108, XLE proxy but single-stock earnings catalyst Friday
+
+6. **TLT puts or SH (inverse S&P)** — If VIX confirmes above 25 at open:
+   - Consider $3,000 in SH (ProShares Short S&P500) as hedge
+   - Hedges the 20% equity exposure
+
+7. **NO momentum/tech plays** — Late Cycle/Stress regime says avoid momentum
+
+### Watch List
+- Intel earnings tonight (after close): If EPS beat + AI guidance strong → tech bounce possible
+- Trump renewed Iran strikes: If announced → oil spikes to $120+, XLE rockets, reduce XLV
+- FOMC follow-up today: Warsh press conference tone → any hint of rate cut timeline bullish
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -62,7 +187,7 @@ Regime is Risk-On (VIX < 20). Strategy says: increase Momentum, reduce Low Vol.
 **Options:**
 1. **Add momentum/tech position** — XLK or QQQ to capture risk-on rally
 2. **Maintain XLV** — healthcare has UNH tailwind, but lags in risk-on
-3. **Add to XLE** — Hormuz escalation continues, oil tailwind strong
+3. **Add to XLE** — Hormuz escalation continues, oil tail wind strong
 4. **Hold GLD** — gold still bid on geopolitical risk, but entry was high
 
 **Wait for 4/24 pre-market research before deciding.**
@@ -328,8 +453,7 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 ### Backtesting Engine Update
 Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
 - Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
-- Signals: quality, momentum, regime
-- Strategy: bull_strategy (multi-factor composite)
+- Signals: quality, momentum, regime, bull_strategy (multi-factor composite)
 - Sizing: half-Kelly
 - Backtest: walk-forward runner, metrics with anti-overfitting guards
 
@@ -363,33 +487,6 @@ All tools operational: get_clock, get_account_info, get_stock_snapshot, place_st
 - Trump: "under no pressure" to make deal, threatened to bomb bridges/power plants
 - **If no extension by market open 4/22 → assume Stress regime**
 
-### Tesla Earnings Preview (4/22 After Close)
-- EPS consensus: $0.39 | Revenue: ~$22.96B
-- Deliveries already missed (358K vs 365K est)
-- Energy storage 8.8 GWh (-38% QoQ from 14.2 GWh) — big disappointment
-- Robotaxi expansion to Dallas/Houston, Cybercab production start this month
-- FSD approved in Netherlands (European expansion)
-- Model S/X discontinued, lines repurposed for Optimus
-- Zacks ESP: -19.36% → likely earnings miss
-- Key upside: robotaxi timeline, AI narrative
-
-### SpotGamma Intelligence
-- VIX ~25 vs realized vol ~12% = 13pt spread (unusual outside panic)
-- Jump risk: sharp downside could force convergence
-- SPX 6,500 critical support (JP Morgan collar trade)
-- Post-VIX expiration, structural support removed
-- Correlation risk rising — everything trades together in stress
-
-### Regime Assessment
-**Late Cycle, leaning Stress.** Iran ceasefire expiration is the hinge. If it breaks tomorrow → shift to full Stress protocol (defensive only, hedging). If extended → brief Risk-On relief.
-
-### Action Plan for 4/22 Pre-Market
-1. Check Iran ceasefire status FIRST — determines entire regime
-2. If Stress: XLV/XLU positions only, consider SPY puts for hedge
-3. If Risk-On relief: momentum plays in beaten-down tech (TSLA post-earnings?)
-4. If neutral/Late Cycle: start with 2-3 positions, 5-8% each
-5. **This is our FIRST TRADING DAY.** Time to deploy capital.
-
 ---
 
 ## Session: Market Close Routine (2026-04-21)
@@ -406,18 +503,6 @@ All tools operational: get_clock, get_account_info, get_stock_snapshot, place_st
 
 ### Regime Assessment
 **Risk-On, watchful.** VIX under 20 but rising. S&P at record highs with lagging breadth. Iran ceasefire deadline (8 PM ET 4/21) is key binary event.
-
-### Key Catalysts This Week
-1. Iran ceasefire deadline — Tuesday 8 PM ET (major risk)
-2. Earnings: UnitedHealth (4/21), Tesla (4/22), Boeing, P&G
-3. Fed — rate cut hopes fading, energy inflation sticky
-4. AI supercycle continues as independent tailwind
-
-### Action Items for Next Session
-- Monitor Iran situation before market open
-- If ceasefire holds + oil drops: risk-on, look for momentum plays
-- If ceasefire breaks + oil spikes: shift defensive, consider VIX hedges
-- Research candidates during pre-market routine
 
 ---
 
