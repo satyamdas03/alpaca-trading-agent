@@ -1,87 +1,47 @@
 # Memory Index
 
-- [UTS Intro to AI — Lab 0 Completed 2026-08-06](project_uts_intro_to_ai_lab0.md) — **READ FIRST for current UTS 42172 work.** Lab 0 (Python programming exercises in Google Colab) done end-to-end. Completed notebook saved at `C:\Users\point\projects\utsSem2Stuff\introToAI\Lab 0 Python Programming exercises in Google Colab\tasks\lab0_completed.ipynb` and `lab0_task_student_template_filled.ipynb`. All four tasks verified: functions, loops, conditionals, dictionaries/lists/tuples.
-- [UTS Intro to AI — AT1 Deliverables 2026-08-08](project_uts_intro_to_ai_at1_2026-08-08.md) — **READ FIRST for current UTS 42172 Assessment Task 1 work.** All three mini AI examples complete; prose humanised, equations formatted in scientific style, double-hyphen artifacts removed, and visuals polished. Merged Canvas submission files `Das_Satyam_26229599_AT1_1/2/3.pdf` generated (30/27/27 pages). Ready for Canvas upload pending final Colab-link check.
+- [RoboCAD Platform 2026-10-27](project_robocad_platform_2026-10-27.md) — private repo `robocad-platform`; Phases 0–2 closed (G2 met), Phase 3 in progress: accounts/storage/quotas/reason codes done, 625 tests, nothing deployed — next is the `arq` worker.
+- [Paperclip Setup 2026-10-27](project_paperclip_setup_2026-10-27.md) — Local Paperclip instance live on :3100; admin-shell/Postgres gotcha, start/stop via schtasks.
 
-- [SynapseDB — Agent-Native Data Kernel 2026-08-09](project_synapsedb_2026-08-09.md) — **READ FIRST for current SynapseDB work.** A new database category: temporal differential log, all models as derived views, CALM-aware execution, foundation-model autopilot, CRDT edge fabric, and optional verifiable proofs. Dossier lives at `C:\Users\point\projects\experimenting\database\SYNAPSEDB_DOSSIER.md`. Planning complete; Phase 0 implementation ready.
-
-- [Darkwatch — Maritime Dark-Vessel Detection 2026-08-05](project_darkwatch.md) — **READ FIRST for current Darkwatch work.** Sentinel-1 SAR + AIS fusion, calibrated dark-vessel attribution. Phases 0–2 complete; Phase 3 baseline complete with static-object exclusion + two real scenes fused (CLEAR 3, REVIEW 5, DARK 3, ARTIFACT 1). Next: empirical calibration of p_dark/p_clear. Dossier lives at `C:\Users\point\projects\darkwatch\DOSSIER.md`; public repo at https://github.com/satyamdas03/darkwatch.
-- [Aureum — Financial Semantic Kernel 2026-08-01](project_aureum_financial_semantic_kernel.md) — **READ FIRST for Aureum work.** Strategic deep-dive and current status. Self-proving semantic kernel for finance; GitHub repo live at https://github.com/satyamdas03/aureum. **v0.4.2 live Alpaca paper-trading bridge + Windows Task Scheduler shipped** as of commit `9f6a065`; backtest parity preserved (194 passed, 1 skipped). All seven revolutionary edges integrated. Blocker: real Alpaca API keys must be set in `bindings/python/scripts/.env` to run the first live dry-run.
-- [Aureum Session 2026-08-02 — Live Alpaca Paper Trading Bridge v0.4.2](aureum_session_2026-08-02.md) — Latest session: implemented `aureum.trading`, `aureum.execution`, refactored `BacktestRunner`, added `aureum account` + `aureum live` CLI commands, Windows scheduler scripts, and full test coverage. Pushed to `main`. Full record.
-- [Aureum Session 2026-08-01 — Phase 4A + Edges 2–7 + Verifier + Studio + Launch Narrative](aureum_session_2026-08-01.md) — All seven revolutionary edges merged into `main`, verifier bridge extended to Phase 4, Aureum Studio Phase 4 lineage panel added, launch narrative published. Full integration record.
-- [Aureum MPT Research 2026-07-30](aureum_mpt_research_2026-07-30.md) — Deep research synthesis on Modern Portfolio Theory: Markowitz math, efficient frontier, CAPM, Black-Litterman, shrinkage, factor models, CVaR/EVaR, risk parity, Kelly, and a concrete Phase 4 build plan for Aureum's portfolio-construction DSL.
-- [Aureum Revolutionary Edge Research 2026-07-30](aureum_revolutionary_edge_research_2026-07-30.md) — Brainstorming + deep research on field-advancing directions: self-proving portfolios, causal MPT, conformal prediction, neuro-symbolic alpha, semantic finance graphs, differentiable execution, and economic-security audits.
-- [Aureum End-State Positioning 2026-07-30](aureum_endstate_positioning_2026-07-30.md) — End-state vision, problem-solution mapping, ICPs, taglines, channels, and competitive positioning for Aureum after applying all seven edges.
-
-- [QuantCoder / AlphaWeaver LLM Project 2026-07-30](project_quantcoder_alphaweaver_2026-07-26.md) — **READ FIRST for current LLM project.** Phase 1 complete: 138 verified examples, Qwen2.5-1.5B LoRA trained, honest 14-factor benchmark VAcc **64.3%** (9/14), all fixes pushed to https://github.com/satyamdas03/quantcoder-3b. Phase 2A code (HF publish script + tests + README badge) committed; upload blocked until a valid HF write token is provided. Phase 2 plan covers dataset scaling to 500+, conformal calibration, Qwen3.5-4B training, FastAPI serving, and AlphaWeaver-7B roadmap.
-
-- [Satyam Das — Full Profile 2026-07-26](satyam_das_full_profile_2026-07-26.md) — **READ FIRST for Satyam's background.** Complete synthesized profile from resumes, GitHub, LinkedIn, and memory: identity, skills, projects, visa constraints, and strategic positioning.
-
-- [LeadSpark Re — Conversational AI Sales Agent](leadspark_re_conversational_ai_sales_agent.md) — **READ FIRST for LeadSpark_Re work.** Deep-dive foundation + running log for the AI-powered B2B consultative sales agent.
-
-- [Lumina LOB Session 2026-07-08 — Completeness Fixes](lumina_lob_session_2026-07-08_completeness_fixes.md) — **READ FIRST for current lumina-lob work.** Post-publication pass: CI version fix, optional viz imports, RL wrapper fix, executed notebooks, docs blog published, 308 tests green, CI green. Next: GitHub cleanup/pinning or start factor-forge.
-- [Lumina LOB Session 2026-07-05](lumina_lob_session_2026-07-05.md) — Original build session: ALL 28 checkpoints CP0.1→CP6.6 complete, PyPI v0.1.4, GitHub Actions CI green, GitHub Pages docs live.
-
-- [Factor Forge v0.5.0 Build 2026-07-10](factor_forge_v0.5.0_build_2026-07-10.md) — **READ FIRST for current factor-forge work.** v0.5.0 dashboard + interactive research reports: 88 tests green, ruff/mypy clean, MkDocs docs, CI/CD matrix green on Ubuntu/Windows/macOS × Python 3.11–3.13, wheel+sdist built, GitHub tagged v0.5.0 and release created; PyPI live at 0.5.0.
-
-- [Conformal Finance v0.1.1 Build 2026-07-10](conformal_finance_v0.1.1_build_2026-07-10.md) — **READ FIRST for current conformal-finance work.** Distribution-free uncertainty quantification for financial time series via split/CQR/ACI conformal prediction: 33 tests green, CI matrix green, GitHub release v0.1.1 with artifacts; PyPI live at 0.1.1.
-- [Jane Street Session 2026-07-10 — Conformal-finance PyPI completion](janestreet_session_2026-07-10_conformal_finance_pypi_completion.md) — Latest restart + deep-dive record: recovered context, verified all repos, uploaded conformal-finance v0.1.1 to PyPI. Next: GitHub cleanup/pinning, enable conformal-finance Pages deploy, or start stresstest-ai/quant-voice/optiver-repro.
-
-- [Jane Street / Quant Trading 3-Year Roadmap 2026-2029](satyam_janestreet_quant_roadmap_2026-2029.md) — Complete career strategy: Jane Street dossier, candidate profile analysis, 3-year roadmap to Jane Street/Citadel/Optiver/IMC Australia, DOCX artifact, Part 13 with all preparation resources, and Part 14 with six live GitHub portfolio repos (lumina-lob, factor-forge, conformal-finance, stresstest-ai, quant-voice, optiver-repro).
-
-- [MASTER HANDOFF 2026-07-05](icaif_handoff_2026-07-05_complete.md) — **READ FIRST on fresh session — supersedes/consolidates all ICAIF records.** Full mission, 14 commits, 9 bugs, all results, M1 theorems, UNCOMMITTED metered-feedback work in tree, blockers (keys NOT rotated as of 07-05), exact restart order.
-- [ICAIF Session 2026-07-03→04 FULL](icaif_session_2026-07-03_to_04_full.md) — Earlier complete record: 13 commits, 9 bugs, all results (0/14 honest set, 0/18 placebo, M2 attack separation CONFIRMED), blockers, restart instructions.
-- [ICAIF '26 AQRA Sprint](project_icaif_aqra_sprint.md) — **ACTIVE SPRINT, deadline Aug 2.** Live status: paper draft+LaTeX done, moonshot Honest Agent Protocol thesis alive, task #9 M1 theorem next.
-- [C42 Diagnosis + NEW RECORD 2026-07-03](prometheus_c42_diagnosis_2026-07-02.md) — **READ BEFORE any C42 work.** 0.3993 retracted (τ>1/3 violated + wrong v1 linear kernel + zeroed remainder weights — 3 bugs). **NEW FULL-RIGOR RECORD: C₄₂ ≤ 0.690395202310285 (2.6e-4 below Griego), commit e5a5863, state/CERTIFIED_v2b_k3_2026-07-03.json.** Next: QN=1700 tightening, cubic functional for τ<1/3, paper rewrite.
-
-- [Satyam Das - Profile](user_satyam_profile.md) — CS grad, Python/quant engineer, NeuralQuant builder, AWS certified, 3 published papers
-- [IMC Prosperity 4 Competition](project_prosperity4.md) — Full competition rules, schedule, Python interface spec, strategy reference
-- [R2 Results & R3 Prep](project_prosperity4_round2.md) — R2 final scores (307,922 total, rank #2879), intermission status, R3 strategy priorities
-- [R3 Data Intelligence](project_prosperity4_round3_data.md) — R1+R2 product stats, ACO/IPR calibration, strategy insights
-- [R3 Modular Trader Framework](project_prosperity4_round3_framework.md) — 7-strategy architecture, hardening done, pre-R3 checklist
-- [P3 Top Strategy Research](project_prosperity4_p3_research.md) — Prosperity 3 winning strategies for options, conversion arb, copy trading
-- [Apify Monetization](apify_monetization.md) — PPE pricing, top categories, affiliate program, actor deployment status
-- [v18 Live Test Results](project_prosperity4_round2_v18results.md) — v18/v18b live test results vs v5 baseline
-- [v19 Experiment Details](project_prosperity4_round2_v19experiment.md) — v19 experimental findings (superseded by R2 results)
-- [R4 V3 Trader Improvements](project_prosperity4_round4_v3.md) — V3 aggressive fills + VEV cap reductions, realistic backtest 40.5% improvement
-- [Master Context](../../projects/APIFY/MASTER_CONTEXT.md) — FULL end-to-end project history, current state, next steps. READ FIRST on session restart.
-- [Resume Tailoring Methodology](reference_resume_methodology.md) — Process for customizing Satyam's resume per role, sections, rules, visa reality tracking
-- [Job Applications Portfolio](project_job_applications.md) — 10 SWE/Quant/ML roles + new tutoring track with status and strategy
-- [Tutoring Job Applications](project_tutoring_applications.md) — 6 tutoring roles analyzed, 2 viable, 4 blocked. Resume pivot to teaching/mentoring.
-- [W Sydney Application 2026-06-13](project_w_sydney_app.md) — Marriott Beverage & Food Attendant assessment answers, resume strategy, cover letter. Complete session record.
-- [NeuralQuant Project](project_neuralquant.md) — Full-stack AI stock intelligence: 5-factor quant engine + 7-agent PARA-DEBATE, dual market (US/India), 4-layer arch
-- [NeuralQuant Deep Dive Summary](neuralquant_deepdive_2026-05-11.md) — Top 50 bugs, architecture overview, priority fix list
-- [NeuralQuant Full Session Memory](neuralquant_deepdive_full.md) — COMPLETE end-to-end deep dive: every file, every bug, every architecture detail. Read this to restore full context.
-- [AnjaliValueStocks Project](project_anjalivaluestocks.md) — NSE 100 + S&P 500 quintile color-coded screeners, MAZG deep dive, composite rankings, yfinance pipeline
-- [AnjaliValueStocks Session 2026-05-16](anjalivaluestocks_session_2026-05-16.md) — First deep dive: file inventory, MAZG analysis, 9 bugs found, 4-tier task list
-- [AnjaliValueStocks Session 2026-05-17](anjalivaluestocks_session_2026-05-17.md) — Second deep dive: exhaustive stats for all 100 US stocks, cross-file depth assessment (7 dims), 6 new bugs (#10-15), Indian vs US comparison, consolidated priorities
-- [AnjaliValueStocks Session 2026-05-17b](anjalivaluestocks_session_2026-05-17b.md) — Refactoring execution: 2-script pipeline, 4 corrected color hierarchies, scoring system, 503 S&P 500, Excel built
-- [AnjaliValueStocks Session 2026-05-18](anjalivaluestocks_session_2026-05-18.md) — Risk color hierarchy fix: descending (highest std=DR), bug #16 fixed
-- [Financial Simplicity Interview Prep](financial_simplicity_interview_prep.md) — Complete dossier: resume, PROMETHEUS, NeuralQuant, company research, Q&A playbook, tactical advice
-- [Polymarket Pipeline V2](project_polymarket_pipeline.md) — Prediction market trading bot, 98 dry-run trades, $2,114 wagered, real Polymarket + Anthropic API, dashboard live
-- [Hermes Trading Project](project_hermes_trading.md) — Self-improving paper trading agent, AI reflection via Claude API, Railway worker + Windows watchdog, SELF-LEARNING NOW ACTIVE
-- [Hermes Trading Session 2026-05-27](hermes_trading_session_2026-05-27.md) — FULL session Parts 1-16: AI Trading Brain bugs #17 #18, Hermes RSI deep dive, v07→v08 5-point fix then REVERTED, Railway log buffering, time exit zombie fix, SELF-LEARNING PIPELINE DISCOVERED DEAD + FIXED (API key, one_variable_only, prompt, code guardrail), 4 bugs found, 4-day waste analysis, -$125.46 paper loss, 33.3% WR
-- [Hermes Trading Session 2026-05-30](hermes_trading_session_2026-05-30.md) — FULL session recovery after laptop restart. Discovered system evolved v07→v11 autonomously. 19 closed trades, +$227 realized (was -$125), 42.1% WR. Found 5 bugs, fixed 3 safely (goal.yaml BOM, missing v09/v11 archives). Comprehensive P&L analysis proves system IS improving. Score 0.4679 highest yet. v09 best version (100% WR). Total +3.82% on $10K.
-- [Hermes Trading Session 2026-06-04 to 06-05](hermes_trading_session_2026-06-04_to_06-05.md) — **COMPLETE session: deep dive all code, discovered 3 critical bugs (RSI threshold semantic mismatch → overtrading, version audit gaps, duplicate direction key). Fee analysis shows -$1,111 net after fees (NOT ready for real money). Applied 4 fixes (explicit thresholds + backward compat, reflection integrity checks + atomic writes, prompt semantic clarity, strategy.yaml cleanup). Deployed to Railway v23. Post-fix health check confirms fix working. 67 trades, +$960 net, 45.1% WR, Sharpe 1.59, max DD 10.4%.**
-- [Hermes Trading Session 2026-06-07](hermes_trading_session_2026-06-07.md) — Post-laptop-restart recovery. CRITICAL f-string bug found in `reflect_hermes()` — single braces inside f-string broke direct API reflection pipeline (AI evolution dead). HOTFIX deployed (`b33102c`). Also deployed trade_id uniqueness + collision detection, fee context in prompts, watchdog dedup fix, new `monitor.py`. 91 trades, +$1,597 net, 45.1% WR, Sharpe 1.59, max DD 10.4%.
-- [Hermes Tuning Feedback](feedback_hermes_tuning.md) — ANTHROPIC_API_KEY must be on Railway (not just local), one_variable_only defense in depth (goal+prompt+code), time exit = age only (no P&L gate), volume filter too strict for crypto, Railway logs unreliable, volume survives deployments
-- [AI Trading Brain](project_ai_trading_brain.md) — Phases 1-7 DONE, daemon :8420 19h uptime, 18 bugs fixed, DRY_RUN paper mode, 23/23 preflight, latest: bugs #17 #18 fixed (vol_rank shape mismatch, NaN entry_price)
-- [AI Trading Brain Session 2026-05-17](ai_trading_brain_session_2026-05-17.md) — FULL session: syntax fix, trend filter date bug fix (DD 27%→2.7%), DB migration, GitHub repo, README, paper trading enabled
-- [AI Trading Brain Session 2026-05-18](ai_trading_brain_session_2026-05-18.md) — FULL session: Next.js dashboard built, 6 bug fixes (POLYMARKET import, Unicode, TS types×3, weight feedback dead), 500-ticker replay comparison (with/without learning), learning conclusion, daemon running, 6 commits
-- [AI Trading Brain Session 2026-05-19](ai_trading_brain_session_2026-05-19.md) — Parts 1-6 (FULL): 23/23 preflight, Haiku 100%, debate replay 25/25, May 19 live: 0 trades HOLD, bugs #12 #13 #16 found+fixed (d7939b5+7e18281), close journal missed then manually triggered, daemon PID 35312 running all fixes, next: May 20 market open 23:37 AEST
-- [Honest Agent Protocol ICAIF Paper + Private Repo 2026-07-11](honest_agent_protocol_icaif_paper_repo_2026-07-11.md) — **READ FIRST for current Honest Agent work.** Paper polished (figure fixed, named author block, Tectonic installed, PDF recompiled), new private GitHub repo created with complete research archive + comprehensive README. 189 files pushed.
-
-- [Honest Agent Protocol A+C Session 2026-07-06](honest_agent_protocol_ac_session_2026-07-06.md) — A+C push: 10-step roadmap for empirical scaling + maximal leakage tightening. Steps 1–2 complete (naive=1.4 mean false certs, protocol=0.0), Step 3 next (metered + e_bh llama3:8b m=50 reps=5).
-- [Honest Agent Protocol Phase C Session 2026-07-05](honest_agent_protocol_phase_c_session_2026-07-05.md) — Complete session record: Phase A/B/C done; real-LLM pilot committed; bugs fixed, blockers, exact restart instructions.
-- [Honest Agent Breakthrough Analysis 2026-07-05](honest_agent_breakthrough_analysis_2026-07-05.md) — **Path-to-breakthrough deep analysis.** E-values/e-BH identified as the central upgrade to close Theorem 1, leakage, and online-FDR gaps; implementation roadmap and real-LLM experiment plan included.
-- [AQRA Session 2026-06-24 Full Record](aqra_session_2026-07-03_to_04_full.md) — **READ THIS** for complete AQRA Phase 1a context: all 20 tasks, bugs fixed, commits, current state, and exact restart instructions.
-- [AQRA Phase 1a Milestone](project_aqra_phase1a.md) — Short milestone summary; links to the full session record.
-- [Sentinel Project](project_sentinel.md) — AWS-native runtime safety verifier for physical AI. Software-only, Isaac Sim, warehouse AMR/humanoid beachhead. Design phase active. READ THIS on session restart.
-- [AURA Demo Project](project_aura.md) — Financial Simplicity portfolio-assurance AI demo. Full V1 build DONE (16 TDD tasks, v0.1.0 tag): FastAPI+Next.js, deterministic rules engine source of truth, grounded Claude agents, 3 screens, Hermes reflect loop. MATRIX UI. LIVE end-to-end on Vercel (same-origin API proxy fix applied 2026-06-18).
-- [AURA MATRIX UI Session 2026-06-18](aura_session_2026-06-18_matrix_ui.md) — Session record: MATRIX UI redesign, encoding fixes, Vercel diagnosis. NOTE: original "change Root Dir to ." diagnosis was WRONG — corrected; real fix = API proxy + API_URL env.
-- [Prometheus C_42 Full Session 2026-06-20](prometheus_c42_full_session_2026-06-20.md) — COMPLETE session record: recovery, k-band implementation, all bugs fixed, certified bound 0.399333354781627 (42.15% below Griego), plus the new revolutionary theorem direction. READ THIS on restart.
-- [Prometheus C_42 Restart Brief](prometheus_c42_restart_brief.md) — One-page quick-start for a fresh session. READ FIRST if you have no context.
-- [Prometheus C_42 Breakthrough 2026-06-20](prometheus_c42_breakthrough_2026-06-20.md) — Short summary of the C_42 certified upper bound. Superseded in detail by the full session file.
-- [C_42 Deep Exploration Plan](c42-deep-exploration-plan.md) — Long-horizon plan to push C_42 toward exact value, general method, or cross-field connection.
-- [C_42 Exploration Synthesis 2026-06-20](c42-exploration-synthesis_2026-06-20.md) — Initial 4-direction scout results; Biró lower-bound caveat flagged.
-- [Prometheus C_42 Session 2026-06-20 Continued](prometheus_c42_session_2026-06-20_continued.md) — **READ THIS after a fresh session start.** Full continuation record: rigorous certificate completed, bugs fixed, deep exploration launched, and the critical continuum-to-discrete gap discovered (Toeplitz not PSD, Biró contradiction). Contains exact restart restart instructions.
+- [UTS Intro to AI — AT2 RoboCAD report 2026-10-13](project_uts_intro_to_ai_at2_2026-10-13.md) — Generated docx; rebuild with build_report.py; team number + Figure 3/4 screenshots pending.
+- [Hi-EV / Session Recovery 2026-09-15](hi-ev_restart_2026-09-15.md) — **Read first when restarting EV** — full dossier of today’s work, current state, next steps, and non-obvious context.
+- [Hi-EV / Personal AI OS 2026-09-15](project_hi-ev_2026-09-15.md) — EV local-first personal operating system; Phase 3 complete, 82 tests passing, live Gmail/Calendar sync.
+- [UTS Intro to AI — Lab 1 2026-08-13](project_uts_intro_to_ai_lab1_2026-08-13.md) — Classic search algorithms completed.
+- [LearningRobotics / Option A 2026-08-13](project_learning_robotics_option_a_2026-08-13.md) — Chapters 2-3 + PIBench Phases 1-2 complete, 30 tests passing, pushed.
+- [UTS Intro to AI — Lab 0 2026-08-06](project_uts_intro_to_ai_lab0.md) — Python programming exercises completed.
+- [UTS Intro to AI — AT1 Deliverables 2026-08-08](project_uts_intro_to_ai_at1_2026-08-08.md) — Assessment Task 1 ready for Canvas upload.
+- [LearningRobotics / PIBench Phase 0 2026-08-13](project_learning_robotics_pibench_phase0.md) — MuJoCo benchmark engine + `TowerFall` scene, tests passing, pushed.
+- [SynapseDB 2026-08-09](project_synapsedb_2026-08-09.md) — Agent-native temporal differential DB; Phase 0 planning done.
+- [Darkwatch 2026-08-05](project_darkwatch.md) — SAR + AIS dark-vessel detection; Phase 3 baseline complete.
+- [Aureum 2026-08-01](project_aureum_financial_semantic_kernel.md) — Self-proving financial semantic kernel; v0.4.2 Alpaca paper-trading bridge live.
+- [Aureum Sessions](aureum_session_2026-08-02.md) — Live trading bridge + Studio/verifier sessions; see linked files.
+- [Aureum MPT Research](aureum_mpt_research_2026-07-30.md) — Portfolio theory build plan.
+- [Aureum Revolutionary Edge Research](aureum_revolutionary_edge_research_2026-07-30.md) — Field-advancing directions brainstorm.
+- [QuantCoder / AlphaWeaver 2026-07-30](project_quantcoder_alphaweaver_2026-07-26.md) — 14-factor benchmark at 64.3%; Phase 2 blocked on HF token.
+- [Satyam Das — Full Profile](satyam_das_full_profile_2026-07-26.md) — Resume, skills, visa constraints, strategic positioning.
+- [LeadSpark Re](leadspark_re_conversational_ai_sales_agent.md) — Conversational AI sales agent foundation.
+- [Lumina LOB](lumina_lob_session_2026-07-08_completeness_fixes.md) — LOB sim v0.1.4, 308 tests green, PyPI + CI + docs live.
+- [Factor Forge v0.5.0](factor_forge_v0.5.0_build_2026-07-10.md) — Dashboard + research reports, PyPI v0.5.0.
+- [Conformal Finance v0.1.1](conformal_finance_v0.1.1_build_2026-07-10.md) — Conformal prediction for finance, PyPI v0.1.1.
+- [Jane Street / Quant Trading Roadmap 2026-2029](satyam_janestreet_quant_roadmap_2026-2029.md) — 3-year prep plan + portfolio repos.
+- [ICAIF '26 / AQRA Sprint](project_icaif_aqra_sprint.md) — Honest Agent Protocol paper + experiments; see linked full records.
+- [C₄₂ Prometheus](prometheus_c42_diagnosis_2026-07-02.md) — Certified bound 0.690395; see linked sessions/plans.
+- [IMC Prosperity 4](project_prosperity4.md) — Competition rules + R2–R4 frameworks and results.
+- [Apify Monetization](apify_monetization.md) — PPE pricing and actor deployment notes.
+- [Master Context](../../projects/APIFY/MASTER_CONTEXT.md) — End-to-end project history; READ FIRST on fresh session.
+- [Resume Tailoring Methodology](reference_resume_methodology.md) — Per-role resume customization.
+- [Job Applications Portfolio](project_job_applications.md) — SWE/Quant/ML/tutoring applications.
+- [W Sydney Application 2026-06-13](project_w_sydney_app.md) — Marriott assessment + cover letter.
+- [NeuralQuant Project](project_neuralquant.md) — 5-factor quant engine + PARA-DEBATE agents; see deep-dive files.
+- [AnjaliValueStocks Project](project_anjalivaluestocks.md) — NSE/S&P 500 screeners; see session files.
+- [Financial Simplicity Interview Prep](financial_simplicity_interview_prep.md) — Interview dossier and Q&A playbook.
+- [Polymarket Pipeline V2](project_polymarket_pipeline.md) — Prediction-market trading bot, 98 dry-run trades.
+- [Hermes Trading Project](project_hermes_trading.md) — Self-improving paper-trading agent; see tuning + session files.
+- [AI Trading Brain](project_ai_trading_brain.md) — 24/7 trading daemon + dashboard sessions.
+- [Honest Agent Protocol Paper + Repo 2026-07-11](honest_agent_protocol_icaif_paper_repo_2026-07-11.md) — Private research archive and PDF.
+- [Sentinel Project](project_sentinel.md) — AWS-native runtime safety verifier for physical AI.
+- [AURA Demo](project_aura.md) — Portfolio-assurance AI demo, live on Vercel.
+- [Tutoring Job Applications](project_tutoring_applications.md) — Teaching/mentoring roles analysis.
+- [UTS Data Visualisation — AT3 2026-10-15](uts_data_visualisation_at3_2026-10-15.md) — AT3 Visual Analytics deliverables complete; report, Excel, and Tableau workbook ready for Canvas upload.
+- [UTS Data Visualisation — AT2 2026-09-13](uts_data_visualisation_at2_2026-09-13.md) — Wimbledon finals deliverables ready for Canvas upload.
+- [UTS Ethics of Data and AI 2026-10-27](uts_ethics_of_data_and_ai_2026-10-27.md) — 57304; essay + case study both drafted and packaged, neither submitted.
