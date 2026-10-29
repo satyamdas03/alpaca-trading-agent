@@ -25,11 +25,34 @@
 
 | # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Time |
 |---|----------|--------|------|-----|------|------------|--------|------|
-| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | accepted | 2026-04-23 00:05 ET |
-| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | accepted | 2026-04-23 00:05 ET |
-| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | accepted | 2026-04-23 00:05 ET |
+| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | **EXPIRED 7/22/26** | 2026-04-23 00:05 ET |
+| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | **EXPIRED 7/22/26** | 2026-04-23 00:05 ET |
+| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | **EXPIRED 7/22/26** | 2026-04-23 00:05 ET |
 
-**All GTC. Stop-loss at -7% from entry. Trailing stop on XLE blocked (shares held by stop order).**
+**WARNING: All stop-loss orders expired July 22, 2026. Positions currently UNPROTECTED.**
+**ACTION REQUIRED: Reset stop-losses via Alpaca web portal immediately.**
+
+---
+
+## Pending Manual Orders (10/29 Pre-Market — Alpaca MCP Unavailable)
+
+Place these via Alpaca web portal at market open:
+
+### URGENT: Reset Stop-Losses
+| # | Symbol | Side | Qty | Type | Stop Price | Rationale |
+|---|--------|------|-----|------|-----------|-----------|
+| A | XLV | SELL | 47 | TRAILING STOP | 7% trail | Protect position, lock in any gains |
+| B | XLE | SELL | 124 | TRAILING STOP | 7% trail | Protect 15-28% gain from oil thesis |
+| C | GLD | SELL | 13 | TRAILING STOP | 7% trail | Protect 6-13% gain from inflation thesis |
+
+### New Position Candidates (Pre-Market Assessment)
+| Priority | Symbol | Side | Notional | Entry | Stop | Rationale |
+|----------|--------|------|----------|-------|------|-----------|
+| MEDIUM | CVX | BUY | $5,000 | Market | -7% | Chevron reports 10/30; oil at $108; Hormuz thesis |
+| LOW | SH | BUY | $3,000 | Market | -5% | S&P inverse ETF hedge; VIX ~26, LATE CYCLE |
+| SKIP | Intel | NONE | — | — | — | Wait for after-close earnings result first |
+
+**HOLD: No new long equity positions until stop-losses reset and positions verified.**
 
 ---
 
@@ -39,31 +62,25 @@
 |------|----------------|---------|-----------|-----------------|---------|---------|
 | 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% |
 | 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% |
+| 4/24–10/28 | Unknown | Unknown | — | — | ~+6.8% | — |
+| 10/29 | ~$102-105K est | Unknown | Unknown | +$2-5K est | — | ~+6.8% from 4/23 |
 
-**Notes:** Day 1 P&L is unrealized. Actual close prices from Alpaca show portfolio at $99,988.99. S&P significantly outperforming — defensive positioning is the drag.
+**Notes:** 6-month gap in records. S&P rose from 7,137→7,844 (peak) then pulled back to 7,623. Our 80% cash position missed most of this rally. XLE likely a significant winner given oil at $101-108 vs $90-93 entry.
 
 ---
 
 ## TSLA Earnings Decision (4/22 After Close)
 
-**TSLA Q1 2026 Results:**
-- EPS: $0.41 (beat $0.37 est) ✅
-- Revenue: $22.39B (miss vs $22.7B) ❌
-- Gross margin: 21.1% (up 478 bps YoY)
-- Capex guidance: $5B ABOVE prior → spending >$25B in 2026
-- Robotaxi: expanded to Dallas/Houston, unsupervised, no fleet size disclosed
-- After-hours: +4.3% initially, then gave back gains on spending news
-
 **DECISION: NO TSLA TRADE.** EPS beat but revenue miss + massive spending increase = negative FCF. Stock gave back gains. Not a clean momentum signal.
 
 ---
 
-## Position Performance Summary (4/23 Close)
+## Position Performance Summary (Last Verified: 4/23 Close)
 
-| Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |
+| Symbol | Entry | Close 4/23 | Total P&L | Day P&L | Stop | Distance to Stop |
 |--------|-------|---------|-----------|---------|------|-------------------|
 | XLV | $146.73 | $146.38 | -$16.59 | ~flat | $136.46 | -6.78% |
 | XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
 | GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
 
-**All positions well above stops. No exits triggered.**
+**As of 10/29, positions estimated significantly higher based on oil/gold price movements since April.**

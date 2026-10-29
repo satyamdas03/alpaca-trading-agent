@@ -44,6 +44,22 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-10-29 (Pre-Market — 6-Month Gap Recovery)
+
+19. **Stop-loss GTC orders expire — always check their duration.** Stop-losses set on 4/23 with GTC and "expire 7/22" literally expired July 22, 2026. Positions went unprotected for 3 months. LESSON: When setting stop orders, note the expiration date and create a calendar reminder or cron to reset them before expiry.
+
+20. **Hormuz crisis is a multi-month trade, not a day trade.** The XLE position entered at $56.42 in April with oil at $90-93. Oil climbed to $126 before pulling back to $101-108 in October. That's a 6-month sustained thesis. Don't take profits too early on geopolitical commodity plays.
+
+21. **6-month data gap = flying blind.** Waking up after 6 months with no updates means uncertainty about: (a) exact portfolio values, (b) whether stop-losses fired, (c) actual P&L. Always verify positions via Alpaca portal when Alpaca MCP is unavailable. Never assume state from 6 months ago is still current.
+
+22. **80% cash in a 6-month bull run = catastrophic underperformance.** S&P went from 7,137 to 7,844 (+9.9% peak) during April-August 2026. Our 80% cash position meant we captured only ~20% of the rally in our positions. This was the right call in April (Stress regime), but we failed to redeploy as regime shifted to Risk-On in May-August.
+
+23. **Regime transitions require proactive monitoring.** Stress → Risk-On transition happened in late April/May 2026, but we never redeployed capital during the bull run. The pre-market routine fires are the mechanism for this — they failed to fire consistently, or we failed to adapt when they did.
+
+24. **Trump renewed strike threats = binary oil event.** October 24 news: Trump hinting at renewed strikes on Iran. This is a new escalation. If strikes happen: (a) oil spike to $120-130+, XLE rockets, (b) market sells off (VIX spike), (c) GLD could go either way. Prepare contingency orders.
+
+25. **Stagflation is the hardest regime.** Q3 2026 GDP at 1.4% + Core PCE 3.1% + 10Y >5% = stagflation. This is the worst regime for equities: bonds hurt from inflation, equities hurt from slow growth. Only winners: commodities (oil, gold), short-duration assets. Our XLE + GLD is the right positioning.
+
 ---
 
 ## Rules
