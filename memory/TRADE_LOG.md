@@ -58,6 +58,42 @@
 
 ---
 
+---
+
+## ⚠️ STOP-LOSS EXPIRY NOTICE (2026-10-30)
+
+All GTC stop-loss orders set on 2026-04-23 expired on 2026-07-22:
+
+| Order ID | Symbol | Stop Price | Status | Action Required |
+|----------|--------|-----------|--------|-----------------|
+| 71b7b3bf | XLV | $136.46 | **EXPIRED** | Reset at -7% from current price |
+| 63cbc6a9 | XLE | $52.47 | **EXPIRED** | Reset at -7% from current price |
+| f91b4932 | GLD | $405.17 | **EXPIRED** | Reset at -7% from current price |
+
+**Manual Execution Required (Alpaca MCP unavailable):**
+```
+Alpaca Paper - Place GTC Stop Orders:
+1. XLV SELL 47 @ STOP [current_price × 0.93] GTC
+2. XLE SELL 124 @ STOP [current_price × 0.93] GTC
+3. GLD SELL 13 @ STOP [current_price × 0.93] GTC
+```
+
+---
+
+## Pre-Market Research (2026-10-30) — No New Trades
+
+**Regime: LATE CYCLE.** VIX ~17-18.5. S&P pulling back from Oct 12 highs (~7,844 → 7,677).
+No new trades. Priority is resetting expired stop-losses.
+
+| Factor | Assessment |
+|--------|------------|
+| XOM/CVX earnings today | Energy sector catalyst — monitor for XLE impact |
+| Trump/Iran | Tail risk: renewed strikes = VIX spike, oil spike, regime shift |
+| Fed Oct 27-28 | Decision just made — impact TBD (check results) |
+| VIX +8% intraday | Watch for break above 20 → regime shift to STRESS |
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |

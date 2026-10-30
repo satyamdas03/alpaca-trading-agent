@@ -44,6 +44,20 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-10-30 (Pre-Market — Return After 6-Month Gap)
+
+19. **GTC stop orders have expiry dates — check them every session.** The April 23 stops set to "expire 7/22" meant July 22, 2026. After 6 months of no sessions, all stops expired and positions are unprotected. NEVER set GTC orders without noting the expiry and renewing them monthly.
+
+20. **A 6-month data gap is dangerous.** Portfolio has open positions with no active risk management for 6 months. Market moved significantly (S&P +12%, oil +20-40%). Fortunately positions appear to be winning, but this is luck not skill.
+
+21. **Session gaps require regime re-assessment from scratch.** Do not assume last session's regime holds. Re-run full macro analysis every session regardless of gap.
+
+22. **Iran/Hormuz crisis can persist for months.** April 2026 analysis assumed 6-8 week recovery. As of October 2026 (6+ months later), Hormuz still closed with October being the most intense month yet. Long-duration geopolitical crises require long-term positioning, not 30-day trade horizons.
+
+23. **XLE thesis has been correct for 6 months.** Oil stayed elevated, Hormuz remained closed. The energy position was the right call — vindication of the original analysis. When a thesis is supported by strong structural factors, hold through volatility.
+
+24. **Late Cycle regime = hold current defensive/value positions.** S&P off highs, VIX rising, Fed hawkish, yield near 5%. Do not chase momentum in this environment. The defensive positioning (XLV, XLE, GLD) is actually appropriate for Late Cycle.
+
 ---
 
 ## Rules

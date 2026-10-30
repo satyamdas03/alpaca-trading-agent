@@ -1,6 +1,15 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-10-30 Pre-Market Routine
+
+## ⚠️ CRITICAL ALERTS
+1. **STOP-LOSSES EXPIRED:** All GTC stop orders expired 2026-07-22. No downside protection on XLV, XLE, GLD.
+2. **6-MONTH DATA GAP:** Last confirmed prices from 2026-04-23. Current prices unverified (Alpaca MCP unavailable).
+3. **ACTION REQUIRED:** Verify current prices and set new stop-losses immediately.
+
+---
+
+**Last Verified Account Data (2026-04-23):**
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -67,6 +76,16 @@ All positions well above stops. No exits triggered.
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
 
+## Market Context (2026-10-30 Pre-Market)
+- S&P 500: ~7,677 (Oct 26 close), peaked ~7,844 on Oct 12 — pulling back
+- VIX: ~17-18.5 (Oct 30 intraday, up ~8%)
+- Oil (WTI/Brent): ~$100-118 (Hormuz crisis ongoing, most intense October since crisis began)
+- CPI: ~3.4% YoY (peaked 4.2% May 2026)
+- 10Y yield: ~4.99%
+- Fed: 3.75-4.00%, hawkish tilt, Oct 27-28 meeting just concluded
+- Regime: **LATE CYCLE** (VIX 17-18, S&P below recent highs, hawkish Fed, oil elevated)
+- Iran/Hormuz: 135 incidents by Oct 16, tanker blasts Oct 24, Trump threatening renewed strikes
+
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
 - Nasdaq: 24,657.57 (+1.64%) — record close
@@ -106,6 +125,20 @@ All positions well above stops. No exits triggered.
 
 **Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
 Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
+
+## Estimated Current Portfolio (2026-10-30) — UNVERIFIED
+
+Based on market trajectory (oil +~20-22% since April, S&P +~12% YTD):
+
+| Symbol | Side | Qty | Entry Price | Estimated Current | Est. Unrealized P&L | Stop Price | Stop Status |
+|--------|------|-----|-------------|-------------------|---------------------|------------|-------------|
+| XLV | LONG | 47.707 | $146.73 | ~$158-165 (est) | ~+$540-870 (+8-12%) | NONE | **EXPIRED 7/22** |
+| XLE | LONG | 124.076 | $56.42 | ~$68-80 (est) | ~+$1,440-2,920 (+20-42%) | NONE | **EXPIRED 7/22** |
+| GLD | LONG | 13.772 | $435.66 | ~$460-500 (est) | ~+$335-885 (+5.7-14.7%) | NONE | **EXPIRED 7/22** |
+
+**MUST VERIFY WITH ALPACA BEFORE TRADING**
+
+---
 
 ## Infrastructure Status
 
