@@ -1,5 +1,128 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-10-30) — BULL RETURNS AFTER 6-MONTH GAP
+
+**Market Status:** Pre-market (opens 9:30 AM ET)
+**Last Session:** 2026-04-23 — 6+ month gap in coverage
+
+### ⚠️ CRITICAL ALERT: STOP-LOSSES EXPIRED
+Stop-loss GTC orders set April 23, 2026 had expiry date of 7/22 (July 22, 2026). All three stops (XLV $136.46, XLE $52.47, GLD $405.17) have EXPIRED. Positions currently have NO downside protection. This is top priority today.
+
+---
+
+### Macro Context (Oct 30, 2026)
+
+#### Regime: LATE CYCLE (with elevated STRESS tail risk)
+| Indicator | Value | Regime Signal |
+|-----------|-------|---------------|
+| VIX | ~17-18.5 (up ~8% intraday) | Late Cycle (below 20, but rising) |
+| S&P 500 | ~7,677 (Oct 26 close; peaked ~7,844 Oct 12) | Mild pullback from highs |
+| 10Y Yield | ~4.99% | Near 5% = financial conditions tight |
+| Oil (WTI/Brent) | ~$100-118 (Hormuz ongoing) | Stress for energy |
+| CPI | ~3.4% YoY (peaked 4.2% in May 2026) | Declining but above 2% target |
+| Fed Rate | 3.75-4.00% range (meeting Oct 27-28) | On hold / hawkish |
+| PMI | Not yet confirmed | — |
+
+**REGIME VERDICT: LATE CYCLE** — VIX below 20 but rising sharply today, S&P pulling back from all-time highs, 10Y near 5%, Fed hawkish. Geopolitical STRESS signals are elevated (Hormuz most intense month, Trump threatening renewed Iran strikes) but have not yet triggered VIX >20 break.
+
+Factor shift for Late Cycle: **Value ↑, Low Vol ↑, Momentum ↓, Sentiment ↓**
+
+---
+
+### Iran/Hormuz — OCTOBER IS MOST INTENSE MONTH
+
+- **October 2026 = Most intense month of crisis** — 135 conflict-related incidents as of Oct 16 (UKMTO)
+- **Oct 24:** Tanker blasts in Hormuz; CGTN/Reuters both reported tanker hit by unknown projectile
+- **Trump hinting renewed strikes** on Iran (Oct 24 CGTN headline)
+- **Iran Parliament:** Hormuz remains closed until Iran's 7 conditions are met — no timeline for reopening
+- **Diplomatic status:** Total breakdown. Trump threatening to "obliterate Iran's energy plants/oil wells"
+- **Shipping traffic:** Only 4 transits Oct 4 (vs 85/day pre-crisis baseline) — near-complete blockade
+- **Alternative routes:** Middle Eastern oil exports via alternative routes averaging above pre-war levels as of Oct 18 — some adaptation occurring
+- **US cleared mines** in Hormuz in August 2026 — limited success
+- **Oil impact:** WTI/Brent in $100-118 range — India VIX article Oct 30 cited "crude nears $118"
+
+**XLE THESIS STATUS: INTACT AND STRENGTHENED.** Oil is substantially higher than April entry. XLE likely up 20-40%+ from entry of $56.42.
+
+---
+
+### Key Earnings Today (Oct 30, 2026 — Pre-Market)
+| Company | Ticker | Sector | Consensus EPS | Relevance |
+|---------|--------|--------|--------------|-----------|
+| ExxonMobil | XOM | Energy | ~$4.12 | DIRECT: energy sector, Hormuz beneficiary |
+| Chevron | CVX | Energy | ~$4.93 | DIRECT: energy sector, Hormuz beneficiary |
+| AbbVie | ABBV | Healthcare | ~$3.82 | INDIRECT: XLV component |
+| Regeneron | REGN | Healthcare | — | INDIRECT: XLV component |
+| Colgate-Palmolive | CL | Staples | — | Low relevance |
+
+**Note:** Q3 2026 is first full quarter with oil at elevated levels — XOM and CVX likely reporting strong profits driven by Hormuz-inflated oil prices. In Q1 2026, both beat estimates per Rigzone (May 1, 2026).
+
+---
+
+### S&P 500 Context
+- S&P 500 YTD: approximately +12-14% (from ~6,845 year-end 2025 to ~7,677 Oct 26)
+- October performance: +0.1% total return through Oct 16, then pullback to ~7,677 by Oct 26
+- 52-week range: 6,316.91 to 7,844.52
+- Record high: ~7,844 on October 12, 2026
+- Current trend: **Pulling back from all-time highs**
+
+---
+
+### Fed / Macro
+- Fed meeting: October 27-28, 2026 (decision likely announced Oct 28)
+- Current rate: 3.75-4.00% (held at 3.50-3.75% June 2026, likely hiked once since)
+- Market odds: 50-50 on another hike before year-end
+- Boston Fed (Collins): expects another rate hike needed in 2026
+- Cleveland Fed (Hammack): tighter policy necessary
+- CPI trend: 4.2% peak May 2026 → 3.4% August → still above 2% target
+- **Oil-driven inflation is the key constraint** — Hormuz keeping energy CPI elevated
+
+---
+
+### Portfolio Position Assessment
+
+**CRITICAL NOTE:** Cannot confirm current prices without Alpaca MCP. Estimates below based on oil/sector trajectory.
+
+| Symbol | Entry | Entry Date | Stop (EXPIRED) | Estimated Current | Status |
+|--------|-------|-----------|----------------|-------------------|--------|
+| XLV | $146.73 | 2026-04-22 | $136.46 (EXPIRED 7/22) | ~$155-165 (est) | OPEN, NO STOP |
+| XLE | $56.42 | 2026-04-22 | $52.47 (EXPIRED 7/22) | ~$68-80 (est) | OPEN, NO STOP |
+| GLD | $435.66 | 2026-04-22 | $405.17 (EXPIRED 7/22) | ~$460-500 (est) | OPEN, NO STOP |
+
+**Rationale for estimates:**
+- XLE: Oil went from $97 (April) to $100-118 (October) = +~20-22%. XLE should mirror energy sector.
+- XLV: S&P +12% YTD from April, healthcare defensive lagged but tracked market. ~+8-12%.
+- GLD: Gold benefits from inflation + geopolitical stress. Likely $460-500+.
+
+---
+
+### Trade Plan (Oct 30, 2026)
+
+**IMMEDIATE PRIORITY: Reset stop-losses** (all expired July 22)
+If Alpaca MCP unavailable (consistent pattern), write orders for manual execution:
+
+| Symbol | Qty | Action | New Stop Price | Rationale |
+|--------|-----|--------|----------------|-----------|
+| XLV | 47 | SELL STOP | ~$144.45 (est -7% from $155) | Reset -7% from estimated current |
+| XLE | 124 | SELL STOP | ~$63.24 (est -7% from $68) | Reset -7% from estimated current |
+| GLD | 13 | SELL STOP | ~$427.80 (est -7% from $460) | Reset -7% from estimated current |
+
+**ACTUAL STOP PRICES MUST USE CURRENT ALPACA PRICES — ESTIMATES ONLY**
+
+**New Positions:** NO new trades today.
+- Late Cycle regime does not favor momentum buys
+- S&P pulling back from all-time highs
+- VIX rising +8% today
+- Earnings risk from XOM/CVX could swing energy sector (verify before adding to XLE)
+- Trump/Iran tail risk: any strike announcement = VIX spike, oil spike, immediate regime shift
+
+**Wait for:**
+1. Fed decision result (Oct 28 — already occurred, need to check outcome)
+2. XOM/CVX earnings results today
+3. VIX to stabilize: if it continues rising above 20 → regime shift to Stress
+4. Trump/Iran clarity: if strikes imminent → XLE adds (oil spike) but also GLD adds
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
