@@ -1,6 +1,6 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-02 Pre-Market Routine (Session resumed after 6-month gap)
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -24,16 +24,18 @@
 **Total position value: $19,990.23. Cash: $80,000.**
 **Net unrealized P&L: -$9.80 (-0.01%)**
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+### Stop-Loss Orders — EXPIRED 7/22/2026 — ACTION REQUIRED
+| Symbol | Side | Qty | Type | Stop Price | Order ID | Status |
+|--------|------|-----|------|-----------|----------|--------|
+| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | **EXPIRED** |
+| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | **EXPIRED** |
+| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | **EXPIRED** |
+
+**CRITICAL: All stop-losses expired 7/22/2026. Positions currently UNPROTECTED.**
+Manual orders needed to reset stops (see TRADE_LOG.md for instructions).
 
 ### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+- None currently.
 
 ## Allocation
 - Cash: 80.0%
@@ -66,6 +68,23 @@ All positions well above stops. No exits triggered.
 - Portfolio YTD: -0.011% (since first trade 4/22)
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
+
+## Market Context (2026-11-02 Pre-Market)
+
+### Current Macro (Nov 2, 2026)
+- S&P 500: ~7,580 (Oct 30 close, -1.82%). Pre-market +0.5%. Record: 7,818.93 (Oct 6)
+- VIX: ~19.07 (Nov futures; borderline Late Cycle/Risk-On)
+- Brent crude: ~$109-111 (falling 3-4% pre-market on Hormuz deal hopes)
+- WTI crude: ~$100-102 (fundamental value ~$80 = 20% downside if deal closes)
+- Fed rate: 3.75%-4.00% (held Oct 28; December hike possible)
+- Bitcoin: ~$78,000
+- Regime: **LATE CYCLE** (VIX < 20 but hawkish Fed + election risk + AI scrutiny)
+
+### Key Risks Today
+1. **XLE Hormuz deal risk**: Qatar-brokered plan for 2-day reopening. If confirmed → exit XLE immediately. Oil could fall from $102 to $80 WTI (-20%)
+2. **Election uncertainty**: Midterms Nov 3 → unclear market direction
+3. **AAPL earnings**: After close today (±4.4% implied move)
+4. **Stop-losses expired**: All 3 positions unprotected since 7/22
 
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026

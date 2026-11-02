@@ -46,6 +46,20 @@
 
 ---
 
+## Session: 2026-11-02 (Pre-Market — after 6-month gap)
+
+19. **GTC stop-losses expire after 90 days.** Set on 4/23, expired 7/22. Positions were unprotected for 3+ months. LESSON: Always check stop-loss status first when resuming. Use rolling GTC stops or calendar reminders to reset every 60 days.
+
+20. **Macro regimes shift slowly but stop-loss orders don't auto-renew.** The regime shifted from Stress → Late Cycle → Risk-On → back to borderline Late Cycle over 6 months. The positions survived (estimated), but the risk was unmanaged. Risk management infrastructure matters as much as trade selection.
+
+21. **Hormuz situation took 6+ months without full resolution.** As of November 2026, a deal is "looming" but still not closed. Long-duration geopolitical events don't resolve on analyst timelines. XLE thesis has been directionally correct (oil at $110) but the position could flip 20% instantly when it resolves.
+
+22. **Binary events deserve tight stops or exit before the event.** The Hormuz deal floating (Qatar brokered, 2-day timeline) is exactly the scenario that could crush XLE overnight. Should set tight stop (3-4% instead of 7%) near binary resolution events.
+
+23. **Session gaps are the biggest risk in autonomous trading.** 6 months of no updates means no reinvestment, no stop-loss maintenance, no portfolio rebalancing. In Risk-On markets (S&P +6.2% since April), the 80% cash drag continued burning alpha. Infrastructure resilience is a core trading function.
+
+24. **Post-election periods favor clarity.** Midterms on Nov 3 create short-term uncertainty but resolve in 24-48 hours. Best entry timing is typically post-election clarity, not pre-election uncertainty.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
