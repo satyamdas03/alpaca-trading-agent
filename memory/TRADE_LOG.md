@@ -58,6 +58,38 @@
 
 ---
 
+---
+
+## Pre-Market Routine (2026-11-02) — Stop-Loss Reset Orders
+
+**CONTEXT:** Alpaca MCP unavailable. Stop-losses expired 7/22/2026. Positions unprotected.
+**ACTION REQUIRED:** Execute via Alpaca web UI or REST API immediately at market open.
+
+### PRIORITY: Reset Stop-Loss Orders at Market Open
+
+| # | Symbol | Side | Qty | Type | Stop Price | Basis | Notes |
+|---|--------|------|-----|------|-----------|-------|-------|
+| A | XLV | SELL | 47 | STOP_GTC | Need current price × 0.93 | Entry $146.73 | Get current quote first, set -7% from current |
+| B | XLE | SELL | 124 | STOP_GTC | Need current price × 0.93 | Entry $56.42 | **HIGH PRIORITY**: Hormuz deal could close oil -20% |
+| C | GLD | SELL | 13 | STOP_GTC | Need current price × 0.93 | Entry $435.66 | Get current quote first, set -7% from current |
+
+**Steps to execute:**
+1. Get current quotes for XLV, XLE, GLD via Alpaca
+2. Calculate stop = current_price × 0.93 (7% below current)
+3. Place GTC stop orders for each via: `POST /v2/orders`
+4. XLE special note: If Hormuz deal confirmed TODAY → cancel stop order, place MARKET SELL immediately
+
+### Regime Trigger Orders (Watch, Do Not Execute Yet)
+
+| Trigger | Action | Size | Rationale |
+|---------|--------|------|-----------|
+| Hormuz deal confirmed | SELL XLE 124 shares at MARKET | Exit full position | WTI drops from $102 to ~$80 (-20%) |
+| AAPL beats + strong guidance | BUY AAPL $8-10K MARKET (next session) | New position | Earnings momentum play |
+| VIX breaks below 18 + AAPL beat | BUY QQQ or XLK $10-15K | Momentum in Risk-On | Increase equity exposure |
+| VIX spikes above 25 | BUY SPY PUTS $5K hedge | Hedge | Election/Hormuz stress scenario |
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |

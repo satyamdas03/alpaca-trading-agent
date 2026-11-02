@@ -1,5 +1,99 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-02) — 6-MONTH GAP
+
+**Market Status:** Pre-market (market opens 9:30 AM ET)
+**Gap Note:** Last session was 2026-04-23. Stop-losses expired 7/22. Memory restored — positions UNVERIFIED against Alpaca.
+
+---
+
+### REGIME ASSESSMENT: LATE CYCLE (borderline Risk-On)
+
+**VIX:** ~19.07 (Nov 2026 futures contract; below 20 threshold but borderline)
+- Technically Risk-On (VIX < 20) but environment has multiple headwinds
+- S&P down 1.82% last Friday (Oct 30), Nasdaq -2% last week on AI investment scrutiny
+- Fed hawkish: 3.75%-4.00% held Oct 28, December hike likely
+- **REGIME CALL: LATE CYCLE** — VIX borderline, election risk, hawkish Fed, unresolved Hormuz
+
+---
+
+### MACRO CONTEXT (Nov 2, 2026 Pre-Market)
+
+**S&P 500:**
+- Oct 30 close: 7,580.07 (-1.82% on the day)
+- Record high: 7,818.93 (Oct 6, 2026) — currently 3% off record
+- Pre-market Nov 2: futures +0.5-0.84% → implied open ~7,618-7,644
+- Last week: S&P -<1%, Nasdaq -2% (AI investment scrutiny + earnings miss fears)
+- S&P has rallied significantly from our April entry (was 7,137 on 4/23)
+
+**Interest Rates / Fed:**
+- Rate: 3.75%-4.00% (held Oct 28, 2026 — 10-2 vote)
+- Door open for December hike (persistent inflation + strong growth)
+- September dot plot: median end-2026 rate 4.1% → one more 25bps hike
+- Impact: Higher for longer = headwind for growth stocks, supports value/financials
+
+**Iran/Hormuz — STILL UNRESOLVED but deal possibly imminent:**
+- **Brent crude: ~$111 falling to ~$109 (-3-4% pre-market Nov 2)**
+- **WTI crude: ~$101-102 falling toward $100**
+- Qatar-brokered plan: Tehran says strait could reopen within 2 days — NOT CONFIRMED
+- Two tankers struck by mines in Hormuz on Sunday Nov 1 (escalation continues even as talks proceed)
+- If Hormuz deal closes: WTI fundamental price ~$80 (20% downside vs current $102)
+- If deal fails: Oil stays at $100-110+ (XLE thesis intact)
+- **BINARY RISK for XLE position — this is the #1 portfolio risk today**
+
+**Key Events This Week:**
+| Date | Event | Impact |
+|------|--------|--------|
+| Nov 2 (today) | Apple (AAPL) earnings after close | ±4.4% implied move |
+| Nov 3 (tomorrow) | US Midterm Elections | Election uncertainty |
+| Nov 4 | AMD earnings (EPS est $1.96), CAT earnings (EPS est $7.03) | Tech/Industrial |
+| Nov 4 | Qualcomm earnings (EPS est $2.20) | Semiconductors |
+| Nov 6 | Jobs Report | Fed trajectory |
+
+**AAPL Pre-Earnings Context:**
+- Q2 2026 (April 30): EPS $2.01 beat $1.95 est, Rev $111.18B beat $109.46B est (+16.6% YoY)
+- Q4 2026 (tonight) — fiscal Q4. No consensus available but likely ~$1.50-1.60 EPS range
+- Implied move ±4.4% — big if AAPL is at $220+
+- Strategy: Do NOT trade pre-earnings. Watch and decide after release.
+
+---
+
+### POSITIONS STATUS (ESTIMATED — Unverified with Alpaca)
+
+**CRITICAL ALERT: Stop-losses expired 7/22/2026. Positions currently UNPROTECTED.**
+
+| Symbol | Entry | Entry Price | Estimated Current Price | Est P&L | Stop Status |
+|--------|-------|-------------|-------------------------|---------|-------------|
+| XLV | LONG 47.707 | $146.73 | ~$157-160 (est +7-9%) | ~+$500 | EXPIRED 7/22 |
+| XLE | LONG 124.076 | $56.42 | Unknown — HIGH RISK (Hormuz deal risk) | Unknown | EXPIRED 7/22 |
+| GLD | LONG 13.772 | $435.66 | ~$450-480 (est) | ~+$200-600 | EXPIRED 7/22 |
+
+Price estimates based on limited web search data. XLE Yahoo Finance showed prior close 47.61 (undated, possibly stale). With Brent at $110+ in Nov 2026, XLE is likely higher than April levels, but the Yahoo snippet is concerning.
+
+**Action Required:**
+1. Reset all stop-losses via Alpaca REST API
+2. Monitor XLE closely for Hormuz deal news
+3. Do NOT add new positions today (election risk + heavy earnings)
+
+---
+
+### NEW TRADE CANDIDATES — NONE TODAY
+
+Rationale:
+- Midterms tomorrow = binary political risk
+- Hormuz deal binary = oil/XLE direction unclear
+- AAPL earnings tonight = market direction unclear post-close
+- VIX 19 borderline = don't chase
+- Better to reset risk management first, then evaluate Wednesday after election clarity
+
+**Watchlist for later this week:**
+- AAPL post-earnings momentum (if beats and guides up)
+- AMD post-earnings if AI demand remains strong  
+- Energy exit trigger: If Hormuz deal confirmed → exit XLE same day
+- Gold: Monitor GLD if rates spike (December hike risk)
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
