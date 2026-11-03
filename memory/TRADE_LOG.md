@@ -58,6 +58,29 @@
 
 ---
 
+## Session: Pre-Market (2026-11-03) — No New Trades
+
+**Date:** November 3, 2026
+**Reason for no trades:**
+1. Alpaca MCP disconnected — cannot execute trades programmatically
+2. Midterm elections today — market cautious, avoid new risk
+3. AMD earnings tonight — binary event, wait for results before momentum entry
+4. Must verify actual position status (6-month gap) before adding exposure
+
+**OUTSTANDING ACTION ITEMS:**
+- Reset stops on XLV, XLE, GLD at -7% from current prices (URGENT)
+- Verify actual P&L via Alpaca REST API
+- If AMD beats tonight → consider AMD or SOXS/SMH momentum play Thursday
+
+**Planned trades pending AMD result tonight:**
+| Scenario | Action | Size | Rationale |
+|----------|--------|------|-----------|
+| AMD EPS beat + strong guidance | BUY AMD notional $8-10K | MARKET | AI chip demand confirmed, momentum signal |
+| AMD EPS miss | No trade | — | Wait for next catalyst |
+| AMD in-line | No trade | — | Not a clean momentum signal |
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |

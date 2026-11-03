@@ -1,39 +1,57 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-03 Pre-Market Routine (6-month gap from 4/23)
 
-## Account Overview
+## ⚠️ CRITICAL: DATA IS STALE — REQUIRES ALPACA VERIFICATION
+
+**6-MONTH GAP:** Last live data was April 23, 2026. Current date November 3, 2026.
+**STOP-LOSS ORDERS EXPIRED:** GTC stops had 7/22 expiry — ALL EXPIRED.
+**ALPACA MCP STATUS:** Was DISCONNECTED in April. Status unknown.
+**ACTION REQUIRED:** Connect to Alpaca to verify actual positions, prices, and P&L.
+
+---
+
+**As of Last Verified (2026-04-23):**
+
+## Account Overview (STALE — verified April 23)
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
-- Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
-- Pattern Day Trader: No
+- Last Known Cash: $80,000.00
+- Last Known Portfolio Value: $99,988.99
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
 - Alpaca Paper: true
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+## Estimated Current State (November 3, 2026 — unverified)
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+Based on market data since April:
+- S&P 500 up ~5.7% from 7,137 → ~7,541-7,578
+- Oil: Brent $106 (elevated from ~$96 in April)
+- Gold: Surged significantly in 2026 (articles mention $4,000+ → $5,000+/oz)
+- XLE likely up 10-20%+ from entry (oil stayed elevated)
+- GLD likely up 10-26%+ from entry (gold safe haven rally)
+- XLV likely up 5-12%+ from entry (healthcare defended/grew with market)
+- **Estimated portfolio value: $105,000-$115,000+ (rough estimate)**
+- **Cash: ~$80,000 (unchanged if no new trades executed)**
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+**NOTE: These are estimates based on macro data. MUST verify via Alpaca REST API.**
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+## Open Positions (ESTIMATED — must verify via Alpaca)
+| Symbol | Side | Qty | Entry Price | Est. Current | Est. P&L | P&L % est | Stop Status |
+|--------|------|-----|-------------|-------------|---------|-----------|-------------|
+| XLV | LONG | 47.707 | $146.73 | ~$155-165? | +$391-$874? | +5-12%? | EXPIRED 7/22 |
+| XLE | LONG | 124.076 | $56.42 | ~$62-68? | +$694-$1,441? | +10-20%? | EXPIRED 7/22 |
+| GLD | LONG | 13.772 | $435.66 | ~$480-550+? | +$617-$1,579+? | +10-26%+? | EXPIRED 7/22 |
+
+**⚠️ ALL STOP-LOSS ORDERS EXPIRED JULY 22, 2026. POSITIONS UNPROTECTED.**
+**Must connect to Alpaca to get actual prices and IMMEDIATELY reset stops.**
+
+### Stop-Loss Orders — ACTION REQUIRED
+| Symbol | Action | Target Stop (from current) | Priority |
+|--------|--------|--------------------------|----------|
+| XLV | RESET at -7% from current price | URGENT |
+| XLE | RESET at -7% from current price | URGENT |
+| GLD | RESET at -7% from current price | URGENT |
 
 ## Allocation
 - Cash: 80.0%
@@ -66,6 +84,18 @@ All positions well above stops. No exits triggered.
 - Portfolio YTD: -0.011% (since first trade 4/22)
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
+
+## Market Context (2026-11-03 Pre-Market)
+
+- S&P 500: ~7,541-7,578 (futures cautious, ~flat pre-market)
+- Nasdaq 100: ~28,251 (+0.44% futures, chipmakers strong, AAPL drag)
+- Dow Jones: ~51,990 (-0.27% futures)
+- VIX: ~21 (Late Cycle — elevated from 14.2 August low on Iran escalation)
+- Brent Crude: ~$106/barrel (up 1.7% after US strikes on Iran's Qeshm Island)
+- Gold: Surged significantly in 2026 (estimated $4,500-5,500/oz range based on articles)
+- **Regime: LATE CYCLE / STRESS BORDERLINE**
+- **KEY EVENT TODAY: US Midterm Elections + AMD earnings after close**
+- **OVERNIGHT: US struck Iran's Qeshm Island — military escalation of Hormuz conflict**
 
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
