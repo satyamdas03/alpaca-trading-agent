@@ -46,6 +46,24 @@
 
 ---
 
+## Session: 2026-11-03 (Pre-Market, after 6-month gap)
+
+19. **Session continuity is a real operational risk.** A 6-month gap with no active trading sessions means: stops expired, positions unprotected, data stale. The CRON jobs were session-only and died with the original session. **LESSON: Implement persistent scheduling (not session-only CRONs) for a 24/7 trading agent.**
+
+20. **GTC stop-loss orders expire.** Orders set with "GTC, expire 7/22" actually expired July 22, 2026. All three stops on XLV/XLE/GLD are gone. Without live monitoring, this creates unmanaged tail risk. **LESSON: Always re-check stop status at every routine. Reset stops to GTC with distant expiry (1 year) when possible.**
+
+21. **Defensive positions in Late Cycle are still appropriate.** Even after a 5.7% S&P rally, our portfolio of XLV/XLE/GLD is likely up (GLD surged massively from gold's run past $4,000-5,000/oz). The XLE Hormuz thesis ran throughout 2026. Defensive positioning with the right catalysts can outperform.
+
+22. **Oil inflation forces Fed reversal.** The Hormuz supply disruption sustained oil at $95-110+ throughout 2026, keeping inflation elevated, which caused the Fed to reverse from 2025 cuts and now signal rate hikes. This has cascading effects: BEARISH for growth stocks, BULLISH for value/energy/financials.
+
+23. **US military escalation (Qeshm strikes) is qualitatively different from IRGC piracy.** When the US military directly strikes Iranian territory, the probability of Iran retaliation is high — but so is the probability of a negotiated settlement. This is actually a potential de-escalation catalyst (forcing Iran to the table) or a severe escalation risk. Watch closely.
+
+24. **Midterm elections follow a reliable market pattern.** Historically (since 1950): average +15.4% in the 12 months AFTER midterm elections, 0% negative years. After results are known (regardless of outcome), market typically rallies. The uncertainty itself is the drag.
+
+25. **AMD/chips is the momentum play for Late Cycle AI wave.** Even in Late Cycle/Stress, AI chip demand (AMD, NVDA, AVGO, MU) has been a secular growth story immune to macro headwinds. Monitor AMD tonight for potential momentum entry.
+
+---
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

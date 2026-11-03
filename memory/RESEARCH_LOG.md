@@ -1,5 +1,140 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-03)
+
+**Market Status:** Pre-market (market opens 9:30 AM ET — today is US Midterm Election Day)
+
+**NOTE: 6-MONTH GAP since last session (April 23 → November 3, 2026). All position data and stops from April are stale. CRONs expired. Stop-loss orders expired July 22, 2026.**
+
+---
+
+### Regime Assessment: LATE CYCLE → STRESS BORDERLINE
+
+**VIX: ~21.0-21.5** — Late Cycle band (20-25). Elevated from 14.2 August low. Up on Iran escalation.
+**S&P 500: ~7,541-7,578** (was 7,137 on 4/23 = +5.7% over 6 months). US stocks +13% YTD through August.
+**Regime: LATE CYCLE, trending toward STRESS**
+
+| Signal | Value | Implication |
+|--------|-------|-------------|
+| VIX | ~21 | Late Cycle (above 20) |
+| US strikes on Iran | OVERNIGHT | Escalation risk → could flip to Stress |
+| Fed posture | Hawkish (Oct minutes: rate hike possible) | Late Cycle tightening |
+| Midterm elections | TODAY | Binary event, market cautious |
+| Oil | Brent $106 | Inflation pressure, XLE thesis intact |
+
+**Factor Shifts (Late Cycle):** Value ↑, Low Vol ↑ / Momentum ↓
+
+---
+
+### CRITICAL OVERNIGHT DEVELOPMENT: US Strikes on Iran's Qeshm Island
+
+**MAJOR ESCALATION — November 3, 2026:**
+- **US struck Iran's Qeshm Island** in the Strait of Hormuz — described as "defensive" strikes to protect commercial shipping
+- Brent crude: **$106/barrel** (+1.7% today after -7.6% crash Monday on Qatar diplomacy hopes)
+- Saudi Aramco CEO confirmed: Hormuz flows still NOT back to pre-conflict levels
+- Qatar mediation attempt on Sunday → 8% oil crash Monday → US military action Tuesday → oil rebounds
+- Conflict timeline: Started late February 2026 → June 17 MOU collapsed → now US direct military action
+- This is the MOST SIGNIFICANT ESCALATION since conflict began
+
+**Oil outlook:** Binary — if negotiations succeed from here, Brent could fall to $80-90; if Iran retaliates, $115-120+
+
+---
+
+### Futures (Pre-Market Nov 3, 2026)
+
+| Index | Futures | Move |
+|-------|---------|------|
+| Dow Jones | ~51,990 | -0.27% |
+| Nasdaq 100 | ~28,251 | +0.44% |
+| S&P 500 | ~7,578 | roughly flat |
+
+**Market tone: CAUTIOUS — election day, geopolitical uncertainty, mixed signals**
+- AAPL margin concern (-2%+ pre-market): Beat Q3 earnings but flagged rising memory chip prices squeezing gross margins
+- Semiconductor strength offsetting: Micron +4%, AMD +3%+, Intel +3%+
+- Oil rebound supporting energy sector
+
+---
+
+### Macro Context
+
+**Fed Policy:**
+- October 2026 FOMC minutes: Another rate hike "likely appropriate" before year-end
+- Current rate: ~3.50-3.75% (from 2025 cuts)
+- Hawkish shift: Persistent oil inflation from Hormuz forcing Fed reversal from 2025 cut path
+- Impact: BEARISH for growth stocks, BEARISH for rate-sensitive sectors, BULLISH for financial sector
+
+**Inflation:** Oil at $106 Brent keeping energy inflation elevated. Core inflation likely stuck above Fed 2% target.
+
+**Gold:** SURGED in 2026 — articles reference gold blasting past $4,000, then $5,000+. Our GLD position (entry $435.66/share April 22) is likely a MAJOR WINNER. Safe haven demand from Hormuz + inflation hedge.
+
+---
+
+### Earnings Calendar This Week
+
+| Date | Company | EPS Est | Rev Est | Timing | Note |
+|------|---------|---------|---------|--------|------|
+| Mon Nov 2 (AC) | **AAPL** | — | — | Reported | Beat but margin concerns, -2%+ AH |
+| Tue Nov 3 (AC) | **AMD** | $1.96 | $13.20B | After close TODAY | AI chip demand strong; ±8% implied move |
+| Tue Nov 3 (AC) | **ALAB** | — | — | After close | ±15.8% implied |
+| Wed Nov 4 (BO) | **CAT** | $7.03 | $20.69B | Before open | Cyclical indicator |
+| Wed Nov 4 (AC) | **QCOM** | $2.20 | — | After close | AI/mobile chips |
+| This week | **PLTR** | — | — | — | AI data/defense play |
+
+**AMD is the key watch for tonight.** If AMD beats (AI data center demand), semiconductor momentum continues → potential pre-market trade Thursday.
+
+---
+
+### Midterm Elections (Today)
+
+- **Historical pattern:** Midterm year stocks avg only +7.5% vs +12.4% non-midterm years
+- **Post-midterm:** Average +15.4% in the 12 months AFTER midterm — NO negative years since 1950
+- **S&P 2026 YTD:** +13% through August (one of best midterm year starts since 1926)
+- **Divided Congress likely bullish:** Markets prefer gridlock (fiscal stability)
+- **Near-term risk:** Uncertainty today, resolution tonight → likely rally once results known
+
+---
+
+### Portfolio Status (ESTIMATED — 6-Month Gap, No Live Alpaca Data)
+
+| Symbol | Entry | Est. Current | Est. P&L | Stop Status | Action |
+|--------|-------|-------------|---------|-------------|--------|
+| XLV | $146.73 | ~$155-165? | +5-12%? | EXPIRED 7/22 | RESET STOP |
+| XLE | $56.42 | ~$62-68? | +10-20%? | EXPIRED 7/22 | RESET STOP |
+| GLD | $435.66 | ~$480-550+? | +10-26%+? | EXPIRED 7/22 | RESET STOP — MAJOR WINNER |
+
+**CRITICAL: Stop-loss orders expired July 22, 2026. All positions unprotected.**
+**Need Alpaca MCP or REST API access to check actual prices and reset stops.**
+
+---
+
+### Trade Plan
+
+**Regime = Late Cycle / Stress Borderline → DEFENSIVE positions appropriate**
+
+Our current holdings (XLV, XLE, GLD) are WELL-SUITED to this environment:
+- GLD: Safe haven, military escalation = continued bid. HOLD.
+- XLE: Oil at $106, Hormuz still disrupted. HOLD. Consider adding to on any dips.
+- XLV: Healthcare defensive, neutral in Late Cycle. HOLD.
+
+**NEW OPPORTUNITIES:**
+1. **AMD tonight (AC):** If Q3 beats on AI chip demand → momentum entry Thursday pre-market. EPS $1.96 est. Chipmakers already up 3%+ today.
+2. **PLTR:** Defense/AI data plays benefit from Hormuz/military escalation narrative.
+3. **More XLE/energy names:** DVN, HAL, SLB — direct Hormuz beneficiaries.
+
+**What NOT to do today:**
+- No new positions before midterm results
+- No chasing AMD before earnings (binary risk)
+- No reducing defensive positions until regime clarifies
+
+**Post-election plan:**
+- If Dems take Congress (gridlock) → mild risk-on rally → consider small momentum positions
+- If unexpected result → assess VIX reaction, wait 1 session before trading
+- AMD beat tonight → AMD momentum entry Thursday if futures confirm
+
+**CRITICAL PRIORITY:** Reset stop-losses on XLV, XLE, GLD at -7% from current prices. Requires Alpaca access.
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
