@@ -25,11 +25,31 @@
 
 | # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Time |
 |---|----------|--------|------|-----|------|------------|--------|------|
-| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | accepted | 2026-04-23 00:05 ET |
-| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | accepted | 2026-04-23 00:05 ET |
-| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | accepted | 2026-04-23 00:05 ET |
+| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | **EXPIRED 7/22** | 2026-04-23 00:05 ET |
+| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | **EXPIRED 7/22** | 2026-04-23 00:05 ET |
+| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | **EXPIRED 7/22** | 2026-04-23 00:05 ET |
 
-**All GTC. Stop-loss at -7% from entry. Trailing stop on XLE blocked (shares held by stop order).**
+**⚠️ ALL STOP-LOSS ORDERS EXPIRED JULY 22, 2026. POSITIONS UNPROTECTED FOR 3+ MONTHS.**
+
+---
+
+## REQUIRED ORDERS (11/4 Pre-Market — Manual Execution via Alpaca REST)
+
+**Priority: Set stop-losses immediately at market open (9:30 AM ET)**
+
+| # | Symbol | Side | Qty | Type | Stop Price | Rationale |
+|---|--------|------|-----|------|------------|-----------|
+| 7 | XLV | SELL | 47 | STOP GTC | $172.00 | -7% from est. $185.38. Lock in most of +26% gain. |
+| 8 | XLE | SELL | 124 | STOP GTC | $62.50 | Tight stop (-6.3%). Hormuz deal = oil crash risk. |
+| 9 | GLD | SELL | 13 | STOP GTC | [verify price first] | -7% from verified current price. |
+
+**Manual REST execution format:**
+```
+curl -X POST https://paper-api.alpaca.markets/v2/orders \
+  -H "APCA-API-KEY-ID: PK7CLPEOIIEKMEVPNWEF4GPL22" \
+  -H "APCA-API-SECRET-KEY: [from docs/superpowers/plans]" \
+  -d '{"symbol":"XLV","qty":"47","side":"sell","type":"stop","time_in_force":"gtc","stop_price":"172.00"}'
+```
 
 ---
 
@@ -39,8 +59,10 @@
 |------|----------------|---------|-----------|-----------------|---------|---------|
 | 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% |
 | 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% |
+| 11/4 | ~$101,500 est | — | — | ~+$1,500 est | +10.3% YTD | — |
 
-**Notes:** Day 1 P&L is unrealized. Actual close prices from Alpaca show portfolio at $99,988.99. S&P significantly outperforming — defensive positioning is the drag.
+**Alpha vs S&P 500: approximately -8.8pp (portfolio ~+1.5% vs S&P +10.3% since Jan 2026)**
+**Primary drag: 80% cash position + defensive positioning**
 
 ---
 
@@ -67,3 +89,14 @@
 | GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
 
 **All positions well above stops. No exits triggered.**
+
+---
+
+## Watchlist / New Trade Candidates (11/4)
+
+| Symbol | Thesis | Entry Trigger | Size |
+|--------|--------|--------------|------|
+| PLTR | +96% revenue, AI gov spending, Dem Congress = more gov AI contracts | VIX < 20 sustained | $8K |
+| QQQ | Tech recovery + Dem gridlock limits regulation | Hormuz deal closes + VIX < 19 | $10K |
+| XLP | Consumer staples defensive hedge | If no Hormuz deal + VIX > 22 | $7K |
+| XLK | Tech momentum in Risk-On | Same as QQQ trigger | $8K |
