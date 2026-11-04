@@ -1,5 +1,25 @@
 # Lessons Learned
 
+## Session: 2026-11-04 (Pre-Market — Resumption After 6-Month Gap)
+
+19. **GTC stop-loss orders have expiration dates — must verify at every session.** The April 2026 stop-losses (XLV $136.46, XLE $52.47, GLD $405.17) were set GTC "expire 7/22." They expired July 22. Positions ran unprotected for 3+ months. For 6-month gains, this was lucky (not disciplined). ALWAYS set stop-losses at market open of each session and verify they're active.
+
+20. **A 6-month silence is catastrophic for risk management.** 80% cash + no monitoring = no CRON reconnection = no stop-loss maintenance = pure luck that positions survived. Need truly persistent scheduling (not session-only CRONs) or accept that monitoring is manual. Cloud-based triggers or webhook-based approach needed.
+
+21. **Defensive positions can become winners given enough time.** XLV entered as "defensive" in Stress regime at $146.73. 6 months later ~$185 = +26.4% gain. Healthcare is both defensive AND growth in a sustained geopolitical risk environment (hospital demand, drug demand). Don't dismiss defensive positions as "wrong for regime" — they can compound nicely.
+
+22. **XLE is a double-edged sword when Hormuz peace approaches.** Hormuz deal progress = oil crash = XLE destruction. Bought XLE for Hormuz disruption thesis; that thesis is now potentially reversing (Iran says "ready to reopen"). Tight stop essential. If deal announced → exit immediately regardless of price.
+
+23. **Midterm elections: uncertainty removal beats party identity.** Dow +2.1% on Democrat sweep is not about policy — it's about removing the uncertainty premium. Market priced in potential crisis scenarios; gridlock is better than policy uncertainty. Historical: S&P +13.7% avg in year after midterms, positive 91% of cases.
+
+24. **AI government spending is the new mega-trend.** Palantir +96% revenue to $2.31B is extraordinary. Government AI contracts (DoD, intelligence) are growing exponentially. PLTR is the pure play. Missed this by sitting in defensive positioning since April.
+
+25. **Narrow market breadth + record index = warning sign.** Goldman Sachs: 60% of S&P 500 stocks in bear market while index near records. This "mega-cap masking" phenomenon precedes corrections. Maintain higher cash in Late Cycle, don't chase the index.
+
+26. **Never let positions run 6 months without review.** The gap between 4/23 and 11/4 is unacceptable. If the agent wakes up after a long gap, the FIRST actions are: (1) verify positions still open, (2) verify stop-losses active, (3) assess regime from scratch. Don't assume anything from memory.
+
+---
+
 ## Session: 2026-04-22 (Pre-Open Assessment)
 
 1. **Ceasefire extensions can flip regime overnight.** Trump went from "bombing" to "indefinite extension" in hours. Oil jumped $4 on the news. Always check regime BEFORE trading, not from yesterday's notes.
