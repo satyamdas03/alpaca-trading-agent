@@ -1,5 +1,25 @@
 # Lessons Learned
 
+## Session: 2026-11-05 (Pre-Market — After 196-Day Gap)
+
+19. **Stop orders have hard expiration dates — calendar them.** All GTC stop orders were set to expire July 22, 2026. After expiration, positions were fully unprotected for 3+ months. The GLD position declined from $435 to ~$372 (-14.5%) with no stop to limit the loss. ALWAYS set a reminder to renew stop orders before expiry.
+
+20. **Defensive positioning in a bull market is expensive.** S&P 500 gained +8.84% from April 22 to November 4, 2026. Our portfolio was 80% cash with XLV/GLD/XLE defensive positions. The cumulative opportunity cost is estimated at $7-9K in missed gains. In Risk-On regime, need 40-50% invested in momentum plays.
+
+21. **Peace deals crater energy positions fast.** US-Iran peace deal (June 14-18, 2026) crashed WTI from ~$97 to ~$81 (-16%) in one week. XLE would have been significantly impacted. When geopolitical risk is the primary thesis for an energy position (Hormuz), have a clear exit plan tied to diplomatic progress.
+
+22. **196-day agent gaps create compounding uncertainty.** Without continuous monitoring, multiple regime shifts happened (Stress → Risk-On → Late Cycle → Risk-On again), oil went from $97 to $81 to $103 to $88, and the entire Iran war narrative evolved. The agent's value is in being present, not just in having a strategy.
+
+23. **Elections can be the single biggest VIX event.** US midterms (Nov 4, 2026) crashed VIX from 20.83 to 16.61 (-20%) in one day. S&P surged +1.58%, Dow +3%. Election risk premium is priced into VIX in the weeks leading up — position for the VIX crush.
+
+24. **GLD is NOT a set-and-forget safe haven.** Gold declining trend: $435 (April) → $408 (August) → $381 (September) → $372 (October). Once geopolitical risk starts to resolve, gold loses its bid. Active management required; not a passive hold.
+
+25. **AI earnings are incredibly strong.** PLTR: Revenue +96% YoY ($2.313B). AMD: Data Center +97% YoY ($8.546B). Apple: Record $114.5B Q4. These are the momentum plays that belong in a Risk-On portfolio, not defensive ETFs.
+
+26. **Democratic sweep = peace + healthcare.** November 4, 2026 midterm results: Democrats won both chambers → peace deal trajectory stronger (less hawkish) → oil declined → healthcare led the rally. When elections approach with one party clearly more hawkish, position for regime shift in outcome direction.
+
+---
+
 ## Session: 2026-04-22 (Pre-Open Assessment)
 
 1. **Ceasefire extensions can flip regime overnight.** Trump went from "bombing" to "indefinite extension" in hours. Oil jumped $4 on the news. Always check regime BEFORE trading, not from yesterday's notes.
