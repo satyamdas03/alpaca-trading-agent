@@ -1,5 +1,157 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-05)
+
+**Market Status:** Pre-market (opens 9:30 AM ET)
+**Last session gap: 196 days (2026-04-23 → 2026-11-05) — stop orders expired July 22, 2026**
+
+---
+
+### REGIME ASSESSMENT: RISK-ON (upgraded from Late Cycle)
+
+| Signal | Value | Threshold | Verdict |
+|--------|-------|-----------|---------|
+| VIX | 16.61 (Nov 4 close), 16.91 intraday | < 20 = Risk-On | ✅ RISK-ON |
+| S&P 500 | 7,688.62 (Nov 4 close) | Above 200MA | ✅ RISK-ON |
+| Oil | WTI $88–89 (down from $103 Oct 30) | Declining = relief | ✅ RISK-ON |
+| Elections | Democrats swept both chambers (Nov 4) | Uncertainty resolved | ✅ RISK-ON |
+| Futures | -0.24% (Nov 5 pre-market) | Flat to slightly down | ⚠️ Neutral |
+
+**Regime: RISK-ON. Strategy shifts: Momentum ↑, Low Vol ↓.**
+
+---
+
+### MACRO OVERVIEW
+
+**US Midterm Elections (November 4, 2026):**
+- Democrats swept BOTH chambers of Congress (House + Senate)
+- S&P 500 surged +1.58% (7,568.92 → 7,688.62)
+- Nasdaq +1.44%
+- Dow +3% (+1,500 pts)
+- VIX crashed 20.26% (20.83 → 16.61) — election uncertainty priced out
+- Treasury yields fell — less fiscal stimulus expected from divided government
+- Dollar weakened
+- Defense stocks FELL (Democratic budget pressure)
+- Healthcare stocks LED the rally (Medicare expansion potential)
+- S&P 500 E-mini futures: ~7,732.50 at 7 AM. November 5 futures: -0.24%
+
+**Iran/Hormuz — Day 249 of Closure:**
+- Timeline: Strait closed ~April-May 2026, initial peace deal June 14-18, 60-day talks, deal fell apart, tensions resumed
+- Current (Nov 5, 2026): 2 oil tankers + tugboat on fire after hitting mines near Hormuz
+- Trump confirmed US strikes on Qeshm Island (Iranian territory)
+- Iran offering "2-day plan" to reopen Hormuz amid US talks
+- Oman mediating: joint control system for Hormuz still in talks
+- Democratic election sweep = stronger mandate for peace deal
+- Oil reaction: WTI $88–89 (down from $103 on Oct 30, -15% in one week)
+- Brent: ~$96
+
+**Fed / Macro:**
+- Fed cut rates to 3.50–3.75% in December 2025 (3rd cut)
+- One cut projected for 2026 (per December 2025 dots)
+- October 27-28 FOMC meeting recent (no results on decision found)
+- Prediction markets: 33% odds of Fed cut by December 2026
+- Lower oil prices = reduced inflation pressure = supports accommodative stance
+
+---
+
+### EARNINGS SCORECARD (Week of November 2–6)
+
+| Company | Date | Revenue | EPS | vs Estimate | Action |
+|---------|------|---------|-----|-------------|--------|
+| Apple AAPL | Nov 2 AH | $114.5B (+12% YoY) | $2.10 | BEAT | Bullish |
+| Palantir PLTR | Nov 2 AH | $2.313B (+96% YoY!) | $0.44 (GAAP) | BEAT | Very Bullish |
+| AMD | Nov 3 | $13.4B (+45% YoY) | $2.09 non-GAAP | BEAT | Bullish |
+| McDonald's MCD | Nov 4 | $7.16B (missed) | $3.57 (beat) | Mixed | Neutral |
+| Uber | Nov 4 | $14.8B (+10% YoY) | — | — | Neutral |
+| Cloudflare NET | Nov 5 AH | — | — | Upcoming | Watch |
+| Moderna MRNA | Nov 6 AM | — | — | Upcoming | Watch |
+
+**PLTR detail:** Revenue +96% YoY ($2.313B, first $2B+ quarter). US commercial revenue $984M (overtook govt for first time). $10B US Army contract secured + £1.5B UK defense deal. Raised full-year 2026 guidance to $8.53B.
+
+**AMD detail:** Data Center net revenue $8.546B (+97% YoY). Instinct MI450 GPU launch. CFO guided Q4 "accelerating growth."
+
+**AAPL detail:** Q4 FY2026 record. $114.5B revenue, $2.10 EPS. Full-year revenue $479B (all-time record). Gross margin 47.9%.
+
+---
+
+### SECTOR PERFORMANCE (Nov 4, 2026 — Election Day)
+- Healthcare: LED (election catalyst — Democratic Medicare expansion)
+- Consumer staples / dollar stores: LED
+- Defense: FELL (budget pressure from Democratic Congress)
+- Energy: Declining (oil -15% week, Hormuz resolution priced in)
+- Technology: +1.44% (Nasdaq) — AI supercycle continues
+
+---
+
+### PORTFOLIO STATUS (CRITICAL — 196-Day Gap)
+
+**Last confirmed state (April 23, 2026):**
+- XLV: 47.707 shares @ $146.73 (stop $136.46, expired July 22)
+- XLE: 124.076 shares @ $56.42 (stop $52.47, expired July 22)
+- GLD: 13.772 shares @ $435.66 (stop $405.17, expired July 22)
+- Cash: $80,000
+
+**What happened since (estimated):**
+- June 14-18: Peace deal → oil crashed to ~$81 WTI → XLE likely crashed through $52.47 stop (stop may have executed, or if not, position deeply underwater)
+- GLD: Declining trend confirmed ($435 April → ~$372 October) = -14.5% = ~$877 unrealized loss
+- XLV: Defensive, healthcare up on elections. Likely small gain from $146.73.
+- Stop orders EXPIRED July 22, 2026. No protection in place for 3+ months.
+
+**ACTION REQUIRED: Verify actual positions via Alpaca IMMEDIATELY at market open.**
+
+---
+
+### TRADE PLAN (November 5, 2026 — For Manual or Alpaca Execution)
+
+**SELL ORDERS (IMMEDIATE if positions still open):**
+1. **SELL GLD** — All 13-14 shares at market
+   - Rationale: Stop expired July 22. Gold declining trend ($435→$372, -14.5%). Peace deal reduces safe-haven premium. Expected loss: ~$877.
+   - Signal: Exit Stress-regime hedge now that regime is Risk-On
+
+2. **SELL XLE** — All 124 shares at market (IF still open)
+   - Rationale: Oil down -15% week to $88. Hormuz peace trajectory accelerating. Democratic sweep = more peace deals. XLE purchased at $56.42, may be significantly lower.
+   - Risk of NOT selling: Oil could drop further to $70s if Hormuz fully reopens.
+
+3. **HOLD XLV** — Do not sell
+   - Rationale: Healthcare led election rally. Democratic policies support Medicare/Medicaid expansion. Small gain from entry. Keep for now.
+
+**BUY ORDERS (Add momentum in Risk-On regime):**
+
+4. **BUY PLTR $10,000 notional** — At market open
+   - Signal: Momentum (revenue +96%), Sentiment (govt contracts secured), Quality (GAAP profitable)
+   - Data: Q3 Rev $2.313B (+96% YoY), EPS $0.44, $10B Army contract
+   - Risk: Democratic budget cuts could reduce future defense contracts (monitor)
+   - Approximate shares at ~$140: ~71 shares
+
+5. **BUY AMD $8,000 notional** — At market open
+   - Signal: Quality + Momentum (Data Center +97% YoY)
+   - Data: Q3 Rev $13.4B (+45%), EPS $2.09, Instinct MI450 GPU launch
+   - Risk: Broad chip selloff possible (June 9: AMD -9%, Intel -8%)
+   - Approximate shares at ~$507: ~15 shares
+
+6. **BUY QQQ $10,000 notional** — At market open (Risk-On regime ETF)
+   - Signal: Momentum factor — tech leadership, elections resolved, AI supercycle
+   - Risk: Futures -0.24% today; already priced in election win; minor headwind
+   - Net: Appropriate Risk-On allocation anchor
+
+**ALLOCATION AFTER TRADES (Target):**
+- XLV: ~$7K (keep)
+- PLTR: ~$10K (new)
+- AMD: ~$8K (new)
+- QQQ: ~$10K (new)
+- Cash: ~$65K remaining (63% cash)
+- **Target: 37% invested — appropriate for Risk-On**
+
+---
+
+### WATCHES FOR TODAY
+- Cloudflare NET earnings tonight (AH) — cloud/AI play, monitoring
+- VIX intraday: Up to 16.91 today; watch for spike above 20 = regime shift
+- Oil: If WTI breaks below $85, Hormuz resolution accelerating → trim XLE further
+- If WTI spikes back above $95 → escalation → XLE bullish, risk off
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -91,7 +243,7 @@ Regime is Risk-On (VIX < 20). Strategy says: increase Momentum, reduce Low Vol.
 - **IRGC seized 2 ships** on 4/22: Epaminondas (Liberia-flagged) and MSC Francesca (Panama-flagged)
 - **Fired on 3 ships total** in Hormuz — bridge of one heavily damaged by RPG
 - **White House says seizures don't violate ceasefire** (not U.S./Israeli vessels)
-- **Diplomatic stalemate:** Iran won't talk until blockade lifted, U.S. won't lift until Iran negotiates
+- **Diplomatic stalemate:** Iran won't talk until blockade lifted, U.S. won't lift until blockade lifted
 - **Oil:** Brent briefly >$100, now ~$99. WTI ~$90-93
 - **EU warning:** €500M/day disruption cost, possible jet fuel/diesel shortages
 - **Recovery timeline:** 6-8 weeks after peace deal just to reposition tankers, another 2-5 weeks for insurance
@@ -122,305 +274,3 @@ Regime uncertain. VIX says Late Cycle but Hormuz escalation says Stress. Adding 
 2. VIX break below 20 consistently → risk-on, momentum plays
 3. VIX spike above 30 → stress, add more defensive/hedges
 4. Major earnings catalysts later this week (Boeing, P&G)
-
----
-
-## Session: Evening Routine (2026-04-22, ~6:30 AM ET — market still closed)
-
-**Market Status:** Closed (opens 9:30 AM ET 4/22, closes 4 PM ET)
-**Key Event Tonight:** TSLA earnings after close (5:30 PM ET call)
-
-### Order Status
-All 3 orders still PENDING (status: new, filled_qty: 0). Day orders expire 4/22 8 PM UTC.
-- XLV BUY $7K (ID: 69ed3794)
-- XLE BUY $7K (ID: fa0dd584)
-- GLD BUY $6K (ID: b2bb3e3b)
-Orders will execute at market open 9:30 AM ET.
-
-### Account State
-- Cash: $100K, Portfolio: $100K (no positions yet)
-- Buying power: $180K (2x margin)
-- No fills, no P&L
-
-### Macro Update (4/22)
-- S&P 500 close 4/22: 7,064.01 (-0.63%)
-- VIX: ~21.11 (down 18% from 25.78 prev close — ceasefire extension cooling)
-- SPY: ~$706.78 (extended hours)
-- Oil: Brent ~$98-99, WTI ~$90-93 (Hormuz still closed)
-- Regime: **LATE CYCLE / STRESS BORDERLINE** — VIX dropping from >25 to ~21 but Hormuz still blocked
-
-### Iran/Hormuz — ESCALATION DESPITE CEASEFIRE
-1. **Trump extended ceasefire indefinitely** — at Pakistan's request, waiting for Iran "unified proposal"
-2. **U.S. naval blockade continues** — Iran calls it "act of war," won't negotiate until lifted
-3. **Strait of Hormuz STILL CLOSED** — IRGC attacked 3 ships on 4/22:
-   - One container ship hit by IRGC gunboat with guns and RPGs (bridge damaged)
-   - Two ships taken into IRGC custody (MSC Francesca, Epaminodes)
-   - This is SIGNIFICANT ESCALATION — active seizure of commercial vessels
-4. **Peace talks collapsed** — Islamabad round: neither side showed up
-   - U.S. delegation (led by VP JD Vance) never left Washington
-   - Iran never confirmed attendance
-5. **IRGC declared "peak readiness"** — displayed Khorramshahr-4 ballistic missile at rallies
-6. **Tasnim News (IRGC):** Iran did NOT request ceasefire extension, called it "means nothing"
-7. **UK/France convening 30+ nations** in London to plan force-based Hormuz reopening
-
-### Key Assessment
-**Ceasefire is symbolic. Reality on ground = escalation.** Ship seizures = new escalation level. Hormuz closed indefinitely. Oil likely stays elevated ($90-100+). VIX dropping on ceasefire headline but fundamentals still Stress-level.
-
-### TSLA Earnings Preview (Tonight After Close)
-- Consensus: EPS $0.35-0.39, Rev $21.4-22.96B
-- Deliveries already missed: 358K vs 365K est
-- Production > deliveries by 50K+ (inventory buildup)
-- Energy: 8.8 GWh (-38% QoQ, well below 12-14 GWh est)
-- Zacks ESP: -19.36% → likely miss
-- Key upside: Robotaxi expansion (Dallas/Houston), Cybercab production, FSD Netherlands
-- Key risk: Margin compression, demand slowdown, Musk divided attention (SpaceX/xAI IPO)
-- P/E: ~235 (extremely elevated, little room for disappointment)
-
-### TSLA Post-Earnings Trade Plan
-| Scenario | Action | Rationale |
-|----------|--------|-----------|
-| Beat EPS + strong guidance | Consider $3-5K momentum long | Robotaxi/AI narrative catalyst |
-| Beat EPS + weak guidance | No trade | Core business deteriorating |
-| Miss EPS, any guidance | Avoid or consider small short | Demand/margin concerns confirmed |
-| Mixed (beat rev, miss EPS) | No trade | Margin pressure, avoid binary |
-
-### 4/23 Trade Plan
-1. **Check if XLV/XLE/GLD filled** at open — confirm positions, set stop-losses
-2. **Check TSLA after-hours** — implement post-earnings plan above
-3. **Monitor Iran** — ship seizures = escalation risk. If Hormuz force-reopening announced, oil crashes fast (exit XLE immediately)
-4. **Regime reassessment** — VIX ~21 = Late Cycle, but Hormuz escalation could spike back to Stress overnight
-
----
-
-## Session: Pre-Open Assessment (2026-04-22, Late Night)
-
-**Market Status:** Closed (reopens 9:30 AM ET 4/22)
-
-### Macro Context
-- SPY close 4/21: $703.91 (-0.69%)
-- VIX: ~25-28 — STRESS regime confirmed (above 25 threshold)
-- S&P 500: down 7-9% over past month
-- Oil: Brent $99, WTI ~$93 — Hormuz still closed
-- Put/call ratio on VIX futures: 2.54 (heavy downside hedging)
-- S&P 500 E-Mini: -2.24% over 5 days, -7.62% over 1 month
-
-### Regime Assessment
-**STRESS.** VIX >25, Hormuz closed, oil near $100, S&P in correction territory. Strategy shifts to defensive:
-- Low Volatility ↑, Quality ↑
-- Momentum ↓, Value ↓
-
-### Iran Situation — MAJOR UPDATE
-- **Trump extended ceasefire INDEFINITELY** — reversed from bombing threat hours earlier
-- Iran REFUSES talks while U.S. naval blockade continues
-- Strait of Hormuz: still effectively closed (~5% pre-war volume)
-- U.S. seized Iranian-flagged ship Touska, boarded M/T Tifani
-- Iran calls seizure "maritime piracy," warns of "extremely dangerous consequences"
-- Oil jumped to $99 on extension news (disappointment Hormuz not reopening)
-- Lebanon: Israel continues strikes, Iran/Pakistan say ceasefire should cover Lebanon
-
-### Tesla Earnings (After Close 4/22)
-- Deliveries: 358K (missed 365K est by 7.6K)
-- Production: 408K
-- Energy storage: 8.8 GWh (-38% QoQ)
-- Zacks ESP: -19.36% → likely earnings miss
-- Consensus: EPS $0.39, rev $21.9-23.0B
-- Upside catalysts: Robotaxi (Dallas/Houston live), Cybercab production start, FSD Netherlands approval, AI5 chip tapeout
-- TSLA closed: $386.32 (already down from $400+ on 4/17)
-
-### Trade Plan for 4/22 Open
-**STRESS REGIME = DEFENSIVE ONLY.**
-
-Per strategy: In Stress, increase Low Vol and Quality weights, reduce Momentum.
-
-**Planned Positions (subject to pre-market confirmation):**
-1. **XLV** (Healthcare ETF) — $7K (7% of portfolio)
-   - Signal: Low volatility + defensive sector in Stress regime
-   - XLU also valid but rates rising hurts utilities more
-   - UNH beat earnings +8.5% — sector leader
-
-2. **XLE** (Energy ETF) — $7K (7% of portfolio)
-   - Signal: Oil at $99, Hormuz closed — direct beneficiary
-   - XLE +1.4% on 4/21 while rest of market fell
-   - Risk: If Hormuz suddenly reopens, energy crashes
-
-3. **GLD** (Gold ETF) — $6K (6% of portfolio)
-   - Signal: Safe haven in Stress, GLD $429.62
-   - Gold benefits from geopolitical uncertainty + weak dollar
-   - Risk: If ceasefire breakthrough, gold sells off
-
-**Total deployment: $20K (20% of portfolio).** Conservative for Stress regime.
-**Remaining $80K cash** — wait for clarity on Iran/Hormuz.
-
-**NO momentum plays.** NO TSLA directional bet pre-earnings (binary risk too high).
-**Consider after TSLA earnings:** If TSLA beats → momentum play on robotaxi narrative. If TSLA misses → possible short or avoid.
-
----
-
-## Session: Pre-Market (2026-04-22)
-
-**Market Status:** Closed (6:51 PM ET 4/21, next open 9:30 AM 4/22)
-
-### Macro Context
-- SPY close: $704.08 (-0.65% from $708.72 prev close)
-- S&P 500: slipped ~0.2%, oil rising ahead of Iran deadline
-- VIX: 20.20 (+7.05% from 18.87) — crossed 20 threshold
-- WTI crude: $93+ (+3%), Brent: $97+ (+2%)
-- Nasdaq: 13-day winning streak ended
-- Dow: -33 pts (-0.1%)
-
-### Regime Assessment
-**SHIFTING to Late Cycle.** VIX at 20.20 crossed above 20 threshold. Oil surging on Iran/Hormuz uncertainty. This is the 4th Trump deadline — pattern: rhetoric → deadline → last-minute diplomacy → extension. Polymarket: only 22.5% chance of ceasefire by end April.
-
-Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime. If extended again, relief rally → temporary Risk-On.
-
-### Iran Situation Update
-- Two-week ceasefire announced April 7, conditional on Strait of Hormuz reopening
-- Iran "has not yet decided" whether to attend last-ditch peace talks
-- ~2,000 vessels stranded in Arabian Gulf (Goldman: largest supply disruption in crude history)
-- Israel continuing strikes on Tehran despite U.S. pause
-- Polymarket: 22.5% ceasefire by April end, 51.5% by June end
-
-### Key Catalysts This Week
-1. **Iran peace talks outcome** — binary risk for oil/VIX
-2. **Tesla Q1 earnings** — first Mag 7 to report (week of 4/20)
-3. **UNH Q1 beat** — Adj EPS $7.23 vs $6.58 est, raised guidance (+8.5%)
-4. **S&P 500 earnings** — 6th consecutive quarter of double-digit growth expected
-5. **Fed** — rate cut hopes fading, energy inflation sticky
-
-### Market Movers (4/21 close)
-- Gainers: ATIIW +179%, NRXPW +138%, FFAI +86% (warrants/micro-caps)
-- Losers: HUBC -54%, SXTPW -50% (warrants/micro-caps)
-- Notable: UNH +8.5% on earnings beat
-
-### Trade Ideas for 4/22 Open
-**FIRST TRADES TOMORROW.** Backtesting ready. Alpaca tools live. Deploy capital.
-
-- If ceasefire holds/extended → small risk-on (momentum plays)
-- If ceasefire breaks → defensive only (XLV, XLU, VIX hedge)
-- If neutral → start 2-3 positions, 5-8% each, sector-diversified
-
----
-
-## Session: Midday (2026-04-22)
-
-**Market Status:** Open
-
-### Macro Context Update
-- VIX: 21.11 (down 18% from 25.78 prev close — Iran ceasefire cooling)
-- S&P 500: slipped 0.3-0.6% on 4/21 after morning 2% gain reversed
-- Oil: WTI ~$90, Brent ~$97.80 — ceasefire deadline expires Wednesday
-- Regime: Late Cycle (VIX 20-25 band, improving from yesterday's spike)
-
-### Key Catalysts Today
-1. **Tesla Q1 earnings after close** — deliveries missed (358K vs 365K est), 50K excess inventory, energy storage -38%. Consensus EPS $0.39, rev ~$22.96B
-2. **Apple CEO transition** — Tim Cook stepping down Sep, John Ternus replacing. AAPL -2.6%
-3. **Fed Chair nominee Kevin Warsh** — confirmation hearing, calling for "regime change" at Fed
-4. **Strong retail sales** — March +1.7% (biggest gain since Jan 2023)
-5. **Iran ceasefire** — expires Wednesday, Iran hasn't confirmed new peace talks
-
-### Market Movers (4/21 close)
-- UNH +7% on Q1 beat
-- 3M (MMM) +7.5% on strong Q1
-- TSCO -10.8% on missed sales
-- GE -6% on disappointing guidance
-- Energy sector (XLE) +1.3% on oil
-
-### Backtesting Engine Update
-Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
-- Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
-- Signals: quality, momentum, regime
-- Strategy: bull_strategy (multi-factor composite)
-- Sizing: half-Kelly
-- Backtest: walk-forward runner, metrics with anti-overfitting guards
-
-### Trade Decision
-**No trades today.** Backtesting engine now operational — can validate strategy before first live trade. Need Alpaca MCP tools for trade execution (not available in this session).
-
----
-
-## Session: Evening (2026-04-21, ~8:30 PM ET)
-
-**Market Status:** Closed (next open 9:30 AM 4/22)
-
-### Alpaca MCP Verified
-All tools operational: get_clock, get_account_info, get_stock_snapshot, place_stock_order confirmed working. Trade execution now possible.
-
-### Snapshot Data (4/21 Close)
-| Symbol | Close | Chg | Notes |
-|--------|-------|-----|-------|
-| SPY | $703.91 | -0.65% | Fragile, VIX-implied spread wide |
-| TSLA | $386.32 | -1.5% | Earnings tomorrow after close |
-| XLE | $55.86 | +1.4% | Oil strength |
-| XLV | $145.93 | -1.0% | Defensive pullback |
-| XLU | $44.93 | -1.7% | Rates rising, defensive underperforming |
-
-### Iran Ceasefire — CRITICAL BINARY EVENT
-- Ceasefire expires **April 22** (14 days from April 7)
-- Iran has NOT sent delegation to Islamabad for second round
-- Strait of Hormuz: only ~5% pre-war volume, Iran re-closed April 18
-- Xi called Saudi Crown Prince — last-minute Chinese intervention
-- U.S. naval blockade of Iranian ports remains — Iran says this disqualifies talks
-- Trump: "under no pressure" to make deal, threatened to bomb bridges/power plants
-- **If no extension by market open 4/22 → assume Stress regime**
-
-### Tesla Earnings Preview (4/22 After Close)
-- EPS consensus: $0.39 | Revenue: ~$22.96B
-- Deliveries already missed (358K vs 365K est)
-- Energy storage 8.8 GWh (-38% QoQ from 14.2 GWh) — big disappointment
-- Robotaxi expansion to Dallas/Houston, Cybercab production start this month
-- FSD approved in Netherlands (European expansion)
-- Model S/X discontinued, lines repurposed for Optimus
-- Zacks ESP: -19.36% → likely earnings miss
-- Key upside: robotaxi timeline, AI narrative
-
-### SpotGamma Intelligence
-- VIX ~25 vs realized vol ~12% = 13pt spread (unusual outside panic)
-- Jump risk: sharp downside could force convergence
-- SPX 6,500 critical support (JP Morgan collar trade)
-- Post-VIX expiration, structural support removed
-- Correlation risk rising — everything trades together in stress
-
-### Regime Assessment
-**Late Cycle, leaning Stress.** Iran ceasefire expiration is the hinge. If it breaks tomorrow → shift to full Stress protocol (defensive only, hedging). If extended → brief Risk-On relief.
-
-### Action Plan for 4/22 Pre-Market
-1. Check Iran ceasefire status FIRST — determines entire regime
-2. If Stress: XLV/XLU positions only, consider SPY puts for hedge
-3. If Risk-On relief: momentum plays in beaten-down tech (TSLA post-earnings?)
-4. If neutral/Late Cycle: start with 2-3 positions, 5-8% each
-5. **This is our FIRST TRADING DAY.** Time to deploy capital.
-
----
-
-## Session: Market Close Routine (2026-04-21)
-
-**Market Status:** Closed (2:33 AM ET, next open 9:30 AM 4/21)
-
-### Macro Context
-- S&P 500: ~7,126 (record close 4/17, -0.3% pullback 4/20)
-- SPY close: $708.79 (prev: $710.06)
-- VIX: 19.42 — risk-on but creeping up
-- 10Y yield: 4.266%
-- Brent crude: ~$95 (+5.1% on Iran/Hormuz tensions)
-- IMF cut 2026 global growth to 3.1% (from 3.3%)
-
-### Regime Assessment
-**Risk-On, watchful.** VIX under 20 but rising. S&P at record highs with lagging breadth. Iran ceasefire deadline (8 PM ET 4/21) is key binary event.
-
-### Key Catalysts This Week
-1. Iran ceasefire deadline — Tuesday 8 PM ET (major risk)
-2. Earnings: UnitedHealth (4/21), Tesla (4/22), Boeing, P&G
-3. Fed — rate cut hopes fading, energy inflation sticky
-4. AI supercycle continues as independent tailwind
-
-### Action Items for Next Session
-- Monitor Iran situation before market open
-- If ceasefire holds + oil drops: risk-on, look for momentum plays
-- If ceasefire breaks + oil spikes: shift defensive, consider VIX hedges
-- Research candidates during pre-market routine
-
----
-
-## Session: Initialization (2026-04-21)
-
-*Agent initialized. No research conducted yet. First research session will be pre-market on next trading day.*
