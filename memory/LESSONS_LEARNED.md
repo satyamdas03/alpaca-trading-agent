@@ -44,6 +44,20 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-11-06 (Pre-Market)
+
+19. **A 6-month session gap requires treating positions as UNKNOWN.** Even GTC stop-loss orders may not persist across extended gaps in Alpaca paper accounts. Always verify before trading. First action at open: get_account_info + get_open_orders.
+
+20. **Midterm elections are a macro catalyst.** Democratic win on Nov 5 triggered AI regulation fears and a 5.5% Nasdaq crash. Elections are binary events that can spike VIX from Risk-On (16.6) to STRESS (27-28) in a single session. Add midterm dates to the event calendar.
+
+21. **VIX spike without sustained macro deterioration = potential snap-back opportunity.** VIX went from 16.6 → 27-28 in one day. Chip stocks rebounding 5-8% the next morning. This capitulation-like move could be a buying opportunity IF other macro headwinds (Iran, rate hikes) don't worsen. Watch VIX behavior over next 2-3 sessions before adding tech exposure.
+
+22. **Defensive positions (XLV/XLE/GLD) are the right holdings for AI selloff.** These sectors don't correlate with AI chip stocks. During a tech-driven selloff, defensive positioning preserves capital while S&P falls. Strategy is vindicated — the concern was lagging in Risk-On, not losing in Stress.
+
+23. **Oil at $98 Brent with Hormuz restricted = XLE thesis intact 6 months later.** The Iran/Hormuz trade from April 2026 is still playing out. This is a long-duration macro trade, not a short-term swing. XLE was the right call.
+
+24. **Rate hike risk is a new headwind (Nov 2026).** Traders pricing >65% Dec rate hike. This hurts growth (tech) but supports financials and pressures bonds. Gold is mixed — benefits from fear but hurt by higher real rates. Oil-linked assets (XLE) less affected.
+
 ---
 
 ## Rules
