@@ -1,5 +1,154 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-09) — Bull Waking Up After 186-Day Gap
+
+**Market Status:** Pre-market (8:55 AM ET, 2026-11-09 — Monday)
+**Last Session:** 2026-04-23 (186 days ago — massive context gap)
+
+---
+
+### REGIME ASSESSMENT: LATE CYCLE (borderline STRESS)
+
+| Signal | Value | Interpretation |
+|--------|-------|----------------|
+| VIX | ~25.6 (down ~9% today) | Late Cycle/Stress border — >25 = Stress |
+| S&P 500 | 7,376.86 (Friday close) | -2.68% last week, bouncing today |
+| S&P Futures | +0.84% (~7,464) | Dip buying after brutal tech week |
+| CPI YoY | 3.88% (Cleveland Fed nowcast) | Reaccelerating — Fed hiking |
+| Fed Outlook | ~80% Dec hike probability | RATE HIKES, not cuts |
+| Oil (WTI) | ~$87-90 (-3.66% today) | Declining on Iran diplomacy hopes |
+| Oil (Brent) | ~$97-98 | Still elevated historically |
+| Iran/Hormuz | CLOSED — Day 253 | Closure since Feb 28, 2026 |
+
+**REGIME: LATE CYCLE** (VIX 20-25 zone, PMI unknown, inflation reaccelerating, Fed shifting hawkish)
+- If CPI Tuesday prints hot → shift to STRESS
+- S&P had rough week → possible transition point
+
+---
+
+### Macro Context (2026-11-09)
+
+**S&P 500:**
+- Friday close: 7,376.86 (+0.31%, but -2.68% for the week)
+- Week was brutal: AI and data-center funding concerns triggered tech sell-off
+- Today: Futures +0.84% at ~7,464 — dip buyers emerging
+
+**VIX:**
+- ~25.6 (down ~9% today from prior close)
+- Spot VIX futures curve: Nov 18 contract ~23.7, Dec ~22.1 — market expects vol to decline
+- Still above 25 = technically Stress, but declining
+
+**Inflation — CRITICAL HAWKISH SHIFT:**
+- Cleveland Fed CPI nowcast: 3.88% YoY, core PCE: 3.31%
+- September PCE rose to 3.6%, core PCE 3.1% (+0.3% MoM)
+- Fed rate hike probability Dec 2026: ~80%
+- Deutsche Bank projecting 25bp hikes in Dec and March
+- **October CPI report due TOMORROW (Nov 10)** — MARKET-DEFINING EVENT
+- Forecast: headline +0.28% MoM, core +0.21% MoM (note: no YoY rate due to data gap)
+
+---
+
+### Iran/Hormuz — Day 253 (STILL CLOSED)
+
+- Strait of Hormuz closed since February 28, 2026 — 253 days
+- US naval blockade of Iranian ports still in force
+- **Nov 8:** US military fired on and disabled a cargo vessel attempting to breach blockade
+- **Iran's conditions** for reopening remain: lift blockade first (unchanged from April)
+- **Unverified:** Iraq-US deal to export oil through strait (not confirmed by any authority)
+- **Diplomacy stalled** — no agreement reached
+- 25 seafarers killed in strait incidents since Feb 28
+- **Oil today:** WTI down 3.66% to ~$87-90 on "Iran diplomacy hopes" headline
+- Brent: ~$97-98
+
+**Key change since April:** Oil has DECLINED from $96-100 (April) to $87-90 today. Diplomacy hopes appear to be weighing on oil prices. This is NEGATIVE for our XLE position thesis.
+
+---
+
+### NVIDIA Scandal — Major AI Sector Headwind
+
+- **CEO Jensen Huang** reportedly had affair with Alice Huang, a businesswoman US intelligence suspects of being a Chinese spy
+- Nvidia's board opened independent investigation
+- **NVDA down ~5% premarket** on Nov 9
+- AI cloud stocks also pressured: CoreWeave -3%+
+- Trump publicly backed Huang remaining as CEO
+- Board says no evidence national security or company secrets compromised
+- This was the trigger for last week's tech sell-off
+
+**CoreWeave** (CRWV) reports earnings **Tuesday Nov 10** alongside CPI — high risk/reward event. Options pricing 21% move. Revenue expected $3.54B (+159% YoY).
+
+---
+
+### This Week's Earnings Calendar
+
+| Date | Company | Ticker | Expected | Notes |
+|------|---------|--------|----------|-------|
+| Mon Nov 9 | Constellation Energy | CEG | Pre-open | Nuclear power for AI data centers — key AI infrastructure play |
+| Mon Nov 9 | Barrick Mining | GOLD | Pre-open | Gold miner — correlated to GLD position |
+| Tue Nov 10 | CoreWeave | CRWV | After-close | AI cloud, 21% options move expected; +CPI |
+| **Tue Nov 10** | **CPI Report** | — | **8:30 AM** | **Market-defining event — expect volatility** |
+| Thu Nov 12 | Cisco | CSCO | After-close | Downgraded by Morgan Stanley pre-earnings |
+| Thu Nov 12 | Applied Materials | AMAT | After-close | Semis after brutal week |
+| Fri Nov 13 | PPI Report | — | 8:30 AM | Inflation follow-up |
+
+---
+
+### Position Status (ESTIMATED — Alpaca API unavailable)
+
+**CRITICAL:** Stop-loss orders set in April 2026 were GTC with **7/22 expiry** — these EXPIRED on July 22, 2026. We have been running WITHOUT stop-loss protection for 109 days.
+
+| Symbol | Entry | Estimated Current | Est. P&L | Stop (EXPIRED) | Action Needed |
+|--------|-------|-------------------|----------|----------------|---------------|
+| XLV | $146.73 | Unknown | Unknown | $136.46 (expired 7/22) | RESET STOP |
+| XLE | $56.42 | ~$62-65 est. | +10-15% est. | $52.47 (expired 7/22) | RESET STOP + review |
+| GLD | $435.66 | ~$372 est. | -14.5% est. | $405.17 (expired 7/22) | REVIEW URGENTLY |
+
+**GLD CRITICAL:** Entry was $435.66. GLD was at $372.52 on Nov 6 (52-week range $354-$509, hit $509 in mid-year then sold off). The original stop at $405.17 may have triggered before 7/22 expiry. VERIFY via Alpaca web interface (https://app.alpaca.markets).
+
+**XLE POSITIVE:** Oil rose from $56 to $70 all-time high on Oct 30. Even with today's oil decline, XLE likely still profitable.
+
+---
+
+### Trade Plan for Today (Manual Execution — API Blocked)
+
+**STEP 1 — URGENT: Verify positions at https://app.alpaca.markets**
+- Check all 3 positions still open
+- Check stop-loss orders (almost certainly expired 7/22)
+
+**STEP 2 — Reset stop-losses immediately:**
+| Symbol | Action | New Stop Price | Rationale |
+|--------|--------|----------------|-----------|
+| XLV | RESET STOP | $136.46 (original) or current -7% | Healthcare stable — maintain protection |
+| XLE | RESET STOP | $56.42 (breakeven) | Oil declining — protect gains, move to breakeven |
+| GLD | EVALUATE | If still open, re-evaluate entire thesis | -14% loss means original stop triggered or should have |
+
+**STEP 3 — Regime-appropriate positioning (Late Cycle):**
+- Strategy: Value ↑, Quality ↑, Momentum ↓
+- NO new tech/momentum positions
+- Watch CEG (nuclear/energy for AI) — if earnings beat today, could be a Late Cycle quality play
+- CPI Tuesday: Hold cash. If hot print → shift to Stress, add more defensive. If cool → relief rally.
+
+**STEP 4 — New trade candidates:**
+1. **CEG (Constellation Energy)** — Reports today. Nuclear power for AI data centers. Quality + AI infrastructure play. Watch for earnings beat. Size: $7-10K if strong beat.
+2. **GLD reduction** — If still open and in loss, consider closing. Inflation hedge at $372 vs $435 entry is -14%, and Fed hiking is gold-negative.
+3. **XLE partial close** — Take 50% profits on XLE if still up ~10-15%. Oil declining + diplomacy hints.
+
+**STEP 5 — Avoid:**
+- NVDA and AI cloud names (Nvidia scandal, elevated risk)
+- Leveraged tech plays (VIX elevated, CPI uncertainty)
+- Adding to losing positions (GLD)
+
+---
+
+### Previous Session Summary (For Reference)
+Prior session was 2026-04-23 (Market Close). Portfolio at that time:
+- Total value: $99,988.99
+- 3 positions: XLV, XLE, GLD (~$20K total)
+- 80% cash ($80K)
+- Regime was: Risk-On (VIX ~17-18)
+- S&P was at 7,137.90
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -328,10 +477,7 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 ### Backtesting Engine Update
 Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
 - Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
-- Signals: quality, momentum, regime
-- Strategy: bull_strategy (multi-factor composite)
-- Sizing: half-Kelly
-- Backtest: walk-forward runner, metrics with anti-overfitting guards
+- Signals: quality, momentum, regime, strategy/bull_strategy (multi-factor composite), sizing/half-Kelly, backtest/walk-forward runner
 
 ### Trade Decision
 **No trades today.** Backtesting engine now operational — can validate strategy before first live trade. Need Alpaca MCP tools for trade execution (not available in this session).

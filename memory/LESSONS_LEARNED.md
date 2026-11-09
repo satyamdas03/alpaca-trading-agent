@@ -44,6 +44,20 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-11-09 (Pre-Market — 186-Day Gap)
+
+19. **GTC stop-loss expiry dates are a critical risk management failure mode.** Orders set with 7/22 expiry ran out in July. We went 109+ days without any downside protection. NEVER set GTC orders without a calendar reminder to renew them, or use indefinite GTC without expiry.
+
+20. **186 days of market moves can fundamentally change a thesis.** Regime shifted from Risk-On (VIX ~17) in April back to Late Cycle/Stress (VIX ~25.6) in November. Oil went from $96 → $70 (XLE all-time high) → back to $87. GLD went from $435 → $509 (peak) → $372 (current). Positions set for one regime are not automatically right for another.
+
+21. **Egress proxy blocks external trading APIs in cloud sessions.** paper-api.alpaca.markets is not on the allowlist. All Alpaca trade execution and verification must be done via web interface (https://app.alpaca.markets) when running in cloud environment.
+
+22. **GLD underperformed vs inflation thesis.** We bought GLD as an inflation/safe-haven hedge. CPI is now 3.88% (reaccelerating) but GLD fell from $435 → $372. This is because Fed hawkishness (rate hikes) is MORE negative for gold than inflation is positive. Higher real rates = lower gold prices. The relationship is: Gold price moves inverse to REAL rates (nominal - inflation), not nominal rates or inflation alone.
+
+23. **XLE all-time high coincided with Hormuz peak.** XLE hit $70.15 on Oct 30 — highest ever. This likely reflected maximum Hormuz disruption/oil pricing. Oil has since declined on diplomacy hints ($100 → $87-90). The XLE thesis was correct directionally but we should have taken profits near the peak. Set trailing stops on winning positions after stop-loss expires.
+
+24. **Oil declining on Iran diplomacy ≠ Hormuz reopening.** Oil dropped 3.66% today on "Iran diplomacy hopes" — but Hormuz is still physically closed, and the blockade is still active. These are early positioning moves, not confirmed resolution. Don't overreact to oil moves unless there's a confirmed diplomatic breakthrough.
+
 ---
 
 ## Rules
