@@ -1,142 +1,141 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-09 Pre-Market Routine (Bull Session — 186 days after last update)
 
-## Account Overview
+## ⚠️ CRITICAL RISK MANAGEMENT ALERT
+
+**Stop-loss orders placed on 2026-04-23 were GTC with 7/22 expiry.**
+**These expired on July 22, 2026. We have been UNPROTECTED for 109+ days.**
+**IMMEDIATELY verify positions and reset stops at https://app.alpaca.markets**
+
+---
+
+## Account Overview (Last Known — 2026-04-23)
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
+- Last Known Cash: $80,000.00
+- Last Known Portfolio Value: $99,988.99
 - Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
-- Pattern Day Trader: No
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
 - Alpaca Paper: true
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+## Open Positions (ESTIMATED — Last Verified 2026-04-23)
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+| Symbol | Side | Qty | Entry Price | Est. Current | Est. P&L | Est. P&L % | Stop (EXPIRED) |
+|--------|------|-----|-------------|-------------|----------|------------|----------------|
+| XLV | LONG | 47.707 | $146.73 | Unknown | Unknown | Unknown | $136.46 (EXPIRED 7/22) |
+| XLE | LONG | 124.076 | $56.42 | ~$62-65 | +$700-$1,050 est | +10-15% est | $52.47 (EXPIRED 7/22) |
+| GLD | LONG | 13.772 | $435.66 | ~$372 | -$870 est | -14.6% est | $405.17 (EXPIRED 7/22) |
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+**VERIFY ALL POSITIONS IMMEDIATELY via Alpaca web interface.**
+**GLD may have been stopped out before 7/22 (original stop $405.17 — GLD likely dropped through this level).**
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+### Stop-Loss Orders — EXPIRED (were GTC, expired 7/22/2026)
+| Symbol | Side | Qty | Type | Stop Price | Order ID | Status |
+|--------|------|-----|------|-----------|----------|--------|
+| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | **EXPIRED 7/22** |
+| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | **EXPIRED 7/22** |
+| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | **EXPIRED 7/22** |
 
-## Allocation
-- Cash: 80.0%
-- Equities: 20.0%
+### Immediate Actions Required (Manual — Alpaca API blocked in this environment)
+1. Log into https://app.alpaca.markets
+2. Check which positions are still open
+3. For each open position: place new GTC stop-loss order (-7% from entry OR at breakeven if position is profitable)
+4. Consider closing GLD if still open at a loss > original stop level
+5. Consider taking partial profits on XLE (up ~10-15% estimated)
+
+---
+
+## Position History Context
+
+**XLE (Entry: $56.42, 2026-04-22)**
+- Thesis: Oil at $99, Hormuz closed → energy sector tailwind
+- XLE hit all-time high of $70.15 on 2026-10-30 (+24.4% from entry)
+- Current estimate: ~$62-67 range (oil declining on Iran diplomacy hints)
+- Today's oil move: WTI -3.66% to ~$87-90
+- Recommendation: PROTECT GAINS. Reset stop to $56.42 (breakeven) or $60 (partial profit protection)
+
+**GLD (Entry: $435.66, 2026-04-22)**
+- Thesis: Safe haven in Stress/geopolitical regime
+- GLD 52-week range (Nov 2026): $354.67 - $509.70
+- GLD hit $509 high (mid-year peak when inflation fears peaked)
+- GLD now ~$372.52 (Nov 6 close) = BELOW entry
+- Original stop $405.17 likely triggered before 7/22 IF GLD dropped below that level
+- Current situation: May have been auto-stopped at $405 (best case), or still open at -14% (worst case)
+- IF still open: CLOSE POSITION. Thesis is broken. Inflation reaccelerating but Fed hiking = gold negative.
+
+**XLV (Entry: $146.73, 2026-04-22)**
+- Thesis: Defensive healthcare in Stress/Late Cycle regime
+- Healthcare is relatively stable defensive sector
+- No price data available but likely near entry or slightly positive
+- Recommendation: HOLD. Healthcare appropriate for current Late Cycle/Stress regime.
+
+---
+
+## Allocation (Estimated, 2026-11-09)
+- Cash: ~80% (if no positions closed) or higher (if stops triggered)
+- Equities: ~20% (if all positions open) or less
 - Options: 0%
 - Crypto: 0%
-- **Target in Risk-On: 40-50% equities (currently underdeployed)**
+
+---
 
 ## Performance Tracking
 
-### Daily Returns
-| Date | Equity | Day P&L | Day P&L % | Cum P&L | S&P Day | S&P Cum | Alpha |
-|------|--------|---------|-----------|----------|---------|---------|-------|
-| 4/22 | $100,000* | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% | +0.62% |
-| 4/23 | $99,988.99 | -$4.11 est | -0.004% | -$11.01 | +1.05% | +0.42% | -0.43% |
+### Last Known Performance (2026-04-23)
+| Date | Equity | Day P&L | Cum P&L | S&P Day | S&P Cum | Alpha |
+|------|--------|---------|----------|---------|---------|-------|
+| 4/22 | $100,000 | -$6.90 | -$6.90 | -0.63% | -0.63% | +0.62% |
+| 4/23 | $99,988.99 | -$4.11 est | -$11.01 | +1.05% | +0.42% | -0.43% |
 
-*Portfolio history API shows $100,000 for 4/15-4/21 (no positions), then $99,993.10 on 4/22 close.
+### S&P Benchmark (For Reference)
+- S&P 500 on 2026-04-23: 7,137.90
+- S&P 500 on 2026-11-07 (Friday): 7,376.86
+- S&P change since last session: +3.36%
+- **Our portfolio needs to have gained >3.36% to have kept pace with S&P**
 
-### Position P&L Detail
-| Symbol | Entry | Last Close | Entry→Close | Day Chg | Stop | Distance to Stop |
-|--------|-------|------------|-------------|---------|------|-------------------|
-| XLV | $146.73 | $146.38 | -$16.59 | 0.00% | $136.46 | -6.78% |
-| XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
-| GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
+---
 
-All positions well above stops. No exits triggered.
+## Market Context (2026-11-09)
+- S&P 500: 7,376.86 (Friday close, -2.68% last week, +0.84% futures today)
+- VIX: ~25.6 (Late Cycle/Stress borderline, down ~9% today)
+- 10Y yield: Elevated (Fed hiking — exact level TBD)
+- WTI: ~$87-90 (-3.66% today on Iran diplomacy hints)
+- Brent: ~$97-98
+- Regime: **LATE CYCLE (borderline STRESS)**
 
-### Benchmark Comparison
-- S&P 500 YTD: +4.27%
-- Portfolio YTD: -0.011% (since first trade 4/22)
-- **Alpha: -4.28%** (significantly underperforming)
-- Primary cause: defensive positioning in Risk-On market + 80% cash drag
+### Iran/Hormuz (Day 253)
+- Strait STILL CLOSED since Feb 28, 2026
+- US naval blockade active
+- Diplomacy stalled
+- Oil declining on "diplomacy hopes" headline
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+### Key Events This Week
+- **Tue Nov 10:** October CPI report (8:30 AM ET) — MARKET DEFINING
+- **Tue Nov 10:** CoreWeave (CRWV) earnings after close
+- **Thu Nov 12:** Cisco (CSCO), Applied Materials (AMAT) earnings
+- **Fri Nov 13:** PPI report
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
-
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
-
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
-
-## Key Assessment
-**Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.
-- XLV flat (+0.32%) vs tech +2.31% = wrong sector for this regime
-- XLE working (+0.54%) = Hormuz/oil thesis correct
-- GLD underwater (-0.51%) = entry was near peak, gold bid still present
-- 80% cash drag = missing most of S&P rally
-
-**Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
-Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
+---
 
 ## Infrastructure Status
 
 ### MCP Connectors
 | Server | Status | Last Verified |
 |--------|--------|---------------|
-| Alpaca | DISCONNECTED (MCP) / WORKING (REST) | 2026-04-23 |
-| Gmail | CONNECTED | 2026-04-23 |
-| Google Calendar | CONNECTED | 2026-04-23 |
+| Alpaca | DISCONNECTED (MCP) / BLOCKED (REST — egress proxy blocks paper-api.alpaca.markets) | 2026-11-09 |
+| Gmail | CONNECTED | 2026-11-09 |
 
-### API Keys
-- Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
-- Alpaca Secret: stored in docs/superpowers/plans (REST fallback working)
-- Alpaca Paper: true
+### API Access
+- Alpaca API blocked in cloud session (paper-api.alpaca.markets rejected by egress proxy)
+- Use Alpaca web interface: https://app.alpaca.markets
+- API keys available via environment variables if running locally
 
-### CRON Jobs (Session-Only, Expire 7 Days)
-| Routine | Schedule | Job ID | Next Fire |
-|---------|----------|--------|-----------|
-| Pre-Market | Weekdays 8:55 AM ET | 93231087 | 4/24 8:55 AM |
-| Midday | Weekdays 12:00 PM ET | b3f3cc68 | 4/24 12:00 PM |
-| Market Close | Weekdays 3:50 PM ET | 5a80a0f4 | 4/24 3:50 PM |
-| Weekly Review | Fridays 5:00 PM ET | edd3dac0 | 4/25 5:00 PM |
-
-**WARNING:** These CRONs are session-only. They die when Claude session ends and auto-expire after 7 days. For persistent scheduling, implement Windows Task Scheduler or cloud-based trigger.
-
-### Backtesting Engine
-- Phase 1: COMPLETE (46/46 tests passing)
-- Modules: data/cache, data/alpaca_fetcher, signals/quality, signals/momentum, signals/regime, strategy/bull_strategy, sizing/half-Kelly, backtest/walk-forward
-- Status: Ready for live validation
-
-### Self-Learning Roadmap
-- Saved in memory/SELF_LEARNING_ROADMAP.md
-- 5 phases: Feedback Loop → Strategy Evolution → ML Enhancement → Multi-Agent → Continuous Improvement
-- MVP: SQLite trade database with automated post-mortem
+### CRON Jobs
+- Previous CRONs (session-only) have EXPIRED
+- New CRONs need to be created if continuing automated trading
+- Pre-Market: Weekdays 8:55 AM ET
+- Midday: Weekdays 12:00 PM ET
+- Market Close: Weekdays 3:50 PM ET
+- Weekly Review: Fridays 5:00 PM ET
