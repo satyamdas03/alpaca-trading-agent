@@ -46,6 +46,20 @@
 
 ---
 
+## Session: 2026-11-10 (Pre-Market — Resumed after 6-month gap)
+
+19. **XLE oil thesis had an expiration date.** Entered XLE at $56.42 on Hormuz blockade thesis with oil near $100. Iran war de-escalation (Trump: "effectively over") + Brent below $90 = thesis is dead. Regardless of P&L, when the fundamental thesis breaks, EXIT. Don't hold hoping for recovery when the catalyst is gone.
+
+20. **Stop-loss orders have expiry dates.** Our GTC stops were set "expire 7/22" — after 6 months without monitoring, all three stops likely expired. Never assume risk management orders are still active after a session gap. Always verify before trusting protection is in place.
+
+21. **A 6-month session gap means a 6-month P&L gap.** The portfolio ran unmonitored from April 23 to November 10. That's not trading — that's holding. For an active swing trading strategy, this is unacceptable. The CRONs need to be re-established every session.
+
+22. **Regime shifts are slow until they're not.** April → Risk-On → by November: Stress spike (VIX >28 Nov 5) → then rebound. Market went through multiple regimes while we were dormant. The pre-market routine is critical precisely because regime can change overnight.
+
+23. **Oil and equities can decouple.** When Hormuz closed, XLE and broader equities diverged (XLE up, tech down). When Hormuz reopened (effectively), oil crashed but tech rallied. The correlation is not fixed — geopolitical risk premiums unwind fast when catalysts resolve.
+
+24. **Hot CPI in Late Cycle = no new buys.** When CPI surprises to the upside and the Fed signals rate hikes, do NOT add momentum or growth positions. The Late Cycle playbook says Value ↑, Momentum ↓. Hot CPI confirms we're in Late Cycle, not Risk-On.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
