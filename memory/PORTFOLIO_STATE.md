@@ -1,5 +1,72 @@
 # Portfolio State
 
+**Last Updated:** 2026-11-11 Pre-Market Routine
+
+## ⚠️ WARNING: 6.5-Month Data Gap
+Last Alpaca verification: 2026-04-23. All position data below is STALE. Stop-losses may have triggered. Verify via Alpaca before any trades.
+
+## Account Overview (STALE — April 23, 2026)
+- Account Type: Paper Trading
+- Account Number: PA3M6G5LMKMI
+- Starting Balance: $100,000.00
+- Cash at Last Check: $80,000.00
+- Portfolio Value at Last Check: $99,988.99
+- Buying Power at Last Check: $179,988.99 (2x margin)
+- Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
+- Alpaca Paper: true
+
+## Open Positions (UNVERIFIED — may be closed by stops)
+| Symbol | Side | Qty | Entry Price | Stop Price | Stop Risk | Last Known Price (4/23) |
+|--------|------|-----|-------------|------------|-----------|------------------------|
+| XLV | LONG | 47.707 | $146.73 | $136.46 | UNCERTAIN | $146.38 |
+| XLE | LONG | 124.076 | $56.42 | $52.47 | HIGH (oil fell to ~$89 by Oct) | $56.72 |
+| GLD | LONG | 13.772 | $435.66 | $405.17 | MODERATE | $433.43 |
+
+**STATUS: UNVERIFIED. Must connect Alpaca to confirm.**
+
+## Market Context (2026-11-11 Pre-Market)
+- S&P 500 futures: +0.74% (tech-led rebound after Tue inflation selloff)
+- Nasdaq 100 futures: +1.5% (AI/CoreWeave +13%)
+- Dow futures: +0.2%
+- VIX estimate: ~19-20 (Risk-On)
+- Oil (WTI): ~$82-88 est. (declining on Iran peace talks)
+- Bond market: CLOSED (Veterans Day federal holiday)
+- Regime: **RISK-ON** (with Iran tail risk)
+
+### Iran/Hormuz Update (Nov 11, 2026)
+- Bridge deal (US blockade lift + $8B assets → IAEA access) deadline lapsed ~Nov 10
+- Qatar mediating; Trump: strikes "highly unlikely" if talks progress
+- No confirmed deal. IRGC action risk elevated if bridge deal collapsed.
+- If deal: oil drops (bearish XLE), airlines rally (UAL)
+- If IRGC acts: oil spikes (bullish XLE/GLD)
+
+## Infrastructure Status
+
+### MCP Connectors
+| Server | Status | Last Verified |
+|--------|--------|---------------|
+| Alpaca | UNKNOWN (was DISCONNECTED 4/23) | 2026-04-23 |
+| Gmail | CONNECTED | 2026-11-11 |
+
+### CRON Jobs
+| Routine | Schedule | Status |
+|---------|----------|--------|
+| Pre-Market | Weekdays 8:55 AM ET | RUNNING (this session) |
+| Others | Various | UNKNOWN — may have expired |
+
+## Performance Tracking (STALE)
+| Date | Equity | Day P&L | Cum P&L | S&P Day | Alpha |
+|------|--------|---------|---------|---------|-------|
+| 4/22 | $100,000* | -$6.90 | -$6.90 | -0.63% | +0.62% |
+| 4/23 | $99,988.99 | -$4.11 | -$11.01 | +1.05% | -0.43% |
+| 11/11 | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
+
+**Next step: Run Alpaca account check to restore accurate state.**
+
+---
+
+## STALE SECTION BELOW (April 23, 2026 — historical reference)
+
 **Last Updated:** 2026-04-23 Market Close Routine (Session 2)
 
 ## Account Overview

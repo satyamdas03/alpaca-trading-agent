@@ -1,5 +1,30 @@
 # Trade Log
 
+## Recommended Orders — 2026-11-11 Pre-Market (MANUAL EXECUTION — Alpaca MCP status unknown)
+
+### Pre-Trade Checklist
+1. **FIRST:** Connect Alpaca, run `get_account_info` to verify cash/positions
+2. **CONFIRM** if XLV/XLE/GLD stops were triggered in past 6.5 months
+3. **THEN** execute new trades based on confirmed available cash
+
+### Recommended New Positions (Risk-On regime, Nasdaq +1.5% pre-mkt)
+| Priority | Symbol | Side | Notional | Signal | Stop (-7%) | Execute When |
+|----------|--------|------|----------|--------|------------|--------------|
+| 1 | XLK | BUY | $10,000 | Tech ETF, momentum regime, Nasdaq 100 +1.5% pre-mkt | -7% from fill | At or near open |
+| 2 | QQQ | BUY | $5,000 | Nasdaq momentum, CoreWeave +13% AI theme | -7% from fill | At or near open |
+| 3 | XLE | REDUCE/SELL | 50% position | Peace talks advancing → oil downside risk | Cancel existing stop first | Watch Iran news |
+
+### Contingency: Iran Bridge Deal Collapses
+| Event | Action |
+|-------|--------|
+| IRGC seizes ships (bridge deal lapsed) | HOLD XLE, ADD GLD $3,000 |
+| Iran deal extended/signed | EXIT XLE immediately, BUY UAL $3,000 (jet fuel relief) |
+| VIX spikes above 25 | CANCEL all tech orders, go defensive |
+
+---
+
+## Historical Trade Log (entries below are from April 2026)
+
 | Timestamp | Symbol | Side | Qty | Price | Rationale | Signal | Status |
 |-----------|--------|------|-----|-------|-----------|--------|--------|
 | 2026-04-22 09:31 ET | XLV | BUY | 47.707 | $146.73 | Defensive sector in Stress, UNH beat earnings | Low Vol ↑ in Stress regime | OPEN |

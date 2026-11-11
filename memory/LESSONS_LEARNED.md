@@ -46,6 +46,24 @@
 
 ---
 
+## Session: 2026-11-11 (Pre-Market — Returning after 6.5-month gap)
+
+19. **Session gaps destroy position integrity.** 6.5 months of price action with stops in place = unknown portfolio state. ALWAYS check Alpaca account first before ANY trade after a gap. Never assume positions are still open.
+
+20. **Stop-loss orders are GTC — but with an expiry.** Stops were set GTC expiry 7/22 (from April session notes). If those stops expired on July 22, 2026, positions may have drifted BELOW stop prices without being triggered. Verify order status AND current prices.
+
+21. **Veterans Day = bond market closed.** Bond market closed on November 11 (federal holiday). No 10Y yield signal, no credit spread data. Rely on equity futures and VIX for regime signal. VIX calculation itself may be less reliable with bond market closed.
+
+22. **Iran/Hormuz is a multi-month drag, not a single event.** What started as a 2-week ceasefire in April became a 7-month war with multiple escalation/de-escalation cycles. The XLE trade thesis (oil at $96) was directionally correct in April but oil has since declined to ~$89 as the market adapted. Geopolitical trades have a time horizon — set an exit trigger, not just a price stop.
+
+23. **Diplomacy-driven oil declines are fast.** Oil dropped from ~$96 (April) to ~$89 (Oct 1) as Middle East shipments partially recovered. When the Iran bridge deal was floated (Nov 2), oil fell sharply. If a deal is signed, WTI could drop to $70s quickly. Have an exit plan for XLE if diplomacy accelerates.
+
+24. **CRON jobs are session-only and expire.** The CRONs from April 2026 (93231087, b3f3cc68, etc.) were session-only with 7-day expiry. They've long since died. For persistent scheduling, implement external triggers (GitHub Actions, cloud scheduler).
+
+25. **AI infrastructure is the new dominant theme.** CoreWeave +13% pre-market on outlook raise. Nasdaq 100 futures +1.5% while Dow barely moves. The 2026 AI supercycle is accelerating — in Risk-On regime, tech/AI is where momentum is. Missing this by holding healthcare was opportunity cost.
+
+---
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

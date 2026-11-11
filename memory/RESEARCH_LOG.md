@@ -1,5 +1,128 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-11) — RETURNING SESSION (6.5-month gap)
+
+**Market Status:** Pre-Market (NYSE/Nasdaq OPEN today — Veterans Day, bond market CLOSED)
+**Last Session:** 2026-04-23. Major gap. All data below is freshly researched.
+
+### CRITICAL: 6.5-Month Gap Summary (April 23 → November 11, 2026)
+
+#### Iran/Hormuz Evolution
+- **April 23 (last session):** Hormuz ~1 ship/day, oil WTI $96.73, IRGC seizing ships
+- **June 20:** Iran closed Hormuz AGAIN citing Lebanon ceasefire violations, Brent ~$80
+- **July 8:** Ceasefire collapsed after attacks by both sides
+- **July 12:** US launched new Iran strikes, Tehran declared Hormuz closed
+- **Oct 1:** WTI fell to near $89 as Middle East oil shipments partially recovered (source: FXStreet)
+- **Nov 2:** Oil prices fell sharply on Iran-US diplomacy signals; Iran pushing accelerated ceasefire
+- **Nov 3:** Crude fell 2nd consecutive day; Qatar mediating "bridge deal"
+  - Bridge deal terms: US lifts port blockade + releases $8B frozen assets in 2 days → IAEA inspector access to bombed sites
+  - Two-day clock expired **~November 10** (yesterday) — no confirmation of execution
+- **Nov 6 (Bloomberg):** Iran oil exports near zero; FGE says peace deal "not likely"
+- **Nov 9 (latest):** Trump told CNN strikes "highly unlikely" if talks progress
+- **Nov 11 TODAY:** Bridge deal deadline lapsed. Status unclear — either deal extended or IRGC action risk elevated
+
+#### US Midterm Elections (November 3, 2026)
+- Just occurred 8 days ago — market reacted with oil selloff and equity rally
+
+#### S&P 500 / Earnings Season
+- Q3 2026 earnings: ~90% of S&P 500 reported, YoY growth ~29% (source: capital.com)
+- Market at record or near-record levels based on futures trajectory
+
+### TODAY's Pre-Market (November 11, 2026 — Veterans Day)
+
+**Overnight Futures (approximate, as of early session):**
+- S&P 500 futures: **+0.74% (+55.75 pts)** — tech-led rebound after Tuesday inflation selloff
+- Nasdaq 100 futures: **+1.5%** — AI/tech names surging
+- Dow futures: **+0.03-0.2%** — lagging, bond-sensitive names quiet (bond mkt closed)
+- Source: MLQ/Investing.com
+
+**Notable Pre-Market Mover:**
+- CoreWeave (CRWV): **+13%** after raising 2026 outlook — AI infrastructure demand accelerating
+- European stocks: Stoxx 600 +0.7% (positive global risk-on tone)
+
+**VIX Estimate:**
+- No confirmed live reading. Context: Rebound after Tuesday selloff = VIX declining
+- Estimate: ~18-21 range (Risk-On to Late Cycle boundary)
+- Previous all-clear level: April 23 VIX was ~17-18 (confirmed Risk-On)
+- TODAY ESTIMATE: **~19-20** (Risk-On, bond mkt closed reduces data points)
+
+**Oil (Estimated):**
+- October 1 confirmed: WTI ~$89 (down from April $96.73)
+- Since Nov 2 peace talk rally: Oil likely in $82-88 range
+- Direction: Declining on diplomacy hopes, but bridge deal lapse = tail risk spike back to $90+
+
+**Macro Regime Indicators:**
+- Futures: Risk-On signal (+0.74% S&P, +1.5% Nasdaq)
+- Tech leading (CoreWeave +13%, AI theme intact)
+- Oil declining (peace talks reducing energy inflation pressure)
+- Bond mkt closed (Veterans Day) — 10Y yield unknown today
+- Q3 earnings +29% YoY = strong corporate fundamentals (Quality factor positive)
+- Tuesday "inflation selloff" = some CPI concern lingering
+
+### Regime Assessment: **RISK-ON (with Iran tail risk)**
+
+| Factor | Signal | Confidence |
+|--------|--------|------------|
+| VIX | ~19-20 (est.) → Risk-On/Late Cycle boundary | Medium |
+| Futures | S&P +0.74%, Nasdaq +1.5% | High |
+| Tech Leadership | CoreWeave +13%, AI names surging | High |
+| Oil | ~$82-88 (declining on peace talks) | Medium |
+| Iran/Hormuz | Bridge deal lapsed Nov 10 — IRGC action risk elevated | RISK |
+| Earnings | 29% YoY growth, 90% of S&P reported | High |
+| Bond Market | CLOSED today (Veterans Day) — no yield signal | N/A |
+
+**REGIME: RISK-ON.** Momentum and Quality factors dominant. Iran tail risk present but market pricing diplomacy.
+
+**Previous Regime (April 23):** RISK-ON — consistent. No major shift in framework.
+
+### Portfolio Position Status (UNCERTAIN — 6.5 Month Gap)
+
+**Last known prices (April 23, 2026):**
+| Symbol | Entry | Last Known | Stop Price | Stop Distance |
+|--------|-------|------------|------------|---------------|
+| XLV | $146.73 | $146.38 | $136.46 | -6.78% |
+| XLE | $56.42 | $56.72 | $52.47 | -7.50% |
+| GLD | $435.66 | $433.43 | $405.17 | -6.52% |
+
+**Stop-loss risk analysis (were stops hit?):**
+- XLE stop $52.47: Oil dropped from $96.73 (Apr) to $89 (Oct) = -7.9% oil move. XLE correlated. If XLE fell 7%+, stop was triggered. **HIGH probability stop was hit.**
+- GLD stop $405.17: GLD was already -0.51% at entry. Gold tends to hold in geopolitical uncertainty. **MODERATE probability stop was NOT hit** (gold likely stayed elevated through Iran war).
+- XLV stop $136.46: Healthcare in risk-on market. XLV may have ranged widely. **UNCERTAIN.**
+
+**ACTION REQUIRED:** Verify all positions via Alpaca before any new trades.
+
+### Today's Earnings Calendar
+- Light day (Nov 11 = Veterans Day, bond mkt closed)
+- Major reports this week: **Cisco Systems (CSCO)** and **Applied Materials (AMAT)** — both Thursday Nov 12 after close
+- Q3 earnings season nearly complete (~90% reported)
+
+### Trade Plan for November 11, 2026
+
+**Priority 1: Verify existing positions** — 6.5 months of price action, stops may have triggered
+**Priority 2: If in Risk-On regime confirmed → add tech/momentum exposure**
+
+**Recommended New Positions (subject to Alpaca verification):**
+
+| Priority | Action | Symbol | Notional | Signal | Risk |
+|----------|--------|--------|----------|--------|------|
+| 1 | VERIFY | XLV/XLE/GLD | — | Check if stops triggered | — |
+| 2 | BUY | XLK | $10,000 | Tech momentum, Nasdaq +1.5% pre-mkt | Iran tail risk → global selloff |
+| 3 | BUY | QQQ | $5,000 | Diversified Nasdaq exposure, CoreWeave AI theme | Same |
+| 4 | WATCH | UAL | — | Peace deal = airline beneficiary (jet fuel cost relief) | Deal falls through |
+| 5 | REDUCE | XLE | — | If still open: oil declining, peace deal = XLE headwind | Deal collapses → oil spike |
+
+**Iran Contingency Plan:**
+- If IRGC acts on expired bridge deal → oil spike → HOLD/ADD XLE, ADD GLD
+- If deal extended or new terms → oil drops → EXIT XLE, consider airlines (UAL)
+- If deal signed → Hormuz reopens → oil crashes to $70 range → EXIT XLE immediately
+
+### Session Notes
+- **Bond market closed (Veterans Day):** No 10Y yield data, credit markets quiet. VIX reading absent. Use equity futures as primary regime signal today.
+- **Major gap since last session.** Memory files reflect April 23 state. All numbers must be verified against Alpaca before trading.
+- **Alpaca MCP status unknown.** Was DISCONNECTED as of April 23. Need to test before execution.
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
