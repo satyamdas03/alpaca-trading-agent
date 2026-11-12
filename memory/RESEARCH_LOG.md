@@ -1,5 +1,145 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-12)
+
+**Market Status:** Pre-market (~8:55 AM ET), market opens 9:30 AM ET
+**Last Session:** 2026-04-23 (6.5-month gap — CRONs expired and were not re-registered)
+
+### CRITICAL GAP ALERT
+- CRONs expired after 7 days from April session — no routine ran from ~4/30 to 11/12
+- Stop-loss orders (GTC, expire 7/22/2026) have EXPIRED — positions unprotected since July 22
+- Must reset stop-losses immediately at market open TODAY
+
+---
+
+### Macro Context (2026-11-12)
+
+#### VIX
+- **VIX: ~17.49** (closed 11/11, confirmed below 20 threshold)
+- Down 10.12% on 11/11 from 19.46 (chips rallied Wednesday)
+- Pre-open: ~17.46 (Saxo, 8:00 CET)
+- **Signal: Risk-On** (below 20) BUT dual shock events create Late Cycle risk
+
+#### S&P 500 / Equities
+- **S&P 500: ~7,550** (11/9 close: 7,549.94, up 2.35% that day)
+- Record high: ~7,818-7,819 (Oct 6, 2026)
+- Currently ~3.4% below record
+- **Overnight futures (11/12):** S&P 500 E-minis -0.3% to -0.4%, Nasdaq-100 E-minis -0.6% to -0.8%
+- Primary driver: Nvidia CEO crisis (see below)
+- YTD S&P 500 from April session: significantly higher (was ~7,138 on 4/23, now ~7,550 = +5.8%)
+
+#### Nvidia CEO Crisis (MAJOR HEADLINE)
+- **Board investigation opened 11/8:** Jensen Huang targeted by Chinese intelligence operation
+- Reports of an affair used to access sensitive information
+- Board has confidence in Huang; he remains CEO
+- Congressional briefing requested for 11/18
+- **NVDA stock: down ~8% after-hours on 11/11**
+- Nasdaq-100 futures dragged down -0.6-0.8%
+- Implications: AI/semiconductor headwind today; could be buying opportunity if investigation clears Huang
+
+#### Iran / Strait of Hormuz — ESCALATION TODAY
+- **TODAY (11/12):** IRGC reports two oil tankers carrying 4M+ barrels ablaze in Hormuz Strait
+- IRGC calls it an "accident" on "unauthorized route" but maritime risk firms report strike-caused fire
+- **Flow status (prior to today):** Crude exports recovering near pre-war levels (13.5M bbl/day 7-day avg per Kpler, as of ~11/9), but highly volatile day-to-day
+- October had MORE tanker attacks than any prior month of the Iran war
+- **Oil prices recent trajectory:** Brent was at $115.11 on 10/28 (5paisa); as of ~11/8 Brent ~$97.75, WTI ~$90.34 (commodity.com). CNBC reference shows WTI >$87 on 11/11.
+- Tanker fires today will spike oil at open — XLE position directly benefits
+- Trump: "no deal needed with Iran" — no diplomatic resolution imminent
+- PolitiFact confirmed: Hormuz traffic remains below pre-war levels despite recovery claims
+
+#### Oil Price Estimate (Nov 12)
+- **Best estimate: Brent ~$100-105, WTI ~$87-93** (pending tanker fire news impact)
+- Two tankers on fire = ~4M barrels affected = potential intraday spike $3-5
+- **XLE thesis: STRONGLY INTACT** — energy supply disruption ongoing
+
+---
+
+### Regime Assessment: LATE CYCLE (leaning Stress)
+
+| Signal | Reading | Regime Implication |
+|--------|---------|-------------------|
+| VIX | 17.49 | Risk-On ✅ |
+| S&P 500 | 3.4% off record | Healthy but cautious |
+| Overnight futures | -0.3% to -0.4% | Mild weakness |
+| Nvidia crisis | CEO under investigation | Tech headwind ⚠️ |
+| Hormuz tanker fires | 2 tankers ablaze TODAY | Oil spike = Stress signal ⚠️ |
+| Trump on Iran | "no deal needed" | No resolution = persistent oil risk ⚠️ |
+| Fed policy | Unknown (gap in data) | Need to research |
+
+**VERDICT: LATE CYCLE with Stress signals**
+- VIX says Risk-On but dual macro shocks (Nvidia + Hormuz) argue for caution
+- Not full Stress regime (VIX not >25) but deploying aggressively in momentum would be unwise today
+- Hybrid approach: Hold energy/defensive positions, reduce tech exposure, consider adding XLE on oil spike
+
+---
+
+### Portfolio Position Estimates (6.5-month gap, no Alpaca access)
+
+| Symbol | Entry (4/22) | Stop (expired 7/22) | Estimated Current | Est. P&L |
+|--------|-------------|---------------------|-------------------|----------|
+| XLV | $146.73 | $136.46 (EXPIRED) | ~$158-165* | +8-12% |
+| XLE | $56.42 | $52.47 (EXPIRED) | ~$68-78* | +20-38% |
+| GLD | $435.66 | $405.17 (EXPIRED) | ~$470-510* | +8-17% |
+
+*Estimates based on: XLV=$158.66 on 6/30 (Schwab); XLE extrapolated from Brent $115 Oct peak; GLD extrapolated from gold's safe-haven strength in 2026
+
+**CRITICAL:** Stop-losses expired 7/22. Positions are UNPROTECTED since then. Must reset today.
+
+---
+
+### Today's Trade Plan
+
+#### IMMEDIATE ACTION (at market open):
+1. **Reset stop-losses for XLV, XLE, GLD** at -7% from CURRENT prices (not entry prices)
+2. If unable to access Alpaca: manual order instructions in TRADE_LOG.md
+
+#### WATCH/EVALUATE:
+1. **XLE/Energy:** Two tankers on fire today = oil spike likely. Consider ADDING to XLE position ($10K new position) — oil thesis strongest in portfolio
+2. **NVDA:** Down ~8% AH. If board clears Huang and investigation proves routine, potential buying opportunity. Wait for clarity — do NOT buy today.
+3. **QQQ/XLK:** Avoid adding tech today (Nvidia headwind on entire sector)
+4. **GLD:** Tanker fires + Iran escalation = safe haven bid. HOLD/CONSIDER ADDING.
+5. **XLV:** Healthcare defensive. Hold. Not priority to add.
+
+#### NEW TRADE CANDIDATES:
+- **XLE ADD ($10K):** Oil tanker fires today = immediate catalyst. Brent was $97-100 before this news; could spike $3-8. Direct beneficiary of Hormuz escalation.
+  - Signal: Supply disruption (4M barrels potentially affected by fires)
+  - Entry target: Market order at open
+  - Stop: -7% from fill
+  - Risk: If tanker fires resolve quickly (accident confirmed, not attack), oil normalizes
+  - Size: $10K (to bring energy exposure to ~$17-18K total)
+
+- **GLD ADD ($5K):** Geopolitical safe haven. Iran escalation with tanker fires = gold bid.
+  - Signal: Safe haven demand + inflation from oil spike
+  - Entry target: Market order at open
+  - Stop: -7% from fill
+  - Risk: If Hormuz magically resolves, gold sells off
+  - Size: $5K
+
+#### NO TRADES TODAY:
+- Momentum/tech (Nvidia crisis = sector headwind)
+- NVDA (wait for board statement)
+- QQQ, XLK (Nasdaq -0.8% futures)
+
+---
+
+### Earnings This Week (Nov 10-14, 2026)
+- Nov 9 (Mon): Palantir Technologies (PLTR), Vertex Pharma (VRTX), Constellation Energy (CEG), Realty Income
+  - PLTR notable: AI/defense data platform, high-momentum name
+- Next week (Nov 16-20): Home Depot (HD), Disney (DIS) — Wed 11/18, Cisco (CSCO) — Wed 11/18, Walmart (WMT) — Thu 11/19
+- **No major earnings catalysts this specific day (11/12)**
+
+---
+
+### Previous Session Summary (2026-04-23)
+- Entered XLV/XLE/GLD in Stress regime
+- Regime shifted to Risk-On within 24 hours
+- Portfolio lagged S&P significantly due to 80% cash + defensive positioning
+- Last recorded P&L: -$11.01 (-0.011%)
+- S&P was at 7,137.90 on 4/23 — now ~7,550 = +5.8% since last session
+- Our defensive positions should have done OK given continued geopolitical tensions
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

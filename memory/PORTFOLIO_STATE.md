@@ -1,46 +1,51 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-12 Pre-Market Routine
 
-## Account Overview
+## ⚠️ CRITICAL ALERTS
+1. **Stop-losses EXPIRED 7/22/2026** — All positions unprotected for ~3.5 months
+2. **Alpaca API inaccessible** in current environment (proxy blocked)
+3. **CRONs expired** after 7-day session window — no routine ran from ~4/30 to 11/12
+4. **Manual intervention required:** Reset stops, consider adding XLE/GLD positions
+
+## Account Overview (ESTIMATED — Alpaca unavailable)
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
-- Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
-- Pattern Day Trader: No
+- Current Cash: ~$80,000.00 (unchanged from 4/23)
+- Estimated Portfolio Value: ~$103,000-108,000 (see position estimates)
+- Buying Power: ~$183,000 est (2x margin)
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
 - Alpaca Paper: true
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+## Open Positions (ESTIMATES — verify at market open)
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+| Symbol | Side | Qty | Entry Price | Est. Current Price | Est. P&L | Est. P&L % |
+|--------|------|-----|-------------|--------------------|----------|------------|
+| XLV | LONG | 47.707 | $146.73 | ~$160* | +~$633 | +~9% |
+| XLE | LONG | 124.076 | $56.42 | ~$70-75** | +~$1,680-2,290 | +~24-33% |
+| GLD | LONG | 13.772 | $435.66 | ~$480-500*** | +~$620-890 | +~10-15% |
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+*XLV: Schwab showed $158.66 on 6/30/2026; likely $158-165 now
+**XLE: Brent was $115 in late Oct, now ~$97-105; XLE tracks energy broadly
+***GLD: Gold strong throughout 2026 on geopolitical tensions; estimated from trend
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+**⚠️ All GTC stop-losses expired 7/22/2026. MUST RESET TODAY.**
 
-## Allocation
-- Cash: 80.0%
-- Equities: 20.0%
+### Stop-Loss Orders — EXPIRED, MUST RESET
+| Symbol | Side | Qty | Old Stop | New Stop Target | Priority |
+|--------|------|-----|----------|-----------------|----------|
+| XLV | SELL | 47 | $136.46 (EXPIRED) | 0.93 × current price | URGENT |
+| XLE | SELL | 124 | $52.47 (EXPIRED) | 0.93 × current price | URGENT |
+| GLD | SELL | 13 | $405.17 (EXPIRED) | 0.93 × current price | URGENT |
+
+## Allocation (Estimated)
+- Cash: ~77-78% ($80K / ~$103-108K total)
+- Equities: ~22-23%
 - Options: 0%
 - Crypto: 0%
-- **Target in Risk-On: 40-50% equities (currently underdeployed)**
+- **Target in Current Regime (Late Cycle): 30-40% equities**
+- **Currently: Underdeployed even for Late Cycle**
 
 ## Performance Tracking
 
@@ -49,94 +54,79 @@
 |------|--------|---------|-----------|----------|---------|---------|-------|
 | 4/22 | $100,000* | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% | +0.62% |
 | 4/23 | $99,988.99 | -$4.11 est | -0.004% | -$11.01 | +1.05% | +0.42% | -0.43% |
+| 11/12 | ~$103,000-108,000 est | -- | -- | +~$3-8K est | -- | +5.8%** | -2.5% est |
 
 *Portfolio history API shows $100,000 for 4/15-4/21 (no positions), then $99,993.10 on 4/22 close.
+**S&P 500 moved from 7,137.90 (4/23) to ~7,550 (11/9) = +5.8% since last session
 
-### Position P&L Detail
-| Symbol | Entry | Last Close | Entry→Close | Day Chg | Stop | Distance to Stop |
-|--------|-------|------------|-------------|---------|------|-------------------|
-| XLV | $146.73 | $146.38 | -$16.59 | 0.00% | $136.46 | -6.78% |
-| XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
-| GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
+### Position P&L Detail (Estimated, 11/12)
+| Symbol | Entry | Est. 11/12 | Entry→Now | Stop Status | Action |
+|--------|-------|------------|-----------|-------------|--------|
+| XLV | $146.73 | ~$160 | +~9% | EXPIRED — RESET | HOLD + Reset Stop |
+| XLE | $56.42 | ~$72 | +~28% | EXPIRED — RESET | HOLD + Reset Stop + Consider Adding |
+| GLD | $435.66 | ~$490 | +~12% | EXPIRED — RESET | HOLD + Reset Stop + Consider Adding |
 
-All positions well above stops. No exits triggered.
+### Benchmark Comparison (Estimated)
+- S&P 500 from 4/22 to 11/9: 7,137.90 → 7,549.94 = **+5.8%**
+- Portfolio from 4/22 to 11/12: ~+3-7% (est) depending on actual position prices
+- **Alpha: approximately -1% to -3%** (portfolio lagging S&P due to 80% cash drag)
+- Positive: All three positions likely profitable from entry
 
-### Benchmark Comparison
-- S&P 500 YTD: +4.27%
-- Portfolio YTD: -0.011% (since first trade 4/22)
-- **Alpha: -4.28%** (significantly underperforming)
-- Primary cause: defensive positioning in Risk-On market + 80% cash drag
+## Market Context (2026-11-12 Pre-Market)
+- S&P 500: ~7,550 (11/9 close: 7,549.94)
+- S&P 500 Record: ~7,819 (Oct 6, 2026) — currently 3.4% below record
+- VIX: **17.49** (11/11 close, Risk-On signal — below 20)
+- Overnight futures: S&P -0.3-0.4%, Nasdaq-100 -0.6-0.8% (Nvidia crisis)
+- 10Y yield: Unknown (need to research)
+- Regime: **LATE CYCLE (leaning Stress)**
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+### Nvidia CEO Crisis (11/8-11/12)
+- Board investigation: Jensen Huang targeted by Chinese intelligence (alleged affair/espionage)
+- Huang remains CEO; board has confidence
+- NVDA: Down ~8% after-hours on 11/11
+- Congressional briefing requested for 11/18
+- Nasdaq-100 dragged lower
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
+### Oil / Iran / Hormuz (ESCALATION TODAY)
+- **TODAY 11/12:** IRGC reports 2 oil tankers (4M+ barrels combined) ablaze in Hormuz
+- Crude flow: near pre-war levels by late September but volatile; October = highest tanker attack month
+- WTI ~$87-90, Brent ~$97-105 (pre-fire estimate)
+- Trump: "no deal needed with Iran" = no diplomatic resolution imminent
+- **XLE thesis remains strongly intact**
 
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
+### Sector Performance Expectations (11/12 open)
+- Energy (XLE): UP — oil spike from tanker fires
+- Gold (GLD): UP — safe haven from escalation
+- Tech/Nasdaq: DOWN — Nvidia CEO investigation headwind
+- Healthcare (XLV): NEUTRAL to slight DOWN — market defensive bias
 
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
-
-## Key Assessment
-**Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.
-- XLV flat (+0.32%) vs tech +2.31% = wrong sector for this regime
-- XLE working (+0.54%) = Hormuz/oil thesis correct
-- GLD underwater (-0.51%) = entry was near peak, gold bid still present
-- 80% cash drag = missing most of S&P rally
-
-**Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
-Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
+### Earnings This Week
+- Nov 9 (Mon): Palantir (PLTR), Vertex Pharma, Constellation Energy — all reported
+- Nov 12 (Thu): No major earnings
+- Next week: HD, DIS (Tue 11/17), CSCO (Wed 11/18), WMT (Thu 11/19)
 
 ## Infrastructure Status
 
 ### MCP Connectors
 | Server | Status | Last Verified |
 |--------|--------|---------------|
-| Alpaca | DISCONNECTED (MCP) / WORKING (REST) | 2026-04-23 |
-| Gmail | CONNECTED | 2026-04-23 |
-| Google Calendar | CONNECTED | 2026-04-23 |
+| Alpaca | DISCONNECTED (proxy blocked) | 2026-11-12 |
+| Gmail | CONNECTED | 2026-11-12 |
+| GitHub | CONNECTED | 2026-11-12 |
 
 ### API Keys
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
-- Alpaca Secret: stored in docs/superpowers/plans (REST fallback working)
+- Alpaca Secret: (see env var ALPACA_SECRET_KEY or docs/superpowers/plans)
 - Alpaca Paper: true
 
-### CRON Jobs (Session-Only, Expire 7 Days)
-| Routine | Schedule | Job ID | Next Fire |
-|---------|----------|--------|-----------|
-| Pre-Market | Weekdays 8:55 AM ET | 93231087 | 4/24 8:55 AM |
-| Midday | Weekdays 12:00 PM ET | b3f3cc68 | 4/24 12:00 PM |
-| Market Close | Weekdays 3:50 PM ET | 5a80a0f4 | 4/24 3:50 PM |
-| Weekly Review | Fridays 5:00 PM ET | edd3dac0 | 4/25 5:00 PM |
-
-**WARNING:** These CRONs are session-only. They die when Claude session ends and auto-expire after 7 days. For persistent scheduling, implement Windows Task Scheduler or cloud-based trigger.
+### CRON Jobs
+⚠️ **All prior CRONs expired** (were session-only, 7-day expiry from April session)
+- Must re-register CRONs for continued routine operation
+- Pre-Market: Weekdays 8:55 AM ET
+- Midday: Weekdays 12:00 PM ET
+- Market Close: Weekdays 3:50 PM ET
+- Weekly Review: Fridays 5:00 PM ET
 
 ### Backtesting Engine
 - Phase 1: COMPLETE (46/46 tests passing)
-- Modules: data/cache, data/alpaca_fetcher, signals/quality, signals/momentum, signals/regime, strategy/bull_strategy, sizing/half-Kelly, backtest/walk-forward
-- Status: Ready for live validation
-
-### Self-Learning Roadmap
-- Saved in memory/SELF_LEARNING_ROADMAP.md
-- 5 phases: Feedback Loop → Strategy Evolution → ML Enhancement → Multi-Agent → Continuous Improvement
-- MVP: SQLite trade database with automated post-mortem
+- Status: Operational but not run since April
