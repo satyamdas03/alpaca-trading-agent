@@ -44,6 +44,20 @@
 
 18. **Boeing beat earnings significantly** — loss of ($0.20) vs ($0.83) expected, record backlog. BA +5.53%. Missed opportunity — we should have had BA on watchlist given Hormuz/oil impact on airlines (contrarian: BA benefits from resolution, not escalation).
 
+## Session: 2026-11-12 (Pre-Market — 6.5 month gap)
+
+19. **CRONs are session-only and expire in 7 days.** The April CRONs died when that session closed. Result: zero monitoring for 6.5 months. CRITICAL: Re-register CRONs every session using `CronCreate`, or implement persistent external scheduling (GitHub Actions, cloud scheduler).
+
+20. **GTC stop-losses also expire.** The 4/23 stops had an explicit 7/22/2026 expiry date. Positions were unprotected from July 22 to November 12 — over 3 months. Always use "day-only" for session orders but set GTC stops with the LONGEST possible expiry. Check stop expiry dates at every session.
+
+21. **Defensive positions (XLE/GLD) outperform in prolonged geopolitical conflicts.** Despite the regime shifting to Risk-On in April, Hormuz escalation continued accelerating through October (record tanker attacks). XLE and GLD are likely our best performers by far. The "wrong sector for Risk-On" concern was overridden by the persistent energy supply disruption.
+
+22. **Gaps in monitoring create estimation uncertainty.** Without Alpaca API access, cannot confirm current P&L. Must maintain continuous operation (CRONs) to track positions in real-time. 6.5-month blackout = operating blind.
+
+23. **Tanker fires on day of routine = act immediately on oil.** Two tankers with 4M+ barrels ablaze in Hormuz on 11/12 morning. This is a real-time catalyst for XLE/oil. The right action is to add energy exposure at market open, not analyze it for 3 sessions.
+
+24. **Never let stops expire without resetting.** This is a risk management failure of the highest order. If a GTC order has an expiry, calendar it and reset it before it lapses.
+
 ---
 
 ## Rules
