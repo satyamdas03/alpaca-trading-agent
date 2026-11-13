@@ -46,6 +46,24 @@
 
 ---
 
+## Session: 2026-11-13 (Pre-Market)
+
+19. **GTC stop-loss orders have expiration dates — always check.** The April 2026 stops were set GTC "expire 7/22." They expired July 22, 2026, leaving positions unprotected for 4+ months. For every new position, explicitly track stop expiration dates in TRADE_LOG.md and set a calendar reminder to renew.
+
+20. **A 7-month data gap is catastrophic for an autonomous agent.** CRON jobs are session-only (expire 7 days). Without persistent scheduling infrastructure, the agent goes dark for months. Must implement persistent scheduling outside of Claude sessions — Windows Task Scheduler, cloud triggers, or GitHub Actions.
+
+21. **Alpaca REST can be blocked by session proxy.** Even with valid API keys, paper-api.alpaca.markets is blocked in this cloud session's proxy config. Need to test API access at the start of each new session and have a fallback (web dashboard manual check).
+
+22. **Gmail MCP failure = silent notification blackout.** No email = owner doesn't know the agent ran. Need secondary notification channel (PushNotification tool, GitHub commit as indicator).
+
+23. **When you can't verify positions, estimate from public ETF data.** XLV NAV from SSGA, XLE/GLD from ETFdb, provide directional sense even without broker access. The estimates here (XLV ~$189, XLE ~$88) suggest strong unrealized gains — urgency to protect them.
+
+24. **Inflation surprise (CPI +0.3% vs +0.2%) + high yields (5.103%) = Late Cycle, not Risk-On.** Even with VIX below 20, the macro fundamentals point to Late Cycle regime. Don't blindly follow VIX — weight macro fundamentals equally.
+
+25. **CEO scandal at a key holding is a major systemic risk.** Nvidia CEO probe affects the entire AI/tech sector. Even if we're not holding NVDA, it suppresses XLK and growth ETFs. In Late Cycle, avoid concentration in scandal-affected names.
+
+26. **Post-earnings is safer than pre-earnings for binary plays.** NVDA reporting Nov 17 with CEO probe ongoing = maximum uncertainty. Wait for the print, then trade the direction.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

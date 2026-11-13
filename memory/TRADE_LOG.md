@@ -58,6 +58,28 @@
 
 ---
 
+## Pre-Market Assessment (2026-11-13) — Manual Orders Required
+
+**Infrastructure:** Alpaca blocked, Gmail failed. No automated execution possible.
+**Regime:** LATE CYCLE (VIX 18.70, 10Y 5.103%, CPI hot, Hormuz closed)
+
+### URGENT: Verify then reset stop-losses (originals expired 7/22/2026)
+| Symbol | Old Stop | Approx Current | Suggested New Stop (7% below) |
+|--------|----------|---------------|-------------------------------|
+| XLV | $136.46 (EXPIRED) | ~$180-189 | ~$167-176 |
+| XLE | $52.47 (EXPIRED) | ~$88 | ~$81.84 |
+| GLD | $405.17 (EXPIRED) | Unknown | -7% from current price |
+
+### New Trade Orders (Conditional on Position Verification)
+**New position: GLD ADD — Buy $5,000-$10,000 notional**
+- Signal: Inflation (CPI core +0.3% hot, PPI +2.8% above consensus), Hormuz unresolved
+- Rationale: Late Cycle inflation hedge; gold is the best hedge when yields high AND inflation sticky
+- Entry: Market order at open, or limit at current price or below
+- Stop: -7% from fill price (GTC)
+- Do NOT trade NVDA pre-earnings (CEO probe + binary risk until 11/17)
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |
