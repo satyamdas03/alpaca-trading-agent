@@ -1,6 +1,13 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-13 Pre-Market Routine
+
+## ⚠️ CRITICAL — 7-Month Data Gap (April 23 → November 13, 2026)
+Alpaca REST API blocked by session proxy. Gmail MCP failed. Cannot verify current positions.
+**Manual verification required via Alpaca web dashboard before any trades.**
+Stop-loss orders (GTC expire 7/22/2026) have EXPIRED. Positions may be unprotected.
+
+**Last Updated (data verified):** 2026-04-23 Market Close Routine (Session 2)
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -107,14 +114,32 @@ All positions well above stops. No exits triggered.
 **Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
 Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
 
+## Estimated Current Position State (Nov 13, 2026 — UNVERIFIED)
+Based on web research and April 2026 entry prices:
+| Symbol | Entry | Approx Current | Est. Gain | Stop Status |
+|--------|-------|---------------|-----------|-------------|
+| XLV | $146.73 | ~$180-189 | ~+23-29% | EXPIRED (7/22/2026) |
+| XLE | $56.42 | ~$88 | ~+56% | EXPIRED (7/22/2026) |
+| GLD | $435.66 | Unknown | Unknown | EXPIRED (7/22/2026) |
+
+**All stop-losses expired July 22, 2026. Must reset immediately.**
+
+## Market Context (Nov 13, 2026 Pre-Market)
+- S&P 500 E-Mini Futures: ~7,635 (+0.26%)
+- VIX (11/12 close): 18.70 (borderline Risk-On/Late Cycle)
+- 10Y yield: 5.103%
+- Brent crude: ~$96 (Hormuz still closed)
+- **Regime: LATE CYCLE** (VIX < 20 but yields 5.1%, inflation sticky)
+
 ## Infrastructure Status
 
 ### MCP Connectors
 | Server | Status | Last Verified |
 |--------|--------|---------------|
-| Alpaca | DISCONNECTED (MCP) / WORKING (REST) | 2026-04-23 |
-| Gmail | CONNECTED | 2026-04-23 |
-| Google Calendar | CONNECTED | 2026-04-23 |
+| Alpaca MCP | UNAVAILABLE (not in session) | 2026-11-13 |
+| Alpaca REST | BLOCKED (proxy restriction) | 2026-11-13 |
+| Gmail MCP | FAILED (502 connection error) | 2026-11-13 |
+| GitHub MCP | CONNECTED | 2026-11-13 |
 
 ### API Keys
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22

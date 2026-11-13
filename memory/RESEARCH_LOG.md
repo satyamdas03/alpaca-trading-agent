@@ -1,5 +1,119 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-13)
+
+**Date:** Friday, November 13, 2026 | Pre-market (~10:03 AM UTC / 5:03 AM ET)
+
+### Infrastructure Status
+- Alpaca MCP: UNAVAILABLE (not loaded in session)
+- Alpaca REST: BLOCKED (proxy restricts paper-api.alpaca.markets)
+- Gmail MCP: FAILED (502 connection error)
+- **Action Required:** Manual Alpaca verification needed. Email delivery failed.
+
+### Macro Context (Nov 13, 2026)
+- **S&P 500 E-Mini Futures:** ~7,635 (+0.26%) — slightly positive pre-market
+- **S&P 500 close yesterday (11/12):** ~7,137 (down ~0.35-0.4%)
+- **Nasdaq 100 futures:** Flat
+- **VIX (11/12 close):** ~18.70 (+6.92% on the day) — just below 20 threshold
+- **10Y Treasury yield:** 5.103% — very elevated, restrictive monetary conditions
+- **Brent crude:** ~$96 | **WTI:** ~$90-97 (Hormuz still closed)
+- **US Dollar Index:** No data
+
+### Inflation/Fed Data This Week
+- **Oct CPI (released 11/10):** Core CPI +0.3% vs +0.2% expected — HOTTER than expected
+- **Oct PPI (released 11/13):** YoY +2.8% vs +2.7% expected — slightly above consensus
+  - Market interpreting PPI as manageable; futures UP on PPI release
+- **Fed meeting:** December 8-9 (final meeting of 2026)
+- **Rate cut outlook:** Diminished — two consecutive above-consensus inflation prints
+- **5yr/5yr forward inflation expectation:** 2.17% (down, long-term expectations anchored)
+
+### Regime Assessment: LATE CYCLE
+**VIX (18.70) is below 20 = technical Risk-On signal**
+**BUT multiple Late Cycle indicators present:**
+- 10Y yield at 5.103% = severe headwind for equity multiples
+- Core CPI +0.3% (above target) = Fed remaining restrictive
+- PPI +2.8% YoY = pipeline inflation persistent  
+- Hormuz closed 7+ months = structural energy inflation
+- Market slightly positive but on PPI relief, not fundamental improvement
+
+**REGIME: LATE CYCLE (leaning toward Risk-On if VIX stays below 20)**
+Per strategy: Value ↑, Momentum ↓. Defensive positioning appropriate.
+
+### Iran/Hormuz Situation (November 2026)
+- **Strait still effectively closed:** 3 transits on Nov 8 vs 85/day pre-crisis baseline
+- **Iran's position hardened:** Parliament speaker Ghalibaf: "Strait will NEVER return to pre-war status"
+- **Iran's demands:** Recognized control of Hormuz + nuclear program maintenance
+- **US actions:** Struck Qeshm Island (radar, missile launchers, mine-laying systems)
+- **Nov 11 incident:** IRGC claimed 2 oil tankers caught fire from explosions (unconfirmed)
+- **Diplomacy:** Qatar proposed compromise (Iran limit enrichment to 3.67%, allow IAEA in exchange for reopening). Iran denied talks.
+- **Humanitarian:** 25 seafarers killed in Strait incidents since February 28.
+- **Oil impact:** Brent ~$96 (down from Oct 28 high of $115, but structurally elevated)
+- **XLE thesis still valid:** Hormuz closed indefinitely = oil supply disruption continues
+
+### Nvidia/Tech (Key Market Risk)
+- **NVDA CEO Jensen Huang:** Board investigation opened — alleged target of Chinese spy operation; admitted intimate relations with Megaspeed executive Alice Huang
+- **NVDA close (11/12):** $178.67 (-4.3%), down ~25% from 1-year high
+- **NVDA earnings:** November 17 (Tuesday), guidance $108B — four days away
+- **Risk:** CEO probe + earnings = binary outcome. CEO investigation could overhang results.
+- **Opportunity:** If earnings beat with $108B guidance clear + probe fades, NVDA could bounce hard
+- **Decision: AVOID NVDA pre-earnings.** CEO probe uncertainty makes this a binary risk.
+
+### Key Earnings This Week (Nov 9-13)
+- **Applied Materials (AMAT):** Reports this week (likely today). Strong Q1 guidance of $6.85B.
+- **Cisco Systems (CSCO):** Reports this week.
+- **Constellation Energy:** Reported Nov 10.
+- **Next week (Nov 17):** NVIDIA earnings — the week's major catalyst
+
+### ETF Price Estimates (Approximate — Cannot Verify via Alpaca)
+Portfolio entered positions April 22, 2026. Current approximate prices:
+| Symbol | Entry (4/22) | Approx Current | Estimated Gain | Note |
+|--------|-------------|----------------|----------------|------|
+| XLV | $146.73 | ~$180-189 | +23-29% (~$1,610-2,000 on $7K) | NAV $189.65 as of 11/4 |
+| XLE | $56.42 | ~$88 | +56% (~$3,920 on $7K) | Undated Benzinga quote ~$88 |
+| GLD | $435.66 | Unknown | Unknown | Gold likely higher on inflation/geopolitics |
+
+**CRITICAL: Stop-loss orders set GTC "expire 7/22" (July 22) have EXPIRED.**
+Positions may be open with NO stop-loss protection as of July 22, 2026.
+**Manual Alpaca verification REQUIRED before trading.**
+
+### Trade Plan (Manual Execution Required)
+
+**Step 1: Verify positions immediately via Alpaca app/dashboard**
+- Confirm XLV, XLE, GLD positions open/closed
+- Check current P&L
+- Note: Stop-loss orders expired July 22, 2026
+
+**Step 2: If positions still open, place new stop-losses:**
+| Symbol | Approx Current | New Stop (7% below) | Action |
+|--------|---------------|---------------------|--------|
+| XLV | ~$180-189 | ~$167-176 | Cancel old stop ($136.46), place new |
+| XLE | ~$88 | ~$81.84 | Cancel old stop ($52.47), place new |
+| GLD | Unknown | -7% from current | Cancel old stop ($405.17), place new |
+
+**Step 3: New position consideration for Late Cycle regime:**
+- **HOLD XLV:** Healthcare is excellent Late Cycle (defensive, value). +23-29% gain — do not sell.
+- **HOLD XLE:** Hormuz thesis intact, still generating oil premium. +56% potential — do not sell yet.
+- **HOLD GLD:** Inflation hedge now more relevant (CPI hot, PPI above). Regret we didn't buy more.
+- **CONSIDER: GLD add** — $5-10K additional. Core CPI above target, PPI elevated, Hormuz unresolved. Perfect inflation hedge. Buy at or below $450.
+- **AVOID NVDA:** CEO probe + binary earnings = too much uncertainty until Nov 17 results.
+- **AVOID momentum plays:** 10Y at 5.1%, inflation sticky = Late Cycle, not Risk-On.
+
+**Step 4: Post-NVDA earnings (Nov 18+):**
+- If NVDA beats and guidance reaffirmed: Consider $5-7K long (momentum signal)
+- If NVDA misses or CEO probe escalates: Consider XLK short or avoid tech entirely
+
+### Sector Outlook for Late Cycle
+| Sector | Signal | Action |
+|--------|--------|--------|
+| Healthcare (XLV) | ✅ Defensive, Late Cycle | HOLD |
+| Energy (XLE) | ✅ Oil thesis intact, Hormuz | HOLD |
+| Gold (GLD) | ✅ Inflation hedge, geopolitics | HOLD / ADD |
+| Technology (XLK) | ⚠️ Nvidia overhang, high yields | AVOID |
+| Utilities (XLU) | ⚠️ Bad when yields at 5.1% | AVOID |
+| Financials (XLF) | ⚠️ Higher yields help but recession risk | WAIT |
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
