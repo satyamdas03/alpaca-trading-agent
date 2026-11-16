@@ -1,5 +1,139 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-16)
+
+**Market Status:** Closed (opens 9:30 AM ET 11/16/2026 — Monday)
+**Data Sources:** WebSearch (Alpaca MCP unavailable — REST fallback needed)
+
+---
+
+### Regime Assessment: LATE CYCLE (VIX = 20.08)
+
+**VIX:** 20.08 (Investing.com live quote, Nov 16). Exactly at the 20 threshold — Late Cycle/Risk-On boundary.
+- 2026 52-week range: 13.47 (Dec 24, 2025) to 31.05 (Mar 27, 2026)
+- 2026 YTD average: 18.21
+- **Verdict: LATE CYCLE** — trending from Risk-On (16.0 in July) upward
+
+**Regime Signal: LATE CYCLE (leaning toward Stress)**
+- VIX = 20.08 (above 20 threshold)
+- 4 consecutive weekly declines from Oct 6 record high
+- S&P down 5.65% from recent highs
+- Fed hiking (not cutting) — rate hike expected December
+- Hedge funds cutting AI risk at fastest pace in a decade (Nov 16)
+- Inflation remains elevated
+
+**Strategy shifts for Late Cycle:** Value ↑, Momentum ↓, Quality ↑
+
+---
+
+### Market Summary (Nov 13 close / Nov 16 premarket)
+
+| Index | Level | Day Chg | Notes |
+|-------|-------|---------|-------|
+| SPY | $754.37 | -0.36% | Nov 13 close, premarket Nov 16: $749.85 (-0.60%) |
+| S&P 500 | 7,592.40 | -0.35% | Nov 12 close (Nov 13 approx same level) |
+| QQQ | ~$671.55 | -1.23% | Premarket Nov 16 estimate |
+| VIX | 20.08 | - | At Late Cycle boundary |
+
+**SPY YTD 2026:** +10.61% (price) / +11.47% (total return) through Nov 13
+**4-week correction:** Worst week Nov 5 (SPY -4.41%, worst since April 2025 tariff crash)
+**Distance from Oct 6 record:** -5.65%
+
+---
+
+### Iran/Hormuz Update — IMPROVING BUT STILL RESTRICTED
+
+| Metric | April 2026 | November 2026 | Change |
+|--------|-----------|---------------|--------|
+| Vessels/day | 1 (vs 130 normal) | 30.3 avg | +2,930% |
+| Oil WTI | ~$97 | ~$90.34 (Nov 8) | -$6.66 |
+| Oil Brent | ~$105 | ~$97.75 (Nov 8) | -$7.25 |
+| Status | Fully blockaded | Partially open | Improving |
+
+- Iran: Maintains control assertion, warning vessels to use approved routes or face "forceful response"
+- US: Trump claims "total control" of Hormuz, US blockade still active
+- 131 maritime incidents confirmed by IMO since conflict start
+- Tanker fire Nov 8 (satellite image, smoke visible)
+- Stalemate continues but significantly more traffic than April
+
+**XLE implication:** Oil down ~$6-7/barrel from April entry. XLE position thesis partially intact but weakening. Oil still elevated historically ($90 WTI) but below entry-level assumptions ($97).
+
+---
+
+### Federal Reserve — KEY CHANGE FROM APRIL
+
+| Item | April 2026 | November 2026 |
+|------|-----------|---------------|
+| Rate | ~3.25-3.5% (cutting) | 3.75-4.0% (holding/hiking) |
+| Stance | Easing | Tightening |
+| Chair | (previous) | Kevin Warsh |
+| Next move | Cut expected | HIKE expected (December) |
+
+**September 2026:** First rate INCREASE in 3+ years — regime flip from easing to tightening
+**October 28:** Fed held rates, 2 dissents (Cook, Hammack) wanted immediate hike
+**December 2026:** Rate hike widely expected
+**Driver:** Elevated inflation (AI infrastructure buildout + persistent energy costs)
+
+---
+
+### Key Upcoming Catalyst: NVIDIA Q3 FY2027 Earnings (Nov 17)
+
+- **Date/Time:** Tuesday, November 17, 2026 — 4:20 PM ET (after close)
+- **Options-implied move:** ±10.6% (above 10-year average)
+- **Risk:** CEO Jensen Huang under investigation (reports Nov 9, shares -4.3%)
+- **Context:** Hedge funds cutting AI risk at fastest pace in a decade (Nov 16)
+- **Market reaction already in:** NVDA -4.3% Nov 9, -8% prior week
+- **Earnings week:** Disney (before open Nov 17), NVDA (after Nov 17), Palo Alto (Nov 18), Intuit (Nov 19)
+
+**NVDA is THE binary event this week.** ±10.6% implied = market-moving for Nasdaq.
+
+---
+
+### Position Assessment (Estimated — Alpaca MCP unavailable)
+
+**NOTE:** Last confirmed prices April 23, 2026. Using web search estimates for current levels.
+
+| Symbol | Entry | Stop | Est. Current | P&L Est. | Status |
+|--------|-------|------|-------------|----------|--------|
+| XLV | $146.73 | $136.46 | ~$186 (Nov 9: $185-187) | ~+$1,870 (+27%) | Likely OPEN |
+| XLE | $56.42 | $52.47 | ~$54-56 (uncertain) | ~flat to -5% | Uncertain — may have been stopped |
+| GLD | $435.66 | $405.17 | ~$450-480 est. (inflation/rate hedge) | ~+$200-600 | Likely OPEN |
+
+**Stop order expiry:** All stops were GTC expire 7/22 (July 22, 2026). These may have EXPIRED. Need to re-verify and potentially re-enter stop orders.
+
+---
+
+### Trade Plan: November 16, 2026
+
+**Decision: NO NEW POSITIONS TODAY — Wait for NVIDIA earnings**
+
+**Rationale:**
+1. NVIDIA earnings tomorrow (±10.6% implied) = major market uncertainty
+2. VIX at 20 = Late Cycle, not aggressive momentum environment
+3. 4 consecutive down weeks = trend is downward, not buy-the-dip yet
+4. Fed hiking in December = headwind for growth stocks
+
+**Priority Actions Today:**
+1. **Verify account status** — Run Alpaca REST API to check if positions still open
+2. **If XLV open at ~$186**: Raise stop from $136.46 → ~$174 (-7% from $186) to protect ~18% unrealized gain
+3. **If GLD open**: Raise stop to ~current -7%, may need to re-enter if original expired
+4. **If XLE open and near stop**: Monitor closely, oil thesis partially intact but weakening
+
+**Post-NVIDIA Scenario Planning:**
+| Scenario | Action |
+|----------|--------|
+| NVDA beats big, QQQ rallies 5%+ | Add XLK or NVDA with fresh cash ($5-10K), momentum play |
+| NVDA misses, QQQ -5%+ | Consider QQQ/QID short or add cash to GLD/XLV (defensive) |
+| NVDA neutral (±2%) | Hold positions, re-assess regime on Friday weekly data |
+
+**Regime trigger watchlist:**
+- VIX > 25 → Stress regime → cut momentum, add defenses
+- VIX back below 18 → Risk-On confirmed → add QQQ/XLK momentum
+- Dec Fed hike priced in without surprise → potential relief rally
+- Hormuz fully reopens → XLE exits, oil crash trade possible
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

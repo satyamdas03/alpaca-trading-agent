@@ -1,6 +1,6 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-16 Pre-Market Routine
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -67,45 +67,55 @@ All positions well above stops. No exits triggered.
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+## Market Context (2026-11-16 Pre-Market)
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
+**⚠️ NOTE: Last Alpaca account verification was 2026-04-23. MCP still DISCONNECTED. Prices below are web search estimates.**
+**Stop-loss orders (GTC expire 7/22) have EXPIRED. Need to re-enter stops via REST API.**
 
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
+- S&P 500: ~7,592 (Nov 12 close), SPY premarket Nov 16: ~$749.85 (-0.60%)
+- Nasdaq/QQQ: Premarket -1.23% (Nov 16)
+- VIX: **20.08** (Late Cycle boundary — AT the 20 threshold)
+- 10Y yield: ~4.3-4.5% (est., rising with Dec hike expectations)
+- Regime: **LATE CYCLE** — VIX at 20, 4 consecutive down weeks, Fed hiking in December
+- SPY YTD: +10.61% (from Jan 2026 base), down 5.65% from Oct 6 record high
 
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
+### Oil/Hormuz (Updated)
+- WTI: ~$90.34 (Nov 8, down from ~$97 at our April entry)
+- Brent: ~$97.75 (Nov 8, down from ~$105 at entry)
+- Hormuz: ~30.3 vessels/day avg (vs 1/day in April) — SIGNIFICANT IMPROVEMENT
+- Status: Partially open, US claims control, Iran warns of "forceful response"
+- 131 maritime incidents confirmed since conflict start
 
-## Key Assessment
-**Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.
-- XLV flat (+0.32%) vs tech +2.31% = wrong sector for this regime
-- XLE working (+0.54%) = Hormuz/oil thesis correct
-- GLD underwater (-0.51%) = entry was near peak, gold bid still present
-- 80% cash drag = missing most of S&P rally
+### Upcoming Catalyst (THIS WEEK)
+- **NVIDIA Q3 FY2027 earnings: Nov 17 after close (4:20 PM ET)**
+  - Options-implied move: ±10.6%
+  - CEO Jensen Huang under investigation
+  - Hedge funds cutting AI risk fastest pace in a decade
+- Disney Q4/FY2026: Nov 17 before open
+- Palo Alto Networks: Nov 18
+- Intuit: Nov 19
 
-**Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
-Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
+### Estimated Position Status (Unconfirmed — Need Alpaca REST Verification)
+| Symbol | Entry | Old Stop (EXPIRED 7/22) | Est. Current Price | Est. P&L |
+|--------|-------|------------------------|-------------------|----------|
+| XLV | $146.73 | $136.46 (EXPIRED) | ~$186 | ~+$1,870 (+27%) |
+| XLE | $56.42 | $52.47 (EXPIRED) | ~$54-56 (uncertain) | ~flat to -5% |
+| GLD | $435.66 | $405.17 (EXPIRED) | ~$450-480 est. | ~+$700-$600 |
+
+**CRITICAL: Stop-loss orders expired July 22. Positions may be unprotected. Need to:**
+1. Verify positions via Alpaca REST API
+2. Re-enter stop-loss orders immediately
+3. Raise XLV stop to protect +27% gain
+
+## Key Assessment — November 16, 2026
+**Portfolio materially changed over 7 months.**
+- XLV: Likely big winner (+27%) — healthcare resilient in Late Cycle correction
+- XLE: Oil thesis partially resolved — Hormuz improving, oil $7/barrel lower than entry
+- GLD: Likely a winner — gold benefits from inflation/rate uncertainty
+- 80% cash: Both opportunity cost AND protection — now appropriate for Late Cycle
+- Major near-term risk: NVIDIA earnings tomorrow (±10.6% implied move)
+
+**Action: Hold all positions. Re-enter stops. Wait for NVIDIA earnings before any new deployment.**
 
 ## Infrastructure Status
 
