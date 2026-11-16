@@ -33,6 +33,55 @@
 
 ---
 
+## Pre-Market Assessment: 2026-11-16 (7-Month Gap)
+
+**CRITICAL NOTE: Last trade session was 2026-04-23. All stop-loss orders expired 7/22/2026.**
+**Alpaca MCP unavailable. No live account verification possible in this session.**
+**Gmail MCP available. Git available.**
+
+### Regime Change: Risk-On → Late Cycle
+Previous regime (April 2026): Risk-On (VIX ~17-18)
+Current regime (November 2026): **LATE CYCLE** (VIX = 20.08, 4 weekly declines, Fed hiking)
+
+### Decision: NO NEW TRADES TODAY
+**Rationale:**
+1. NVIDIA earnings tomorrow (Nov 17 after close) — ±10.6% implied move
+2. VIX at 20 = Late Cycle boundary, risk elevated
+3. Hedge funds cutting AI at fastest pace in a decade (Nov 16)
+4. December Fed rate hike expected
+5. Need to verify current account state before deploying capital
+
+### Manual Orders for Execution (Alpaca MCP Unavailable)
+
+**PRIORITY 1: Re-enter Stop-Loss Orders (Expired 7/22)**
+| Order | Symbol | Side | Qty | Type | Stop Price | Rationale |
+|-------|--------|------|-----|------|-----------|-----------|
+| A | XLV | SELL | 47 | STOP-LIMIT | ~$174 | Protect ~$27 gain/share; -7% from est. $186 |
+| B | XLE | SELL | 124 | STOP-LIMIT | ~$52 | -7% from est. $56, verify current price first |
+| C | GLD | SELL | 13 | STOP-LIMIT | ~$437 | -7% from est. $470, verify price first |
+
+**NOTE: Exact stop prices depend on current prices. Run:**
+```bash
+curl -H "APCA-API-KEY-ID: PK7CLPEOIIEKMEVPNWEF4GPL22" \
+     -H "APCA-API-SECRET-KEY: $ALPACA_SECRET_KEY" \
+     https://paper-api.alpaca.markets/v2/positions
+```
+Then: stop = current_price × 0.93 for each position.
+
+**PRIORITY 2: Post-NVIDIA Trade Scenarios (Execute Tomorrow after earnings)**
+| Scenario | Trade | Size | Rationale |
+|----------|-------|------|-----------|
+| NVDA beats, QQQ +5%+ | BUY QQQ or XLK | $10K | Momentum, risk-on signal restored |
+| NVDA misses, QQQ -5%+ | No new longs; consider raising cash | - | Stress regime trigger |
+| NVDA neutral ±2% | Hold all positions | - | Await clearer regime |
+
+**PRIORITY 3: XLE Reassessment (Oil thesis partially intact)**
+- Oil down from $97 to $90 at entry = Hormuz improving
+- If XLE below $54 currently → thesis weakening, consider close
+- If XLE still $55-57 → hold with tighter stop
+
+---
+
 ## Daily P&L Tracking
 
 | Date | Portfolio Value | Day P&L | Day P&L % | Cumulative P&L | S&P Day | S&P Cum |

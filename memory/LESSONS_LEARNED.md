@@ -46,6 +46,22 @@
 
 ---
 
+## Session: 2026-11-16 (Pre-Market, 7-Month Gap)
+
+19. **GTC orders expire — always check stop-loss expiry.** Stop-loss orders were set GTC expire 7/22 (July 22). They have now expired. Positions are unprotected until stops are re-entered. Never set GTC without reviewing expiry dates. Lesson: Set recurring reminder to verify/re-enter stops monthly.
+
+20. **Stale memory = stale regime.** Last session was April 23. Regime flipped from Risk-On to Late Cycle in the interim (VIX from 17 to 20, Fed from cutting to hiking, 4 consecutive weekly declines). Always assume context is stale and research fresh on every wakeup.
+
+21. **XLV outperformed over 7 months (+27%)** despite being labeled a "wrong sector" in the April Risk-On environment. Healthcare is resilient in corrections. The initial Stress-regime entry rationale proved out over time — entry thesis can be right for wrong-term reasons.
+
+22. **Hormuz improved dramatically (1 → 30 vessels/day) but is not resolved.** XLE thesis partially intact but oil is now $7 lower than entry. Oil at $90 WTI still historically elevated but thesis no longer as strong. Consider reducing XLE exposure if oil drops below $85.
+
+23. **Fed regime flip changes everything.** April 2026 had Fed cutting. By September 2026, first rate hike in 3+ years. December 2026 hike expected. This is a major regime shift — rising rates hurt growth stocks, support defensives and cash. VIX rising from 16 to 20 reflects this.
+
+24. **NVIDIA earnings binary event (±10.6% implied) = no position building day before.** The rule holds for large-cap market movers: never add new positions the day before a major earnings binary event that the whole market is watching.
+
+25. **Hedge funds cutting AI risk at fastest pace in decade** (Nov 16, 2026) = institutional de-risking signal. When large sophisticated investors are cutting fast, momentum is broken. Wait for stabilization before buying dips in AI names.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
