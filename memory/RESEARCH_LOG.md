@@ -1,5 +1,154 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-17)
+
+**Market Status:** Pre-market (~8:55 AM ET 11/17) — markets open 9:30 AM ET
+**NOTE:** 7-month gap since last session (2026-04-23). Full context restored from memory files.
+
+---
+
+### Regime Assessment: LATE CYCLE
+
+| Signal | Value | Interpretation |
+|--------|-------|----------------|
+| VIX (spot pre-market) | ~22.7 | Late Cycle (20-25 band) |
+| VIX futures | ~18.7 | Market pricing near-term calm |
+| S&P 500 (last close, 11/13) | 7,561.67 | -3.3% from Oct 6 record high |
+| S&P 500 record (10/6) | 7,818.93 | -4.4% correction underway |
+| S&P 500 YTD | +10.5% | Strong year overall |
+| Fed rate | 3.75-4.00% | Hawkish — held Oct, raised Sep |
+| Oil (WTI) | ~$85-88/bbl | FALLING — down from April's $96 |
+| Oil (Brent) | ~$91-96/bbl | Down 3.52% on 11/17 morning |
+
+**Regime: LATE CYCLE.** VIX 22.7 is in the 20-25 band. S&P pulled back 4.4% from Oct record high. Fed raised in September, held in October at 3.75-4.00%. Mortgage rates at 7.4% 3-year high. Strategy: Value ↑, Momentum ↓.
+
+**Key signal conflict:** VIX spot 22.7 vs VIX futures 18.7 — market pricing short-term event risk (NVDA earnings today) but expecting calm after. The actual regime is Late Cycle, not Stress.
+
+---
+
+### Iran/Hormuz Update (November 17, 2026)
+
+| Metric | Value |
+|--------|-------|
+| Strait status | CLOSED |
+| Transits (Nov 8) | 3/day vs 85/day baseline |
+| Iran conditions | Published Nov 5, no agreement |
+| Ceasefire | Collapsed July 8 (Iran attacked commercial vessels) |
+| Seafarers killed | 25 (since Feb 28, 2026) |
+| Latest attack | 3 tankers hit mines, 2 caught fire (IRGC) |
+
+**KEY INSIGHT:** Despite Hormuz still closed, **oil is FALLING** — WTI from $96 (April) to $85-88 (Nov). IEA warning of global supply surplus. World found workarounds to Hormuz blockade over 7 months. Oil thesis for XLE has WEAKENED materially.
+
+---
+
+### Market Context (Week of 11/10-11/17)
+
+- S&P 500 weekly gain (11/9-11/13): +2.51% — first weekly gain in several weeks
+- S&P 500 Nov 13 close: 7,561.67 (-30.72, -0.40%)
+- Pre-market today: S&P futures ~7,440-7,552 (conflicting sources), broadly flat to slightly lower
+- Weekly note: All 11 S&P sectors advanced during the Nov 9-13 week
+
+---
+
+### KEY EVENT TODAY: NVIDIA Q3 FY2027 Earnings (After Close)
+
+**This is the dominant market event.**
+
+| Metric | Value |
+|--------|-------|
+| NVDA close (11/14 or 11/16) | $156.10 |
+| Decline from Oct peak | ~-35% |
+| EPS consensus | $2.47 (whisper: $2.60) |
+| Revenue consensus | $108.7B (guidance: $108B ±2%) |
+| Prior quarter EPS | $2.22 (beat $2.10 est) |
+| Gross margin guidance | 74% ±50bps |
+| Q4 margin warning | 71-72% (memory costs rising) |
+| CEO | Colette Kress (Interim) — Jensen Huang out |
+| Call time | 5:00 PM ET |
+
+**Risk factors:**
+- Jensen Huang departure/investigation overhang
+- Memory cost pressure → 71-72% margins in Jan quarter
+- Stock already down 35% from peak = potential oversold bounce OR continued selling if miss
+
+**Scenarios:**
+1. **Beat + strong guidance** → sharp reversal of -35% selloff, risk-on pop, tech/semis lead
+2. **Beat + weak guidance (margin warning focus)** → sell the news, tech selloff
+3. **Miss EPS** → significant further decline, LATE CYCLE/STRESS crossover risk
+4. **In-line + commentary on Huang** → event-driven volatility
+
+**DECISION: NO PRE-POSITIONING.** Binary event. Do not buy NVDA before 4:20 PM. Assess post-earnings for Session 2.
+
+---
+
+### Anthropic IPO (Potential Catalyst)
+
+- Anthropic filed publicly Oct 26, 2026, targeting mid-November debut
+- Ticker: ANT, Nasdaq
+- Valuation target: ~$2 trillion (would be largest IPO in history, surpassing SpaceX's $1.77T)
+- May debut this week — positive catalyst for AI sentiment if successful
+- If ANT IPO pops → AI optimism tailwind for NVDA post-earnings
+
+---
+
+### XLE Position Reassessment
+
+| Metric | April 2026 | November 2026 |
+|--------|-----------|--------------|
+| Entry price | $56.42 | — |
+| Last confirmed stop | $52.47 (GTC, expired 7/22) | EXPIRED |
+| XLE price range (Nov) | — | $62-64 |
+| Oct high | — | $69.64 |
+| Nov 11-12 price | — | ~$63-64 |
+| 1-month change | — | -4.4% |
+| WTI oil | ~$96/bbl | ~$85-88/bbl |
+
+**XLE thesis assessment:** Position is likely PROFITABLE (+10-13% from entry). BUT oil thesis has weakened significantly — WTI fell from $96 to $85-88 despite Hormuz closed. IEA warning of global supply surplus. World routed around blockade. 10-day MA crossed below 50-day on Nov 11 (bearish technical signal). CONSIDER CLOSING or tightening stop.
+
+---
+
+### Stop-Loss Orders — EXPIRED
+
+All GTC stop-loss orders from April 23, 2026 had expiration date **7/22/2026** (July 22). They have expired. Positions may be unprotected.
+
+**PRIORITY ACTION:** Verify position status via Alpaca REST API and place new stop-loss orders.
+
+---
+
+### Today's Trade Plan
+
+**Regime: LATE CYCLE. Strategy: Value ↑, Momentum ↓.**
+
+| Action | Priority | Rationale |
+|--------|----------|-----------|
+| Verify all 3 positions via Alpaca | URGENT | 7-month gap, stops expired |
+| Place new stop-losses (XLV, XLE, GLD) | URGENT | Protection removed since July 22 |
+| NVDA: No trade pre-earnings | HIGH | Binary event, wait for results |
+| XLE: Consider reducing/closing | MEDIUM | Oil thesis weakened, oil -$10 from entry |
+| GLD: Hold or add | MEDIUM | Safe haven bid continues, gold likely higher |
+| New positions: Wait post-NVDA | MEDIUM | NVDA sets AI regime tone for rest of Q4 |
+
+**Cash position:** Estimated $80,000 cash available (from April 2026 state). Post-NVDA, assess adding:
+- If NVDA beats and AI sentiment recovers: Consider small tech exposure (QQQ/SMH)
+- If NVDA disappoints: Increase defensive positioning, consider VIX hedge
+
+---
+
+### Manual Trade Orders (For Alpaca Execution — MCP Disconnected)
+
+If Alpaca MCP unavailable, execute these via REST or paper trading UI:
+
+**URGENT — Replace expired stop-losses:**
+```
+1. XLV SELL STOP 47 shares @ $136.46 GTC (or recalculate -7% from current)
+2. XLE SELL STOP 124 shares @ $52.47 GTC (or recalculate -7% from current)
+3. GLD SELL STOP 13 shares @ $405.17 GTC (or recalculate -7% from current)
+```
+
+**NOTE:** Recalculate stops from CURRENT price if positions have moved significantly.
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -328,9 +477,7 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 ### Backtesting Engine Update
 Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
 - Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
-- Signals: quality, momentum, regime
-- Strategy: bull_strategy (multi-factor composite)
-- Sizing: half-Kelly
+- Signals: quality, momentum, regime, strategy/bull_strategy, sizing/half-Kelly
 - Backtest: walk-forward runner, metrics with anti-overfitting guards
 
 ### Trade Decision
