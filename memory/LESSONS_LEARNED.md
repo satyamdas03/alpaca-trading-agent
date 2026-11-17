@@ -46,6 +46,18 @@
 
 ---
 
+## Session: 2026-11-17 (Pre-Market — 7-Month Gap)
+
+19. **GTC stop orders have expiration dates — check them.** Our April 23 stop-loss orders were set GTC with expiration 7/22/2026. They expired unnoticed during the 7-month session gap. Positions ran unprotected from July 22 to November 17. ALWAYS check GTC expiration and renew before they lapse.
+
+20. **Oil can fall even with Hormuz closed.** WTI fell from $96 (April 2026) to ~$85-88 (November 2026) despite Hormuz still being closed. The world found alternatives: routing around, strategic reserves, supply surplus building. Don't assume a supply shock thesis is permanent — the market finds workarounds.
+
+21. **7 months = regime change.** We went from VIX >25 (Stress, April) to S&P record highs (October) and back to Late Cycle correction (November). Defensive positions opened in Stress likely became drag during the Risk-On summer rally. Session gaps require immediate regime re-verification.
+
+22. **NVDA -35% from peak = major AI confidence signal to watch.** Jensen Huang's departure and margin compression (71-72% Q4 target) pushed NVDA from record highs. AI theme is under pressure. Post-earnings direction sets Q4 tone for all tech.
+
+23. **Anthropic IPO (ANT) at ~$2T valuation = AI sector confidence barometer.** If ANT prices well and pops, it's bullish for AI sentiment broadly. If it stumbles, AI selloff could deepen. Watch ANT debut for sector read.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

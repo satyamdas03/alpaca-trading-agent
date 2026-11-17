@@ -58,6 +58,45 @@
 
 ---
 
+## 2026-11-17 Pre-Market Assessment
+
+**Regime: LATE CYCLE** | VIX: ~22.7 | S&P: 7,561 | WTI: ~$87 | Brent: ~$92
+
+### Stop-Loss Status — EXPIRED
+All GTC stop orders (placed 4/23) expired on July 22, 2026. Positions are UNPROTECTED.
+
+### Estimated Position Status (Alpaca MCP unavailable — estimates based on market data)
+| Symbol | Entry | Est. Current | Est. P&L | Stop (Expired) | Action |
+|--------|-------|-------------|----------|----------------|--------|
+| XLV | $146.73 | Unknown | Unknown | $136.46 (exp 7/22) | Verify + reset stop |
+| XLE | $56.42 | ~$62-64 | +~$700-900 | $52.47 (exp 7/22) | Verify + tighten stop |
+| GLD | $435.66 | Unknown (likely higher) | Likely positive | $405.17 (exp 7/22) | Verify + reset stop |
+
+### Manual Orders for Execution (Alpaca MCP Disconnected)
+
+**PRIORITY 1 — Replace Expired Stops (Execute at Market Open):**
+```
+ORDER 7: XLV SELL STOP 47 shares, recalculate at -7% from current price (GTC, 90-day expiry)
+ORDER 8: XLE SELL STOP 124 shares, recalculate at -7% from current price (GTC, 90-day expiry)  
+ORDER 9: GLD SELL STOP 13 shares, recalculate at -7% from current price (GTC, 90-day expiry)
+```
+
+**PRIORITY 2 — XLE: Assess profit-taking given oil thesis weakening**
+- Oil thesis weakened: WTI $96 → $87 (-9.4%) since entry
+- XLE still profitable from $56.42 entry (est. current $62-64)
+- Recommended: Tighten stop to -4% from current (vs default -7%) given weakening thesis
+- If XLE close > $64: Consider taking 50% profit, keeping 50% with tight stop
+
+**PRIORITY 3 — Post-NVDA (After 4:20 PM ET close):**
+- IF NVDA beats + guidance positive → Consider $5K SMH or QQQ position at next open
+- IF NVDA misses → No new tech exposure, assess hedges
+- IF NVDA in-line + CEO/margin concerns → No new positions, wait for follow-through
+
+### Trade Decision: NO NEW TRADES PRE-MARKET
+Reason: NVDA binary event today. VIX 22.7 = Late Cycle, not Risk-On. Assess after earnings.
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |

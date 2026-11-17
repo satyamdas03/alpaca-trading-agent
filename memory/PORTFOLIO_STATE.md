@@ -1,6 +1,13 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-17 Pre-Market Routine
+
+## ⚠️ CRITICAL: 7-Month Session Gap
+Last session: 2026-04-23. All stop-loss orders (GTC, expire 7/22) have EXPIRED as of July 22, 2026.
+Positions may be unprotected. VERIFY via Alpaca and replace stops immediately.
+
+---
+*Previous update: 2026-04-23 Market Close Routine (Session 2)*
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -66,6 +73,36 @@ All positions well above stops. No exits triggered.
 - Portfolio YTD: -0.011% (since first trade 4/22)
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
+
+## Market Context (2026-11-17 Pre-Market)
+
+- S&P 500: 7,561.67 (Nov 13 close, -4.4% from Oct 6 record 7,818.93, +10.5% YTD)
+- S&P 500 E-mini futures: ~7,440-7,552 (flat to slightly lower pre-market)
+- VIX (spot): ~22.7 — LATE CYCLE (20-25 band)
+- VIX futures: ~18.7 (market pricing short-term calm after NVDA event risk)
+- 10Y yield: elevated (Fed rate 3.75-4.00%)
+- WTI: ~$85-88/bbl (FALLING — down from $96 in April)
+- Brent: ~$91-96/bbl (down 3.52% on 11/17 morning to $92.13)
+- Regime: **LATE CYCLE** — VIX 22.7, correction from record highs, Fed hawkish
+
+### KEY EVENT TODAY: NVIDIA Earnings After Close (4:20 PM ET)
+- NVDA at $156.10 (down ~35% from Oct peak)
+- Consensus: $2.47 EPS, $108.7B revenue
+- Interim CEO: Colette Kress (CFO)
+- Margin warning: 71-72% in January quarter
+- BINARY event — determines AI/tech regime heading into Q4
+
+### XLE Position Update (Estimated)
+- Entry: $56.42, Stop was $52.47 (EXPIRED 7/22/2026)
+- XLE current range (Nov 12-13): ~$62-64
+- **Estimated P&L: +10-13% unrealized gain** (~$700-900 on $7K position)
+- BUT: Oil falling (WTI $96 → $85-88). Thesis weakened. Consider exit/stop tightening.
+
+### Stop Orders Status
+ALL STOP-LOSS ORDERS EXPIRED July 22, 2026.
+XLV/XLE/GLD positions are UNPROTECTED as of this session.
+
+---
 
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
