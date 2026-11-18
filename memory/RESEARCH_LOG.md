@@ -1,5 +1,75 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-18)
+
+**Market Status:** Pre-market (opens 9:30 AM ET 11/18)
+**Note:** 7-month gap since last memory update (4/23). Position status must be verified via Alpaca REST API.
+
+### Market Close Summary (11/17 — yesterday)
+- **S&P 500: 7,340.53 (-1.03%)** — 4th consecutive losing session, lowest close since late July 2026
+- **Nasdaq: 24,328.38 (-0.74%)** — 4th consecutive loss
+- **Dow: 50,759.42 (-1.64%, -848.75 pts)**
+- **WTI Crude: $86.01/bbl (+0.34%)**
+- **Brent Crude: $93.14 (+0.76%)**
+- **VIX: ~20-22 (estimated)** — was 19.92 on 11/9/26, 4-day losing streak suggests drift above 20
+
+### After-Hours 11/17 — NVIDIA Q3 FY2027 Beat
+- **NVDA Revenue: $115.8B** (+103% YoY, +20% QoQ) vs est $108.7B — MASSIVE BEAT (+6.1% above est)
+- **EPS: $2.70 GAAP** ($2.68 non-GAAP) vs est $2.47-$2.50 — BEAT by ~8%
+- **Data Center: $107.6B** (+110% YoY)
+- **Q4 Guidance: $130.0B** ± 3% — above consensus
+- **Buyback: $150B** added to authorization
+- **REACTION: Stock DECLINED despite beat** — "sell the news" pattern + leadership vacuum
+  - Jensen Huang rumored resigned 11/12 (single source; CFO Colette Kress interim CEO — UNVERIFIED)
+  - Stock closed at $156.14 on 11/16, down 4.12% that day
+- **Salesforce (CRM): -9%** — AI disruption fears, decelerating growth
+- **KEY INSIGHT:** Even massive Nvidia beat failing to lift market = sentiment deteriorating
+
+### Iran/Hormuz — STILL CLOSED (Day ~263)
+- Conflict ongoing since Feb 28, 2026 (US/Israeli military action triggered broader war)
+- As of Nov 5 (Day 251): Strait effectively closed
+- Nov 11-12: 4 oil tankers hit by explosions in Hormuz after ignoring IRGC warnings
+- US downed Iranian drones near Strait; struck coastal surveillance radar sites
+- US naval blockade of Iranian ports still active (since July 14, 2026)
+- **WTI settled $86.01** — DOWN from April peak ~$96. Oil has retreated ~10% from April highs despite Hormuz still closed. Market pricing some normalization in supply routes.
+- **Brent $93.14** — still elevated vs pre-conflict $70-75 baseline
+- Diplomacy still deadlocked; no resolution signal
+
+### Regime Assessment: LATE CYCLE (Tipping Toward STRESS)
+- VIX ~20-22 (borderline Late Cycle/Stress)
+- S&P 500 on 4-day losing streak, lowest since July — momentum turning negative
+- AI/tech bubble fears rising: Salesforce -9%, NVDA sell-the-news
+- Hormuz still closed but oil retreated (less supply shock pricing)
+- Fed: no confirmed rate cuts; December 8-9 FOMC on the horizon; inflation still sticky from energy
+- **Classification: LATE CYCLE** — Strategy says increase Value weight, decrease Momentum
+
+### Critical Risk: Stop-Loss Order Expiry
+- Memory notes stop-loss orders were GTC "expire 7/22" — this likely means July 22, 2026
+- IF STOPS EXPIRED: XLV, XLE, GLD positions are UNPROTECTED since July 22
+- **ACTION REQUIRED:** Verify all positions and re-set stops immediately via Alpaca REST API
+
+### Trade Plan for 11/18
+**Regime: LATE CYCLE** — Strategy: Value ↑, Momentum ↓
+
+**Existing Positions (status unknown — must verify):**
+1. **XLE** — Entered $56.42 (Apr 2026). Oil dropped from ~$97 to $86 (-11%). XLE likely under pressure. If XLE < $52.47 (original stop): may have been closed. Must check.
+2. **XLV** — Entered $146.73. Healthcare tends to hold up. Likely near/above entry.
+3. **GLD** — Entered $435.66. Gold has likely appreciated in 7-month geopolitical stress period.
+
+**New Trade Ideas:**
+1. **GLD ADD** (Priority 1): If still open and gold appreciated, could add or maintain. Late Cycle + Hormuz stress = gold bid.
+2. **QQQ SHORT / PUT HEDGE** (Priority 2): Tech on 4-day losing streak, AI bubble fears, NVDA sell-the-news. Consider small hedge via QQQ puts.
+3. **NO NVDA LONG**: Despite massive beat, stock declining = distribution signal. Avoid until leadership clarity.
+4. **XLE REVIEW**: Oil down from April highs. If stop wasn't hit, evaluate whether energy thesis still holds at $86 WTI.
+
+**Key Watch Levels:**
+- VIX > 25 → Shift to STRESS protocol (defensive only, no new longs)
+- S&P 7,300 → Psychological support; break = accelerated selling
+- NVDA open < $155 → Confirms "sell the news"; tech bearish
+- Oil > $90 → Hormuz escalation renewed; XLE bullish
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

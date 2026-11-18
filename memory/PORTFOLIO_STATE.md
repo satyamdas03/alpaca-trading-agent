@@ -1,6 +1,6 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-18 Pre-Market Routine
 
 ## Account Overview
 - Account Type: Paper Trading
@@ -67,35 +67,29 @@ All positions well above stops. No exits triggered.
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+## Market Context (2026-11-17 Close — LATEST)
+- S&P 500: 7,340.53 (-1.03%) — 4th consecutive loss, lowest since late July 2026
+- Nasdaq: 24,328.38 (-0.74%) — 4th consecutive loss
+- Dow: 50,759.42 (-1.64%, -848.75 pts)
+- VIX: ~20-22 (estimated; was 19.92 on 11/9, now likely above 20 given selling)
+- WTI: $86.01 (+0.34%)
+- Brent: $93.14 (+0.76%)
+- Regime: **LATE CYCLE** (tipping toward Stress)
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
+### After-Hours Earnings (11/17)
+- Nvidia (NVDA): Q3 FY27 — $115.8B rev (+103% YoY), EPS $2.70, Q4 guided $130B. MASSIVE BEAT but stock DECLINED (sell-the-news + leadership vacuum)
+- Salesforce (CRM): -9% (AI disruption fears, decelerating growth)
 
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
+### Iran/Hormuz Status
+- Conflict Day ~263: Strait still effectively closed
+- Nov 11-12: 4 oil tankers hit in Hormuz; US downed Iranian drones
+- US naval blockade of Iranian ports still active (since July 14, 2026)
+- Oil lower than April peak (~$97 WTI) — market normalizing some supply routes
 
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
+### CRITICAL WARNING: Stop-Loss Expiry Risk
+- Stop-loss orders set "GTC expire 7/22" (likely July 22, 2026) — MAY HAVE EXPIRED
+- If expired, XLV/XLE/GLD positions have been UNPROTECTED since July
+- **MUST VERIFY positions and re-set stops at market open**
 
 ## Key Assessment
 **Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.

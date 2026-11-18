@@ -58,6 +58,36 @@
 
 ---
 
+## Pre-Market Assessment (2026-11-18) — Manual Orders Pending
+
+**ALPACA MCP STATUS: DISCONNECTED** — Using REST API fallback / manual orders
+
+### Immediate Actions Required at Market Open
+1. **CHECK POSITIONS**: Verify XLV/XLE/GLD status via Alpaca REST API (7-month gap)
+2. **CHECK STOPS**: Stop orders were "GTC expire 7/22" — likely EXPIRED July 22, 2026. Must re-set.
+3. **REVIEW FILLS**: Any stop-loss triggers between April and November must be logged here
+
+### Manual Orders for 11/18 Open (Execute via Alpaca REST or Dashboard)
+**Regime: LATE CYCLE — Value ↑, Momentum ↓**
+
+| Priority | Symbol | Side | Action | Type | Price | Rationale |
+|----------|--------|------|--------|------|-------|-----------|
+| IMMEDIATE | XLV | SELL | Re-set stop if position open | STOP GTC | $136.46* | Re-protect position |
+| IMMEDIATE | XLE | SELL | Re-set stop if position open | STOP GTC | $52.47* | Re-protect position |
+| IMMEDIATE | GLD | SELL | Re-set stop if position open | STOP GTC | $405.17* | Re-protect position |
+| WATCHLIST | QQQ | SELL | Small short or put hedge | — | ~ | AI/tech selloff + 4-day losing streak |
+| WATCHLIST | GLD | BUY | Add if below $450 | LIMIT | $445-450 | Late Cycle + geopolitical = gold bid |
+
+*Adjust stop prices based on current position cost basis if positions were added/changed in the 7-month gap.
+
+### Key Numbers to Watch 11/18
+- VIX > 25: Shift to STRESS → sell equities, hold defensive only
+- S&P < 7,300: Accelerated breakdown → hedge with puts
+- NVDA open < $155: Tech bearish confirmed → sell/short tech
+- Oil > $90: Hormuz escalation → XLE bullish again
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |
