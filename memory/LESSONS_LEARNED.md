@@ -46,6 +46,24 @@
 
 ---
 
+## Session: 2026-11-19 (Pre-Market)
+
+19. **GTC stop-loss orders have expiration dates.** The stop orders placed on 4/23/2026 expired 7/22/2026 per their settings. Positions were unprotected for 4 months. ALWAYS check expiration on GTC orders and set reminders to re-place them before expiry.
+
+20. **7 months without Alpaca MCP = blind spot.** Sessions without Alpaca MCP can't verify account state, positions, or current prices. Must implement REST API fallback (curl-based) for every routine run, regardless of MCP availability.
+
+21. **XLV vindicated over time.** Entry at $146.73 during Stress regime; now ~$189.65 = +29%. Healthcare sector held up through Late Cycle because it is both defensive (low vol) AND has structural growth (aging demographics, GLP-1 drugs, AI drug discovery). Good sector choice long-term even if regime changed.
+
+22. **Peace deal at Hormuz changes oil thesis.** June 2026 partial deal dropped oil from $105 Brent → $93 and from 1 ship/day to 54% flows. XLE oil thesis weakened materially. Need to evaluate whether to continue holding or take profits.
+
+23. **Nvidia AI demand is structural, not cyclical.** Revenue +103% YoY ($115.8B). Even with VIX at 24.56 (Late Cycle), AI infrastructure demand drives secular earnings growth. Post-earnings dips in NVDA are historically buying opportunities.
+
+24. **Regime detection requires weekly refresh.** Going 7 months without regime reassessment is catastrophic for strategy execution. Even if no trades happen, weekly research runs must continue to track VIX trends and macro shifts.
+
+25. **Anthropic IPO at $2T valuation = day-1 skip.** Too speculative for fundamentals-driven strategy. Wait for price discovery after first week of trading, review earnings after first quarter as public company.
+
+26. **Late Cycle signals:** VIX 24.56, Fed hawkish at 3.75-4% (two members wanted hike), S&P P/E contracting 28.4→25.9, oil stabilizing. This is the classic late-cycle setup where value outperforms momentum. Rotate toward Value and Quality.
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

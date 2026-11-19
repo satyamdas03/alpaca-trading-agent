@@ -67,3 +67,69 @@
 | GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
 
 **All positions well above stops. No exits triggered.**
+
+---
+
+## ⚠️ CRITICAL ALERT: Stop-Loss Orders EXPIRED (2026-07-22)
+
+GTC stop orders placed 4/23 had a "expire 7/22" flag. As of November 2026:
+- Orders 71b7b3bf (XLV), 63cbc6a9 (XLE), f91b4932 (GLD) are EXPIRED.
+- All 3 positions are unprotected.
+
+**FIRST ACTION on next Alpaca session: Re-set stops at -7% from current prices.**
+
+---
+
+## Pre-Market Plan: 2026-11-19 (Late Cycle Regime)
+
+**Regime: LATE CYCLE** — VIX 24.56 (down from 25.46 yesterday = exiting Stress)
+**Strategy shift:** Value ↑, Momentum ↓, Quality ↑
+
+### Immediate Actions (Alpaca MCP unavailable — flag for manual execution)
+
+**ACTION 1: Re-set XLV stop-loss (URGENT)**
+- Current est. price: ~$189.65 (SSGA data Nov 4)
+- New stop target: ~$176.37 (-7%)
+- Order type: STOP SELL 47 XLV @ $176.37 GTC
+
+**ACTION 2: Re-set XLE stop-loss (URGENT)**
+- Current price: Verify via Alpaca (oil down from April, XLE likely ~$55-60 range)
+- New stop target: -7% from current price
+- Order type: STOP SELL 124 XLE @ [current × 0.93] GTC
+
+**ACTION 3: Re-set GLD stop-loss (URGENT)**
+- Current price: Verify via Alpaca (gold likely higher, $450-470 range est.)
+- New stop target: -7% from current price
+- Order type: STOP SELL 13 GLD @ [current × 0.93] GTC
+
+### New Trade Candidates (Late Cycle = Value + Quality, not Momentum)
+
+**CANDIDATE A: XLV Partial Profit Take**
+- Signal: FXStreet flags healthcare overbought (Nov 12, 2026). +29% unrealized gain.
+- Action: SELL 24 XLV at market (take ~half position off)
+- Rationale: Lock in $1,023 profit, retain core position with upside
+- Risk: Healthcare continues rising (but overbought signal argues against)
+
+**CANDIDATE B: NVDA on Post-Earnings Dip**
+- Signal: Beat $115.8B revenue (+103%), EPS $2.68 vs $2.47. Stock slipping day-after (sell-the-news).
+- Entry idea: BUY $3,000-5,000 NVDA on intraday dip if S&P stabilizes
+- Rationale: AI structural demand, 74.8% gross margins, $130B Q4 guidance
+- Risk: VIX still 24.56 = Late Cycle, momentum weight reduced. Jensen Huang gone = leadership risk.
+- Late Cycle position sizing: Max $3K (conservative)
+- Wait for: Price to find intraday support before entry
+
+**CANDIDATE C: Increase Cash Deployment — Value ETF**
+- Target: 35-40% invested (currently ~20%)
+- Options: VTV (Vanguard Value ETF) — $10K allocation
+- Late Cycle = value stocks typically outperform momentum
+- Or: Wait for VIX to drop below 22 before adding risk
+
+**SKIP: Anthropic IPO (ANT)**
+- Day-1 IPO at $2T valuation = maximum speculation
+- No historical price discovery
+- Not appropriate for fundamentals-driven strategy
+
+### Decision Summary (No Alpaca MCP Available)
+1. All above are FLAGGED for manual execution via Alpaca REST API
+2. Priority order: Stop re-sets first (XLV/XLE/GLD) → Partial XLV profit take → NVDA dip buy
+3. Must verify current prices before setting stops
