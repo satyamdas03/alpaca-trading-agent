@@ -1,111 +1,87 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-19 Pre-Market Routine
 
-## Account Overview
+## Account Overview (ESTIMATED — Alpaca MCP unavailable, last verified 4/23/2026)
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
-- Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
-- Pattern Day Trader: No
-- Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
-- Alpaca Paper: true
+- Cash at Last Check (4/23): $80,000.00
+- **CURRENT ACCOUNT STATUS: UNVERIFIED — must check via Alpaca REST or next MCP session**
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+## Open Positions (Estimated as of 2026-11-19)
+| Symbol | Side | Qty | Entry Price | Est. Current Price | Est. Unrealized P&L | P&L % | Cost Basis |
+|--------|------|-----|-------------|-------------------|---------------------|-------|------------|
+| XLV | LONG | 47.707 | $146.73 | ~$189.65 (SSGA Nov 4) | ~+$2,048 | ~+29.3% | $7,000.00 |
+| XLE | LONG | 124.076 | $56.42 | ~$54-58 (est, oil ↓) | Unknown | Unknown | $7,000.03 |
+| GLD | LONG | 13.772 | $435.66 | Unknown | Unknown | Unknown | $6,000.00 |
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+**⚠️ WARNING: Stop-loss orders (IDs 71b7b3bf, 63cbc6a9, f91b4932) set GTC expiring 7/22/2026 have EXPIRED.**
+**Positions are currently UNPROTECTED. Must re-set stops immediately on next Alpaca session.**
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+### Stop-Loss Orders — EXPIRED (were set 4/23/2026, GTC expired 7/22/2026)
+| Symbol | Side | Qty | Type | Stop Price | Order ID | STATUS |
+|--------|------|-----|------|-----------|----------|--------|
+| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | **EXPIRED** |
+| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | **EXPIRED** |
+| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | **EXPIRED** |
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+### New Stops Needed (URGENT — place via Alpaca REST or next MCP session)
+| Symbol | Recommended Stop (-7%) | Basis |
+|--------|------------------------|-------|
+| XLV | ~$176.37 (-7% from ~$189.65) | SSGA Nov 4 price |
+| XLE | Determine from current price | Oil dropped since April |
+| GLD | Determine from current price | Gold likely higher |
 
-## Allocation
-- Cash: 80.0%
-- Equities: 20.0%
+## Allocation (Estimated)
+- Cash: ~80% (unchanged since April — no new trades executed)
+- Equities: ~20% (3 positions: XLV, XLE, GLD)
 - Options: 0%
 - Crypto: 0%
-- **Target in Risk-On: 40-50% equities (currently underdeployed)**
+- **Target in Late Cycle: 35-40% equities. Still underdeployed.**
 
 ## Performance Tracking
 
-### Daily Returns
+### Historical Returns
 | Date | Equity | Day P&L | Day P&L % | Cum P&L | S&P Day | S&P Cum | Alpha |
 |------|--------|---------|-----------|----------|---------|---------|-------|
 | 4/22 | $100,000* | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% | +0.62% |
 | 4/23 | $99,988.99 | -$4.11 est | -0.004% | -$11.01 | +1.05% | +0.42% | -0.43% |
+| 11/19 | Unverified | Unknown | Unknown | Unknown | — | +10.5% | — |
 
-*Portfolio history API shows $100,000 for 4/15-4/21 (no positions), then $99,993.10 on 4/22 close.
+*Note: 7 months of P&L untracked. Must verify via Alpaca. XLV +29% suggests significant positive contribution.
 
-### Position P&L Detail
-| Symbol | Entry | Last Close | Entry→Close | Day Chg | Stop | Distance to Stop |
-|--------|-------|------------|-------------|---------|------|-------------------|
-| XLV | $146.73 | $146.38 | -$16.59 | 0.00% | $136.46 | -6.78% |
-| XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
-| GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
+### Benchmark Comparison (Estimated)
+- S&P 500 YTD 2026: +10.5% (as of Nov 13, 2026)
+- Portfolio YTD: Unverified — likely significantly positive given XLV +29%
+- **Need Alpaca verification to calculate accurate alpha**
 
-All positions well above stops. No exits triggered.
+## Market Context (2026-11-19 Pre-Market)
+- S&P 500: ~7,400 (+10.5% YTD as of Nov 13)
+- VIX: **24.56** (down from 25.46 yesterday) — LATE CYCLE/borderline Stress
+- 10Y Treasury yield: Rising (hawkish Fed minutes cited)
+- Fed funds rate: **3.75-4.0%** — hawkish, two Oct dissents for hike
+- Regime: **LATE CYCLE** (VIX 20-25, Fed hawkish, Hormuz partial)
 
-### Benchmark Comparison
-- S&P 500 YTD: +4.27%
-- Portfolio YTD: -0.011% (since first trade 4/22)
-- **Alpha: -4.28%** (significantly underperforming)
-- Primary cause: defensive positioning in Risk-On market + 80% cash drag
+### Iran/Hormuz Update (November 2026)
+- Partial peace deal reached around June 2026 → Hormuz now flowing at **54% of pre-war** (9.34M bpd vs 17.15M prewar)
+- WTI: ~$86/bbl (down from April's $96)
+- Brent: ~$93/bbl (down from April's $105)
+- Attacks continue to blunt hopes for full Iran truce
+- Key risk: oil price volatility if talks collapse again
 
-## Market Context (2026-04-23 Close)
-- S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
-- Nasdaq: 24,657.57 (+1.64%) — record close
-- Dow: 49,490.03 (+0.69%)
-- SPY: ~$711.21 (+1.01%)
-- VIX: ~17-18 (Risk-On territory, below 20 threshold)
-- 10Y yield: ~4.27%
-- Regime: **RISK-ON** — VIX < 20, ceasefire holding, tech leading
+### Key Overnight Events
+- **Nvidia Q3 FY2027 (reported Nov 18):** Revenue $115.8B (+103% YoY), EPS $2.68 vs $2.47 est. Beat across board. Jensen Huang resigned as CEO (Colette Kress interim). Stock slipping today (sell-the-news).
+- **Anthropic IPO (ANT, Nasdaq):** Market debut today. Last private valuation $965B, IPO could reach $2T. Tech stocks rallied pre-market.
+- **Alibaba:** Cloud revenue growth +53% — AI demand narrative reinforced.
 
-### Sector Performance Today
-- Info Tech: +2.31% (15 of last 16 sessions green)
-- Semiconductors: 11 consecutive winning sessions (record)
-- Energy (XLE): +1.20%
-- Healthcare (XLV): +0.32%
-- Gold (GLD): +1.32%
-
-### Oil (Hormuz Escalation)
-- WTI: ~$96.73 (+4.06%)
-- Brent: ~$105.63 (+3.62%)
-- Iran seized 2 ships, fired on 3 in Hormuz
-- Only 1 ship/day passing through (vs 130/day normal)
-- Diplomacy stalled: Iran won't talk until blockade lifted
-
-### After-Hours Earnings
-- Boeing (BA): Q1 beat significantly. Rev $22.22B vs $21.78B est, loss ($0.20) vs ($0.83) est. +5.53%
-- IBM: Q1 beat but -6-7% AH on decelerating growth, AI disruption fears
-- GE Vernova: +13.75% (best S&P, raised revenue forecast)
-- Micron: +8.48% (AI memory demand, record close)
-- United Airlines: -5.58% (jet fuel costs from Hormuz)
-
-## Key Assessment
-**Portfolio lagging S&P significantly.** Defensive positioning in Risk-On = opportunity cost.
-- XLV flat (+0.32%) vs tech +2.31% = wrong sector for this regime
-- XLE working (+0.54%) = Hormuz/oil thesis correct
-- GLD underwater (-0.51%) = entry was near peak, gold bid still present
-- 80% cash drag = missing most of S&P rally
-
-**Regime is Risk-On. Strategy says increase Momentum, reduce Low Vol.**
-Consider: adding XLK/QQQ for momentum exposure, maintaining XLE (oil tailwind).
+## Key Assessment (November 19, 2026)
+**Regime shifted: Risk-On (April) → Late Cycle now.**
+- XLV massive winner: Entry $146.73, est. current ~$189.65 (+29%)
+- Stop-losses EXPIRED. This is the most urgent action item.
+- 80% cash drag continues but Late Cycle (not Risk-On) = less aggressive deployment warranted
+- Nvidia post-earnings dip = potential value entry in AI secular winner
+- VIX near Stress boundary = keep some defensive posture
 
 ## Infrastructure Status
 

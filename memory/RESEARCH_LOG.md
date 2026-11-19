@@ -1,5 +1,74 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-19)
+
+**Market Status:** Closed (opens 9:30 AM ET 11/19)
+**Gap since last session: ~7 months (last update 4/23/2026)**
+
+### Regime Assessment: LATE CYCLE (transitioning from Stress)
+**VIX: 24.56** (down 3.53% from yesterday's 25.46 = Stress)
+- Yesterday (11/18): VIX 25.46 = STRESS territory (>25)
+- Today (11/19): VIX 24.56 = LATE CYCLE (20-25 band)
+- Saxo Options Brief (11/19): "MARKET REGIME: NEUTRAL / CHOP | VIX 24.56"
+- Regime = **LATE CYCLE** per strategy table (VIX 20-25)
+- Strategy shifts: Value ↑, Momentum ↓, Quality ↑
+
+### S&P 500 Summary
+- Level: ~7,400 (up from 7,138 on April 23)
+- YTD (as of Nov 13): +10.5%
+- Recent: Best week since August the week of Nov 13 (+2.5%)
+- Today: Mixed/slightly lower (down ~0.23% per Trading Economics)
+- P/E multiple contracted from 28.4 to 25.9 (more attractive valuation)
+
+### Iran/Hormuz Update
+- **Partial peace deal reached ~June 2026** ("Peace Deal Overcomes Fed Jitters" - AdvisorPerspectives 6/18)
+- Hormuz now at **54% of pre-war flows** (9.34M bpd vs 17.15M prewar baseline)
+- WTI crude: ~$86/bbl (down from $96 in April)
+- Brent crude: ~$93/bbl (down from $105 in April)
+- Ongoing: Attacks continue, Iran warns tankers to use approved routes
+- Key risk: Further de-escalation = oil price crash (bad for XLE); re-escalation = oil spike
+
+### Federal Reserve
+- Fed funds rate: **3.75-4.0%** (October FOMC held steady, raised from Dec 2025 cuts)
+- Two members (Cook + Hammack) dissented in Oct, wanted rate hike
+- Trajectory: Possibly hawkish into year-end
+- Hawkish Fed minutes = higher yields = headwind for equities, especially growth
+- Late Cycle signature confirmed: Fed hawkish while macro decelerates
+
+### Key Overnight Events (11/18-19)
+- **NVIDIA Q3 FY2027 (reported 11/18):**
+  - Revenue: $115.8B (+103% YoY) vs $109B est — massive beat
+  - EPS: $2.68 vs $2.47 est — beat
+  - Gross margin: 74.8% vs 74.03% est
+  - Q4 guidance: $130B ± 3% (excluding China data center)
+  - Jensen Huang resigned as CEO; Colette Kress interim
+  - After-hours +3.6%, but stock slipping 11/19 (sell-the-news volatility cooldown)
+  - Saxo: "one-day volatility cools" — typical post-earnings IV crush
+
+- **Anthropic IPO (ANT, Nasdaq):**
+  - Company making stock market debut today
+  - Previous valuation: $965B; IPO target: up to $2T
+  - Tech stocks rallied pre-market in sympathy
+  - Skip for now — day-1 IPO pricing too speculative
+
+- **Alibaba:** Cloud revenue +53% — AI demand acceleration narrative confirmed
+
+### Position Status (Estimates — Alpaca MCP unavailable)
+| Symbol | Entry | Est. Current | Est. P&L | Stop Status |
+|--------|-------|-------------|---------|-------------|
+| XLV | $146.73 | ~$189.65 | +29.3% | **EXPIRED 7/22** |
+| XLE | $56.42 | ~$54-58 est | Unknown | **EXPIRED 7/22** |
+| GLD | $435.66 | Unknown | Unknown | **EXPIRED 7/22** |
+
+### Today's Trade Plan
+1. **IMMEDIATE**: Re-set all 3 stop-losses (expired GTC orders from July)
+2. **EVALUATE**: Partial profit take on XLV (overbought signal, +29% gain)
+3. **WATCH**: NVDA intraday dip after earnings beat selloff
+4. **SKIP**: Anthropic ANT IPO (day-1 speculation)
+5. **CONSIDER**: VTV (Value ETF) $10K deployment as Late Cycle play
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
