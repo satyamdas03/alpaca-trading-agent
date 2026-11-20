@@ -58,6 +58,41 @@
 
 ---
 
+## Pre-Market Assessment: 2026-11-20
+
+**Regime: LATE CYCLE** (VIX ~21-23, Hormuz closed, Fed hiking Dec)
+**Position status: ESTIMATED OPEN — not verified with Alpaca (MCP unavailable)**
+**7-month gap: Last confirmed update 4/23. No intervening trades recorded.**
+
+### Estimated Position Summary (11/20 Pre-Market)
+| Symbol | Entry | Est. Current | Est. P&L | Stop (OUTDATED) | Required Action |
+|--------|-------|-------------|----------|-----------------|-----------------|
+| XLV | $146.73 | ~$178 | +21% | $136.46 | Update trailing stop → ~$165 |
+| XLE | $56.42 | ~$68 | +20.5% | $52.47 | Update trailing stop → ~$63 |
+| GLD | $435.66 | ~$473 | +8.5% | $405.17 | Update trailing stop → ~$440 |
+
+### Manual Orders for Alpaca Execution (Stop-Loss Updates)
+```
+# URGENT: Cancel April 23 stops, replace with current trailing stops
+
+CANCEL: Order 71b7b3bf (XLV stop $136.46)
+PLACE: XLV SELL 47 TRAILING_STOP trail_percent=7.0
+
+CANCEL: Order 63cbc6a9 (XLE stop $52.47)
+PLACE: XLE SELL 124 TRAILING_STOP trail_percent=7.0
+
+CANCEL: Order f91b4932 (GLD stop $405.17)
+PLACE: GLD SELL 13 TRAILING_STOP trail_percent=7.0
+```
+
+### No New Trades Today
+- **Reason:** Late Cycle regime, tech momentum breaking down (chip stocks -1.67% pre-market)
+- **Watch:** VIX crossing 25 → add SH or SPY puts hedge
+- **Watch:** Trump Iran announcement → if deal → EXIT XLE immediately (oil crash risk)
+- **Watch:** VIX stabilizing below 20 → reassess momentum plays when confirmed
+
+---
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |
