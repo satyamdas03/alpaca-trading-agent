@@ -1,5 +1,111 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-20)
+
+**Market Status:** Pre-market (opens 9:30 AM ET 11/20/2026)
+**Last Memory Update:** 7 months ago (2026-04-23) — gap noted, estimates used below
+
+### Regime Assessment: LATE CYCLE (Trending toward STRESS)
+| Signal | Value | Threshold | Verdict |
+|--------|-------|-----------|---------|
+| VIX | ~21-23 est. (19.30 on 11/13) | <20=Risk-On, 20-25=Late Cycle, >25=Stress | LATE CYCLE |
+| S&P trend | 6-session losing streak, -1.96% yesterday | Above 200MA = OK | CAUTION |
+| Oil | Brent ~$108-115 est. (Oct 28: $115.11), WTI ~$95-102 | Elevated >$90 = Stress driver | STRESS SIGNAL |
+| Fed | Rates 3.75-4%, Dec hike expected, PCE 3.6% | Hawkish = headwind | LATE CYCLE |
+| Iran/Hormuz | Closed (Iran declared after July 7 breakdown) | Open = Risk-On | STRESS SIGNAL |
+
+**REGIME: LATE CYCLE with HIGH STRESS RISK. VIX ~21-23 (technically Late Cycle), but Hormuz closed again, Fed hiking in December, chip stocks tumbling. One shock from moving to full Stress.**
+
+### Iran/Hormuz — STILL ESCALATING (Nov 19-20, 2026)
+- **Hormuz CLOSED** — Iran declared closure after June 17 Islamabad memorandum broke down July 7
+- **US struck Qeshm Island Nov 17** — latest strike in ongoing military action
+- **3 commercial vessels attacked** Nov 16-19 by IRGC; 2 seafarers missing
+- **28M barrels/day** passed through Hormuz on a recent Wednesday (some throughput despite closure)
+- **Trump weighing Iran decision** — military action vs. diplomacy uncertain
+- **Qatar mediating** — Iran presented 10-nation regional bloc proposal, US response "not convincing"
+- **Diplomacy stalled** — Iran FMin calls US stance "not convincing"
+- **Status:** No ceasefire in force (Nov 19). Active hostilities. Oil remains elevated.
+- **Oil latest** — Brent $115.11, WTI $101.65 on Oct 28. Likely $100-115 range on Nov 20.
+
+### Market Data (Nov 20 Pre-Market)
+- **SPY close (11/19):** $715.87, down 1.96% (-$14.28) — 6-session losing streak
+- **SPY pre-market (8:01 AM):** ~$710 (-0.81%)
+- **QQQ pre-market (8:01 AM):** -1.67%
+- **S&P 500:** ~7,350-7,416 range
+- **Catalyst:** Chip stocks tumbling globally; Anthropic shares reportedly -9%+
+- **Nov 5 EVENT:** VIX spiked 28.18 (+70%), SPY fell 4.4% — likely midterm elections, fell back quickly
+
+### VIX Trajectory (Nov 2026)
+| Date | VIX | Note |
+|------|-----|------|
+| 11/5 | 28.18 | Spike (+70%), fell back — likely election event |
+| 11/9 | 19.92 | Recovery |
+| 11/10 | 19.46 | |
+| 11/11 | 17.49 | Low |
+| 11/12 | 18.70 | |
+| 11/13 | 19.30 | Last confirmed |
+| 11/19-20 | ~21-23 est. | SPY -6-day losing streak, chip selloff |
+
+### Fed (Oct 28, 2026 Meeting)
+- Held at **3.75-4.00%** — no change, two dissents for +25bps
+- **December hike** widely expected — PCE 3.6%, Warsh "no soft inflation target"
+- Mortgage rates: 7.4% (3-year high)
+- Driver: AI infrastructure buildout + energy inflation from Hormuz = not rate-sensitive
+
+### Nvidia Earnings (Nov 17, 2026)
+- **Revenue: $115.8B** (+103% YoY) — BEAT
+- **EPS: $2.68 non-GAAP** vs $2.47 expected — BEAT
+- **Data Center: $107.6B** (+110% YoY)
+- **Q4 guidance: $130B** (but no China Data Center revenue assumed)
+- **Jensen Huang resigned Nov 12** — Colette Kress (CFO) serving as interim CEO
+- **Stock reaction:** Rose 3.6% AH to ~$161, now DOWN pre-market with chip selloff
+- **Impact:** Anthropic reportedly -9%+. Chip sector tumbling globally. Tech momentum broken.
+
+### Earnings This Week (Nov 16-20, 2026)
+- **Nvidia (NVDA):** Beat Nov 17 (details above)
+- **WMT, PDD, BABA:** Reported Nov 19 per Newsquawk
+- **Nov 20 (Friday):** ~31 small/mid-cap reporters; BJ's Wholesale Club notable
+- **No major S&P 500 names reporting Friday**
+
+### Estimated Position Status (Without Alpaca Verification)
+*WARNING: 7-month gap since last confirmed update (4/23). These are ESTIMATES.*
+
+| Symbol | Entry | Est. Current | P&L Est. | Stop (Original) | Stop (Should Be) |
+|--------|-------|-------------|----------|-----------------|------------------|
+| XLV | $146.73 | ~$178 (-2% from $181.30 Oct 22) | +21% (+$1,470) | $136.46 (OUTDATED) | ~$165 (-7% from est.) |
+| XLE | $56.42 | ~$68 est. (oil elevated all year) | +20% (+$1,448) | $52.47 (OUTDATED) | ~$63 (-7% from est.) |
+| GLD | $435.66 | ~$473 est. (one ref cited) | +8.5% (+$524) | $405.17 (OUTDATED) | ~$440 (-7% from est.) |
+
+**CRITICAL:** Original stops based on April entry prices. With 20%+ gains, these stops are DANGEROUSLY outdated. ALL THREE STOPS MUST BE UPDATED to protect accumulated gains.
+
+### Trade Plan — Nov 20, 2026
+**REGIME: LATE CYCLE. No new Momentum plays. Protect existing gains.**
+
+1. **UPDATE STOPS (URGENT)** — Current stops protect entry, not profits
+   - XLV: Cancel $136.46 stop, set new STOP at ~$165 (trailing from ~$178 estimate)
+   - XLE: Cancel $52.47 stop, set new STOP at ~$63 (trailing from ~$68 estimate)
+   - GLD: Cancel $405.17 stop, set new STOP at ~$440 (trailing from ~$473 estimate)
+
+2. **NO NEW TECH/MOMENTUM POSITIONS** — Chip stocks tumbling, QQQ -1.67% pre-market
+   - Avoid: NVDA, NVDA-related, semis, Nasdaq plays
+   - Anthropic -9%+ is canary — tech leadership breaking down
+
+3. **HOLD XLE** — Oil elevated ($100-115+), Hormuz closed, US-Iran tensions rising
+   - Risk: Sudden Trump deal or successful Hormuz reopening → oil crash → EXIT immediately
+
+4. **HOLD GLD** — Inflation 3.6%, Hormuz closed, Dec Fed hike = safe haven bid persists
+
+5. **HOLD XLV** — Healthcare defensive = correct for Late Cycle. Gains need protecting.
+
+6. **CONSIDER HEDGE** — If VIX crosses 24, buy SH (inverse S&P) or SPY puts for downside protection
+   - December Fed hike + Hormuz closed + chip breakdown = elevated crash risk
+
+7. **CASH DEPLOYMENT** — 80% cash. In Late Cycle, can deploy in VALUE (not Momentum):
+   - XLU (utilities): Late Cycle beneficiary, inflation/rates headwind but defensive
+   - Consider after stop-losses updated and position review confirmed
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

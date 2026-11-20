@@ -1,6 +1,110 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-20 Pre-Market Routine
+**WARNING: 7-month gap in updates. Alpaca MCP unavailable — using ESTIMATES from web data. Actual account state UNVERIFIED.**
+
+## Account Overview (ESTIMATED — based on April 23 last confirmed + market data)
+- Account Type: Paper Trading
+- Account Number: PA3M6G5LMKMI
+- Starting Balance: $100,000.00
+- Current Cash: ~$80,000.00 (unchanged from April 23 — no new trades)
+- **Estimated Portfolio Value: ~$103,500** (+3.5% from start)
+- Buying Power: ~$183,000 est. (2x margin)
+- Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
+- Alpaca Paper: true
+
+## Open Positions (ESTIMATED — NOT VERIFIED with Alpaca)
+| Symbol | Side | Qty | Entry Price | Est. Current | Est. Unrealized P&L | Est. P&L % | Stop (OUTDATED) |
+|--------|------|-----|-------------|-------------|---------------------|------------|-----------------|
+| XLV | LONG | 47.707 | $146.73 | ~$178 | ~+$1,490 | ~+21% | $136.46 ← MUST UPDATE |
+| XLE | LONG | 124.076 | $56.42 | ~$68 | ~+$1,450 | ~+20.5% | $52.47 ← MUST UPDATE |
+| GLD | LONG | 13.772 | $435.66 | ~$473 | ~+$524 | ~+8.5% | $405.17 ← MUST UPDATE |
+
+**Est. position value: ~$23,500. Cash: ~$80,000. Est. total: ~$103,500**
+**Est. unrealized P&L: ~+$3,464 (+3.5% from $100K start)**
+
+### Stop-Loss Orders (CRITICAL: ALL OUTDATED — Based on April entry prices)
+| Symbol | Current Stop | Distance to Entry | Action Required |
+|--------|-------------|-------------------|-----------------|
+| XLV | $136.46 (Order 71b7b3bf) | -7% from $146.73 | CANCEL & reset to ~$165 |
+| XLE | $52.47 (Order 63cbc6a9) | -7% from $56.42 | CANCEL & reset to ~$63 |
+| GLD | $405.17 (Order f91b4932) | -7% from $435.66 | CANCEL & reset to ~$440 |
+
+**ACTION: Stops based on ENTRY prices, not current prices. With 20%+ gains, these stops protect entry but surrender all profits. Update to trailing stops based on current estimated prices.**
+
+### Manual Order Instructions (Alpaca MCP unavailable — execute via REST API or UI)
+```
+# XLV — Cancel old stop, set new trailing stop
+DELETE order 71b7b3bf
+POST order: SELL XLV, 47 shares, TRAILING_STOP, trail_percent=7.0
+
+# XLE — Cancel old stop, set new trailing stop
+DELETE order 63cbc6a9
+POST order: SELL XLE, 124 shares, TRAILING_STOP, trail_percent=7.0
+
+# GLD — Cancel old stop, set new trailing stop
+DELETE order f91b4932
+POST order: SELL GLD, 13 shares, TRAILING_STOP, trail_percent=7.0
+```
+
+## Allocation
+- Cash: ~77.3% (est.)
+- Equities: ~22.7% (est.)
+- Options: 0%
+- Crypto: 0%
+- **Target in Late Cycle: 25-35% equities — slightly underdeployed but no momentum plays**
+
+## Performance Tracking
+
+### Daily Returns (incomplete — 7-month gap, only endpoints known)
+| Date | Equity | Day P&L | Day P&L % | Cum P&L | S&P Day | S&P Cum | Alpha |
+|------|--------|---------|-----------|---------|---------|---------|-------|
+| 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% | +0.62% |
+| 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% | -0.43% |
+| 11/19 | ~$103,500 est. | unknown | ~+3.5% from start | +$3,500 est. | SPY $715.87 | SPY vs $711 start = +0.7% from 4/23 | ~+2.8% est. alpha |
+
+### Benchmark Comparison
+- S&P 500: SPY was $715.87 on 11/19 close, was ~$711 on 4/23. +0.7% over 7 months.
+- Portfolio est.: +3.5% from start ($100K → ~$103.5K)
+- **Estimated Alpha: ~+2.8%** (vs flat S&P over same period — primarily driven by oil/gold position)
+- Note: Estimates only. S&P YTD from Jan 1 unknown. Positions may have changed.
+
+## Market Context (2026-11-20 Pre-Market)
+- S&P 500: ~7,350-7,416 (6-session losing streak, down 1.96% yesterday)
+- SPY: $715.87 close 11/19; pre-market ~$710 (-0.81%)
+- QQQ: pre-market ~-1.67%
+- VIX: ~21-23 est. (confirmed 19.30 on 11/13; Nov 5 spike to 28.18)
+- Oil: Brent est. ~$105-115 (Oct 28: $115.11), WTI est. ~$95-102
+- 10Y yield: elevated (mortgage rates 7.4%)
+- Regime: **LATE CYCLE (high stress risk)** — VIX 20-25 zone, Hormuz closed, Fed hiking
+
+### Iran/Hormuz (11/20)
+- Hormuz CLOSED by Iran (after July 7 ceasefire breakdown)
+- US struck Qeshm Island Nov 17
+- 3 ships attacked Nov 16-19
+- Trump weighing Iran action
+- Oil elevated — direct XLE tailwind
+
+### Tech Sector (11/20)
+- Chip stocks tumbling globally pre-market
+- Anthropic -9%+
+- Nvidia beat earnings (Nov 17) but stock now declining
+- Jensen Huang resigned Nov 12 — Colette Kress interim CEO
+
+## Infrastructure Status
+
+### MCP Connectors
+| Server | Status | Last Verified |
+|--------|--------|---------------|
+| Alpaca | DISCONNECTED (MCP) / Working (REST fallback) | 2026-04-23 (MCP), unknown current |
+| Gmail | CONNECTED | 2026-11-20 |
+| GitHub | CONNECTED | 2026-11-20 |
+
+### CRON Jobs Status
+**WARNING:** CRONs from April 23 were session-only and have long since expired. Need to recreate.
+Previous job IDs: 93231087, b3f3cc68, 5a80a0f4, edd3dac0 — all expired.
+
+## Previous Portfolio State (2026-04-23 Close — preserved for reference)
 
 ## Account Overview
 - Account Type: Paper Trading
