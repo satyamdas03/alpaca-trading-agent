@@ -1,6 +1,25 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-23 Pre-Market Routine (7-month gap recovery)
+
+**⚠️ CRITICAL: 7-MONTH SESSION GAP. All position data below is from 4/23/2026 and is STALE. GTC stops expired 7/22/2026. Must verify via manual Alpaca login before trading.**
+
+---
+
+## CURRENT REGIME: STRESS (as of 2026-11-23)
+- VIX: ~27-30 (spiked to ~40 on Nov 20, 2026 — highest since March)
+- S&P 500: ~6,910 (Nov 20 close), broken below 200-day MA Nov 17
+- S&P down ~11.6% from Oct 6 record of 7,818.93
+- Fed: Rates at 3.75-4%, inflation elevated, Dec 2026 rate hike possible
+- Primary driver: AI/tech selloff (Nvidia + chip export curbs)
+- Hormuz: Partially reopened (27.7 ships/day), oil down to ~$82-84 (from $97-100 in April)
+
+## PREVIOUS REGIME: RISK-ON (2026-04-23 — last session)
+**Regime fully reversed over 7 months.**
+
+---
+
+**Last Updated (STALE — 2026-04-23):** 2026-04-23 Market Close Routine (Session 2)
 
 ## Account Overview
 - Account Type: Paper Trading

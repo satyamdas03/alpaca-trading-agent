@@ -1,5 +1,95 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-23) — 7-MONTH GAP RECOVERY
+
+**Market Status:** Pre-market (opens 9:30 AM ET 11/23/2026)
+**NOTE:** 7-month gap since last session (4/23/2026). CRONs expired. Positions status UNKNOWN — requires manual Alpaca verification.
+
+### REGIME ASSESSMENT: STRESS (confirmed — major regime change from April's Risk-On)
+
+**Regime Signals:**
+- VIX: ~27-30 range (spiked to ~40 intraday on 11/20 — highest since March 2026) → **STRESS confirmed**
+- S&P 500: ~6,910 close 11/20 — down ~11-12% from Oct 6 record of 7,818.93 → **STRESS confirmed**
+- S&P **broke 200-day MA on Nov 17** (bearish technical signal)
+- Nasdaq: Down ~19% from recent high
+- Fed: Holding rates at **3.75%-4%** (Oct 28 FOMC). Market pricing ~85% chance of **December rate HIKE**. "Inflation remains elevated." Fed Chair Kevin Warsh.
+- Previous regime (4/23/2026): RISK-ON (VIX ~17-18, S&P at records). **Regime has fully reversed.**
+
+### Selloff Catalyst
+- Primary driver: **AI/tech valuation collapse** — Nvidia reversal, new chip export curbs, AI agent concerns undercutting software subscription pricing
+- S&P 500 worst day Nov 5 since 2025 Liberation Day tariffs
+- Multiple consecutive losing sessions; longest losing streak of recent period
+- Nov 16: S&P -1.9% (chip export curbs), Nov 17: S&P -1.0% (NSA outage + AI agent pricing fears), Nov 20: S&P ~-3.7% (VIX to 40)
+
+### Market Levels (as of Nov 20, 2026 — last close)
+| Asset | Level | Change | Notes |
+|-------|-------|--------|-------|
+| S&P 500 | ~6,910 | -3.7% (Nov 20) | -11.6% from Oct 6 record 7,818.93 |
+| Nasdaq | Approx 20,500 est | -19% from high | Amazon options strangle active (Nov 23) |
+| VIX | ~27-30 | Spiked to 40 (Nov 20) | STRESS threshold >25 breached |
+| WTI Crude | ~$82-84/bbl | Down from April $97-100 | Oil lower = XLE thesis weakened |
+| Brent | ~$85-87/bbl est | Down significantly | Hormuz partially reopened |
+| 10Y Yield | ~4.3% est | Fed holding 3.75-4% | December hike risk |
+
+### Iran/Hormuz Update (November 2026)
+- **Partially reopened:** US-facilitated transits averaged **27.7 vessels/day** (was 1/day in April, pre-war was 130/day)
+- **Record 135 transits** over Nov 8-11
+- **Energy Sec. Wright:** 7-day average oil leaving Hormuz >8M bbl/day
+- **BUT attacks continue:** Tanker DOMINICA PROSPERITY hit by projectile near UAE Nov 11 (fire); tanker on fire in strait Nov 17
+- **Iran blacklisted 45 tankers** using Hormuz
+- **Iran oil exports:** "Nearly zero" per Seatrade Maritime (US blockade effective)
+- **Implication for XLE:** Oil dropped from ~$100 (Apr) to ~$83 (Nov) as Hormuz partially reopened. XLE thesis significantly weakened. Must assess XLE position status.
+
+### Macro Context
+- **Fed:** Rates at 3.75-4%, inflation stubborn, Dec hike increasingly priced in. This is a HEADWIND for equities (particularly tech/growth).
+- **Thanksgiving week:** Market closes early Wednesday Nov 25, closed Thursday Nov 26. Low liquidity rest of week.
+- **AI/tech selloff:** Dominant driver. Not Hormuz this time.
+
+### Portfolio Position Status (ESTIMATED — 7-MONTH GAP)
+**CRITICAL: GTC stop orders were set to expire 7/22/2026. Positions after that date = NO STOPS.**
+- **XLV (entry $146.73, stop was $136.46):** Healthcare is defensive — likely held up better. Market from Apr→Oct went Risk-On (record highs), then corrected. XLV may be flat to slightly up. **Status: LIKELY OPEN — needs verification.**
+- **XLE (entry $56.42, stop was $52.47):** Oil dropped from ~$97→$83 (-14%). XLE would have dropped proportionally. If stop expired July 22, may have remained open during recovery rally to Oct records, then dropped again. **Status: UNKNOWN — needs verification. Could be near/at loss.**
+- **GLD (entry $435.66, stop was $405.17):** Gold is a safe haven. STRESS regime = gold demand up. GLD likely APPRECIATED in current selloff. **Status: LIKELY PROFITABLE — needs verification.**
+
+### Trade Plan for 2026-11-23 (STRESS Regime)
+
+**Strategy: Low Volatility ↑, Quality ↑, Momentum ↓, Value ↓**
+
+**Step 1 — Verify positions (MANUAL):**
+- Log into Alpaca paper account (key: PK7CLPEOIIEKMEVPNWEF4GPL22)
+- Check open positions: XLV, XLE, GLD status and current prices
+- Check any existing stop orders or lack thereof
+
+**Step 2 — Position decisions (conditional):**
+
+| Position | Action if Open | Action if Closed |
+|----------|---------------|-----------------|
+| XLV | HOLD - appropriate for STRESS. Set new GTC stop at -7%. | Rebuy: $7K at market open. STRESS defensive. |
+| XLE | EVALUATE: If <$52, check oil thesis. Consider reducing/exiting. | Don't rebuy yet. Oil declining. |
+| GLD | HOLD and consider ADDING. STRESS = safe haven. Set new stop at -7%. | Rebuy: $6-8K. Gold thesis intact. |
+
+**Step 3 — New positions (if remaining cash available ~$80K):**
+
+| Order | Symbol | Side | Notional | Rationale |
+|-------|--------|------|----------|-----------|
+| 1 | GLD | BUY | $8,000 | Add to gold — STRESS regime safe haven, VIX ~40 spike = safe haven demand ↑ |
+| 2 | TLT | BUY | $7,000 | 20Y Treasury ETF — flight to safety + possible Fed pivot in 2027 |
+| 3 | HOLD CASH | — | — | Do NOT add momentum/tech. Keep $65K+ in cash. |
+
+**Wait-and-see triggers:**
+- VIX declining below 25 consistently → begin shifting to Recovery (Quality + Momentum)
+- VIX confirming <20 → shift to Risk-On (Momentum + tech)
+- S&P recovering above 200-day MA → bullish signal
+
+**Step 4 — Stop-losses (critical — previous stops expired):**
+- Set new GTC stops on ALL open positions at -7% from CURRENT price (not entry)
+- Note: GTC stops last seen as expiring 7/22/2026. Must re-set.
+
+### Session Conclusion
+**REGIME CHANGE DETECTED:** Risk-On (Apr 23) → STRESS (Nov 23). Full 7-month gap. AI/tech selloff + Fed tightening = new stress cycle. Oil lower = Hormuz thesis partially resolved (bearish for XLE, neutral for GLD). Key action: verify positions manually, re-set stops, add GLD/TLT for STRESS positioning.
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)

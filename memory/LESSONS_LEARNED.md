@@ -46,6 +46,24 @@
 
 ---
 
+## Session: 2026-11-23 (Pre-Market, 7-month gap recovery)
+
+19. **7-month session gaps leave positions exposed.** GTC stop orders expired July 22, leaving XLV/XLE/GLD positions with NO stops for 4+ months during a volatile period. Always re-set GTC stops on every session and note their expiration dates.
+
+20. **Regime can fully reverse in a bull-bear cycle over months.** April was Risk-On (VIX 17, S&P records), November is STRESS (VIX ~40 spike, S&P -11.6% from Oct record). What's right for one regime is wrong for the other. Always re-assess regime before reviewing positions.
+
+21. **AI/tech is the new dominant macro driver in late 2026.** Iran/Hormuz is partially resolved (27 ships/day vs zero), so oil dropped from $100 → $83. The new systemic risk is AI valuation: Nvidia reversal + chip export curbs + AI agents undercutting software = tech-led correction. Must monitor NVDA and AI export policy as closely as geopolitics.
+
+22. **Fed tightening headwind in STRESS.** Fed holding at 3.75-4% with December hike likely. This kills tech (long duration) and lifts USD. In this environment, GLD (inflation hedge), TLT (rate hedge if pivot comes), and defensive sectors outperform.
+
+23. **CRONs are session-only and die.** Despite setting up automated routines, 7 months passed without a session. All cron jobs died. The system is NOT truly autonomous without persistent infrastructure. Manual check-in is required.
+
+24. **Hormuz de-escalation is XLE bearish.** When Hormuz reopens (even partially), oil falls, XLE falls. The thesis that worked in April (Hormuz closed → XLE up) has reversed. Be ready to exit or short energy when de-escalation signals appear.
+
+25. **VIX spike to 40 can signal capitulation and buying opportunity.** The Nov 20 VIX spike to 40 (highest since March) may represent exhaustion of sellers. If VIX declines from 40 → Recovery regime beginning. Watch closely for VIX declining below 30, then 25, then 20.
+
+---
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions
