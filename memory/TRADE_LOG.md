@@ -1,5 +1,27 @@
 # Trade Log
 
+## ⚠️ 7-MONTH GAP NOTICE (2026-11-23)
+Last session was 2026-04-23. GTC stop orders placed 4/23 were set to expire 7/22/2026. All position/order status below is STALE. Manual Alpaca verification required before any new orders.
+
+**Regime at last session:** RISK-ON (VIX ~17-18)
+**Regime NOW (2026-11-23):** STRESS (VIX ~27-30, S&P -11.6% from records, below 200MA)
+
+### Planned Orders — 2026-11-23 Pre-Market (STRESS Regime — Manual Execution)
+*To be executed at market open 9:30 AM ET if positions verified OPEN:*
+
+| # | Symbol | Side | Notional | Type | Rationale | Priority |
+|---|--------|------|----------|------|-----------|---------|
+| A | GLD | BUY | $8,000 | MARKET | Add to gold — STRESS safe haven, VIX ~40 spike | HIGH |
+| B | TLT | BUY | $7,000 | MARKET | 20Y Treasury — flight to safety, possible 2027 Fed pivot | HIGH |
+| C | XLE | SELL | Full position | MARKET | Oil dropped $97→$83 (-14%), Hormuz partial reopen, thesis weakened | EVALUATE |
+
+*STOPS to re-set (previous GTC expired 7/22/2026):*
+- XLV: SELL STOP at current_price × 0.93 (7% stop), GTC
+- GLD: SELL STOP at current_price × 0.93 (7% stop), GTC
+- New GLD add: include in bracket
+
+---
+
 | Timestamp | Symbol | Side | Qty | Price | Rationale | Signal | Status |
 |-----------|--------|------|-----|-------|-----------|--------|--------|
 | 2026-04-22 09:31 ET | XLV | BUY | 47.707 | $146.73 | Defensive sector in Stress, UNH beat earnings | Low Vol ↑ in Stress regime | OPEN |
