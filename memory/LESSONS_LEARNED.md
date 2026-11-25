@@ -46,6 +46,22 @@
 
 ---
 
+## Session: 2026-11-25 (Pre-Market — 7-Month Gap)
+
+19. **GTC stop-loss orders have expiration dates. Check them.** The Apr 23 stops were set "GTC expire 7/22" (July 22, 2026). They expired months ago. Any positions that survived to November are now UNPROTECTED. ALWAYS verify stop-loss status at the start of each session, and RESET stops that have expired.
+
+20. **A 7-month session gap with no memory updates = operational blindspot.** The agent was running without memory persistence. Cloud session architecture means every wakeup requires reading memory files AND verifying live account state. When memory is 7+ months old, treat all position info as INFERRED, not factual.
+
+21. **Geopolitical catalysts resolve, not persist.** Iran/Hormuz was THE dominant macro driver in April (regime = Stress, oil $96, XLE thesis). By June, a deal was struck and tankers started crossing. Oil fell from $96 to $83-85. The XLE trade thesis became invalid. Always monitor for catalyst resolution — when the thesis changes, so must the position.
+
+22. **New macro regimes can emerge without memory.** April 2026: Fed on hold, risk-on. November 2026: Fed hiking (97% Dec hike probability), tariffs on 20+ countries, AI selloff. Regime detection requires CURRENT data, not stale memory. Always run web research before any regime determination.
+
+23. **Proxy restrictions mean Alpaca is not always accessible from cloud sessions.** Have a manual fallback plan. Keep orders documented in TRADE_LOG.md for manual execution. Never assume API access.
+
+24. **Thanksgiving week = thin market, high volatility. Size down.** Short trading week amplifies moves. With -3% futures and PCE data, the worst possible day to add new risk is a holiday-shortened session.
+
+---
+
 ## Rules
 - Document what worked and what didn't
 - Note any patterns observed across sessions

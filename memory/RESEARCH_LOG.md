@@ -69,7 +69,111 @@ Regime is Risk-On (VIX < 20). Strategy says: increase Momentum, reduce Low Vol.
 
 ---
 
-## Session: Pre-Market Routine (2026-04-23)
+## Session: Pre-Market Routine (2026-11-25) ← CURRENT SESSION
+
+**Market Status:** Pre-market (opens 9:30 AM ET 2026-11-25; closed Thursday Thanksgiving + half-day Friday)
+
+**⚠️ CONTEXT NOTE:** 7-month gap since last memory update (2026-04-23 → 2026-11-25). Position state is UNCERTAIN — must verify via Alpaca before trading. Alpaca REST and MCP blocked in this cloud session (proxy denies paper-api.alpaca.markets). Manual account verification required.
+
+---
+
+### Regime Assessment: LATE CYCLE / STRESS BORDERLINE
+
+| Factor | Value | Signal |
+|--------|-------|--------|
+| VIX (last known ~Nov 13) | ~19.30 (rebounded from 28.18 on Nov 5) | Late Cycle (20-25 band) |
+| VIX implied today | Likely 22-26 (Nasdaq -3% = fear spike) | Stress borderline |
+| S&P 500 futures | -1.9% | Risk-Off |
+| Nasdaq 100 futures | -3.11% | Risk-Off / Stress |
+| Dow futures | -0.7% | Risk-Off |
+| KOSPI | -6%+ (semiconductor tariffs) | Global Risk-Off |
+
+**REGIME: LATE CYCLE with real Stress risk. Strategy: Value ↑, Low Vol ↑, Momentum ↓**
+
+---
+
+### Macro Context
+
+**TARIFFS (New risk factor — dominant driver today):**
+- Trump administration weighing 20% duties on China, EU + 12-16 major trading partners
+- Partly replaces tariffs struck down by Supreme Court in February 2026
+- Stagflation risk: tariffs raise consumer prices while slowing growth
+- Semiconductor sector hardest hit (KOSPI -6%, Nvidia/AI weak)
+
+**PCE INFLATION (key event today):**
+- October PCE report due before market open
+- CME FedWatch: ~97% probability of 25bps RATE HIKE at Dec 8-9 Fed meeting
+- Fed Chair Warsh has been hawkish ("regime change at Fed" rhetoric)
+- If PCE hot: reinforces Dec hike, could spike VIX above 25 → Stress confirmed
+- If PCE cool: reduces hike probability, possible relief rally
+
+**IRAN/HORMUZ — RESOLVED (June 2026 deal):**
+- June 18, 2026: First tankers crossed Hormuz under Iran deal terms
+- Iran's fee-based routing system now in effect
+- Oil has fallen sharply from $96-100 (April) to WTI $83-85, Brent $91-92
+- November: Oil down ~20% on supply surplus (US inventories +3.4M barrels, IEA sees global supply at record 105.4Mb/d)
+- EIA previously saw Brent ~$100 for rest of year — no longer valid; actual ~$91-92
+- **XLE THESIS INVALIDATED**: Oil tailwind gone. Likely stop-loss triggered at some point post-June.
+
+**MARKET STRUCTURE:**
+- VIX Nov 5 spike: 16.61 → 28.18 (after S&P worst week since April 2025, Nasdaq -5.52% single day)
+- Recovery: VIX retreated to 19.30 by Nov 13
+- Today Nov 25: Tariff shock pushing VIX back up. With Nasdaq -3%, VIX likely 22-26.
+- Market closed Thursday (Thanksgiving). Half-day Friday (early close).
+
+---
+
+### Position Status (INFERRED — 7-month gap, unverified)
+
+| Symbol | Entry | Apr 23 Price | Inferred Current | Stop | Status |
+|--------|-------|-------------|-----------------|------|--------|
+| XLV | $146.73 | $146.38 | Unknown — healthcare resilient, likely $150-165 | $136.46 | LIKELY OPEN (stop intact) |
+| XLE | $56.42 | $56.72 | Likely $48-53 (oil -13% from entry-time levels) | $52.47 | LIKELY STOPPED OUT (stop probably triggered ~July) |
+| GLD | $435.66 | $433.43 | Likely $450-490 (gold bull run, uncertainty bids) | $405.17 | LIKELY OPEN (stop intact) |
+
+⚠️ **MUST VERIFY ACTUAL POSITIONS BEFORE ANY TRADES**
+
+---
+
+### Today's Trade Plan
+
+**Step 1: Verify Account State (MANUAL)**
+- Log into Alpaca paper account PA3M6G5LMKMI
+- Check which positions are still open
+- Check if stop orders (71b7b3bf, 63cbc6a9, f91b4932) triggered
+
+**Step 2: If XLE Still Open**
+- Current WTI ~$83-85 (down ~13% from $97 at entry time)
+- XLE very likely < $52.47 stop → check if already executed
+- If not, SELL 124 XLE MARKET immediately
+
+**Step 3: Maintain Defensive Positions**
+- If XLV open: HOLD. Healthcare defensive, appropriate for Late Cycle/Stress.
+- If GLD open: HOLD. Safe haven, benefits from tariff uncertainty and global risk-off.
+
+**Step 4: No New Positions Today**
+- Tariff shock + PCE data = binary risk day
+- Nasdaq -3% = no momentum plays
+- Wait for PCE print and market reaction before adding exposure
+- Thanksgiving = short week, reduce position risk
+- Potential new idea AFTER clarity: XLP (Consumer Staples) for Late Cycle positioning
+
+**Step 5: If Account Mostly Cash (XLE stopped out)**
+- Portfolio likely has: $80K cash + XLV (~$7K) + GLD (~$6K) = ~$93K
+- In Late Cycle/Stress: 15-20% invested is appropriate. Hold cash.
+- Do NOT add tech or momentum in -3% futures environment.
+
+---
+
+### Key Numbers to Monitor Today
+- VIX: watch for break above 25 (→ Stress, increase defensive) or below 18 (→ Risk-On possible)
+- Nasdaq open: If opens below -3%, avoid all additions
+- PCE print: Expect "hot" given oil/tariff pass-through. Hot = more Stress.
+- XLE: Check if stopped out. If WTI < $80, XLE could be < $48.
+
+---
+
+## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (opens 9:30 AM ET 4/23)
 
