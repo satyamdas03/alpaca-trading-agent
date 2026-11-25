@@ -58,6 +58,67 @@
 
 ---
 
+---
+
+## 2026-11-25 Pre-Market Assessment (7-Month Gap Session)
+
+**Regime: LATE CYCLE / STRESS BORDERLINE**
+**Alpaca status: INACCESSIBLE (proxy blocks paper-api.alpaca.markets)**
+**→ All orders below are for MANUAL EXECUTION**
+
+### Critical Issue: Stop-Loss Expiry
+GTC stop orders were set to expire 7/22 (July 22, 2026). They have EXPIRED.
+Positions are currently UNPROTECTED if still open. Highest priority task.
+
+### Inferred Position Status (MUST VERIFY)
+
+| Symbol | Likely Status | Rationale |
+|--------|--------------|-----------|
+| XLV | OPEN (inferred) | Healthcare defensive sector — stop at $136.46 unlikely triggered in bull market |
+| XLE | STOPPED OUT (inferred) | Oil from $96 → $83-85 (-13%); Hormuz deal June; XLE almost certainly < $52.47 at some point |
+| GLD | OPEN (inferred) | Gold bull run, geopolitical uncertainty bids; stop at $405.17 unlikely triggered |
+
+### Orders for Manual Execution (2026-11-25)
+
+**Priority 1: Verify account state**
+- Log into paper.alpaca.markets
+- Check actual positions and cash balance
+
+**Priority 2: If XLE still open**
+```
+SELL 124 XLE MARKET
+Reason: Oil thesis invalidated (Hormuz deal June 2026, WTI now $83-85 vs $96 at trade entry-time)
+Oil down ~13% → XLE likely near or below original $52.47 stop
+```
+
+**Priority 3: Reset stop-losses if XLV/GLD open (stops expired July 22)**
+```
+XLV: SELL 47 STOP $136.46 GTC (or use current price × 0.93 as new stop)
+GLD: SELL 13 STOP $405.17 GTC (or use current price × 0.93 as new stop)
+Note: If XLV price > $157, set stop to $146 (10% trailing). If GLD > $468, set stop to $435 (10% trailing).
+```
+
+**Priority 4: No new positions today**
+- Nasdaq -3.11% futures, VIX spiking on tariff news
+- PCE print due today — binary risk
+- Short trading week (Thanksgiving tomorrow)
+- Wait for regime clarity
+
+### Today's Regime: Late Cycle → Stress Transition Signals
+
+| Signal | Value | Interpretation |
+|--------|-------|---------------|
+| Nasdaq 100 futures | -3.11% | Risk-off, tech vulnerable |
+| S&P 500 futures | -1.9% | Broad selloff |
+| VIX trend | Spiked to 28, now ~22-26 | Late Cycle/Stress border |
+| Fed December | 97% rate HIKE | Tightening = headwind |
+| New tariffs | 20% China/EU/12 partners | Stagflation risk |
+| PCE today | Hot expected | Confirms hike path |
+| Oil | $83-85 (WTI) | Supply surplus, Hormuz premium gone |
+| KOSPI | -6% | Semiconductor/tech global risk-off |
+
+**Decision: HOLD CASH HEAVY. Confirm positions. Reset stops. No new buys.**
+
 ## Position Performance Summary (4/23 Close)
 
 | Symbol | Entry | Current | Total P&L | Day P&L | Stop | Distance to Stop |

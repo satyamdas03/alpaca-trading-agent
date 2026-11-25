@@ -1,39 +1,41 @@
 # Portfolio State
 
-**Last Updated:** 2026-04-23 Market Close Routine (Session 2)
+**Last Updated:** 2026-11-25 Pre-Market Routine (Session 3 — 7-month gap)
 
 ## Account Overview
 - Account Type: Paper Trading
 - Account Number: PA3M6G5LMKMI
 - Starting Balance: $100,000.00
-- Current Cash: $80,000.00
-- Total Portfolio Value: $99,988.99
-- Buying Power: $179,988.99 (2x margin)
-- Equity: $99,988.99
+- Current Cash: UNKNOWN (Alpaca inaccessible this session — proxy blocks paper-api.alpaca.markets)
+- Total Portfolio Value: UNKNOWN — last known $99,988.99 on 2026-04-23
+- Buying Power: UNKNOWN
+- Equity: UNKNOWN
 - Pattern Day Trader: No
 - Alpaca API Key: PK7CLPEOIIEKMEVPNWEF4GPL22
 - Alpaca Paper: true
 
-## Open Positions
-| Symbol | Side | Qty | Entry Price | Current Price | Unrealized P&L | P&L % | Cost Basis | Market Value |
-|--------|------|-----|-------------|---------------|----------------|-------|------------|--------------|
-| XLV | LONG | 47.707 | $146.73 | $146.38 | -$16.59 | -0.24% | $7,000.00 | $6,983.41 |
-| XLE | LONG | 124.076 | $56.42 | $56.72 | +$37.56 | +0.54% | $7,000.03 | $7,037.59 |
-| GLD | LONG | 13.772 | $435.66 | $433.43 | -$30.77 | -0.51% | $6,000.00 | $5,969.23 |
+⚠️ **ACCOUNT STATE UNVERIFIED — 7-month gap. Manual verification required via Alpaca paper trading dashboard.**
 
-**Total position value: $19,990.23. Cash: $80,000.**
-**Net unrealized P&L: -$9.80 (-0.01%)**
+## Open Positions (INFERRED — MUST VERIFY)
 
-### Stop-Loss Orders (SET — GTC, expire 7/22)
-| Symbol | Side | Qty | Type | Stop Price | Order ID | Distance |
-|--------|------|-----|------|-----------|----------|----------|
-| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | -7.00% |
-| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | -7.00% |
-| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | -6.97% |
+⚠️ 7-month data gap. Positions below are LAST KNOWN state from 2026-04-23. Actual state may differ.
 
-### Trailing Stops
-- None currently. Stop-losses block trailing stops on same shares.
-- Strategy: Cancel stop-loss, place trailing stop when position appreciates enough.
+| Symbol | Side | Qty | Entry Price | Last Known Price | Inferred Current | Status |
+|--------|------|-----|-------------|-----------------|-----------------|--------|
+| XLV | LONG | 47.707 | $146.73 | $146.38 (Apr 23) | ~$150-165? | LIKELY OPEN (stop at $136.46 intact) |
+| XLE | LONG | 124.076 | $56.42 | $56.72 (Apr 23) | ~$48-52? | LIKELY STOPPED OUT (oil -13% since entry-time levels; Hormuz deal resolved June 2026) |
+| GLD | LONG | 13.772 | $435.66 | $433.43 (Apr 23) | ~$450-490? | LIKELY OPEN (gold bull run, stop at $405.17 intact) |
+
+**Last verified value: $19,990.23 equity + $80,000 cash = $99,988.99 total on 2026-04-23**
+
+### Stop-Loss Orders (Last Known — verify status)
+| Symbol | Side | Qty | Type | Stop Price | Order ID | Expiry |
+|--------|------|-----|------|-----------|----------|--------|
+| XLV | SELL | 47 | STOP | $136.46 | 71b7b3bf | GTC (set to expire 7/22, may have expired) |
+| XLE | SELL | 124 | STOP | $52.47 | 63cbc6a9 | GTC (set to expire 7/22, may have expired/triggered) |
+| GLD | SELL | 13 | STOP | $405.17 | f91b4932 | GTC (set to expire 7/22, may have expired) |
+
+**⚠️ GTC orders set to expire 7/22 (July 22, 2026). These have EXPIRED. Must reset stop-losses if positions still open.**
 
 ## Allocation
 - Cash: 80.0%
@@ -66,6 +68,32 @@ All positions well above stops. No exits triggered.
 - Portfolio YTD: -0.011% (since first trade 4/22)
 - **Alpha: -4.28%** (significantly underperforming)
 - Primary cause: defensive positioning in Risk-On market + 80% cash drag
+
+## Market Context (2026-11-25 Pre-Market)
+
+- **Regime: LATE CYCLE / STRESS BORDERLINE**
+- S&P 500 futures: -1.9% (last close ~7,200-7,400 estimated based on Jun SPY $741)
+- Nasdaq 100 futures: -3.11% (tariff + AI selloff)
+- VIX: ~22-26 estimated (spiked to 28.18 on Nov 5, retreated to 19.30 by Nov 13, rising again today)
+- WTI crude: ~$83-85 (was $96 in April — Hormuz deal ended premium)
+- Brent crude: ~$91-92
+- 10Y yield: rising (Fed hiking, Dec hike 97% probability)
+- Key event today: October PCE report + tariff news
+- Market: Closed Thursday (Thanksgiving), half-day Friday
+
+### Iran/Hormuz Update (Nov 25, 2026)
+- **DEAL STRUCK June 2026**: First tankers crossed under Iran fee system June 18-19
+- Status now: Shipping under Iran's routing/fee system; US lifted blockade
+- Tanker attacks continue at lower level (exclusion zones dispute in Sept)
+- Oil premium from Hormuz crisis **substantially diminished**
+- US inventories: 417.8M barrels (+3.4M week ending Nov 13) = bearish supply
+- **XLE thesis from April is invalidated — oil tailwind gone, supply surplus emerging**
+
+### New Macro Drivers (vs April 2026)
+- **Fed hiking** (not on hold): 25bps December hike = rate pressure on assets
+- **Tariffs**: 20% duties on China/EU/12+ countries = stagflation risk
+- **AI sector weakness**: Nvidia/tech down on tariff + supply chain fears
+- **KOSPI -6%**: Semiconductor tariff fears = global tech risk-off
 
 ## Market Context (2026-04-23 Close)
 - S&P 500: 7,137.90 (+1.05%) — record close, 8th record of 2026
