@@ -2,9 +2,9 @@
 
 | Timestamp | Symbol | Side | Qty | Price | Rationale | Signal | Status |
 |-----------|--------|------|-----|-------|-----------|--------|--------|
-| 2026-04-22 09:31 ET | XLV | BUY | 47.707 | $146.73 | Defensive sector in Stress, UNH beat earnings | Low Vol ↑ in Stress regime | OPEN |
-| 2026-04-22 09:31 ET | XLE | BUY | 124.076 | $56.42 | Oil at $99, Hormuz closed, direct beneficiary | Hormuz supply disruption | OPEN |
-| 2026-04-22 09:33 ET | GLD | BUY | 13.772 | $435.66 | Safe haven in geopolitical Stress | Safe haven in Stress regime | OPEN |
+| 2026-04-22 09:31 ET | XLV | BUY | 47.707 | $146.73 | Defensive sector in Stress, UNH beat earnings | Low Vol ↑ in Stress regime | OPEN (unconfirmed — verify) |
+| 2026-04-22 09:31 ET | XLE | BUY | 124.076 | $56.42 | Oil at $99, Hormuz closed, direct beneficiary | Hormuz supply disruption | LIKELY STOPPED OUT (verify) |
+| 2026-04-22 09:33 ET | GLD | BUY | 13.772 | $435.66 | Safe haven in geopolitical Stress | Safe haven in Stress regime | LIKELY OPEN (verify) |
 
 ---
 
@@ -25,11 +25,12 @@
 
 | # | Order ID | Symbol | Side | Qty | Type | Stop Price | Status | Time |
 |---|----------|--------|------|-----|------|------------|--------|------|
-| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | accepted | 2026-04-23 00:05 ET |
-| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | accepted | 2026-04-23 00:05 ET |
-| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | accepted | 2026-04-23 00:05 ET |
+| 4 | 71b7b3bf | XLV | SELL | 47 | STOP | $136.46 | set GTC | 2026-04-23 00:05 ET |
+| 5 | 63cbc6a9 | XLE | SELL | 124 | STOP | $52.47 | set GTC | 2026-04-23 00:05 ET |
+| 6 | f91b4932 | GLD | SELL | 13 | STOP | $405.17 | set GTC | 2026-04-23 00:05 ET |
 
-**All GTC. Stop-loss at -7% from entry. Trailing stop on XLE blocked (shares held by stop order).**
+**All GTC. Stop-loss at -7% from entry.**
+**NOTE: GTC orders on Alpaca typically expire after 90 calendar days. These were set 4/23 — expired ~7/22. Unknown if stops triggered before expiration. Must verify at Alpaca.**
 
 ---
 
@@ -39,8 +40,7 @@
 |------|----------------|---------|-----------|-----------------|---------|---------|
 | 4/22 | $100,000 | -$6.90 | -0.007% | -$6.90 | -0.63% | -0.63% |
 | 4/23 | $99,988.99 | -$11.01 est | -0.011% | -$11.01 | +1.05% | +0.42% |
-
-**Notes:** Day 1 P&L is unrealized. Actual close prices from Alpaca show portfolio at $99,988.99. S&P significantly outperforming — defensive positioning is the drag.
+| 4/24–11/26 | UNTRACKED | — | — | — | — | — |
 
 ---
 
@@ -66,4 +66,39 @@
 | XLE | $56.42 | $56.72 | +$37.56 | +0.32% | $52.47 | -7.50% |
 | GLD | $435.66 | $433.43 | -$30.77 | -0.42% | $405.17 | -6.52% |
 
-**All positions well above stops. No exits triggered.**
+**All positions well above stops at last check (April 23, 2026).**
+**STATUS NOW UNKNOWN — 7-month gap. Verify before next trade.**
+
+---
+
+## Planned Orders: Pre-Market 2026-11-27 (FOR MANUAL EXECUTION — Alpaca MCP unavailable)
+
+### Today (Nov 27 — Holiday Session, 1 PM ET close): NO TRADES
+Rationale: Holiday-shortened session (1 PM ET close), low volume, unreliable fills.
+
+### Monday Nov 30 — Conditional Manual Orders
+
+**After verifying portfolio at Alpaca, execute the following based on what you find:**
+
+**If XLF not already in portfolio — BUY:**
+| Order | Symbol | Type | Notional | Rationale |
+|-------|--------|------|----------|-----------|
+| BUY | XLF | MARKET | $8,000 | Fed rate hike Dec 8-9 (97.8% probability). Financials benefit directly from higher rates. Late Cycle value signal. Rotation trade from mega-cap tech. |
+
+**Stop-loss for XLF:** Place GTC STOP at -7% below fill price.
+
+**If GLD stopped out / not in portfolio — BUY:**
+| Order | Symbol | Type | Notional | Rationale |
+|-------|--------|------|----------|-----------|
+| BUY | GLD | MARKET | $6,000 | Hormuz still at 49% throughput, sea mines Nov 25, Iran war continues. Gold safe haven thesis intact. |
+
+**Stop-loss for GLD:** Place GTC STOP at -7% below fill price.
+
+**XLE: WAIT for OPEC Nov 29 result before deciding.**
+- If OPEC restrains 2027 output → BUY XLE $7,000 (oil bullish)
+- If OPEC raises 2027 output → AVOID XLE (oil bearish, oversupply 2027)
+
+**Upcoming key dates:**
+- Nov 29: OPEC+ ministerial meeting (2027 framework)
+- Dec 8-9: Fed rate decision (25bps hike expected)
+- Dec 10: November CPI release
