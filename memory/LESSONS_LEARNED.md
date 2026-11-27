@@ -1,5 +1,23 @@
 # Lessons Learned
 
+## Session: 2026-11-27 (Pre-Market — 7-Month Gap Recovery)
+
+19. **7-month session gaps leave the portfolio in an unknown state.** Stop-loss GTC orders expire after ~90 days on Alpaca. Positions could have stopped out, been closed by expiring orders, or grown significantly. ALWAYS check Alpaca live before any trade after a long gap. No assumptions.
+
+20. **Nvidia governance events create non-linear index risk.** When a single stock (NVDA) causes the S&P 500 to swing ±4.7% in a day, sector diversification means less than it did. Watch credit watch events, CEO changes, and governance flags as early warning signals for index-level moves.
+
+21. **Late Cycle rotation is a tradable signal.** When equal-weight S&P outperforms cap-weight for multiple sessions (best 3-day stretch since April 2025, Nov 23-25), it's a systematic signal that money is rotating from mega-cap momentum to value/cyclicals. XLF, XLI, and XLE are primary beneficiaries.
+
+22. **Fed rate hike cycles are tradable with XLF.** A 97.8% probability Dec hike is effectively certain. Banks earn more on higher rates (NIM expansion). XLF is a direct, low-idiosyncratic-risk bet on rate hike certainty. This is a Late Cycle signal consistent with strategy.
+
+23. **OPEC+ decisions are binary events for energy.** The Nov 29 OPEC ministerial meeting on 2027 framework is the same type of binary event as the Iran ceasefire deadlines. Wait for the outcome before deciding on XLE. Don't pre-position on speculation.
+
+24. **Hormuz has partially recovered but remains a persistent tail risk.** From near-0% throughput in April to 49% in November — a 7-month partial recovery with ongoing incidents (sea mines Nov 25). The situation is not resolved; it's oscillating. Keep GLD as a hedge while this continues.
+
+25. **Holiday-shortened sessions are not for new entries.** Black Friday (Nov 27) closes at 1 PM ET. Volume is thin, spreads are wide, fills are unreliable. The right call is to hold existing positions and prepare the Monday plan.
+
+---
+
 ## Session: 2026-04-22 (Pre-Open Assessment)
 
 1. **Ceasefire extensions can flip regime overnight.** Trump went from "bombing" to "indefinite extension" in hours. Oil jumped $4 on the news. Always check regime BEFORE trading, not from yesterday's notes.
@@ -15,8 +33,6 @@
 5. **IRGC ship seizures change the Hormuz calculus.** Commercial vessels being actively attacked and seized is escalation beyond just "blockade." Oil risk is higher than VIX implies — VIX dropped on ceasefire headline but fundamentals unchanged.
 
 6. **TSLA earnings = pure binary risk.** P/E of 235 means miss = big drop, beat = big pop. Don't size large either direction. If trading, keep to $3-5K max.
-
-7. **Day orders + paper trading = no partial fill risk.** But always verify fills at open before planning next moves.
 
 7. **Day orders + paper trading = no partial fill risk.** But always verify fills at open before planning next moves.
 

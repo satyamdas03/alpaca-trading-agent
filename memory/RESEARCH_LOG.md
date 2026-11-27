@@ -1,5 +1,127 @@
 # Research Log
 
+## Session: Pre-Market Routine (2026-11-27 — Black Friday, Holiday-Shortened Session)
+
+**Market Status:** Closed for Thanksgiving Nov 26. Early close today at 1:00 PM ET (Nov 27).
+**NOTE:** 7-month gap since last session (last update: 2026-04-23). Full context reconstruction below.
+
+### Regime Assessment: LATE CYCLE
+
+**Key Signals:**
+- VIX: ~18.70 (Nov 12 close); likely 19-21 range now given Nvidia volatility events this week
+- S&P 500: 7,182.78 (last close Nov 25, -0.25% after recovering from -3.21% intraday crash)
+- S&P 500 record: 7,818.93 (Oct 6, 2026) — now **8.1% below record**
+- S&P 500 futures (Thanksgiving morning): 7,247.50 (+0.7%) — positive open expected today
+- Fed funds rate: 3.88% effective, **97.8% probability of 25bps HIKE at Dec 8-9 meeting**
+- PCE inflation (Oct): 3.8% headline, 3.3% core — sticky, well above 2% target
+- Cleveland Fed PCE nowcast (Nov): 3.78% headline, 3.38% core
+
+**NOT Stress (VIX < 25, S&P recovering)**
+**NOT Risk-On (Fed hiking, inflation 3.8%, NVDA governance crisis, S&P 8.1% below record)**
+**CONCLUSION: LATE CYCLE — Value ↑, Momentum ↓, Low Volatility maintained**
+
+---
+
+### Nvidia / Tech Crisis — DOMINANT MARKET DRIVER THIS WEEK
+
+| Date | Event | NVDA | S&P 500 |
+|------|-------|------|---------|
+| Nov 11 | Jensen Huang resigns (affair scandal) | -5%+ | -0.35% |
+| Nov 23 | Huang reinstated as CEO | +31.5% | +4.7% (best day since April 2025) |
+| Nov 24 | Gave back gains | -5.9% | -0.5% |
+| Nov 25 | 9th decline in 10 sessions; S&P places NVDA on NEGATIVE CREDIT WATCH (90 days, governance/management) | -3.9% | -0.25% (recovered from -3.21% intraday) |
+
+**YTD 2026 S&P contribution:** NVDA = -77 index pts (largest negative), Apple = +124 pts (largest positive)
+**NVDA still 8.5% below pre-resignation level.** Governance overhang persists.
+**Rotation trade active:** Equal-weight S&P had best 3-day stretch since April 2025 as money rotates FROM mega-cap tech TO value/cyclicals.
+
+---
+
+### Iran / Hormuz — ONGOING, PARTIAL RESOLUTION
+
+**Key developments since April 2026:**
+- April–June 2026: Multiple seizures, blockades, diplomatic rounds all failed
+- July 2026: Interim deal — US/Iran agreed to allow ships to pass without charges for 60 days
+- Aug 2026: Iran refuted Trump's claim to "control" Hormuz; attacks continued intermittently
+- Nov 25, 2026: Two oil tankers hit **sea mines** in Hormuz (new escalation tactic)
+
+**Current Hormuz throughput: ~49% of normal** (vs ~1 ship/day in April, now partially recovering)
+- Still severely constrained vs 130 ships/day pre-war
+- Low inventories globally + no spare capacity (per ANZ)
+
+**Oil prices (Nov 27, 2026):**
+- WTI: $84–86 (flirting with $85, first **weekly gain in 1 month**)
+- Brent: $94–95
+- Down significantly from April peak of $96.73 WTI / $105.63 Brent
+- Oversupply fears for early 2027 capping upside
+
+**OPEC+ Status:**
+- Nov 1: Kept December targets unchanged (expected)
+- Nov 29 ministerial meeting: Key decision on 2027 production framework
+  - If OPEC restrains 2027 output → oil bullish, XLE/energy trade back on
+  - If OPEC raises 2027 output → oil bearish, avoid energy
+
+---
+
+### Macro Context
+
+| Indicator | Value | Signal |
+|-----------|-------|--------|
+| PCE inflation (Oct) | 3.8% headline, 3.3% core | HAWKISH — well above 2% |
+| Cleveland Fed Nov nowcast | 3.78% / 3.38% | Persistent, not cooling |
+| Fed funds rate | 3.88% effective | HIKING CYCLE ONGOING |
+| Dec 8-9 hike probability | 97.8% chance of +25bps | Near-certain hike |
+| Nov unemployment | 4.16% (Chicago Fed forecast) | Slight softening |
+| S&P 500 | 7,182.78 (-8.1% from record) | Below record, recovering |
+| VIX | ~18-21 (est) | Late Cycle borderline |
+| 10Y yield | ~4.5-4.7% (est, rising with hike expectations) | Pressure on duration/growth |
+
+---
+
+### Portfolio Status (UNCERTAIN — 7-Month Gap)
+
+**Last confirmed positions (April 23, 2026):**
+| Symbol | Entry | Stop | April Close | Likely Outcome |
+|--------|-------|------|-------------|----------------|
+| XLV | $146.73 | $136.46 | $146.38 | UNCERTAIN — healthcare defensive |
+| XLE | $56.42 | $52.47 | $56.72 | LIKELY STOPPED OUT — WTI down -12% from April peak |
+| GLD | $435.66 | $405.17 | $433.43 | LIKELY OPEN — gold safe haven bid continued |
+
+**CRITICAL: Must manually verify positions at Alpaca before any new trades.**
+Alpaca MCP unavailable; Alpaca REST env vars blocked in this session.
+
+---
+
+### Trade Plan — Today (Nov 27) and Monday (Nov 30)
+
+**TODAY (Holiday-shortened, closes 1 PM ET):**
+- **NO NEW POSITIONS** — Holiday session, low volume, dangerous for entries
+- **Monitor existing positions** (if any still open via stopped orders)
+- Positive futures (+0.7%) = likely green open but thin volume
+
+**MONDAY NOV 30 — MANUAL EXECUTION PLAN:**
+
+**Step 1: Verify portfolio via Alpaca dashboard**
+- Check if XLV, XLE, GLD positions are still open or stopped out
+- Check cash balance
+
+**Step 2: Regime-appropriate trades (Late Cycle = Value ↑, Momentum ↓)**
+
+| Trade | Symbol | Action | Notional | Signal | Stop |
+|-------|--------|--------|----------|--------|------|
+| 1 | GLD | HOLD/ADD | — | Hormuz mines Nov 25, Iran still active, gold safe haven. VIX risk rising. | $405.17 existing |
+| 2 | XLF | BUY | $8,000 | Financials ETF. Direct beneficiary of Dec 8-9 Fed rate hike (97.8% probability). Value signal. Banks earn more on higher rates. | -7% from entry |
+| 3 | XLE | WAIT | — | Wait for OPEC Nov 29 decision. If production restrained → re-enter. If 2027 output raised → avoid. | — |
+| 4 | Cash | HOLD | $70-80K | Fed hiking, inflation 3.8%, S&P 8.1% below record. This is not a Risk-On moment to deploy aggressively. | — |
+
+**Key upcoming catalysts (priority order):**
+1. **Nov 29** — OPEC+ ministerial meeting on 2027 output framework
+2. **Dec 8-9** — Fed rate decision (25bps hike expected; watch dot plot for future path)
+3. **Nov CPI** — Due Dec 10 (expect ~3.86% per nowcast)
+4. **Nvidia credit watch** — 90-day window; any governance progress = NVDA recovery, tech rally
+
+---
+
 ## Session: Market Close Routine (2026-04-23)
 
 **Market Status:** Closed (4:00 PM ET 4/23)
@@ -328,10 +450,7 @@ Key risk: If ceasefire collapses, oil spikes to $100+, VIX >30 → Stress regime
 ### Backtesting Engine Update
 Phase 1 implementation COMPLETE. 46/46 tests passing. All modules:
 - Data: cache, alpaca_fetcher, edgar_fetcher, finra_fetcher
-- Signals: quality, momentum, regime
-- Strategy: bull_strategy (multi-factor composite)
-- Sizing: half-Kelly
-- Backtest: walk-forward runner, metrics with anti-overfitting guards
+- Signals: quality, momentum, regime, strategy, sizing, backtest
 
 ### Trade Decision
 **No trades today.** Backtesting engine now operational — can validate strategy before first live trade. Need Alpaca MCP tools for trade execution (not available in this session).
@@ -354,41 +473,8 @@ All tools operational: get_clock, get_account_info, get_stock_snapshot, place_st
 | XLV | $145.93 | -1.0% | Defensive pullback |
 | XLU | $44.93 | -1.7% | Rates rising, defensive underperforming |
 
-### Iran Ceasefire — CRITICAL BINARY EVENT
-- Ceasefire expires **April 22** (14 days from April 7)
-- Iran has NOT sent delegation to Islamabad for second round
-- Strait of Hormuz: only ~5% pre-war volume, Iran re-closed April 18
-- Xi called Saudi Crown Prince — last-minute Chinese intervention
-- U.S. naval blockade of Iranian ports remains — Iran says this disqualifies talks
-- Trump: "under no pressure" to make deal, threatened to bomb bridges/power plants
-- **If no extension by market open 4/22 → assume Stress regime**
-
-### Tesla Earnings Preview (4/22 After Close)
-- EPS consensus: $0.39 | Revenue: ~$22.96B
-- Deliveries already missed (358K vs 365K est)
-- Energy storage 8.8 GWh (-38% QoQ from 14.2 GWh) — big disappointment
-- Robotaxi expansion to Dallas/Houston, Cybercab production start this month
-- FSD approved in Netherlands (European expansion)
-- Model S/X discontinued, lines repurposed for Optimus
-- Zacks ESP: -19.36% → likely earnings miss
-- Key upside: robotaxi timeline, AI narrative
-
-### SpotGamma Intelligence
-- VIX ~25 vs realized vol ~12% = 13pt spread (unusual outside panic)
-- Jump risk: sharp downside could force convergence
-- SPX 6,500 critical support (JP Morgan collar trade)
-- Post-VIX expiration, structural support removed
-- Correlation risk rising — everything trades together in stress
-
 ### Regime Assessment
 **Late Cycle, leaning Stress.** Iran ceasefire expiration is the hinge. If it breaks tomorrow → shift to full Stress protocol (defensive only, hedging). If extended → brief Risk-On relief.
-
-### Action Plan for 4/22 Pre-Market
-1. Check Iran ceasefire status FIRST — determines entire regime
-2. If Stress: XLV/XLU positions only, consider SPY puts for hedge
-3. If Risk-On relief: momentum plays in beaten-down tech (TSLA post-earnings?)
-4. If neutral/Late Cycle: start with 2-3 positions, 5-8% each
-5. **This is our FIRST TRADING DAY.** Time to deploy capital.
 
 ---
 
@@ -406,18 +492,6 @@ All tools operational: get_clock, get_account_info, get_stock_snapshot, place_st
 
 ### Regime Assessment
 **Risk-On, watchful.** VIX under 20 but rising. S&P at record highs with lagging breadth. Iran ceasefire deadline (8 PM ET 4/21) is key binary event.
-
-### Key Catalysts This Week
-1. Iran ceasefire deadline — Tuesday 8 PM ET (major risk)
-2. Earnings: UnitedHealth (4/21), Tesla (4/22), Boeing, P&G
-3. Fed — rate cut hopes fading, energy inflation sticky
-4. AI supercycle continues as independent tailwind
-
-### Action Items for Next Session
-- Monitor Iran situation before market open
-- If ceasefire holds + oil drops: risk-on, look for momentum plays
-- If ceasefire breaks + oil spikes: shift defensive, consider VIX hedges
-- Research candidates during pre-market routine
 
 ---
 
